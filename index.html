@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>오사카·교토 맛집 지도</title>
+<meta name="description" content="오사카 현지인이 유튜브 댓글로 추천한 맛집과 숙소 위치, 이동 경로를 한 번에 보는 여행 지도">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#f6f4f0; --panel:#ffffff; --ink:#1d1b18; --ink2:#5d5850; --ink3:#8f887d; --line:#e7e2d9;
+  --food:#e0452b; --food-soft:#fdece8; --hotel:#2456d6; --hotel-soft:#e8eefc; --walk:#11875d; --walk-soft:#e3f4ec;
+  --accent:#1d1b18; --warn:#9a5b00; --warn-soft:#fff4dc; --radius:14px; --shadow:0 6px 24px rgba(29,27,24,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit}
+.app{display:grid;grid-template-columns:420px minmax(0,1fr);height:100dvh}
+.side,.mapwrap{min-width:0}
+.side{display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);min-height:0;z-index:2}
+.side-head{padding:18px 18px 12px;border-bottom:1px solid var(--line)}
+.title{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0}
+.sub{font-size:12.5px;color:var(--ink3);margin:4px 0 0}
+.legend{display:flex;gap:12px;margin-top:10px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.dot.food{background:var(--food)} .dot.hotel{background:var(--hotel);border-radius:3px} .dot.cand{background:#fff;border:2px dashed var(--food)}
+.tabs{display:flex;gap:6px;margin-top:12px}
+.tab{flex:1;padding:9px 0;border:1px solid var(--line);background:#fff;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
+.tab[aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.chips{display:flex;gap:6px;margin-top:8px}
+.chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;cursor:pointer;color:var(--ink2)}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.scroll{overflow-y:auto;flex:1;min-height:0;padding:12px 14px 40px}
+
+/* route box */
+.routebox{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:14px}
+.rb-title{font-size:14px;font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:6px}
+.rb-row{display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:6px;margin-bottom:6px}
+.rb-row label{font-size:12px;font-weight:700;color:var(--ink2)}
+.rb-row select{width:100%;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px}
+.rb-actions{display:flex;gap:6px}
+.btn{padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink)}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink);flex:1;justify-content:center}
+.btn.small{padding:6px 10px;font-size:12px}
+.result{margin-top:10px}
+.modes{display:flex;gap:6px;margin-bottom:8px}
+.mode{flex:1;padding:8px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+.mode[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.mode b{display:block;font-size:17px}
+.mode small{font-size:11.5px;color:var(--ink3)}
+.steps{list-style:none;margin:0;padding:0}
+.step{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.step:last-child{border-bottom:0}
+.step .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:15px;background:var(--walk-soft)}
+.step .meta{font-size:12px;color:var(--ink3)}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;color:#fff}
+.alts{margin-top:8px;font-size:12.5px;color:var(--ink2)}
+.alts li{margin:3px 0}
+.note{font-size:11.5px;color:var(--ink3);margin-top:8px;line-height:1.5}
+.warn{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:8px 10px;font-size:12.5px;line-height:1.5}
+.links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+
+/* list */
+.sec{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin:16px 4px 8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;transition:box-shadow .15s,border-color .15s}
+.card:hover{box-shadow:var(--shadow)}
+.card.sel{border-color:var(--ink);box-shadow:var(--shadow)}
+.card-top{display:flex;gap:10px;align-items:flex-start}
+.ico{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:var(--food-soft)}
+.card.hotel .ico{border-radius:10px;background:var(--hotel-soft)}
+.card.cand .ico{background:#fff;border:2px dashed var(--food)}
+.nm{font-weight:800;font-size:15px;line-height:1.3}
+.ja{font-size:12px;color:var(--ink3);margin-top:2px}
+.area{font-size:12px;color:var(--ink2);margin-top:3px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--food-soft);color:var(--food);margin-right:4px}
+.tag.cand{background:#fff;border:1px dashed var(--food)}
+.tag.hotel{background:var(--hotel-soft);color:var(--hotel)}
+.detail{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;font-size:13.5px}
+.card.sel .detail{display:block}
+.quote{background:var(--bg);border-radius:10px;padding:9px 11px;white-space:pre-line;line-height:1.55;font-size:13.5px}
+.quote-h{font-size:11.5px;font-weight:700;color:var(--ink3);margin:0 0 4px}
+.facts{margin:8px 0 0;padding-left:16px;color:var(--ink2);font-size:12.5px;line-height:1.55}
+.addr{font-size:12px;color:var(--ink3);margin-top:8px}
+table.near{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+table.near th{font-size:11px;color:var(--ink3);text-align:left;font-weight:700;padding:4px}
+table.near td{border-top:1px solid var(--line);padding:6px 4px;vertical-align:top}
+table.near td.n{font-weight:700}
+.empty{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink2);font-size:13.5px;line-height:1.6;background:#fff}
+
+/* map */
+.mapwrap{position:relative;min-height:0}
+#map{position:absolute;inset:0;background:#e9e5dd}
+#map .leaflet-tile-pane{filter:saturate(.75) contrast(.95)}
+.pin{width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--food);display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.28);border:2px solid #fff}
+.pin span{transform:rotate(45deg);font-size:16px;line-height:1}
+.pin.cand{background:#fff;border:2px dashed var(--food);opacity:.9}
+.hpin{width:36px;height:36px;border-radius:10px;background:var(--hotel);display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.28);border:2px solid #fff;color:#fff}
+.pin.sel,.hpin.sel{outline:3px solid var(--ink);outline-offset:2px}
+.st{width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ink)}
+.leaflet-tooltip.lbl{font-family:inherit;font-weight:700;font-size:12px;border-radius:8px;padding:3px 7px}
+.leaflet-popup-content{font-family:inherit;margin:10px 12px;font-size:13px}
+.maplegend{position:absolute;right:10px;bottom:24px;z-index:500;background:rgba(255,255,255,.95);border-radius:12px;padding:8px 10px;font-size:12px;box-shadow:var(--shadow);display:none}
+.maplegend.on{display:block}
+.maplegend div{display:flex;align-items:center;gap:6px;margin:2px 0}
+.sw{width:22px;height:0;border-top:4px solid}
+.sw.walk{border-top:4px dotted var(--walk)}
+
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:46dvh minmax(0,1fr)}
+  .mapwrap{order:1}
+  .side{order:2;border-right:0;border-top:1px solid var(--line)}
+  .side-head{padding:12px 16px 10px}
+  .scroll{padding:10px 16px 40px}
+}
+@media (max-width:860px) and (max-height:520px){
+  .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
+  .mapwrap{order:2} .side{order:1;border-top:0;border-right:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="side-head">
+      <h1 class="title">오사카·교토 맛집 지도</h1>
+      <p class="sub">오사카 사는 분이 유튜브 댓글로 추천한 가게 + 우리 숙소</p>
+      <div class="legend">
+        <span><i class="dot food"></i>맛집</span>
+        <span><i class="dot cand"></i>맛집 후보(지점 미확정)</span>
+        <span><i class="dot hotel"></i>숙소</span>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button>
+        <button class="tab" role="tab" data-city="kyoto" aria-selected="false">교토</button>
+      </div>
+      <div class="chips">
+        <button class="chip" data-filter="all" aria-pressed="true">전체</button>
+        <button class="chip" data-filter="food" aria-pressed="false">맛집</button>
+        <button class="chip" data-filter="hotel" aria-pressed="false">숙소</button>
+      </div>
+    </div>
+    <div class="scroll" id="scroll">
+      <section class="routebox" aria-label="이동 방법">
+        <p class="rb-title">🧭 이동 방법 찾기</p>
+        <div class="rb-row"><label for="from">출발</label><select id="from"></select></div>
+        <div class="rb-row"><label for="to">도착</label><select id="to"></select></div>
+        <div class="rb-actions">
+          <button class="btn" id="swap" title="출발/도착 바꾸기">⇅ 바꾸기</button>
+          <button class="btn" id="clear">지우기</button>
+        </div>
+        <div class="result" id="result"></div>
+      </section>
+      <div id="list"></div>
+    </div>
+  </aside>
+  <main class="mapwrap">
+    <div id="map" aria-label="지도"></div>
+    <div class="maplegend" id="maplegend"></div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/hotels.js"></script>
+<script src="data/places.js"></script>
+<script src="data/routes.js"></script>
+<script src="data/geo.js"></script>
+<script>
+(function(){
+const P = window.PLACES || [];
+const R = window.ROUTES || {};
+const G = window.GEO || {walk:{}, stations:{}};
+const META = window.ROUTES_META || {};
+const byId = Object.fromEntries(P.map(p=>[p.id,p]));
+const CITY = {osaka:{name:'오사카',center:[34.682,135.507],zoom:13}, kyoto:{name:'교토',center:[35.0036,135.7681],zoom:13}};
+const LINE_COLORS = {'미도스지선':'#e5171f','다니마치선':'#522886','요츠바시선':'#0078ba','주오선':'#019a66','센니치마에선':'#e44d93','사카이스지선':'#814721','나가호리쓰루미료쿠치선':'#a9cc51','이마자토스지선':'#ee7b1a','오사카 순환선':'#f15a22','JR':'#f15a22','한신':'#0d4ea1','긴테쓰':'#d40000','난카이':'#ff6600','게이한':'#00a0e9','한큐':'#7a1e2b'};
+const lineColor = n => { if(!n) return '#555'; for(const k in LINE_COLORS){ if(n.includes(k)) return LINE_COLORS[k]; } return '#555'; };
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtMin = m => m==null ? '미확인' : (m>=60 ? `${Math.floor(m/60)}시간 ${m%60}분` : `${m}분`);
+const fmtDist = m => m==null ? '' : (m>=1000 ? `${(m/1000).toFixed(1)}km` : `${m}m`);
+const fmtYen = y => y==null ? '요금 미확인' : `¥${y.toLocaleString()}`;
+const fmtAt = iso => { if(!iso) return '일시 미확인'; const d=new Date(iso); return d.toLocaleString('ko-KR',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',weekday:'short',hour:'numeric',minute:'2-digit'})+' 일본시간'; };
+const gmap = (a,b,mode) => `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}&travelmode=${mode}`;
+const gplace = p => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.nameJa+' '+p.address)}`;
+
+const state = {city:'osaka', filter:'all', sel:null, from:'', to:'', mode:null};
+
+/* ---------- map ---------- */
+const map = L.map('map',{zoomControl:true}).setView(CITY.osaka.center, CITY.osaka.zoom);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  maxZoom:19,
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · 도보선 <a href="https://routing.openstreetmap.de/">FOSSGIS OSRM</a>'
+}).addTo(map);
+const routeLayer = L.layerGroup().addTo(map);
+const markers = {};
+const BED = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>';
+function iconFor(p, sel){
+  if(p.type==='hotel') return L.divIcon({className:'',html:`<div class="hpin${sel?' sel':''}">${BED}</div>`,iconSize:[36,36],iconAnchor:[18,18],popupAnchor:[0,-18]});
+  return L.divIcon({className:'',html:`<div class="pin${p.candidate?' cand':''}${sel?' sel':''}"><span>${p.emoji||'🍴'}</span></div>`,iconSize:[34,34],iconAnchor:[17,40],popupAnchor:[0,-36]});
+}
+P.forEach(p=>{
+  const m = L.marker([p.lat,p.lng],{icon:iconFor(p,false),title:p.name,zIndexOffset:p.type==='hotel'?1000:0});
+  m.bindTooltip(p.name.replace(' (후보)',''),{direction:'top',offset:[0,p.type==='hotel'?-18:-38],className:'lbl'});
+  m.on('click',()=>select(p.id,true));
+  markers[p.id]=m;
+});
+function refreshMarkers(){
+  P.forEach(p=>{
+    const show = p.city===state.city && (state.filter==='all'||state.filter===p.type);
+    const m = markers[p.id];
+    m.setIcon(iconFor(p, state.sel===p.id));
+    const routing = state.from && state.to;
+    m.setOpacity(!routing || p.id===state.from || p.id===state.to ? 1 : .35);
+    if(show) m.addTo(map); else m.remove();
+  });
+}
+
+/* ---------- list ---------- */
+const listEl = document.getElementById('list');
+function nearTable(p){
+  // hotel -> each food in same city ; food -> each hotel in same city
+  const others = P.filter(q=>q.city===p.city && q.id!==p.id && (p.type==='hotel' ? q.type==='food' : q.type==='hotel'));
+  if(!others.length) return '';
+  const rows = others.map(q=>{
+    const key = p.type==='hotel' ? `${p.id}|${q.id}` : `${q.id}|${p.id}`;
+    const r = R[key];
+    return {q, r, t: r&&r.transit&&Number.isFinite(r.transit.total) ? r.transit.total : 1e9};
+  }).sort((a,b)=>a.t-b.t);
+  const head = p.type==='hotel' ? '숙소 → 맛집' : '숙소 → 이 가게';
+  return `<table class="near"><thead><tr><th>${head}</th><th>🚶 도보</th><th>🚇 대중교통</th></tr></thead><tbody>${rows.map(({q,r})=>{
+    const w = r&&r.walk ? `${fmtMin(r.walk.min)}<div class="meta">${fmtDist(r.walk.m)}</div>` : '<span class="meta">미수집</span>';
+    let t = '<span class="meta">미수집</span>';
+    if(r&&r.transit){
+      if(r.transit.walkOnly) t = '<span class="meta">Google 안내: 도보</span>';
+      else if(!Array.isArray(r.transit.legs) || r.transit.incomplete) t = '<span class="meta">미확인</span>';
+      else { const lines=[...new Set(r.transit.legs.filter(l=>l.mode==='ride').map(l=>l.line))];
+        t = `${fmtMin(r.transit.total)} · ${fmtYen(r.transit.fare)}<div class="meta">${esc(lines.join(' → '))}</div>`; }
+    }
+    const a = p.type==='hotel' ? p.id : q.id, b = p.type==='hotel' ? q.id : p.id;
+    return `<tr data-route="${a}|${b}"><td class="n">${esc(q.name.replace(' (후보)',''))}</td><td>${w}</td><td>${t}</td></tr>`;
+  }).join('')}</tbody></table>`;
+}
+function cardHTML(p){
+  const cls = ['card',p.type, p.candidate?'cand':'', state.sel===p.id?'sel':''].join(' ');
+  const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : `<span class="tag">${esc(p.group)}</span>${p.candidate?'<span class="tag cand">후보</span>':''}${p.branchUnsure?'<span class="tag cand">지점 미확정</span>':''}`;
+  const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
+  let body = '';
+  if(p.comment) body += `<p class="quote-h">💬 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
+  if(p.menu) body += `<p class="addr">🍽 추천: <b>${esc(p.menu)}</b></p>`;
+  if(p.notes&&p.notes.length) body += `<ul class="facts">${p.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`;
+  body += `<p class="addr">📍 ${esc(p.address)}</p>`;
+  body += `<div class="links">`+
+    (p.agoda?`<a class="btn small" href="${esc(p.agoda)}" target="_blank" rel="noopener">아고다에서 보기</a>`:'')+
+    `<a class="btn small" href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`+
+    (p.sources||[]).map(s=>`<a class="btn small" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')+
+    `<button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small" data-setto="${p.id}">여기로 도착</button></div>`;
+  body += nearTable(p);
+  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}${esc(p.area)}</div></div></div><div class="detail">${body}</div></article>`;
+}
+function renderList(){
+  const items = P.filter(p=>p.city===state.city);
+  const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food');
+  let h='';
+  if(state.filter!=='food'){
+    h += `<div class="sec">숙소 ${hotels.length}</div>`;
+    h += hotels.length ? hotels.map(cardHTML).join('') : `<div class="empty">아직 등록된 ${CITY[state.city].name} 숙소가 없어요. 아고다 링크를 주시면 위치를 확인해서 추가합니다.</div>`;
+  }
+  if(state.filter!=='hotel'){
+    const groups = [...new Set(foods.map(f=>f.group))];
+    if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">댓글에는 ${CITY[state.city].name} 추천 맛집이 없었어요.</div>`;
+    groups.forEach(g=>{ const fs=foods.filter(f=>f.group===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
+  }
+  listEl.innerHTML = h;
+}
+listEl.addEventListener('click',e=>{
+  const sf=e.target.closest('[data-setfrom]'), st=e.target.closest('[data-setto]'), tr=e.target.closest('tr[data-route]');
+  if(sf){ e.stopPropagation(); setRoute(sf.dataset.setfrom, state.to); return; }
+  if(st){ e.stopPropagation(); setRoute(state.from, st.dataset.setto); return; }
+  if(tr){ e.stopPropagation(); const [a,b]=tr.dataset.route.split('|'); setRoute(a,b); return; }
+  if(e.target.closest('a')) return;
+  const c=e.target.closest('.card'); if(c) select(c.dataset.id===state.sel?null:c.dataset.id,false);
+});
+
+function select(id, fromMap){
+  state.sel=id; renderList(); refreshMarkers();
+  if(!id) return;
+  const p=byId[id];
+  if(p.city!==state.city){ setCity(p.city, true); }
+  try{ map.flyTo([p.lat,p.lng], Math.max(map.getZoom(),15), {duration:.6}); }catch(e){ map.setView([p.lat,p.lng], Math.max(map.getZoom(),15)); }
+  markers[id].openTooltip();
+  const el=listEl.querySelector(`[data-id="${id}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ---------- city / filter ---------- */
+function setCity(c, keepRoute){
+  state.city=c;
+  if(!keepRoute){ const a=byId[state.from], b=byId[state.to]; if((a&&a.city!==c)||(b&&b.city!==c)) setRoute('',''); }
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===c));
+  renderList(); refreshMarkers();
+  const pts=P.filter(p=>p.city===c);
+  if(pts.length) map.fitBounds(L.latLngBounds(pts.map(p=>[p.lat,p.lng])).pad(.12)); else map.setView(CITY[c].center, CITY[c].zoom);
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ state.sel=null; setCity(t.dataset.city); });
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ state.filter=c.dataset.filter; document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); renderList(); refreshMarkers(); });
+
+/* ---------- route box ---------- */
+const fromSel=document.getElementById('from'), toSel=document.getElementById('to'), resEl=document.getElementById('result'), legendEl=document.getElementById('maplegend');
+function fillSelects(){
+  const opt = p=>`<option value="${p.id}">${p.type==='hotel'?'🛏 ':(p.emoji||'')+' '}${esc(p.name)}</option>`;
+  let h='<option value="">선택하세요</option>';
+  for(const c of ['osaka','kyoto']){
+    const hs=P.filter(p=>p.city===c&&p.type==='hotel'), fs=P.filter(p=>p.city===c&&p.type==='food');
+    if(hs.length) h+=`<optgroup label="${CITY[c].name} · 숙소">${hs.map(opt).join('')}</optgroup>`;
+    if(fs.length) h+=`<optgroup label="${CITY[c].name} · 맛집">${fs.map(opt).join('')}</optgroup>`;
+  }
+  fromSel.innerHTML=h; toSel.innerHTML=h;
+}
+fromSel.onchange=()=>setRoute(fromSel.value,state.to);
+toSel.onchange=()=>setRoute(state.from,toSel.value);
+document.getElementById('swap').onclick=()=>setRoute(state.to,state.from);
+document.getElementById('clear').onclick=()=>setRoute('','');
+
+function setRoute(a,b){
+  state.from=a||''; state.to=b||''; state.mode=null;
+  fromSel.value=state.from; toSel.value=state.to;
+  const A=byId[state.from], B=byId[state.to];
+  if(A&&B&&A.city===B.city&&A.city!==state.city){ state.city=A.city; document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===A.city)); renderList(); refreshMarkers(); }
+  renderRoute();
+  try{ history.replaceState(null,'', state.from||state.to ? `#from=${state.from}&to=${state.to}` : location.pathname); }catch(e){}
+  if(a && b) document.getElementById('scroll').scrollTo({top:0,behavior:'smooth'});
+}
+function renderRoute(){
+  routeLayer.clearLayers(); legendEl.classList.remove('on'); refreshMarkers();
+  const a=byId[state.from], b=byId[state.to];
+  if(!a||!b){ resEl.innerHTML = a||b ? '<p class="note">출발지와 도착지를 모두 고르세요. 리스트의 표 행을 눌러도 바로 경로가 나와요.</p>' : ''; return; }
+  if(a.id===b.id){ resEl.innerHTML='<p class="note">출발지와 도착지가 같아요.</p>'; return; }
+  const r0=R[`${a.id}|${b.id}`], rev=R[`${b.id}|${a.id}`];
+  const r = r0 ? {...r0} : (rev && rev.walk ? {o:a.id,d:b.id,walk:rev.walk,walkAt:rev.walkAt,walkFromReverse:true} : null);
+  let revNote='';
+  if(r && (!r.transit || r.transit.incomplete)){
+    delete r.transit;
+    const rt = rev && rev.transit && !rev.transit.incomplete && !rev.transit.walkOnly ? rev.transit : null;
+    if(rt){ const ls=[...new Set((rt.legs||[]).filter(l=>l.mode==='ride').map(l=>l.line))];
+      revNote=`<div class="warn" style="margin-bottom:8px">이 방향의 대중교통은 아직 조회하지 못했어요. 참고로 <b>반대 방향(${esc(b.name)} → ${esc(a.name)})</b> 조회값은 ${fmtMin(rt.total)} · ${esc(ls.join(' → ')||'—')} · ${fmtYen(rt.fare)} 이에요. 정확한 경로는 아래 Google 지도 버튼으로 확인하세요.</div>`; }
+  }
+  const links=`<div class="links"><a class="btn small" target="_blank" rel="noopener" href="${gmap(a,b,'transit')}">Google 지도에서 최신 대중교통 경로</a><a class="btn small" target="_blank" rel="noopener" href="${gmap(a,b,'walking')}">도보 경로</a></div>`;
+  if(!r){
+    resEl.innerHTML=`<div class="warn">이 구간은 아직 저장된 경로 데이터가 없어요.${a.candidate||b.candidate?' (지점 미확정 후보 가게는 경로를 미리 조회하지 않았어요)':''} 아래 버튼으로 Google 지도에서 확인하세요.</div>${links}`;
+    drawEnds(a,b); L.polyline([[a.lat,a.lng],[b.lat,b.lng]],{color:'#888',weight:2,dashArray:'4 6'}).addTo(routeLayer);
+    map.fitBounds(L.latLngBounds([[a.lat,a.lng],[b.lat,b.lng]]).pad(.3)); return;
+  }
+  const t=r.transit, w=r.walk && Number.isFinite(r.walk.min) ? r.walk : null;
+  const transitUseful = t && !t.walkOnly && !t.incomplete && Array.isArray(t.legs) && t.legs.some(l=>l.mode==='ride');
+  if(!state.mode) state.mode = transitUseful && !(w && w.min<=15) ? 'transit' : 'walk';
+  if(!transitUseful) state.mode='walk';
+  let h=revNote+'<div class="modes">';
+  h+=`<button class="mode" data-mode="walk" aria-pressed="${state.mode==='walk'}"><small>🚶 도보</small><b>${w?fmtMin(w.min):'미확인'}</b><small>${w?fmtDist(w.m):''}</small></button>`;
+  if(transitUseful) h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 대중교통</small><b>${fmtMin(t.total)}</b><small>${fmtYen(t.fare)}</small></button>`;
+  else h+=`<button class="mode" disabled style="opacity:.6"><small>🚇 대중교통</small><b>—</b><small>${t&&t.walkOnly?'가까워서 도보 추천':'미확인'}</small></button>`;
+  h+='</div>';
+  if(state.mode==='transit'){
+    h+='<ol class="steps">'+t.legs.map((l,i)=>{
+      if(l.mode==='walk') return `<li class="step"><span class="ic">🚶</span><div>${esc(i===t.legs.length-1?b.name:l.to)}까지 걷기<div class="meta">약 ${fmtMin(l.min)}${l.m?` · ${fmtDist(l.m)}`:''}</div></div></li>`;
+      if(l.mode!=='ride') return `<li class="step"><span class="ic">❔</span><div>${esc(l.from)} → ${esc(l.to)}<div class="meta">구간 정보 해석 불가 — Google 지도에서 확인</div></div></li>`;
+      const c=lineColor(l.line);
+      return `<li class="step"><span class="ic" style="background:${c}22">🚇</span><div><span class="badge" style="background:${c}">${esc(l.line)}</span><div style="margin-top:4px"><b>${esc(l.from)}</b> 승차 → <b>${esc(l.to)}</b> 하차</div><div class="meta">${fmtMin(l.min)}${l.nonstop?' · 무정차':(l.stops?` · ${l.stops}개 역`:'')}${l.lineUnverified?' · 노선명 원문 그대로':''}</div></div></li>`;
+    }).join('')+'</ol>';
+    const alts=(t.options||[]).slice(1);
+    if(alts.length) h+=`<div class="alts"><b>다른 방법</b><ul style="margin:4px 0 0;padding-left:16px">${alts.map(o=>`<li>${fmtMin(o.min)} · ${esc(o.lines.join(' → ')||'—')}</li>`).join('')}</ul></div>`;
+  } else if(w){
+    h+=`<ol class="steps"><li class="step"><span class="ic">🚶</span><div>${esc(b.name)}까지 걷기<div class="meta">${fmtMin(w.min)} · ${fmtDist(w.m)}${w.via?` · ${esc(w.via)}`:''}${r.walkFromReverse?' · 반대 방향으로 조회한 도보값':''}</div></div></li></ol>`;
+  }
+  const at = (state.mode==='transit'?t&&t.at:r.walkAt);
+  h+=`<p class="note">시간·노선·요금 출처: Google 지도 길찾기 (${esc(fmtAt(at))} 조회, 조회 시점 출발 기준). 요금은 Google이 표시한 금액이며 적용 조건(IC/승차권·성인 등)은 표시되지 않았어요. 요일·시간대에 따라 달라질 수 있어요.<br>지도 선: 도보는 OpenStreetMap 기반 도보 경로(OSRM)라 Google 경로와 약간 다를 수 있고, 열차 구간은 역과 역을 이은 <b>개략선</b>이에요.</p>`;
+  h+=links;
+  resEl.innerHTML=h;
+  resEl.querySelectorAll('.mode[data-mode]').forEach(m=>m.onclick=()=>{state.mode=m.dataset.mode; renderRoute();});
+  drawRoute(a,b,r);
+}
+function drawEnds(a,b){
+  [a,b].forEach((p,i)=>L.circleMarker([p.lat,p.lng],{radius:16,color:i?'#e0452b':'#11875d',weight:3,fill:false}).addTo(routeLayer));
+}
+function drawRoute(a,b,r){
+  drawEnds(a,b);
+  const key=`${a.id}|${b.id}`; const geo=(G.walk||{});
+  const pts=[[a.lat,a.lng],[b.lat,b.lng]];
+  let leg='';
+  if(state.mode==='walk'){
+    const g=geo[`route:${key}`]||geo[`route:${b.id}|${a.id}`];
+    const line=g||[[a.lat,a.lng],[b.lat,b.lng]];
+    L.polyline(line,{color:'#11875d',weight:5,dashArray:g?'1 9':'4 8',lineCap:'round'}).addTo(routeLayer);
+    pts.push(...line);
+    leg=`<div><span class="sw walk"></span>도보${g?'':' (직선 표시)'}</div>`;
+  } else {
+    const S=G.stations||{};
+    const lineSeen={}; let missing=0;
+    r.transit.legs.forEach((l,i)=>{
+      const A = i===0 ? [a.lat,a.lng] : S[l.from];
+      const B = i===r.transit.legs.length-1 ? [b.lat,b.lng] : S[l.to];
+      if(l.mode==='walk'){
+        const g=geo[`leg:${l.from}|${l.to}|${key}`];
+        const line=g||(A&&B?[A,B]:null);
+        if(line){ L.polyline(line,{color:'#11875d',weight:5,dashArray:'1 9',lineCap:'round'}).addTo(routeLayer); pts.push(...line); } else missing++;
+      } else if(l.mode==='ride' && A&&B){
+        const c=lineColor(l.line);
+        L.polyline([A,B],{color:c,weight:6,opacity:.85}).addTo(routeLayer).bindTooltip(`${l.line} (개략선)`,{sticky:true,className:'lbl'});
+        [[A,l.from],[B,l.to]].forEach(([pt,nm])=>L.marker(pt,{icon:L.divIcon({className:'',html:`<div class="st" style="border-color:${c}"></div>`,iconSize:[12,12],iconAnchor:[6,6]})}).bindTooltip(nm,{permanent:true,direction:'right',offset:[8,0],className:'lbl'}).addTo(routeLayer));
+        pts.push(A,B);
+        lineSeen[l.line]=c;
+      } else missing++;
+    });
+    leg=`<div><span class="sw walk"></span>도보</div>`+Object.entries(lineSeen).map(([n,c])=>`<div><span class="sw" style="border-color:${c}"></span>${esc(n)} (개략선)</div>`).join('')+(missing?`<div style="color:#9a5b00">⚠ ${missing}개 구간은 위치 정보가 없어 선 미표시</div>`:'');
+  }
+  legendEl.innerHTML=leg; legendEl.classList.add('on');
+  map.fitBounds(L.latLngBounds(pts).pad(.18));
+}
+
+/* ---------- init ---------- */
+fillSelects(); setCity('osaka');
+const hp=new URLSearchParams(location.hash.slice(1));
+if(hp.get('from')||hp.get('to')) setRoute(byId[hp.get('from')]?hp.get('from'):'', byId[hp.get('to')]?hp.get('to'):'');
+})();
+</script>
+</body>
+</html>

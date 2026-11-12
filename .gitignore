@@ -1,0 +1,7 @@
+tools/raw_routes*.jsonl
+tools/osrm_cache.json
+tools/test_routes.json
+tools/routes_parsed.json
+tools/__pycache__/
+tools/urls.txt
+tools/jobs_remaining.json
