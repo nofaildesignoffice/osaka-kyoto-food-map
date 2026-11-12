@@ -5,3 +5,6 @@ tools/routes_parsed.json
 tools/__pycache__/
 tools/urls.txt
 tools/jobs_remaining.json
+tools/osm/
+tools/gm_batches.json
+tools/gm_b1.json
