@@ -93,8 +93,10 @@ table.near td.n{font-weight:700}
 .empty{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink2);font-size:13.5px;line-height:1.6;background:#fff}
 
 /* map */
-.mapwrap{position:relative;min-height:0}
-#gmap{position:absolute;inset:0;width:100%;height:100%;border:0;background:#e9e5dd}
+.mapwrap{position:relative;min-height:0;overflow:hidden}
+#gmap{position:absolute;left:0;top:0;width:100%;height:100%;border:0;background:#e9e5dd}
+/* 내 지도 embed 상단 제목줄(지도 이름·계정, 60px)을 화면 밖으로 밀어 숨김 */
+.mapwrap.crop #gmap{top:-60px;height:calc(100% + 60px)}
 .mapbar{position:absolute;left:50%;transform:translateX(-50%);bottom:30px;z-index:5;display:flex;gap:6px;flex-wrap:nowrap;align-items:center;white-space:nowrap}
 .mapbar .pill{background:rgba(255,255,255,.96);border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;box-shadow:var(--shadow);border:0;color:var(--ink);text-decoration:none;cursor:pointer;font-family:inherit}
 .mapbar .pill.on{background:var(--ink);color:#fff}
@@ -200,6 +202,7 @@ function renderMap(){
     url=`https://www.google.com/maps/d/embed?mid=${mid()}&hl=ko&ll=${view.lat},${view.lng}&z=${view.z}`;
     bar=`<button class="pill${shade?' on':''}" data-shade role="switch" aria-checked="${shade}">지역 음영 ${shade?'켜짐':'꺼짐'}</button><a class="pill" href="https://www.google.com/maps/d/viewer?mid=${mid()}" target="_blank" rel="noopener">크게 보기 ↗</a>`;
   }
+  gframe.parentElement.classList.toggle('crop', view.kind!=='route');
   setFrame(url); mapbar.innerHTML=bar;
 }
 mapbar.addEventListener('click',e=>{ if(e.target.closest('[data-back]')) setRoute('','');
