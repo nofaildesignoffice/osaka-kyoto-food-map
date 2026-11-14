@@ -82,7 +82,9 @@ button,select{font:inherit;color:inherit}
 .ja{font-size:12px;color:var(--ink3);margin-top:2px}
 .area{font-size:12px;color:var(--ink2);margin-top:3px}
 .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--food-soft);color:var(--food);margin-right:4px}
-.tag.cand{background:#fff;border:1px dashed var(--food)}
+.area{display:flex;align-items:center;flex-wrap:wrap;column-gap:0}
+.area .area-t{min-width:0}
+.area .flag{margin-left:auto;padding-left:8px;font-size:11px;font-weight:700;color:var(--food);white-space:nowrap}
 .tag.hotel{background:var(--hotel-soft);color:var(--hotel)}
 .tag.spot{background:var(--spot-soft);color:var(--spot)}
 .rk{position:relative;display:inline-block!important;width:22px;height:22px;flex:none;border-radius:50%;font-size:0!important;color:transparent;padding:0;vertical-align:-6px;border:1.5px solid transparent;box-sizing:border-box;overflow:hidden}
@@ -620,7 +622,8 @@ function nearTable(p){
 function cardHTML(p){
   const r = rankOf(p);
   const cls = ['card',p.type, p.candidate?'cand':'', state.sel===p.id?'sel':''].join(' ');
-  const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : p.type==='spot' ? '<span class="tag spot">관광지</span>' : `<span class="tag">${esc(p.group)}</span>${p.candidate?'<span class="tag cand">후보</span>':''}${p.branchUnsure?'<span class="tag cand">지점 미확정</span>':''}`;
+  const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : p.type==='spot' ? '<span class="tag spot">관광지</span>' : `<span class="tag">${esc(p.group)}</span>`;
+  const flags = [p.candidate?'후보':'', p.branchUnsure?'지점 미확정':''].filter(Boolean).join(' · ');
   const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
   const rankset = p.type==='food' ? `<div class="rankset" role="group" aria-label="순위">${[1,2,3].map(n=>`<button class="r${n}" data-rank="${n}" data-id="${p.id}" aria-pressed="${r===n}" title="${n}순위">${RANK_ICON[n]}</button>`).join('')}</div>` : '';
   let body = '';
@@ -640,7 +643,7 @@ function cardHTML(p){
     (p.sources||[]).map(s=>`<a class="btn small" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')+
     `<button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small" data-setto="${p.id}">여기로 도착</button></div>`;
   body += `<div data-near="${p.id}">${nearTable(p)}</div>`;
-  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}${esc(p.area)}</div></div>${rankset}</div><div class="detail">${body}</div></article>`;
+  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div></div>${rankset}</div><div class="detail">${body}</div></article>`;
 }
 function renderList(){
   const items = P.filter(p=>p.city===state.city);
