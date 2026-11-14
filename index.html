@@ -232,6 +232,14 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .osm-attr{position:absolute;left:6px;bottom:26px;z-index:5;font-size:10px;color:#555;background:rgba(255,255,255,.75);padding:1px 5px;border-radius:4px;pointer-events:none}
 .ctlpanel.right{left:auto;right:0}
 .rankset button{display:grid;place-items:center;line-height:0}
+.rb-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px}
+.rbox{position:relative;display:flex;align-items:center;gap:9px;height:44px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;min-width:0}
+.rbox:focus-within{border-color:var(--ink)}
+.rbox .ctlk{flex:none;font-size:11.5px;font-weight:700;color:var(--ink3)}
+.rbox select{flex:1;min-width:0;height:100%;border:0;background:transparent;font:inherit;font-size:14px;font-weight:600;color:var(--ink);-webkit-appearance:none;appearance:none;cursor:pointer;outline:none;padding:0;text-overflow:ellipsis}
+.rbox .chev{flex:none;opacity:.55;pointer-events:none}
+.ibtn{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink2);padding:0}
+.ibtn:hover{border-color:var(--ink);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -247,7 +255,6 @@ table.near tr[data-route]:hover td{background:var(--bg)}
         <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>맛집</span>
         <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-hotel)" stroke="var(--pin-hotel-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>숙소</span>
         <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-spot)" stroke="var(--pin-spot-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>관광지</span>
-        <span><i class="dot zone"></i>유명 지역</span>
       </div>
       <div class="ctlgrp">
         <div class="ctl" id="cityCtl">
@@ -262,12 +269,12 @@ table.near tr[data-route]:hover td{background:var(--bg)}
     </div>
     <div class="scroll" id="scroll">
       <section class="routebox" aria-label="이동 방법">
-        <p class="rb-title">🧭 이동 방법 찾기</p>
-        <div class="rb-row"><label for="from">출발</label><select id="from"></select></div>
-        <div class="rb-row"><label for="to">도착</label><select id="to"></select></div>
-        <div class="rb-actions">
-          <button class="btn" id="swap" title="출발/도착 바꾸기">⇅ 바꾸기</button>
-          <button class="btn" id="clear">지우기</button>
+        <p class="rb-title">길찾기</p>
+        <div class="rb-grid">
+          <label class="rbox"><span class="ctlk">출발</span><select id="from"></select><svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>
+          <button class="ibtn" id="swap" type="button" title="출발/도착 바꾸기" aria-label="출발/도착 바꾸기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg></button>
+          <label class="rbox"><span class="ctlk">도착</span><select id="to"></select><svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>
+          <button class="ibtn" id="clear" type="button" title="지우기" aria-label="출발/도착 지우기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button>
         </div>
         <div class="result" id="result"></div>
       </section>
