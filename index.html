@@ -257,6 +257,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 <script src="data/hotels.js"></script>
 <script src="data/places.js"></script>
 <script src="data/spots.js"></script>
+<script src="data/added.js"></script>
 <script>window.PLACES.push(...(window.SPOTS||[]));</script>
 <script src="data/districts.js"></script>
 <script>
@@ -264,7 +265,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 /* Google Maps Platform 브라우저 키 — 콘솔에서 웹사이트(HTTP 리퍼러)·API 제한을 걸어 둔 공개용 키 */
 const GKEY = 'AIzaSyB2CPI2TJ3u5JcDOXyrnhjCimsOct_b6pc';
 
-const BASE = (window.PLACES || []).slice();
+const BASE = (window.PLACES || []).concat(window.ADDED || []);
 const P = [];
 const DIST = window.DISTRICTS || [];
 const byId = {};
@@ -585,6 +586,7 @@ function cardHTML(p){
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
   if(p.comment) body += `<p class="quote-h">💬 유튜브 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
   if(p.origin==='list') body += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름: “${esc(p.typed)}”</p>`;
+  if(p.origin==='ai') body += `<p class="quote-h">🤖 AI로 추가 — ${p.verified&&p.verified.length===2?'Claude·Codex 둘 다 같은 곳으로 확인':'AI 한쪽 확인'}${p.pending?' (반영 중)':''} · 입력: “${esc(p.typed)}”</p>${(p.aiEvidence||[]).map(a=>`<div class="quote"><b>${esc(a.ai)}</b>: ${esc(a.evidence)}</div>`).join('')}`;
   if(p.origin==='added') body += `<p class="quote-h">➕ 직접 추가 (이 기기에 저장) — 입력: “${esc(p.typed)}”</p>`;
   if(p.origin==='blog') body += `<p class="quote-h">📰 네이버 블로그 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.blog)}</div>`;
   if(p.tip) body += `<div class="tip">💡 ${esc(p.tip)}</div>`;
@@ -771,7 +773,9 @@ async function renderRoute(){
 /* ---------- 장소 추가·삭제 (이 기기에 저장) ---------- */
 function rebuildPlaces(){
   const removed=new Set(lsGet('removed',[]));
-  const added=lsGet('added',[]).filter(x=>x&&x.id&&Number.isFinite(x.lat)&&Number.isFinite(x.lng));
+  const shipped=new Set(BASE.map(p=>p.gpid).filter(Boolean));
+  let added=lsGet('added',[]).filter(x=>x&&x.id&&Number.isFinite(x.lat)&&Number.isFinite(x.lng));
+  if(added.some(x=>x.gpid&&shipped.has(x.gpid))){ added=added.filter(x=>!(x.gpid&&shipped.has(x.gpid))); lsSet('added',added); }
   P.length=0; BASE.forEach(p=>{ if(!removed.has(p.id)) P.push(p); }); added.forEach(p=>{ if(!removed.has(p.id)) P.push(p); });
   for(const k in byId) delete byId[k]; P.forEach(p=>byId[p.id]=p);
 }
@@ -862,52 +866,91 @@ async function placesSearch(query, bias, lang){
   const j=await gpost('https://places.googleapis.com/v1/places:searchText','places.id,places.displayName,places.formattedAddress,places.location,places.types,places.primaryType,places.primaryTypeDisplayName,places.rating,places.userRatingCount,places.photos.name,places.googleMapsUri', body);
   return j.places||[];
 }
+const BRIDGE='http://127.0.0.1:8777';
+async function bridge(path, body){
+  const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(), path==='/health'?2500:20000);
+  try{ const r=await fetch(BRIDGE+path, body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ctl.signal}:{signal:ctl.signal});
+    const j=await r.json(); if(!r.ok) throw new Error(j.error||r.status); return j; } finally{ clearTimeout(t); }
+}
+const LEVEL = {both:['✅ Claude·Codex 둘 다 같은 곳','#1b7f3b'], one:['⚠️ AI 한쪽만 찾음 — 직접 확인 후 추가','#b26a00'], mismatch:['❌ 이름 불일치 (추가 불가)','#b3261e']};
 function openAddModal(){
-  let cands=[], status='', input='', cat='food';
+  let cands=[], status='', input='', cat='food', ai=null, job=null, steps={}, extra='', busy=false, plain=false;
   const draw=()=>{
+    const aiChip = ai===null ? '<span class="meta">AI 연결 확인 중…</span>'
+      : ai ? '<span class="meta" style="color:#1b7f3b;font-weight:700">🤖 AI 연결됨 — Claude + Codex 교차 확인</span>'
+      : '<span class="meta" style="color:#b3261e;font-weight:700">🤖 AI 꺼짐</span><span class="meta"> — 이 PC에서 <b>start_ai_bridge.bat</b>을 실행하면 켜져요.</span>';
     modalEl.querySelector('.modal').innerHTML=`
-      <div class="modal-h"><h2>장소 추가</h2><p>가게 이름, 지역, 설명, 구글 지도 링크를 자유롭게 적으면 Google 지도에서 찾아 후보를 보여줘요. 맞는 곳을 골라 추가하세요.</p></div>
+      <div class="modal-h"><h2>장소 추가</h2><p>가게 이름·지역·설명·구글 지도 링크(짧은 링크 포함)를 자유롭게 적으세요. Claude와 Codex가 각각 웹에서 찾아보고, 두 AI의 답을 Google 지도에서 실제 장소로 확인해요. 이름·주소·좌표는 Google 지도 값만 써요.</p><div style="margin-top:6px">${aiChip}</div></div>
       <div class="modal-b">
-        <label class="field"><span>카테고리</span><select id="addCat">${['food','hotel','spot'].map(t=>`<option value="${t}"${t===cat?' selected':''}>${TYPE_LABEL[t]}</option>`).join('')}</select></label>
-        <label class="field"><span>장소 정보</span><textarea id="addText" placeholder="예) 도톤보리 이치란 라멘&#10;예) 교토 니시키시장 근처 장어덮밥집 '교토 우나기'&#10;예) https://www.google.com/maps/place/…">${esc(input)}</textarea></label>
-        ${status?`<div class="${/찾지|못|실패|짧은/.test(status)?'warn':'note'}" style="margin-bottom:10px">${status}</div>`:''}
-        ${cands.map((c,i)=>{ const ph=c.photos&&c.photos[0]; const ex=c._exists;
-          return `<div class="cand">${ph?`<img class="thumb" alt="" src="${photoURL(ph.name,160)}">`:`<span class="mico">${emojiOf(c.types)||'📍'}</span>`}<div class="mi"><div class="mn">${esc(c.displayName&&c.displayName.text)}</div><div class="meta">${esc(c.primaryTypeDisplayName?c.primaryTypeDisplayName.text:'')}${c.rating?` · ⭐ ${c.rating.toFixed(1)} (${(c.userRatingCount||0).toLocaleString()})`:''}<br>${esc(c.formattedAddress||'')} · ${CITY[cityOf(c.location.latitude,c.location.longitude)].name}${c.googleMapsUri?` · <a href="${esc(c.googleMapsUri)}" target="_blank" rel="noopener">지도에서 확인</a>`:''}</div></div>${ex?`<span class="meta">이미 있음</span>`:`<button class="plus" data-pick="${i}" aria-label="추가" title="이 장소 추가">+</button>`}</div>`; }).join('')}
+        <label class="field"><span>카테고리</span><select id="addCat" ${busy?'disabled':''}>${['food','hotel','spot'].map(t=>`<option value="${t}"${t===cat?' selected':''}>${TYPE_LABEL[t]}</option>`).join('')}</select></label>
+        <label class="field"><span>장소 정보</span><textarea id="addText" ${busy?'disabled':''} placeholder="예) 교토 니시키시장 근처 장어덮밥 유명한 곳&#10;예) 도톤보리 이치란 라멘&#10;예) https://maps.app.goo.gl/…">${esc(input)}</textarea></label>
+        ${Object.keys(steps).length?`<div class="note" style="margin-bottom:10px">${Object.entries(steps).map(([k,v])=>`<div>${/완료/.test(v)?'✔':/실패/.test(v)?'✖':'⏳'} <b>${esc(k)}</b> ${esc(v)}</div>`).join('')}</div>`:''}
+        ${status?`<div class="${/못|실패|꺼|없/.test(status)?'warn':'note'}" style="margin-bottom:10px">${status}</div>`:''}
+        ${cands.map((c,i)=>{ const L=LEVEL[c.level]||['','#555']; const ph=c.photo;
+          const evid=(c.ai||[]).map(a=>`<div style="margin-top:3px"><b>${esc(a.ai)}</b>: ${esc(a.evidence||'')}</div>`).join('');
+          return `<div class="cand" style="align-items:flex-start">${ph?`<img class="thumb" alt="" src="${photoURL(ph,160)}">`:`<span class="mico">${emojiOf(c.types)||'📍'}</span>`}<div class="mi">
+            <div style="font-size:12px;font-weight:800;color:${L[1]}">${L[0]}</div>
+            <div class="mn">${esc(c.name)}${c.nameJa&&c.nameJa!==c.name?` <span class="meta">${esc(c.nameJa)}</span>`:''}</div>
+            <div class="meta">${esc(c.typeKo||'')}${c.rating?` · ⭐ ${(+c.rating).toFixed(1)} (${(+c.ratingCount||0).toLocaleString()})`:''}${c.status&&c.status!=='OPERATIONAL'?` · <b style="color:#b3261e">${c.status==='CLOSED_PERMANENTLY'?'폐업':'휴업'}</b>`:''}<br>${esc(c.address||'')} · ${CITY[cityOf(c.lat,c.lng)].name}${c.mapsUri?` · <a href="${esc(c.mapsUri)}" target="_blank" rel="noopener">지도에서 확인</a>`:''}</div>
+            <details class="meta" style="margin-top:4px"><summary>AI 근거 보기</summary>${evid}</details></div>
+            ${c._exists?'<span class="meta">이미 있음</span>':c._added?'<span class="meta" style="color:#1b7f3b">추가됨</span>':c.level==='mismatch'?'':`<button class="plus" data-pick="${i}" aria-label="추가" title="이 장소 추가">+</button>`}</div>`; }).join('')}
+        ${extra}
       </div>
-      <div class="modal-f"><span class="meta"></span><button class="btn" data-cancel>닫기</button><button class="btn primary" data-search>${cands.length?'다시 찾기':'추가하기'}</button></div>`;
+      <div class="modal-f"><span class="meta"></span>${ai===false?'<button class="btn" data-plain>AI 없이 구글 검색</button>':''}<button class="btn" data-cancel>닫기</button><button class="btn primary" data-search ${busy||!ai?'disabled':''}>${busy?'AI 분석 중…':cands.length?'다시 분석':'추가하기'}</button></div>`;
   };
+  const markExisting = ()=>{ const all=[...BASE,...lsGet('added',[])]; cands.forEach(c=>{ c._exists = all.some(p=>(p.gpid&&p.gpid===c.pid) || haversine(p,{lat:c.lat,lng:c.lng})<25); }); };
   openModal(''); document.addEventListener('keydown', escClose);
+  bridge('/health').then(h=>{ ai=!!(h.ok&&h.claude&&h.codex); if(h.ok&&!ai) status='브리지는 켜졌지만 '+(!h.claude?'Claude':'Codex')+' CLI를 찾지 못했어요.'; }).catch(()=>{ ai=false; }).finally(()=>{ if(modalEl) draw(); });
   modalEl.addEventListener('input',e=>{ if(e.target.id==='addText') input=e.target.value; });
   modalEl.addEventListener('change',e=>{ if(e.target.id==='addCat') cat=e.target.value; });
   modalEl.addEventListener('click', async e=>{
     const t=e.target.closest('button'); if(!t) return;
     if('cancel' in t.dataset){ closeModal(); return; }
+    if('plain' in t.dataset){ plain=true; input=modalEl.querySelector('#addText').value; cat=modalEl.querySelector('#addCat').value;
+      const pi=parseInput(input); if(!pi.q&&!pi.coord){ status='장소 정보를 입력해 주세요.'; draw(); return; }
+      status='Google 지도에서 찾는 중…'; draw();
+      try{ let res=await placesSearch(pi.q||`${pi.coord.lat},${pi.coord.lng}`, pi.coord);
+        cands=res.filter(c=>c.location).map(c=>({pid:c.id, level:'one', name:c.displayName&&c.displayName.text, nameJa:'', address:c.formattedAddress, lat:c.location.latitude, lng:c.location.longitude, types:c.types, typeKo:c.primaryTypeDisplayName&&c.primaryTypeDisplayName.text, rating:c.rating, ratingCount:c.userRatingCount, photo:c.photos&&c.photos[0]&&c.photos[0].name, mapsUri:c.googleMapsUri, ai:[], _plain:true}));
+        cands.forEach(c=>c.level='one'); markExisting();
+        status=cands.length?'AI 없이 Google 검색 결과예요 (이 기기에만 저장).':'Google 지도에서 찾지 못했어요.'; }catch(err){ status='검색 실패: '+esc(err.message||err); }
+      draw(); return; }
     if('search' in t.dataset){
-      input=modalEl.querySelector('#addText').value; cat=modalEl.querySelector('#addCat').value;
-      const pi=parseInput(input);
-      if(!pi.q && !pi.coord){ status = pi.hadUrl ? '짧은 공유 링크(maps.app.goo.gl 등)는 브라우저에서 열어 볼 수 없어요. 가게 이름이나 전체 링크를 같이 적어 주세요.' : '장소 정보를 입력해 주세요.'; draw(); return; }
-      status='Google 지도에서 찾는 중…'; cands=[]; draw();
+      input=modalEl.querySelector('#addText').value.trim(); cat=modalEl.querySelector('#addCat').value;
+      if(!input){ status='장소 정보를 입력해 주세요.'; draw(); return; }
+      busy=true; cands=[]; extra=''; status=''; steps={'Claude':'분석 중','Codex':'분석 중'}; draw();
       try{
-        let res=await placesSearch(pi.q || `${pi.coord.lat},${pi.coord.lng}`, pi.coord);
-        if(pi.coord) res=res.filter(c=>c.location && haversine(pi.coord,{lat:c.location.latitude,lng:c.location.longitude})<400);
-        const existing=new Set([...BASE,...lsGet('added',[])].map(p=>p.gpid).filter(Boolean));
-        const all=[...BASE,...lsGet('added',[])];
-        cands=res.filter(c=>c.location).map(c=>({...c, _exists: existing.has(c.id) || all.some(p=>haversine(p,{lat:c.location.latitude,lng:c.location.longitude})<25)}));
-        status = cands.length ? `후보 ${cands.length}곳을 찾았어요. 맞는 곳의 <b>+</b>를 누르면 ${TYPE_LABEL[cat]}에 추가돼요.` : 'Google 지도에서 찾지 못했어요. 가게 이름을 더 정확히(일본어 이름·지점명·동네) 적어 보세요.';
-      }catch(err){ status='검색에 실패했어요 ('+esc(err.message||err)+')'; }
-      draw(); return;
+        job=(await bridge('/analyze',{text:input,cat})).id;
+        let j; for(let i=0;i<200;i++){ await new Promise(r=>setTimeout(r,2000)); if(!modalEl) return; j=await bridge('/job/'+job); steps=j.steps||steps; draw(); if(j.status!=='running') break; }
+        if(j.status!=='done') throw new Error(j.error||'시간 초과');
+        const R=j.result; cands=R.cands||[]; markExisting();
+        const nb=cands.filter(c=>c.level==='both').length;
+        status = !cands.length ? 'AI가 찾은 장소를 Google 지도에서 확인하지 못했어요. 가게 이름(일본어)이나 지점·동네를 더 적어 주세요.'
+          : nb ? `두 AI가 같은 곳으로 확인한 장소 ${nb}곳${cands.length>nb?` + 한쪽만 찾은 곳 ${cands.length-nb}곳`:''}. <b>+</b>를 누르면 일행 모두의 지도에 추가돼요.`
+          : '두 AI의 답이 일치하지 않았어요. 아래 후보를 지도에서 직접 확인한 뒤 추가하세요.';
+        if(!R.bothRan) status += ' (한쪽 AI가 실패해서 교차 확인이 안 됐어요)';
+        const notes=Object.entries(R.notes||{}).filter(([k,v])=>v); const un=R.unresolved||[];
+        extra = (un.length?`<div class="sub-h">Google 지도에서 확인 안 됨 (추가 불가)</div>`+un.map(u=>`<div class="meta">· ${esc(u.ai)}: ${esc(u.name_ja||u.name_ko)} — ${esc(u.evidence||'')}</div>`).join(''):'')
+          + (notes.length?`<div class="sub-h">AI 메모</div>`+notes.map(([k,v])=>`<div class="meta">· ${esc(k)}: ${esc(v)}</div>`).join(''):'');
+      }catch(err){ status='AI 분석 실패: '+esc(err.message||err); }
+      busy=false; draw(); return;
     }
     if(t.dataset.pick){
-      const c=cands[+t.dataset.pick]; if(!c) return; t.disabled=true;
-      let ja=null; try{ const r=await gpost(`https://places.googleapis.com/v1/places/${encodeURIComponent(c.id)}?languageCode=ja`,'displayName,formattedAddress',undefined,'GET'); ja=r; }catch(err){}
-      const lat=c.location.latitude, lng=c.location.longitude, city=cityOf(lat,lng);
-      const p={id:'u-'+c.id.slice(-12)+'-'+Date.now().toString(36), gpid:c.id, type:cat, city, lat, lng,
-        name:(c.displayName&&c.displayName.text)||'이름 없음', nameJa:(ja&&ja.displayName&&ja.displayName.text)||'',
-        address:(ja&&ja.formattedAddress)||c.formattedAddress||'', area:(c.primaryTypeDisplayName&&c.primaryTypeDisplayName.text)||'',
-        group: cat==='food' ? '직접 추가한 맛집' : (cat==='spot'?'관광지':''),
-        emoji: cat==='hotel'?'':(emojiOf(c.types)||(cat==='spot'?'📍':'🍴')), origin:'added', typed:input.trim().slice(0,300), addedAt:new Date().toISOString(), notes:[]};
-      const added=lsGet('added',[]); added.push(p); lsSet('added',added);
-      closeModal(); afterPlacesChanged(); setCity(p.city,true); select(p.id,false); return;
+      const i=+t.dataset.pick, c=cands[i]; if(!c) return; t.disabled=true;
+      if(c._plain){ // AI 없이 찾은 경우: 이 기기에만
+        let ja=null; try{ ja=await gpost(`https://places.googleapis.com/v1/places/${encodeURIComponent(c.pid)}?languageCode=ja`,'displayName,formattedAddress',undefined,'GET'); }catch(err){}
+        const p={id:'u-'+c.pid.slice(-12)+'-'+Date.now().toString(36), gpid:c.pid, type:cat, city:cityOf(c.lat,c.lng), lat:c.lat, lng:c.lng, name:c.name||'이름 없음', nameJa:(ja&&ja.displayName&&ja.displayName.text)||'', address:(ja&&ja.formattedAddress)||c.address||'', area:c.typeKo||'', group:cat==='food'?'직접 추가한 맛집':(cat==='spot'?'관광지':''), emoji:cat==='hotel'?'':(emojiOf(c.types)||(cat==='spot'?'📍':'🍴')), origin:'added', typed:input.slice(0,300), notes:[]};
+        const added=lsGet('added',[]); added.push(p); lsSet('added',added); closeModal(); afterPlacesChanged(); setCity(p.city,true); select(p.id,false); return;
+      }
+      status='추가하는 중… (사이트에 저장하고 GitHub에 올리는 중)'; draw();
+      try{
+        const r=await bridge('/commit',{job, idx:i, cat}); const p=r.place;
+        // 배포(1~2분)가 끝나기 전까지 이 기기에 먼저 표시
+        const added=lsGet('added',[]); if(!added.some(x=>x.gpid===p.gpid)){ added.push({...p, origin:'ai', pending:true}); lsSet('added',added); }
+        c._added=true;
+        status = r.state==='pushed' ? `✅ <b>${esc(p.name)}</b> 추가 완료. 일행 지도에는 1~2분 뒤 반영돼요.` : r.state==='already' ? '이미 추가된 장소예요.' : `⚠️ 저장은 했지만 GitHub 업로드에 실패했어요. 이 기기에서만 보여요.`;
+        draw(); afterPlacesChanged();
+      }catch(err){ status='추가 실패: '+esc(err.message||err); t.disabled=false; draw(); }
+      return;
     }
   });
   draw();
