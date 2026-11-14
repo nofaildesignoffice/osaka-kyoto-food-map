@@ -8,8 +8,11 @@
 - 지역 음영 13곳: 오사카는 OSM 町丁目 행정경계(admin_level=10)를 합침, 교토는 OSM에 町 경계가 없어 町 중심점을 감싼 대략 범위(기온은 OSM 역사지구 경계). tools/fetch_districts.py, fetch_kyoto_nodes.py, build_districts.py → mymaps/districts.tsv (WKT). © OpenStreetMap contributors (ODbL)
 - 음영 켜기/끄기: 음영 있는 내 지도(mid 1HcytTfswQ8eT6mKa0_MPwfZjCFWzHgI)와 음영 레이어만 뺀 사본(mid 1iovZdjIqgczi0szkajegoqPq1BC9z0c)을 바꿔 끼움 — 두 지도에 같은 데이터를 유지할 것
 - 가게 좌표·주소: 2026-11-12 Google 지도 장소 페이지에서 확인
+- 2026-11-14 추가: 숙소 5곳(아고다 공유 링크 → 숙소명 확인 → Google 지도 좌표), 채팅 목록 가게 12곳 + 블로그 장어집 1곳. 한글 이름→가게 매칭은 Google 지도 검색 + Codex 웹 검수로 교차 확인 (tools/new_places_20261114.json). 나라 탭 추가
+- 숙소↔맛집 경로: 2026-11-14 '지금 출발' 기준 Google 지도 길찾기 화면 수집 (tools/jobs_hotels.json → raw_routes_hotels.jsonl)
 - 대중교통/도보 시간·노선·요금: 2026-11-12 평일 오후 출발 기준으로 Google 지도 길찾기 화면에서 조회한 값 (실시간 값은 페이지의 Google 지도 버튼으로 확인)
 - 경로선: 출발/도착을 고르면 Google 지도 길찾기 임베드(output=embed)를 표시 — 실시간 기준이라 저장값과 다를 수 있음
 
 ## 숙소 추가
 `data/hotels.js`에 숙소를 추가한 뒤 `tools/` 스크립트로 경로를 다시 수집·빌드.
+내 지도 반영: `python tools/make_tsv.py` → mymaps/places.tsv를 시트 '오사카 교토 맛집 지도 데이터' A1에 붙여넣기 → 두 내 지도(음영/무음영)의 '맛집·숙소' 레이어에서 다시 가져오기 → 모든 항목 교체 → 새 분류 아이콘 지정.

@@ -16,7 +16,7 @@ def load_places():
     pts = {}
     for fn in ('places.js', 'hotels.js'):
         s = open(os.path.join(ROOT, 'data', fn), encoding='utf-8').read()
-        for m in re.finditer(r'id:\s*"([^"]+)".*?lat:\s*([\d.]+),\s*lng:\s*([\d.]+)', s, re.S):
+        for m in re.finditer(r'"?id"?:\s*"([^"]+)".*?"?lat"?:\s*([\d.]+),\s*"?lng"?:\s*([\d.]+)', s, re.S):
             pts[m.group(1)] = (float(m.group(2)), float(m.group(3)))
     return pts
 
