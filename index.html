@@ -82,6 +82,7 @@ button,select{font:inherit;color:inherit}
 .credit{font-size:11px;color:var(--ink3);margin:18px 2px 0;line-height:1.5}
 .detail{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;font-size:13.5px}
 .card.sel .detail{display:block}
+.tip{background:#fff6dc;border:1px solid #f1d27a;border-radius:10px;padding:9px 11px;line-height:1.55;font-size:13.5px;margin:8px 0}
 .quote{background:var(--bg);border-radius:10px;padding:9px 11px;white-space:pre-line;line-height:1.55;font-size:13.5px}
 .quote-h{font-size:11.5px;font-weight:700;color:var(--ink3);margin:0 0 4px}
 .facts{margin:8px 0 0;padding-left:16px;color:var(--ink2);font-size:12.5px;line-height:1.55}
@@ -119,7 +120,7 @@ table.near td.n{font-weight:700}
   <aside class="side">
     <div class="side-head">
       <h1 class="title">오사카·교토 맛집 지도</h1>
-      <p class="sub">오사카 사는 분이 유튜브 댓글로 추천한 가게 + 유명 관광지·지역 + 우리 숙소</p>
+      <p class="sub">유튜브 댓글 추천 가게 + 우리가 고른 가게 + 유명 관광지·지역 + 우리 숙소</p>
       <div class="legend">
         <span><i class="dot food"></i>맛집</span>
         <span><i class="dot cand"></i>맛집 후보(지점 미확정)</span>
@@ -130,6 +131,7 @@ table.near td.n{font-weight:700}
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button>
         <button class="tab" role="tab" data-city="kyoto" aria-selected="false">교토</button>
+        <button class="tab" role="tab" data-city="nara" aria-selected="false">나라</button>
       </div>
       <div class="chips">
         <button class="chip" data-filter="all" aria-pressed="true">전체</button>
@@ -170,7 +172,7 @@ const P = window.PLACES || [];
 const R = window.ROUTES || {};
 const META = window.ROUTES_META || {};
 const byId = Object.fromEntries(P.map(p=>[p.id,p]));
-const CITY = {osaka:{name:'오사카',center:[34.676,135.508],zoom:13}, kyoto:{name:'교토',center:[35.005,135.745],zoom:12}};
+const CITY = {osaka:{name:'오사카',center:[34.676,135.508],zoom:13}, kyoto:{name:'교토',center:[35.005,135.745],zoom:12}, nara:{name:'나라',center:[34.686,135.835],zoom:14}};
 const LINE_COLORS = {'미도스지선':'#e5171f','다니마치선':'#522886','요츠바시선':'#0078ba','주오선':'#019a66','센니치마에선':'#e44d93','사카이스지선':'#814721','나가호리쓰루미료쿠치선':'#a9cc51','이마자토스지선':'#ee7b1a','오사카 순환선':'#f15a22','JR':'#f15a22','한신':'#0d4ea1','긴테쓰':'#d40000','난카이':'#ff6600','게이한':'#00a0e9','한큐':'#7a1e2b'};
 const lineColor = n => { if(!n) return '#555'; for(const k in LINE_COLORS){ if(n.includes(k)) return LINE_COLORS[k]; } return '#555'; };
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -241,7 +243,10 @@ function cardHTML(p){
   const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : p.type==='spot' ? '<span class="tag spot">관광지</span>' : `<span class="tag">${esc(p.group)}</span>${p.candidate?'<span class="tag cand">후보</span>':''}${p.branchUnsure?'<span class="tag cand">지점 미확정</span>':''}`;
   const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
   let body = '';
-  if(p.comment) body += `<p class="quote-h">💬 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
+  if(p.comment) body += `<p class="quote-h">💬 유튜브 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
+  if(p.origin==='list') body += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름: “${esc(p.typed)}”</p>`;
+  if(p.origin==='blog') body += `<p class="quote-h">📰 네이버 블로그 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.blog)}</div>`;
+  if(p.tip) body += `<div class="tip">💡 ${esc(p.tip)}</div>`;
   if(p.menu) body += `<p class="addr">🍽 추천: <b>${esc(p.menu)}</b></p>`;
   if(p.notes&&p.notes.length) body += `<ul class="facts">${p.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`;
   body += `<p class="addr">📍 ${esc(p.address)}</p>`;
@@ -263,7 +268,7 @@ function renderList(){
   }
   if(state.filter==='all'||state.filter==='food'){
     const groups = [...new Set(foods.map(f=>f.group))];
-    if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">댓글에는 ${CITY[state.city].name} 추천 맛집이 없었어요.</div>`;
+    if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
     groups.forEach(g=>{ const fs=foods.filter(f=>f.group===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
   }
   if((state.filter==='all'||state.filter==='spot') && spots.length){
@@ -305,7 +310,7 @@ const fromSel=document.getElementById('from'), toSel=document.getElementById('to
 function fillSelects(){
   const opt = p=>`<option value="${p.id}">${p.type==='hotel'?'🛏 ':(p.emoji||'')+' '}${esc(p.name)}</option>`;
   let h='<option value="">선택하세요</option>';
-  for(const c of ['osaka','kyoto']){
+  for(const c of ['osaka','kyoto','nara']){
     const hs=P.filter(p=>p.city===c&&p.type==='hotel'), fs=P.filter(p=>p.city===c&&p.type==='food'), ss=P.filter(p=>p.city===c&&p.type==='spot');
     if(hs.length) h+=`<optgroup label="${CITY[c].name} · 숙소">${hs.map(opt).join('')}</optgroup>`;
     if(fs.length) h+=`<optgroup label="${CITY[c].name} · 맛집">${fs.map(opt).join('')}</optgroup>`;

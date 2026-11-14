@@ -8,6 +8,8 @@ rows=[['이름','구분','위도','경도','일본어 상호','지역','추천 �
 for p in P:
     kind='숙소' if p['type']=='hotel' else ('맛집 후보(지점 미확정)' if p.get('candidate') else '맛집 · '+p['group'])
     link=p.get('agoda') or (p.get('sources') or [{}])[0].get('url','')
-    rows.append([p['name'],kind,str(p['lat']),str(p['lng']),p.get('nameJa',''),p.get('area',''),p.get('menu',''),cl(p.get('comment')),cl(' · '.join(p.get('notes',[]))),p['address'],link])
+    cm=p.get('comment') or p.get('blog') or (('보낸 이름: '+p['typed']) if p.get('typed') else '')
+    memo=' · '.join(([('💡 '+p['tip'])] if p.get('tip') else [])+p.get('notes',[]))
+    rows.append([p['name'],kind,str(p['lat']),str(p['lng']),p.get('nameJa',''),p.get('area',''),p.get('menu',''),cl(cm),cl(memo),p['address'],link])
 open(os.path.join(ROOT,'mymaps','places.tsv'),'w',encoding='utf-8').write('\n'.join('\t'.join(cl(c) for c in r) for r in rows))
 print(len(rows)-1,'rows')

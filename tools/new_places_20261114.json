@@ -1,0 +1,409 @@
+{
+ "foods": [
+  {
+   "id": "nedoko",
+   "city": "osaka",
+   "group": "장어",
+   "emoji": "🍱",
+   "name": "스미비야키 네도코 신사이바시 본점",
+   "nameJa": "炭火焼 寝床 心斎橋本店",
+   "area": "신사이바시 (心斎橋)",
+   "address": "大阪府大阪市中央区東心斎橋2-6-11 三津寺リーズビル 2F",
+   "lat": 34.6703997,
+   "lng": 135.5040005,
+   "menu": "지야키 장어(地焼きうなぎ), 장어 꼬치",
+   "origin": "blog",
+   "blog": "오사카에서 가장 좋아하는 지야키 장어 전문점, 오사카의 노포들과 최근 핫한 오사카의 장어 전문점들과는 차별화되는 특유의 식감을 느낄 수 있는 곳이다.",
+   "notes": [
+    "네이버 블로그 캡처의 타베로그 링크(27015767)로 가게 확인"
+   ],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E7%82%AD%E7%81%AB%E7%84%BC%20%E5%AF%9D%E5%BA%8A%20%E5%BF%83%E6%96%8E%E6%A9%8B%E6%9C%AC%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9D%B1%E5%BF%83%E6%96%8E%E6%A9%8B2-6-11%20%E4%B8%89%E6%B4%A5%E5%AF%BA%E3%83%AA%E3%83%BC%E3%82%BA%E3%83%93%E3%83%AB%202F"
+    },
+    {
+     "label": "타베로그",
+     "url": "https://tabelog.com/kr/osaka/A2701/A270202/27015767/"
+    }
+   ],
+   "type": "food",
+   "comment": ""
+  },
+  {
+   "id": "panel-cafe",
+   "city": "kyoto",
+   "group": "카페",
+   "emoji": "☕",
+   "name": "패널 카페 교토",
+   "nameJa": "Panel Cafe 京都店",
+   "area": "기온 시라카와 (祇園白川)",
+   "address": "京都府京都市東山区常盤町165 ジェイ・プライド祇園白川 1階",
+   "lat": 35.0051395,
+   "lng": 135.772634,
+   "menu": "",
+   "origin": "list",
+   "typed": "패널카페",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=Panel%20Cafe%20%E4%BA%AC%E9%83%BD%E5%BA%97%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E6%9D%B1%E5%B1%B1%E5%8C%BA%E5%B8%B8%E7%9B%A4%E7%94%BA165%20%E3%82%B8%E3%82%A7%E3%82%A4%E3%83%BB%E3%83%97%E3%83%A9%E3%82%A4%E3%83%89%E7%A5%87%E5%9C%92%E7%99%BD%E5%B7%9D%201%E9%9A%8E"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "uoshin-minami",
+   "city": "osaka",
+   "group": "스시",
+   "emoji": "🍣",
+   "name": "우오신 미나미점",
+   "nameJa": "元祖ぶっち切り寿司 魚心 南店",
+   "area": "난바·센니치마에 (千日前)",
+   "address": "大阪府大阪市中央区千日前1-7-9 あじびる南 1F",
+   "lat": 34.6680994,
+   "lng": 135.503607,
+   "menu": "",
+   "origin": "list",
+   "typed": "우오신미나미",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E5%85%83%E7%A5%96%E3%81%B6%E3%81%A3%E3%81%A1%E5%88%87%E3%82%8A%E5%AF%BF%E5%8F%B8%20%E9%AD%9A%E5%BF%83%20%E5%8D%97%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8D%83%E6%97%A5%E5%89%8D1-7-9%20%E3%81%82%E3%81%98%E3%81%B3%E3%82%8B%E5%8D%97%201F"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "kitada",
+   "city": "kyoto",
+   "group": "라멘",
+   "emoji": "🍜",
+   "name": "카이다시멘 키타다",
+   "nameJa": "貝だし麺 きた田",
+   "area": "교토역 (京都駅)",
+   "address": "京都府京都市下京区北不動堂町570-3",
+   "lat": 34.9872701,
+   "lng": 135.7547545,
+   "menu": "조개 육수 라멘",
+   "origin": "list",
+   "typed": "교토역 카이다시멘 키타다",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E8%B2%9D%E3%81%A0%E3%81%97%E9%BA%BA%20%E3%81%8D%E3%81%9F%E7%94%B0%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E4%B8%8B%E4%BA%AC%E5%8C%BA%E5%8C%97%E4%B8%8D%E5%8B%95%E5%A0%82%E7%94%BA570-3"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "goku-kawaramachi",
+   "city": "kyoto",
+   "group": "고기",
+   "emoji": "🥩",
+   "candidate": true,
+   "name": "고쿠 교토 가와라마치점 (후보)",
+   "nameJa": "WAGYU SUKIYAKI 極〜GOKU〜 京都河原町店",
+   "area": "가와라마치 (河原町)",
+   "address": "京都府京都市中京区大黒町46-5",
+   "lat": 35.0083995,
+   "lng": 135.7698789,
+   "menu": "와규 스키야키",
+   "origin": "list",
+   "typed": "코쿠 고베규스키야키",
+   "notes": [
+    "'코쿠'는 와규 스키야키 체인 GOKU(極)로 보이지만 지점이 적혀 있지 않아 교토·오사카 지점을 후보로 표시",
+    "공식 홍보 문구는 'A5 와규' — 고베규인지는 미확인"
+   ],
+   "type": "food",
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=WAGYU%20SUKIYAKI%20%E6%A5%B5%E3%80%9CGOKU%E3%80%9C%20%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E4%B8%AD%E4%BA%AC%E5%8C%BA%E5%A4%A7%E9%BB%92%E7%94%BA46-5"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "goku-dotonbori",
+   "city": "osaka",
+   "group": "고기",
+   "emoji": "🥩",
+   "candidate": true,
+   "name": "고쿠 오사카 도톤보리점 (후보)",
+   "nameJa": "WAGYU SUKIYAKI 極〜GOKU〜 道頓堀",
+   "area": "도톤보리 (道頓堀)",
+   "address": "大阪府大阪市中央区道頓堀1-8-5 こいさんセンタービル 1F2F",
+   "lat": 34.6682838,
+   "lng": 135.5022036,
+   "menu": "와규 스키야키",
+   "origin": "list",
+   "typed": "코쿠 고베규스키야키",
+   "notes": [
+    "'코쿠'는 와규 스키야키 체인 GOKU(極)로 보이지만 지점이 적혀 있지 않아 교토·오사카 지점을 후보로 표시",
+    "공식 홍보 문구는 'A5 와규' — 고베규인지는 미확인"
+   ],
+   "type": "food",
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=WAGYU%20SUKIYAKI%20%E6%A5%B5%E3%80%9CGOKU%E3%80%9C%20%E9%81%93%E9%A0%93%E5%A0%80%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%81%93%E9%A0%93%E5%A0%801-8-5%20%E3%81%93%E3%81%84%E3%81%95%E3%82%93%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%93%E3%83%AB%201F2F"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "tonemon",
+   "city": "kyoto",
+   "group": "돈카츠",
+   "emoji": "🍖",
+   "name": "미야가와 토네몬",
+   "nameJa": "宮川豚衛門",
+   "area": "미야가와초 (宮川町)",
+   "address": "京都府京都市東山区西御門町440-10",
+   "lat": 34.9984709,
+   "lng": 135.7708535,
+   "menu": "돈카츠",
+   "origin": "list",
+   "typed": "마야가와 토네몬",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E5%AE%AE%E5%B7%9D%E8%B1%9A%E8%A1%9B%E9%96%80%20%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E6%9D%B1%E5%B1%B1%E5%8C%BA%E8%A5%BF%E5%BE%A1%E9%96%80%E7%94%BA440-10"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "sashisu-namba",
+   "city": "osaka",
+   "group": "스시",
+   "emoji": "🍣",
+   "name": "스시 사카바 사시스 난바점",
+   "nameJa": "すし酒場 さしす なんばウォーク店",
+   "area": "난바 (なんばウォーク)",
+   "address": "大阪府大阪市中央区千日前1丁目 虹の街5-11 なんばウォーク3番街南通り",
+   "lat": 34.6669629,
+   "lng": 135.5051421,
+   "menu": "",
+   "origin": "list",
+   "typed": "스시사카바사시스 난바점",
+   "notes": [
+    "난바 지하상가 '난바워크' 안에 있음"
+   ],
+   "type": "food",
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E3%81%99%E3%81%97%E9%85%92%E5%A0%B4%20%E3%81%95%E3%81%97%E3%81%99%20%E3%81%AA%E3%82%93%E3%81%B0%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%AF%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8D%83%E6%97%A5%E5%89%8D1%E4%B8%81%E7%9B%AE%20%E8%99%B9%E3%81%AE%E8%A1%975-11%20%E3%81%AA%E3%82%93%E3%81%B0%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%AF3%E7%95%AA%E8%A1%97%E5%8D%97%E9%80%9A%E3%82%8A"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "momiji",
+   "city": "osaka",
+   "group": "오코노미야키",
+   "emoji": "🥞",
+   "name": "모미지",
+   "nameJa": "お好み焼き もみじ",
+   "area": "다니마치9초메 (谷町九丁目)",
+   "address": "大阪府大阪市天王寺区生玉町9-19",
+   "lat": 34.6664623,
+   "lng": 135.5139638,
+   "menu": "오코노미야키",
+   "origin": "list",
+   "typed": "모미지",
+   "notes": [
+    "'모미지'라는 이름의 가게가 많아, 구글 지도에서 같은 한글 이름으로 나오는 오코노미야키집으로 표시 — 다른 가게라면 알려주세요"
+   ],
+   "type": "food",
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E5%A5%BD%E3%81%BF%E7%84%BC%E3%81%8D%20%E3%82%82%E3%81%BF%E3%81%98%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%A4%A9%E7%8E%8B%E5%AF%BA%E5%8C%BA%E7%94%9F%E7%8E%89%E7%94%BA9-19"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "hashiba-nikusara",
+   "city": "osaka",
+   "group": "고기",
+   "emoji": "🥩",
+   "name": "하시바케 니쿠사라",
+   "nameJa": "羽柴家 肉皿",
+   "area": "텐마 (天五横町)",
+   "address": "大阪府大阪市北区天神橋5-6-23 一松食品センター 天五横町",
+   "lat": 34.7075188,
+   "lng": 135.5116608,
+   "menu": "샤토브리앙",
+   "origin": "list",
+   "typed": "하시바케니쿠사라 고배",
+   "tip": "샤토브리앙을 미리 예약하면 1인분 50% 할인 (보통 4,378엔 → 2,178엔, 세금 포함). 구글 예약이면 요청사항에 샤토브리앙 미리 예약이라고 적기. 예약 사이트(ResReserve) 조건: ① '샤토브리앙 반값' 플랜으로 전날까지 예약 — 반값은 1인분만, 다른 메뉴 3개 이상 주문 필요 ② '좌석만 예약' 플랜이면 전날까지 가게에 전화로 따로 알려야 함 (1팀 1개).",
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E7%BE%BD%E6%9F%B4%E5%AE%B6%20%E8%82%89%E7%9A%BF%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E5%A4%A9%E7%A5%9E%E6%A9%8B5-6-23%20%E4%B8%80%E6%9D%BE%E9%A3%9F%E5%93%81%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%20%E5%A4%A9%E4%BA%94%E6%A8%AA%E7%94%BA"
+    },
+    {
+     "label": "샤토브리앙 반값 예약 플랜",
+     "url": "https://res-reserve.com/en/restaurants/148586-45948efc/plans/bd761015-b7f0-40c4-ba36-e0f6d359e977"
+    }
+   ],
+   "type": "food",
+   "notes": [],
+   "comment": ""
+  },
+  {
+   "id": "nidosando",
+   "city": "osaka",
+   "group": "야키토리",
+   "emoji": "🍢",
+   "name": "야키토리 니도산도 텐마점",
+   "nameJa": "純けい焼鳥 ニドサンド 天満店",
+   "area": "텐마 (天満)",
+   "address": "大阪府大阪市北区天神橋5-2-6",
+   "lat": 34.7073285,
+   "lng": 135.5118408,
+   "menu": "야키토리",
+   "origin": "list",
+   "typed": "야키토리니도산도",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E7%B4%94%E3%81%91%E3%81%84%E7%84%BC%E9%B3%A5%20%E3%83%8B%E3%83%89%E3%82%B5%E3%83%B3%E3%83%89%20%E5%A4%A9%E6%BA%80%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E5%A4%A9%E7%A5%9E%E6%A9%8B5-2-6"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "sukiyanen",
+   "city": "osaka",
+   "group": "오코노미야키",
+   "emoji": "🥞",
+   "name": "스키야넨",
+   "nameJa": "好きやねん",
+   "area": "나가호리바시 (島之内)",
+   "address": "大阪府大阪市中央区島之内2-12-15",
+   "lat": 34.671198,
+   "lng": 135.507576,
+   "menu": "오코노미야키",
+   "origin": "list",
+   "typed": "스끼야넨 : 오꼬노모야끼",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E3%81%8D%E3%82%84%E3%81%AD%E3%82%93%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%B3%B6%E4%B9%8B%E5%86%852-12-15"
+    }
+   ],
+   "comment": ""
+  },
+  {
+   "id": "sushi-kazu",
+   "city": "osaka",
+   "group": "스시",
+   "emoji": "🍣",
+   "name": "스시도코로 카즈",
+   "nameJa": "寿司処 かず",
+   "area": "우메다·도야마초 (堂山町)",
+   "address": "大阪府大阪市北区堂山町8-16",
+   "lat": 34.7036493,
+   "lng": 135.5028341,
+   "menu": "",
+   "origin": "list",
+   "typed": "스시도코로카주",
+   "type": "food",
+   "notes": [],
+   "sources": [
+    {
+     "label": "Google 지도",
+     "url": "https://www.google.com/maps/search/?api=1&query=%E5%AF%BF%E5%8F%B8%E5%87%A6%20%E3%81%8B%E3%81%9A%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E5%A0%82%E5%B1%B1%E7%94%BA8-16"
+    }
+   ],
+   "comment": ""
+  }
+ ],
+ "hotels": [
+  {
+   "id": "hotel-mikasa",
+   "city": "nara",
+   "name": "미카사 료칸 (만요와카쿠사노야도 미카사)",
+   "nameJa": "万葉若草の宿 三笠",
+   "area": "나라 와카쿠사야마 (若草山)",
+   "address": "奈良県奈良市川上町728-10",
+   "lat": 34.6969372,
+   "lng": 135.846124,
+   "agoda": "https://www.agoda.com/sh-app/J8p5z81eR7Z",
+   "type": "hotel",
+   "notes": []
+  },
+  {
+   "id": "hotel-sumiya",
+   "city": "kyoto",
+   "name": "교토 유노하나 온천 스미야 기호안",
+   "nameJa": "すみや亀峰菴",
+   "area": "가메오카 유노하나 온천 (湯の花温泉)",
+   "address": "京都府亀岡市ひえ田野町柿花宮ノ奥25",
+   "lat": 35.0212564,
+   "lng": 135.5057184,
+   "agoda": "https://www.agoda.com/sh-app/JTB2VSBvWFn",
+   "notes": [
+    "교토 시내가 아니라 가메오카(교토역에서 서쪽으로 약 20km) 산속 온천 마을"
+   ],
+   "type": "hotel"
+  },
+  {
+   "id": "hotel-granbell",
+   "city": "osaka",
+   "name": "그랑벨 호텔 오사카",
+   "nameJa": "大阪グランベルホテル",
+   "area": "사카이스지혼마치 (北久宝寺町)",
+   "address": "大阪府大阪市中央区北久宝寺町2-6-7",
+   "lat": 34.6797932,
+   "lng": 135.5037083,
+   "agoda": "https://www.agoda.com/sh-app/mIx270RHVq7",
+   "type": "hotel",
+   "notes": []
+  },
+  {
+   "id": "hotel-forza",
+   "city": "osaka",
+   "name": "호텔 포르자 오사카 키타하마",
+   "nameJa": "ホテルフォルツァ大阪北浜",
+   "area": "기타하마 (北浜)",
+   "address": "大阪府大阪市中央区今橋2-2-21",
+   "lat": 34.690275,
+   "lng": 135.5061942,
+   "agoda": "https://www.agoda.com/sh-app/0NibWR93raP",
+   "type": "hotel",
+   "notes": []
+  },
+  {
+   "id": "hotel-daiwa",
+   "city": "osaka",
+   "name": "다이와 로이넷 호텔 오사카 사카이스지 혼마치 프리미어",
+   "nameJa": "ダイワロイネットホテル大阪堺筋本町PREMIER",
+   "area": "사카이스지혼마치 (本町)",
+   "address": "大阪府大阪市中央区本町1-5-10",
+   "lat": 34.6837519,
+   "lng": 135.5076811,
+   "agoda": "https://www.agoda.com/sh-app/FbumT4Y6sFZ",
+   "type": "hotel",
+   "notes": []
+  }
+ ],
+ "review": "Codex web-search review 2026-11-14: 18/18 coords within 300m; fixed hashiba tip & granbell name/area."
+}
