@@ -211,14 +211,15 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .nlink{display:block;border:0;background:none;padding:3px 0;font:inherit;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px}
 .lpin{display:inline-block;width:12px;height:16px;vertical-align:-3px;margin-right:4px;background:var(--c);border:1.5px solid var(--d);border-radius:50% 50% 50% 0;transform:rotate(-45deg) scale(.85);box-sizing:border-box}
 .ico.has-thumb{box-shadow:none}
-.ctl{position:relative;margin-top:12px}
+.ctlgrp{display:flex;gap:8px;margin-top:12px}
+.ctl{position:relative;flex:1 1 0;min-width:0}
 .ctlbtn{display:flex;align-items:center;gap:9px;width:100%;height:44px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;text-align:left}
 .ctlbtn .ctlk{flex:none;font-size:11.5px;font-weight:700;color:var(--ink3)}
 .ctlbtn .ctlv{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ctlbtn>svg{flex:none;opacity:.55;transition:transform .16s}
 .ctl.open .ctlbtn{border-color:var(--ink)}
 .ctl.open .ctlbtn>svg{transform:rotate(180deg)}
-.ctlpanel{position:absolute;left:0;right:0;top:calc(100% + 7px);z-index:60;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.10);padding:4px 16px;opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s,transform .14s,visibility .14s}
+.ctlpanel{position:absolute;left:0;top:calc(100% + 7px);width:max-content;min-width:100%;max-width:min(360px,calc(100vw - 32px));z-index:60;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.10);padding:4px 16px;opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s,transform .14s,visibility .14s}
 .ctl.open .ctlpanel{opacity:1;visibility:visible;transform:none}
 .ctlpanel .frow{display:flex;flex-direction:column;gap:8px;padding:12px 0}
 .ctlpanel .frow+.frow{border-top:1px solid var(--line)}
@@ -229,6 +230,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .ctlpanel .tab[aria-selected=true],.ctlpanel .chip[aria-pressed=true]{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);font-weight:600}
 .bell .badge[hidden]{display:none}
 .osm-attr{position:absolute;left:6px;bottom:26px;z-index:5;font-size:10px;color:#555;background:rgba(255,255,255,.75);padding:1px 5px;border-radius:4px;pointer-events:none}
+.ctlpanel.right{left:auto;right:0}
 </style>
 </head>
 <body>
@@ -246,11 +248,14 @@ table.near tr[data-route]:hover td{background:var(--bg)}
         <span><i class="lpin" style="--c:var(--pin-spot);--d:var(--pin-spot-d)"></i>관광지</span>
         <span><i class="dot zone"></i>유명 지역</span>
       </div>
-      <div class="ctl" id="viewCtl">
-        <button class="ctlbtn" type="button" aria-expanded="false" aria-haspopup="true"><span class="ctlk">보기</span><span class="ctlv" id="ctlv">오사카 · 전체</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="ctlpanel" role="dialog" aria-label="지역·종류 선택">
-          <div class="frow"><div class="fkey">지역</div><div class="fval" role="tablist"><button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button><button class="tab" role="tab" data-city="kyoto" aria-selected="false">교토</button><button class="tab" role="tab" data-city="nara" aria-selected="false">나라</button></div></div>
-          <div class="frow"><div class="fkey">종류</div><div class="fval"><button class="chip" data-filter="all" aria-pressed="true">전체</button><button class="chip" data-filter="food" aria-pressed="false">맛집</button><button class="chip" data-filter="ranked" aria-pressed="false">순위 맛집</button><button class="chip" data-filter="hotel" aria-pressed="false">숙소</button><button class="chip" data-filter="spot" aria-pressed="false">관광지</button></div></div>
+      <div class="ctlgrp">
+        <div class="ctl" id="cityCtl">
+          <button class="ctlbtn" type="button" aria-expanded="false" aria-haspopup="true"><span class="ctlk">지역</span><span class="ctlv">오사카</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="ctlpanel" role="dialog" aria-label="지역 선택"><div class="frow"><div class="fval" role="tablist"><button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button><button class="tab" role="tab" data-city="kyoto" aria-selected="false">교토</button><button class="tab" role="tab" data-city="nara" aria-selected="false">나라</button></div></div></div>
+        </div>
+        <div class="ctl" id="typeCtl">
+          <button class="ctlbtn" type="button" aria-expanded="false" aria-haspopup="true"><span class="ctlk">종류</span><span class="ctlv">전체</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="ctlpanel right" role="dialog" aria-label="종류 선택"><div class="frow"><div class="fval"><button class="chip" data-filter="all" aria-pressed="true">전체</button><button class="chip" data-filter="food" aria-pressed="false">맛집</button><button class="chip" data-filter="ranked" aria-pressed="false">순위 맛집</button><button class="chip" data-filter="hotel" aria-pressed="false">숙소</button><button class="chip" data-filter="spot" aria-pressed="false">관광지</button></div></div></div>
         </div>
       </div>
     </div>
@@ -688,13 +693,16 @@ function setCity(c, keepRoute){
   renderList(); refreshMarkers();
   if(!keepRoute && !(state.from&&state.to)){ clearOverlays(); renderBar(); panTo(CITY[c].center[0], CITY[c].center[1], CITY[c].zoom); }
 }
-const viewCtl=document.getElementById('viewCtl');
+const CTLS=[...document.querySelectorAll('.ctlgrp .ctl')];
+function setOpen(ctl,o){ ctl.classList.toggle('open',o); ctl.querySelector('.ctlbtn').setAttribute('aria-expanded',o); }
 function updCtl(){ const c=document.querySelector('.tab[aria-selected=true]'), f=document.querySelector('.chip[aria-pressed=true]');
-  document.getElementById('ctlv').textContent=`${c?c.textContent:''} · ${f?f.textContent:''}`; }
-viewCtl.querySelector('.ctlbtn').onclick=()=>{ const o=!viewCtl.classList.contains('open'); viewCtl.classList.toggle('open',o); viewCtl.querySelector('.ctlbtn').setAttribute('aria-expanded',o); };
-document.addEventListener('click',e=>{ if(!viewCtl.contains(e.target) && viewCtl.classList.contains('open')){ viewCtl.classList.remove('open'); viewCtl.querySelector('.ctlbtn').setAttribute('aria-expanded',false); } });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape' && viewCtl.classList.contains('open')){ viewCtl.classList.remove('open'); viewCtl.querySelector('.ctlbtn').focus(); } });
-viewCtl.querySelector('.ctlpanel').addEventListener('click',()=>setTimeout(updCtl));
+  document.querySelector('#cityCtl .ctlv').textContent=c?c.textContent:''; document.querySelector('#typeCtl .ctlv').textContent=f?f.textContent:''; }
+CTLS.forEach(ctl=>{
+  ctl.querySelector('.ctlbtn').onclick=()=>{ const o=!ctl.classList.contains('open'); CTLS.forEach(x=>setOpen(x,false)); setOpen(ctl,o); };
+  ctl.querySelector('.ctlpanel').addEventListener('click',e=>{ if(e.target.closest('.tab,.chip')) setTimeout(()=>{ updCtl(); setOpen(ctl,false); }); });
+});
+document.addEventListener('click',e=>{ CTLS.forEach(x=>{ if(!x.contains(e.target)) setOpen(x,false); }); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') CTLS.forEach(x=>{ if(x.classList.contains('open')){ setOpen(x,false); x.querySelector('.ctlbtn').focus(); } }); });
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ state.sel=null; if(view.kind==='embed') showEmbed(null); setCity(t.dataset.city); });
 document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ state.filter=c.dataset.filter; document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); renderList(); refreshMarkers(); });
 
