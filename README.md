@@ -5,7 +5,8 @@
 ## 2026-11-14 Google Maps Platform 전환
 - 지도: Maps JavaScript API (AdvancedMarkerElement, mapId DEMO_MAP_ID, gestureHandling greedy). 키는 index.html의 GKEY — 콘솔에서 HTTP 리퍼러(nofaildesignoffice.github.io/*, 127.0.0.1:8766/*) + API 제한(Maps JavaScript / Routes / Places (New)).
 - 도보: Routes API computeRouteMatrix / computeRoutes 를 브라우저에서 실시간 호출.
-- 지하철·버스: Routes API는 일본 대중교통을 반환하지 않음(2026-11-14 확인: 오사카·도쿄 TRANSIT → 빈 응답/도보만, 서울·런던은 정상). 그래서 google.com/maps?…&dirflg=r&output=embed 화면을 지도 영역에 실시간으로 띄움. data/routes.js(미리 수집한 값)는 더 이상 페이지에서 쓰지 않음.
+- 지하철+도보: Routes API는 일본 대중교통 미지원(Google 공식 FAQ: Routes API transit partners "except ... those in Japan"; 2026-11-14 직접 호출로도 확인). 그래서 NAVITIME Route(totalnavi) on RapidAPI(Basic 무료, 월 500회 hard limit)의 /route_transit 을 누를 때 브라우저에서 호출(CORS 허용 확인). 응답: 노선·승하차역(번호)·출구·환승·소요시간·운임(unit_0)·IC운임·지도 도형(shape=true). 한계: 철도는 시간표가 아닌 평균 소요시간, 버스 미포함(RapidAPI 제공 범위). 결과는 localStorage('nvcache')에 30일 보관(좌표 키 포함) — 같은 구간 재조회 방지.
+- data/routes.js(예전에 Google 지도 화면에서 수집한 값)는 더 이상 페이지에서 쓰지 않음.
 - 순위 ①②③: 맛집 카드에서 지정, localStorage('ranks')에 저장(기기별). 데이터 기본값은 places의 rank 필드.
 - 숙소 선택 → 순위 맛집까지 순위 색 점선 + 도보 시간 라벨, 순위별 평균 도보 시간.
 - 장소 정보: Places API (New) searchText 결과 중 우리 좌표 250m 이내만 채택 → 사진(최대 4장, 작성자 표시)·평점·영업시간·홈페이지·전화·Google 지도(예약) 링크.

@@ -199,7 +199,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
       </section>
       <div id="list"></div>
       <p class="credit">
-        도보 시간·거리: 누를 때마다 Google Routes API로 실시간 계산. 지하철·버스: Google API가 일본 대중교통 경로를 제공하지 않아(2026-11-14 확인), Google 지도 길찾기 화면을 지도 영역에 그대로 띄워 실시간으로 표시.<br>
+        도보 시간·거리: 누를 때마다 Google Routes API로 실시간 계산. 지하철+도보: Google API가 일본 대중교통을 제공하지 않아(Google 공식 FAQ) NAVITIME 경로 탐색 API로 누를 때 조회 — 철도는 평균 소요시간 기준, 버스 미포함. 다음 열차·지연은 구글 지도 앱 버튼으로.<br>
         가게 사진·평점·영업시간·홈페이지: Google 지도 장소 정보(Places API)를 카드를 열 때 불러옴. 순위(①②③)는 이 기기 브라우저에 저장돼요.<br>
         관광지 좌표: 2026-11-12 Google 지도 확인. 지역 음영 경계 데이터 © OpenStreetMap contributors (ODbL).
       </p>
@@ -277,6 +277,77 @@ async function walkRoute(a,b){
   WALK[k] = {min:v.min, m:v.m, at:v.at};
   return ROUTEPATH[k] = v;
 }
+/* ---------- 지하철+도보 (NAVITIME Route totalnavi, RapidAPI) ----------
+   누를 때 조회. 철도는 NAVITIME 평균 소요시간 기준(시간표 아님), 버스는 미포함 — API 마켓 제공 범위. */
+const NVKEY = '70f7d16e38msh2937c64e390967cp14d934jsn7b3cdd7562f8';
+const NVHOST = 'navitime-route-totalnavi.p.rapidapi.com';
+const TR = {};                       // "a|b" -> {status:'loading'|'ok'|'error', routes, at, msg}
+const TRSHAPE = {};                  // "a|b" -> [GeoJSON FeatureCollection per route] (메모리만)
+const TR_TTL = 30*24*3600e3;
+const numOr = v => (v!=null && v!=='' && Number.isFinite(+v)) ? +v : null;
+const coordKey = (a,b) => `${a.lat},${a.lng}>${b.lat},${b.lng}`;
+function cleanRoute(r){ // 캐시·응답 값 검증: 숫자 필드는 숫자만, 문자열은 화면에서 esc 처리
+  const str = v => typeof v==='string' ? v : '';
+  return {min:numOr(r.min), fare:numOr(r.fare), ic:numOr(r.ic), transfers:numOr(r.transfers)||0, walkM:numOr(r.walkM), walkOnly:!!r.walkOnly, longWalk:!!r.longWalk,
+    lines:(Array.isArray(r.lines)?r.lines:[]).map(str),
+    steps:(Array.isArray(r.steps)?r.steps:[]).map(x=>({kind:x.kind==='ride'?'ride':'walk', min:numOr(x.min), m:numOr(x.m), to:str(x.to), gate:str(x.gate), fromGate:str(x.fromGate), line:str(x.line), color:/^#[0-9a-fA-F]{3,8}$/.test(x.color||'')?x.color:'#555', type:str(x.type), from:str(x.from), fromNo:str(x.fromNo), toNo:str(x.toNo), dir:str(x.dir)}))};
+}
+(function(){ const c=lsGet('nvcache',{}); const now=Date.now(); for(const k in c){ const e=c[k]; if(e&&e.at&&now-Date.parse(e.at)<TR_TTL&&Array.isArray(e.routes)) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c}; } })();
+function saveTR(){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; lsSet('nvcache', o); }
+const trFresh = (t,a,b) => t && t.status==='ok' && Date.now()-Date.parse(t.at)<TR_TTL && (!t.c || t.c===coordKey(a,b));
+const KO_LINE = [['御堂筋線','미도스지선'],['谷町線','다니마치선'],['四つ橋線','요쓰바시선'],['中央線','주오선'],['千日前線','센니치마에선'],['堺筋線','사카이스지선'],['長堀鶴見緑地線','나가호리쓰루미료쿠치선'],['今里筋線','이마자토스지선'],['ニュートラム','뉴트램'],['大阪環状線','JR 오사카 순환선'],['ゆめ咲線','JR 유메사키선'],['ＪＲ京都線','JR 교토선'],['ＪＲ神戸線','JR 고베선'],['大和路線','JR 야마토지선'],['ＪＲ奈良線','JR 나라선'],['嵯峨野線','JR 사가노선'],['ＪＲ東西線','JR 도자이선'],['おおさか東線','JR 오사카히가시선'],['阪急京都本線','한큐 교토선'],['阪急神戸本線','한큐 고베선'],['阪急宝塚本線','한큐 다카라즈카선'],['阪急千里線','한큐 센리선'],['京阪本線','게이한 본선'],['京阪鴨東線','게이한 오토선'],['京阪中之島線','게이한 나카노시마선'],['近鉄奈良線','긴테쓰 나라선'],['近鉄京都線','긴테쓰 교토선'],['近鉄難波線','긴테쓰 난바선'],['近鉄大阪線','긴테쓰 오사카선'],['近鉄南大阪線','긴테쓰 미나미오사카선'],['阪神本線','한신 본선'],['阪神なんば線','한신 난바선'],['南海本線','난카이 본선'],['南海高野線','난카이 고야선'],['京都市営烏丸線','교토 지하철 가라스마선'],['京都市営東西線','교토 지하철 도자이선'],['嵐電','란덴(게이후쿠)'],['叡山電鉄','에이잔 전철'],['新幹線','신칸센']];
+const koLine = n => { if(!n) return ''; for(const [ja,ko] of KO_LINE) if(n.includes(ja)) return ko; return ''; };
+const lineLabel = n => { const k=koLine(n); return k ? `${k} <span class="meta">(${esc(n)})</span>` : esc(n); };
+const lineShort = n => koLine(n) || n;
+function jstNow(){ const j=new Date(Date.now()+9*3600e3); const h=j.getUTCHours(); const d=j.toISOString().slice(0,10); return (h<6||h>=22) ? `${d}T12:00:00` : j.toISOString().slice(0,19); }
+function parseItem(it){
+  const m=it.summary.move, secs=it.sections||[];
+  const steps=[];
+  for(let i=0;i<secs.length;i++){ const s=secs[i]; if(s.type!=='move') continue;
+    const prev=secs[i-1]||{}, next=secs[i+1]||{};
+    const pname = x => x.name==='start'?'출발지':x.name==='goal'?'도착지':x.name;
+    const num = (x,k) => { const a=x.numbering&&x.numbering[k]; return a&&a[0]?`${a[0].symbol}${a[0].number}`:''; };
+    if(s.move==='walk') steps.push({kind:'walk', min:s.time, m:s.distance, to:pname(next), gate:next.gateway||'', fromGate:prev.gateway||''});
+    else { const t=s.transport||{}; const lk=(t.links||[])[0]||{};
+      steps.push({kind:'ride', line:s.line_name||t.name, color:t.color||'#555', type:t.type||'', min:s.time, from:pname(prev), fromNo:num(prev,'departure'), to:pname(next), toNo:num(next,'arrival'), dir:(lk.destination&&lk.destination.name)||'', mode:s.move, fromT:s.from_time, toT:s.to_time}); }
+  }
+  const rides=steps.filter(x=>x.kind==='ride');
+  return cleanRoute({min:m.time, fare:m.fare?m.fare.unit_0:null, ic:m.reference_fare?m.reference_fare.lowest_total_ic:null, transfers:Math.max(0,rides.length-1), walkM:m.walk_distance, walkOnly:!rides.length, lines:rides.map(r=>r.line), steps,
+    longWalk: steps.some(x=>x.kind==='walk'&&x.min>=20)});
+}
+const trQueue=[]; let trActive=0;
+function pumpTR(){ while(trActive<2 && trQueue.length){ const job=trQueue.shift(); trActive++; job().finally(()=>{ trActive--; pumpTR(); }); } }
+function transitQuery(a,b,opts={}){
+  const k=`${a.id}|${b.id}`;
+  const cur=TR[k];
+  if(cur && cur.promise){ // 같은 구간 요청이 진행 중이면 기다렸다가 (필요하면 도형만 이어서) — 중복·경합 방지
+    if(!opts.shape || cur.shapeReq) return cur.promise;
+    return cur.promise.then(()=>transitQuery(a,b,opts));
+  }
+  if(trFresh(cur,a,b) && (!opts.shape || TRSHAPE[k])) return Promise.resolve(cur);
+  const basis=jstNow();
+  const url=`https://${NVHOST}/route_transit?start=${a.lat},${a.lng}&goal=${b.lat},${b.lng}&start_time=${basis}&datum=wgs84&coord_unit=degree&limit=3&shape=${opts.shape?'true':'false'}`;
+  const keep = trFresh(cur,a,b) ? cur : null;
+  let resolve; const promise=new Promise(r=>resolve=r);
+  TR[k] = keep ? {...keep, promise, shapeReq:!!opts.shape} : {status:'loading', promise, shapeReq:!!opts.shape};
+  trQueue.push(async()=>{
+    try{
+      const res=await fetch(url,{headers:{'X-RapidAPI-Key':NVKEY,'X-RapidAPI-Host':NVHOST}});
+      const j=await res.json().catch(()=>null);
+      if(!res.ok || !j || !Array.isArray(j.items)) throw new Error((j&&(j.message||(j.error&&j.error.message)))||('HTTP '+res.status));
+      if(!j.items.length) throw new Error('경로 없음');
+      TR[k]={status:'ok', routes:j.items.map(parseItem), at:new Date().toISOString(), basis, c:coordKey(a,b)};
+      if(opts.shape) TRSHAPE[k]=j.items.map(it=>it.shapes&&Array.isArray(it.shapes.features)?it.shapes:null); else delete TRSHAPE[k];
+      saveTR();
+    }catch(err){ TR[k] = keep ? {...keep, promise:undefined, shapeReq:undefined} : {status:'error', msg:String(err.message||err)}; console.warn('navitime', err); }
+    resolve(TR[k]);
+  });
+  pumpTR();
+  return promise;
+}
+const trBest = k => { const t=TR[k]; return t&&t.status==='ok'&&t.routes.length ? t.routes[0] : null; };
+/* 숙소→가게 실제 비교용 시간: 지하철 경로가 '도보만'이면 도보 시간으로 */
+function trMin(k){ const r=trBest(k); if(!r) return null; if(r.walkOnly){ const w=WALK[k]; return w&&Number.isFinite(w.min)?w.min:r.min; } return r.min; }
 /* ---------- Google 장소 정보 (Places API New) ---------- */
 const GP = {};  // id -> {status:'loading'|'ok'|'nomatch'|'error', place, msg}
 function haversine(a,b){ const R6=6371000, t=x=>x*Math.PI/180; const dLat=t(b.lat-a.lat), dLng=t(b.lng-a.lng); const h=Math.sin(dLat/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLng/2)**2; return 2*R6*Math.asin(Math.sqrt(h)); }
@@ -371,7 +442,7 @@ function renderBar(){
 mapbar.addEventListener('click',e=>{
   if(e.target.closest('[data-back]')){ showEmbed(null); }
   if(e.target.closest('[data-shade]')){ shade=!shade; lsSet('shade',shade); applyShade(); renderBar(); }
-  if(e.target.closest('[data-clearlines]')){ newGen(); clearOverlays(); renderBar(); }
+  if(e.target.closest('[data-clearlines]')){ newGen(); hGen++; clearOverlays(); renderBar(); }
 });
 function showEmbed(url){
   if(url){ if(embedEl.dataset.src!==url){ embedEl.dataset.src=url; embedEl.src=url; } view={kind:'embed'}; mapwrap.classList.add('embed'); }
@@ -394,50 +465,74 @@ function rankSummaryHTML(h){
   let h2='<div class="ranksum">';
   for(const r of [1,2,3]){ const fs=foods.filter(q=>rankOf(q)===r);
     if(!fs.length){ h2+=`<div><span class="rk r${r}">${r}</span> 순위<br><span class="meta">지정 없음</span></div>`; continue; }
-    const ws=fs.map(q=>WALK[`${h.id}|${q.id}`]).filter(w=>w&&Number.isFinite(w.min));
-    const pending = fs.some(q=>!WALK[`${h.id}|${q.id}`]);
-    h2+=`<div><span class="rk r${r}">${r}</span> 순위 · ${fs.length}곳<b>🚶 ${ws.length?fmtMin(avg(ws.map(w=>w.min))):(pending?'계산 중…':'—')}</b>${ws.length?`<span class="meta">평균 ${fmtDist(avg(ws.map(w=>w.m)))} · 최단 ${fmtMin(Math.min(...ws.map(w=>w.min)))}</span>`:''}</div>`;
+    const keys=fs.map(q=>`${h.id}|${q.id}`);
+    const ws=keys.map(k=>WALK[k]).filter(w=>w&&Number.isFinite(w.min)).map(w=>w.min);
+    const ts=keys.map(trMin).filter(Number.isFinite);
+    const done = k => WALK[k] && TR[k] && TR[k].status!=='loading';   // 도보·지하철 둘 다 결과가 나온 가게만 '빠른 방법' 평균에
+    const bs=keys.filter(done).map(k=>{ const w=WALK[k], t=trMin(k); const c=[w&&Number.isFinite(w.min)?w.min:null, t].filter(Number.isFinite); return c.length?Math.min(...c):null; }).filter(Number.isFinite);
+    const fares=keys.map(k=>{ const b=trBest(k); return b&&!b.walkOnly&&b.fare!=null?b.fare:null; }).filter(Number.isFinite);
+    const wPend=keys.some(k=>!WALK[k]), tPend=keys.some(k=>!TR[k]||TR[k].status==='loading');
+    const part=(n)=> n<fs.length ? ` <span class="meta">(${n}/${fs.length}곳)</span>` : '';
+    h2+=`<div><span class="rk r${r}">${r}</span> 순위 · ${fs.length}곳
+      <b>⚡ ${bs.length?fmtMin(avg(bs)):'…'}</b><span class="meta">빠른 방법 평균${part(bs.length)}</span><br>
+      🚶 ${ws.length?fmtMin(avg(ws))+part(ws.length):(wPend?'계산 중':'—')}<br>
+      🚇 ${ts.length?fmtMin(avg(ts))+part(ts.length):(tPend?'조회 중':'—')}${fares.length?` <span class="meta">· 평균 ¥${Math.round(avg(fares)).toLocaleString()}</span>`:''}</div>`;
   }
-  return h2+'</div><p class="note">🚶 도보 평균 = Google 실시간 계산. 🚇 지하철·버스는 아래 표에서 가게를 누르면 Google 지도 실시간 경로로 보여줘요 (Google API가 일본 대중교통 시간 숫자를 제공하지 않아 평균은 낼 수 없어요).</p>';
+  return h2+'</div><p class="note">⚡ 빠른 방법 = 가게마다 도보와 지하철+도보 중 빠른 쪽. 🚶 도보 = Google 실시간 계산. 🚇 지하철+도보 = NAVITIME 경로 탐색(철도 평균 소요시간 기준, 버스 미포함).</p>';
 }
+let hGen=0, mapTok=0;
 async function showHotelRanks(h){
-  const g=newGen();
-  if(map) clearOverlays();
+  const g=++hGen, routeOpen=!!(state.from&&state.to);
+  if(map && !routeOpen) clearOverlays();
   const allFoods = P.filter(q=>q.type==='food'&&q.city===h.city);
   const foods = rankedFoods(h);
+  let raf=0;
   const draw = ()=>{
-    if(state.sel!==h.id || g!==gen) return;
+    if(state.sel!==h.id || g!==hGen) return;
     const box=listEl.querySelector(`[data-ranksum="${h.id}"]`); if(box) box.innerHTML=rankSummaryHTML(h);
     const tb=listEl.querySelector(`[data-near="${h.id}"]`); if(tb) tb.innerHTML=nearTable(h);
     if(!map || state.from&&state.to) return;
     clearOverlays();
-    foods.forEach(q=>{ const r=rankOf(q), w=WALK[`${h.id}|${q.id}`];
-      const lab = w&&Number.isFinite(w.min)?`🚶${fmtMin(w.min)} · ${fmtDist(w.m)}`:'';
+    foods.forEach(q=>{ const r=rankOf(q), k=`${h.id}|${q.id}`, w=WALK[k], t=trBest(k);
+      const lab = [w&&Number.isFinite(w.min)?`🚶${fmtMin(w.min)}`:'', t&&!t.walkOnly?`🚇${fmtMin(t.min)}`:''].filter(Boolean).join(' ');
       addLine(h,q,RANK_COLOR[r], r===1?4:r===2?3:2.5, lab); });
     renderBar();
   };
-  if(map){ draw(); fit([h, ...(foods.length?foods:[])]); if(!foods.length) panTo(h.lat,h.lng,15); }
-  if(allFoods.length){ await walkMatrix([h], allFoods); draw(); }
+  const redraw = ()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; draw(); }); };
+  if(map && !routeOpen){ draw(); fit([h, ...(foods.length?foods:[])]); if(!foods.length) panTo(h.lat,h.lng,15); } else draw();
+  if(!allFoods.length) return;
+  walkMatrix([h], allFoods).then(redraw);
+  // 순위 맛집 먼저, 그다음 나머지 맛집 — 지하철+도보 조회 (한 번 조회한 구간은 이 기기에 30일 기억)
+  [...foods, ...allFoods.filter(q=>!rankOf(q))].forEach(q=>transitQuery(h,q).then(redraw));
 }
 
 /* ---------- 리스트 ---------- */
 const listEl = document.getElementById('list');
+function trCellHTML(k){
+  const t=TR[k];
+  if(!t || t.status==='loading') return '<span class="meta">조회 중…</span>';
+  if(t.status==='error') return `<span class="meta">조회 실패 (${esc(t.msg)})</span>`;
+  const r=t.routes[0];
+  if(r.walkOnly) return '<span class="meta">걸어가는 게 빨라요</span>';
+  return `${fmtMin(r.min)} · ${r.fare!=null?'¥'+r.fare.toLocaleString():'요금 미확인'}<div class="meta">${esc(r.lines.map(lineShort).join(' → '))}${r.transfers?` · 환승 ${r.transfers}`:''}</div>`;
+}
 function nearTable(p){
   if(p.type==='spot') return '';
   const others = P.filter(q=>q.city===p.city && q.id!==p.id && (p.type==='hotel' ? q.type==='food' : q.type==='hotel'));
   if(!others.length) return '';
   const rows = others.map(q=>{
-    const a = p.type==='hotel' ? p : q, b = p.type==='hotel' ? q : p;
-    const w = WALK[`${a.id}|${b.id}`];
-    const sortKey = (w&&Number.isFinite(w.min)) ? w.min : 1e9;
-    return {q,a,b,w,sortKey, r: p.type==='hotel'?rankOf(q):0};
+    const a = p.type==='hotel' ? p : q, b = p.type==='hotel' ? q : p, k=`${a.id}|${b.id}`;
+    const w = WALK[k], wm = w&&Number.isFinite(w.min)?w.min:null, tm = trMin(k);
+    const best = [wm,tm].filter(Number.isFinite); const sortKey = best.length?Math.min(...best):1e9;
+    return {q,a,b,k,w,wm,tm,sortKey, r: p.type==='hotel'?rankOf(q):0};
   }).sort((x,y)=> p.type==='hotel' ? ((x.r||9)-(y.r||9) || x.sortKey-y.sortKey) : x.sortKey-y.sortKey);
   const head = p.type==='hotel' ? '숙소 → 맛집' : '숙소 → 이 가게';
-  return `<table class="near"><thead><tr><th>${head}</th><th>🚶 도보 (실시간)</th><th>🚇 지하철·버스</th></tr></thead><tbody>${rows.map(({q,a,b,w,r})=>{
-    const wc = !w ? '<span class="meta">계산 중…</span>' : w.err ? `<span class="meta">${esc(w.err)}</span>` : `${fmtMin(w.min)}<div class="meta">${fmtDist(w.m)}</div>`;
-    const tc = '<span class="meta" style="color:#1a73e8;font-weight:700">실시간 경로 보기 →</span>';
+  return `<table class="near"><thead><tr><th>${head}</th><th>🚶 도보</th><th>🚇 지하철+도보</th></tr></thead><tbody>${rows.map(({q,a,b,k,w,wm,tm,r})=>{
+    const wBest = wm!=null && (tm==null || wm<=tm), tBest = tm!=null && wm!=null && tm<wm;
+    const wc = !w ? '<span class="meta">계산 중…</span>' : w.err ? `<span class="meta">${esc(w.err)}</span>` : `${wBest?'<b>':''}${fmtMin(w.min)}${wBest?' ⚡</b>':''}<div class="meta">${fmtDist(w.m)}</div>`;
+    let tc = trCellHTML(k); if(tBest) tc = '<b>⚡</b> '+tc;
     return `<tr data-route="${a.id}|${b.id}"><td class="n">${r?`<span class="rk r${r}">${r}</span> `:''}${esc(q.name.replace(' (후보)',''))}</td><td>${wc}</td><td>${tc}</td></tr>`;
-  }).join('')}</tbody></table><p class="note">행을 누르면 지도에 경로가 나와요 — 가까우면 도보 경로, 멀면 Google 지도 실시간 지하철·버스 경로.</p>`;
+  }).join('')}</tbody></table><p class="note">⚡ = 더 빠른 방법. 행을 누르면 갈아타는 역·출구·요금까지 단계별로 보여주고 지도에 경로를 그려요.</p>`;
 }
 function cardHTML(p){
   const r = rankOf(p);
@@ -504,7 +599,9 @@ function select(id, fromMap){
   if(p.type==='hotel') showHotelRanks(p);
   else {
     if(!(state.from&&state.to)) panTo(p.lat,p.lng,16);
-    if(p.type==='food'){ const hs=P.filter(q=>q.type==='hotel'&&q.city===p.city); if(hs.length) walkMatrix(hs,[p]).then(()=>{ const tb=listEl.querySelector(`[data-near="${p.id}"]`); if(tb&&state.sel===p.id) tb.innerHTML=nearTable(p); }); }
+    if(p.type==='food'){ const hs=P.filter(q=>q.type==='hotel'&&q.city===p.city);
+      const up=()=>{ const tb=listEl.querySelector(`[data-near="${p.id}"]`); if(tb&&state.sel===p.id) tb.innerHTML=nearTable(p); };
+      if(hs.length){ walkMatrix(hs,[p]).then(up); hs.forEach(h=>transitQuery(h,p).then(up)); } }
   }
   renderBar();
   const el=listEl.querySelector(`[data-id="${id}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -554,50 +651,79 @@ async function renderRoute(){
   if(!a||!b||a.id===b.id){
     if(view.kind==='embed') showEmbed(null);
     resEl.innerHTML = !a&&!b ? '' : a&&b ? '<p class="note">출발지와 도착지가 같아요.</p>' : '<p class="note">출발지와 도착지를 모두 고르세요. 숙소·가게 카드의 표 행을 눌러도 바로 경로가 나와요.</p>';
+    newGen();
     if(state.sel && byId[state.sel].type==='hotel') showHotelRanks(byId[state.sel]);
-    else { newGen(); if(map) clearOverlays(); renderBar(); }
+    else { if(map) clearOverlays(); renderBar(); }
     return;
   }
-  const seq=newGen();
-  const wk = WALK[`${a.id}|${b.id}`];
-  // 기본은 Google 지도 실시간 대중교통. 가까운 구간(도보 12분 이하)만 도보로 시작
-  if(!state.mode){ state.modeAuto=true; state.mode = (wk && Number.isFinite(wk.min) && wk.min<=12) ? 'walk' : 'transit'; }
-  const links=`<div class="links"><a class="btn small primary" target="_blank" rel="noopener" href="${gdir(a,b,'transit')}">Google 지도 앱에서 지하철 경로 열기</a><a class="btn small" target="_blank" rel="noopener" href="${gdir(a,b,'walking')}">도보 경로 열기</a></div>`;
+  const seq=newGen(), k=`${a.id}|${b.id}`;
+  if(view.kind==='embed') showEmbed(null);
+  const decideAuto = ()=>{ if(!state.modeAuto) return; const w=WALK[k], wm=w&&Number.isFinite(w.min)?w.min:null, t=trBest(k);
+    if(wm!=null && wm<=12) state.mode='walk';
+    else if(t && !t.walkOnly && (wm==null || t.min<wm)) state.mode='transit';
+    else if(wm!=null && t) state.mode='walk'; };
+  if(!state.mode){ state.modeAuto=true; state.mode='transit'; state.alt=0; decideAuto(); }
+  const links=`<div class="links"><a class="btn small primary" target="_blank" rel="noopener" href="${gdir(a,b,'transit')}">구글 지도 앱으로 지금 출발 (다음 열차·지연)</a><a class="btn small" target="_blank" rel="noopener" href="${gdir(a,b,'walking')}">도보 경로 열기</a></div>`;
   const draw = ()=>{
-    const w = WALK[`${a.id}|${b.id}`];
+    if(seq!==gen) return;
+    const w=WALK[k], t=TR[k], tb=t&&t.status==='ok'&&t.routes.length ? t.routes[Math.min(state.alt||0,t.routes.length-1)] : null;
     let h='<div class="modes">';
-    h+=`<button class="mode" data-mode="walk" aria-pressed="${state.mode==='walk'}"><small>🚶 도보 (실시간)</small><b>${w&&Number.isFinite(w.min)?fmtMin(w.min):(w&&w.err?'—':'계산 중…')}</b><small>${w&&w.m?fmtDist(w.m):(w&&w.err?esc(w.err):'')}</small></button>`;
-    h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 지하철·버스 (실시간)</small><b>Google 지도</b><small>시간·노선·요금은 지도에 표시</small></button>`;
+    h+=`<button class="mode" data-mode="walk" aria-pressed="${state.mode==='walk'}"><small>🚶 도보</small><b>${w&&Number.isFinite(w.min)?fmtMin(w.min):(w&&w.err?'—':'계산 중…')}</b><small>${w&&w.m?fmtDist(w.m):(w&&w.err?esc(w.err):'')}</small></button>`;
+    h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 지하철+도보</small><b>${tb?(tb.walkOnly?'도보 추천':fmtMin(tb.min)):(t&&t.status==='error'?'—':'조회 중…')}</b><small>${tb&&!tb.walkOnly?(tb.fare!=null?'¥'+tb.fare.toLocaleString():'요금 미확인')+(tb.transfers?` · 환승 ${tb.transfers}`:''):(t&&t.status==='error'?'조회 실패':'')}</small></button>`;
     h+='</div>';
     if(state.mode==='transit'){
-      h+=`<p class="note">오른쪽 지도는 <b>Google 지도 길찾기 화면을 그대로</b> 띄운 거예요. 지금 시각 출발 기준으로 Google이 계산한 지하철·버스 경로, 소요시간, 요금이 지도 위 상자에 나와요. 상자의 경로를 누르면 다른 경로도 볼 수 있어요.</p>`;
+      if(!t || t.status==='loading') h+='<p class="note">NAVITIME에서 경로를 찾는 중…</p>';
+      else if(t.status==='error') h+=`<div class="warn">지하철 경로를 불러오지 못했어요 (${esc(t.msg)}). 아래 구글 지도 앱 버튼으로 확인하세요.</div>`;
+      else {
+        const rs=t.routes; const i=Math.min(state.alt||0, rs.length-1); const r=rs[i];
+        if(rs.length>1) h+=`<div class="modes" style="flex-wrap:wrap">${rs.map((x,j)=>`<button class="mode" data-alt="${j}" aria-pressed="${j===i}" style="flex:1 1 30%"><small>경로 ${j+1}${x.walkOnly?' · 도보':''}</small><b style="font-size:15px">${fmtMin(x.min)}</b><small>${x.fare!=null?'¥'+x.fare.toLocaleString():(x.walkOnly?'요금 없음':'요금 미확인')}${x.transfers?` · 환승 ${x.transfers}`:''}</small></button>`).join('')}</div>`;
+        if(r.longWalk) h+='<div class="warn" style="margin-bottom:8px">이 경로에 20분 넘게 걷는 구간이 있어요. NAVITIME 무료 API는 <b>버스를 넣지 않고</b> 계산해서, 실제로는 버스·택시·숙소 송영이 더 나을 수 있어요. 구글 지도 앱으로도 확인하세요.</div>';
+        h+='<ol class="steps">'+r.steps.map((s,j)=>{
+          if(s.kind==='walk') return `<li class="step"><span class="ic">🚶</span><div>${s.fromGate?`<b>${esc(s.fromGate)}</b>로 나와서 `:''}${esc(s.to==='도착지'?b.name:s.to)}${s.gate?` <b>${esc(s.gate)}</b>`:''}까지 걷기<div class="meta">${fmtMin(s.min)} · ${fmtDist(s.m)}</div></div></li>`;
+          return `<li class="step"><span class="ic" style="background:${esc(s.color)}22">🚇</span><div><span class="badge" style="background:${esc(s.color)}">${lineLabel(s.line).replace(/<span class="meta">/,'<span style="opacity:.85;font-weight:500">')}</span><div style="margin-top:4px"><b>${esc(s.from)}</b>${s.fromNo?` <span class="meta">${esc(s.fromNo)}</span>`:''} 승차 → <b>${esc(s.to)}</b>${s.toNo?` <span class="meta">${esc(s.toNo)}</span>`:''} 하차</div><div class="meta">${fmtMin(s.min)}${s.dir?` · ${esc(s.dir)} 방면`:''}${s.type&&s.type!=='普通'?` · ${esc(s.type)}`:''}</div></div></li>`;
+        }).join('')+'</ol>';
+        h+=`<p class="note">총 ${fmtMin(r.min)} · 운임 ${r.fare!=null?'¥'+r.fare.toLocaleString():'미확인'}${r.ic!=null&&r.ic!==r.fare?` (IC카드 ¥${r.ic.toLocaleString()})`:''} · 걷는 거리 ${fmtDist(r.walkM)}<br>출처: NAVITIME 경로 탐색 (${esc(fmtAt(t.at))} 조회). 철도 시간은 시간표가 아닌 <b>평균 소요시간</b> 기준이고 버스는 포함되지 않아요. 다음 열차 시각·지연은 아래 구글 지도 앱 버튼으로 확인하세요.</p>`;
+      }
     } else if(w && Number.isFinite(w.min)){
       h+=`<ol class="steps"><li class="step"><span class="ic">🚶</span><div>${esc(b.name)}까지 걷기<div class="meta">${fmtMin(w.min)} · ${fmtDist(w.m)}</div></div></li></ol><p class="note">도보: Google Routes API 실시간 계산 (${esc(fmtAt(w.at))}). 지도에 초록 선으로 표시했어요.</p>`;
     } else if(w && w.err){ h+=`<div class="warn">도보 경로를 계산하지 못했어요 (${esc(w.err)}).</div>`; }
     h+=links;
     resEl.innerHTML=h;
     resEl.querySelectorAll('.mode[data-mode]').forEach(m=>m.onclick=()=>{ state.mode=m.dataset.mode; state.modeAuto=false; renderRoute(); });
+    resEl.querySelectorAll('.mode[data-alt]').forEach(m=>m.onclick=()=>{ state.alt=+m.dataset.alt; state.modeAuto=false; draw(); drawMap(); });
+  };
+  const drawMap = async ()=>{
+    if(seq!==gen || !map) return;
+    const tok=++mapTok, mode=state.mode, ok=()=>seq===gen && tok===mapTok && state.mode===mode;
+    if(state.mode==='walk'){
+      try{ const v=await walkRoute(a,b); if(!ok()) return; draw();
+        clearOverlays();
+        const path = v.enc ? google.maps.geometry.encoding.decodePath(v.enc) : [{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}];
+        overlays.push(new google.maps.Polyline({map, path, strokeColor:'#11875d', strokeOpacity:.95, strokeWeight:5, zIndex:3}));
+        const bb=new google.maps.LatLngBounds(); path.forEach(x=>bb.extend(x)); map.fitBounds(bb,60); renderBar();
+      }catch(err){ if(!ok()) return; WALK[k]={err:String(err.message||err)}; draw(); }
+      return;
+    }
+    await transitQuery(a,b,{shape:true}); if(!ok()) return; draw();
+    clearOverlays();
+    const shapes=TRSHAPE[k], i=Math.min(state.alt||0,((TR[k]&&TR[k].routes)||[1]).length-1), fc=shapes&&shapes[i];
+    const bb=new google.maps.LatLngBounds(); bb.extend({lat:a.lat,lng:a.lng}); bb.extend({lat:b.lat,lng:b.lng});
+    if(fc && Array.isArray(fc.features)){
+      fc.features.forEach(f=>{ const g=f.geometry; if(!g) return; const lines = g.type==='LineString'?[g.coordinates]: g.type==='MultiLineString'?g.coordinates:[];
+        const pr=f.properties||{}, walk=pr.ways==='walk', col=(pr.inline&&pr.inline.color)||'#555';
+        lines.forEach(cs=>{ const path=cs.map(c=>({lat:c[1],lng:c[0]})); path.forEach(x=>bb.extend(x));
+          overlays.push(walk ? new google.maps.Polyline({map, path, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1',strokeOpacity:1,strokeColor:'#11875d',strokeWeight:3,scale:2},offset:'0',repeat:'9px'}], zIndex:3})
+                             : new google.maps.Polyline({map, path, strokeColor:col==='#D3D3D3'?'#555':col, strokeOpacity:.95, strokeWeight:6, zIndex:4})); }); });
+    } else {
+      overlays.push(new google.maps.Polyline({map, path:[{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}], strokeColor:'#555', strokeOpacity:.5, strokeWeight:3}));
+    }
+    map.fitBounds(bb,60); renderBar();
   };
   draw();
-  if(state.mode==='transit'){
-    if(map) clearOverlays();
-    showEmbed(`https://www.google.com/maps?saddr=${a.lat},${a.lng}&daddr=${b.lat},${b.lng}&dirflg=r&hl=ko&output=embed`);
-    if(!wk || wk.err) walkMatrix([a],[b]).then(()=>{ if(seq!==gen) return; const w=WALK[`${a.id}|${b.id}`];
-      if(state.modeAuto && w && Number.isFinite(w.min) && w.min<=12){ state.mode='walk'; renderRoute(); } else draw(); });
-    return;
-  }
-  showEmbed(null);
-  try{
-    const v = await walkRoute(a,b);
-    if(seq!==gen) return;
-    draw();
-    if(map){
-      clearOverlays();
-      const path = v.enc ? google.maps.geometry.encoding.decodePath(v.enc) : [{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}];
-      overlays.push(new google.maps.Polyline({map, path, strokeColor:'#11875d', strokeOpacity:.95, strokeWeight:5, zIndex:3}));
-      const bb=new google.maps.LatLngBounds(); path.forEach(x=>bb.extend(x)); map.fitBounds(bb,60); renderBar();
-    }
-  }catch(err){ if(seq!==gen) return; WALK[`${a.id}|${b.id}`]={err:String(err.message||err)}; draw(); }
+  const after = ()=>{ if(seq!==gen) return; const before=state.mode; decideAuto(); if(state.mode!==before){ drawMap(); } draw(); };
+  if(!WALK[k] || WALK[k].err) walkMatrix([a],[b]).then(after);
+  transitQuery(a,b,{shape:true}).then(after);   // 경로+지도 도형을 한 번에 (요청 1회)
+  drawMap();
 }
 
 /* ---------- init ---------- */
