@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>오사카·교토 맛집 지도</title>
-<meta name="description" content="오사카 현지인이 유튜브 댓글로 추천한 맛집과 숙소 위치, 이동 경로를 한 번에 보는 여행 지도">
+<meta name="description" content="유튜브 댓글 추천 맛집과 우리가 고른 가게, 숙소, 관광지를 한 지도에서 보고 숙소별 순위 맛집까지의 거리·시간을 확인하는 여행 지도">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
   --bg:#f6f4f0; --panel:#ffffff; --ink:#1d1b18; --ink2:#5d5850; --ink3:#8f887d; --line:#e7e2d9;
   --food:#e0452b; --food-soft:#fdece8; --hotel:#2456d6; --hotel-soft:#e8eefc; --walk:#11875d; --walk-soft:#e3f4ec; --spot:#0b8043; --spot-soft:#e2f3e8;
+  --r1:#e0452b; --r2:#f08c00; --r3:#e2b100;
   --accent:#1d1b18; --warn:#9a5b00; --warn-soft:#fff4dc; --radius:14px; --shadow:0 6px 24px rgba(29,27,24,.10);
 }
 *{box-sizing:border-box}
@@ -21,14 +22,16 @@ button,select{font:inherit;color:inherit}
 .side-head{padding:18px 18px 12px;border-bottom:1px solid var(--line)}
 .title{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0}
 .sub{font-size:12.5px;color:var(--ink3);margin:4px 0 0}
-.legend{display:flex;gap:12px;margin-top:10px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
+.legend{display:flex;gap:10px;margin-top:10px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
-.dot.food{background:var(--food)} .dot.hotel{background:var(--hotel);border-radius:3px} .dot.cand{background:#fff;border:2px dashed var(--food)}
+.dot.food{background:#fff;border:2px solid var(--food)} .dot.hotel{background:var(--hotel);border-radius:3px}
+.dot.r1{background:var(--r1)} .dot.r2{background:var(--r2)} .dot.r3{background:var(--r3)}
+.dot.spot{background:var(--spot)} .dot.zone{background:rgba(124,77,255,.22);border:1px solid #7c4dff;border-radius:3px}
 .tabs{display:flex;gap:6px;margin-top:12px}
 .tab{flex:1;padding:9px 0;border:1px solid var(--line);background:#fff;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
 .tab[aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
-.chips{display:flex;gap:6px;margin-top:8px}
+.chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;cursor:pointer;color:var(--ink2)}
 .chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .scroll{overflow-y:auto;flex:1;min-height:0;padding:12px 14px 40px}
@@ -41,8 +44,9 @@ button,select{font:inherit;color:inherit}
 .rb-row select{width:100%;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px}
 .rb-actions{display:flex;gap:6px}
 .btn{padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink)}
-.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink);flex:1;justify-content:center}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn.small{padding:6px 10px;font-size:12px}
+.btn.book{background:#1a73e8;color:#fff;border-color:#1a73e8}
 .result{margin-top:10px}
 .modes{display:flex;gap:6px;margin-bottom:8px}
 .mode{flex:1;padding:8px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
@@ -53,7 +57,7 @@ button,select{font:inherit;color:inherit}
 .step{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
 .step:last-child{border-bottom:0}
 .step .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:15px;background:var(--walk-soft)}
-.step .meta{font-size:12px;color:var(--ink3)}
+.meta{font-size:12px;color:var(--ink3)}
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;color:#fff}
 .alts{margin-top:8px;font-size:12.5px;color:var(--ink2)}
 .alts li{margin:3px 0}
@@ -67,9 +71,11 @@ button,select{font:inherit;color:inherit}
 .card:hover{box-shadow:var(--shadow)}
 .card.sel{border-color:var(--ink);box-shadow:var(--shadow)}
 .card-top{display:flex;gap:10px;align-items:flex-start}
+.card-main{flex:1;min-width:0}
 .ico{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:var(--food-soft)}
 .card.hotel .ico{border-radius:10px;background:var(--hotel-soft)}
 .card.cand .ico{background:#fff;border:2px dashed var(--food)}
+.card.spot .ico{background:var(--spot-soft)}
 .nm{font-weight:800;font-size:15px;line-height:1.3}
 .ja{font-size:12px;color:var(--ink3);margin-top:2px}
 .area{font-size:12px;color:var(--ink2);margin-top:3px}
@@ -77,8 +83,13 @@ button,select{font:inherit;color:inherit}
 .tag.cand{background:#fff;border:1px dashed var(--food)}
 .tag.hotel{background:var(--hotel-soft);color:var(--hotel)}
 .tag.spot{background:var(--spot-soft);color:var(--spot)}
-.card.spot .ico{background:var(--spot-soft)}
-.dot.spot{background:var(--spot)} .dot.zone{background:rgba(124,77,255,.22);border:1px solid #7c4dff;border-radius:3px}
+.rk{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:800;color:#fff;padding:0 4px}
+.rk.r1{background:var(--r1)} .rk.r2{background:var(--r2)} .rk.r3{background:var(--r3);color:#3a2f00}
+.rankset{flex:none;display:flex;gap:3px}
+.rankset button{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:12px;font-weight:800;cursor:pointer;color:var(--ink3);padding:0}
+.rankset button[aria-pressed=true].r1{background:var(--r1);border-color:var(--r1);color:#fff}
+.rankset button[aria-pressed=true].r2{background:var(--r2);border-color:var(--r2);color:#fff}
+.rankset button[aria-pressed=true].r3{background:var(--r3);border-color:var(--r3);color:#3a2f00}
 .credit{font-size:11px;color:var(--ink3);margin:18px 2px 0;line-height:1.5}
 .detail{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;font-size:13.5px}
 .card.sel .detail{display:block}
@@ -91,16 +102,49 @@ table.near{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
 table.near th{font-size:11px;color:var(--ink3);text-align:left;font-weight:700;padding:4px}
 table.near td{border-top:1px solid var(--line);padding:6px 4px;vertical-align:top}
 table.near td.n{font-weight:700}
+table.near tr[data-route]{cursor:pointer}
+table.near tr[data-route]:hover td{background:var(--bg)}
 .empty{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink2);font-size:13.5px;line-height:1.6;background:#fff}
+
+/* google place info */
+.gp{margin:10px 0 2px}
+.gp-photos{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+.gp-photos figure{margin:0;flex:none;width:220px;scroll-snap-align:start}
+.gp-photos img{width:220px;height:150px;object-fit:cover;border-radius:10px;background:var(--bg);display:block}
+.gp-photos figcaption{font-size:10.5px;color:var(--ink3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gp-photos figcaption a{color:inherit}
+.gp-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;margin-top:6px}
+.gp-open{font-weight:700} .gp-open.on{color:var(--walk)} .gp-open.off{color:var(--food)}
+.gp details{font-size:12.5px;color:var(--ink2);margin-top:4px}
+.gp details ul{margin:4px 0 0;padding-left:16px;line-height:1.6}
+.gp-src{font-size:10.5px;color:var(--ink3);margin-top:4px}
+
+/* hotel rank summary */
+.ranksum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.ranksum div{background:var(--bg);border-radius:10px;padding:8px;font-size:12px;line-height:1.45}
+.ranksum b{font-size:15px;display:block}
 
 /* map */
 .mapwrap{position:relative;min-height:0;overflow:hidden}
-#gmap{position:absolute;left:0;top:0;width:100%;height:100%;border:0;background:#e9e5dd}
-/* 내 지도 embed 상단 제목줄(지도 이름·계정, 60px)을 화면 밖으로 밀어 숨김 */
-.mapwrap.crop #gmap{top:-60px;height:calc(100% + 60px)}
-.mapbar{position:absolute;left:50%;transform:translateX(-50%);bottom:30px;z-index:5;display:flex;gap:6px;flex-wrap:nowrap;align-items:center;white-space:nowrap}
-.mapbar .pill{background:rgba(255,255,255,.96);border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;box-shadow:var(--shadow);border:0;color:var(--ink);text-decoration:none;cursor:pointer;font-family:inherit}
-.mapbar .pill.on{background:var(--ink);color:#fff}
+#gmap{position:absolute;inset:0;background:#e9e5dd}
+#embed{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#e9e5dd;z-index:3}
+.mapwrap.embed #embed{display:block}
+.mapbar{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;z-index:5;display:flex;gap:6px;flex-wrap:nowrap;align-items:center;white-space:nowrap}
+.pill{background:rgba(255,255,255,.96);border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;box-shadow:var(--shadow);border:0;color:var(--ink);text-decoration:none;cursor:pointer;font-family:inherit}
+.pill.on{background:var(--ink);color:#fff}
+.mapmsg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink2);font-size:14px;line-height:1.6}
+/* markers */
+.pin{display:grid;place-items:center;transform:translateY(50%);cursor:pointer;transition:transform .12s}
+.pin.food{width:22px;height:22px;border-radius:50%;background:#fff;border:2.5px solid var(--food);font-size:11px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.pin.food.cand{border-style:dashed}
+.pin.food.r1,.pin.food.r2,.pin.food.r3{width:28px;height:28px;color:#fff;font-weight:800;font-size:13px;border:2.5px solid #fff}
+.pin.r1{background:var(--r1)} .pin.r2{background:var(--r2)} .pin.r3{background:var(--r3);color:#3a2f00!important}
+.pin.hotel{width:32px;height:32px;border-radius:9px;background:var(--hotel);color:#fff;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.pin.spot{width:24px;height:24px;border-radius:50%;background:var(--spot-soft);border:2px solid var(--spot);font-size:13px}
+.pin.sel{transform:translateY(50%) scale(1.3);z-index:9}
+.pin.dim{opacity:.35}
+.tlabel{transform:translateY(50%);background:#fff;border-radius:999px;padding:2px 7px;font-size:11.5px;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.25);white-space:nowrap;border:2px solid currentColor}
+.zlabel{transform:translateY(50%);font-size:11px;font-weight:800;color:#5a2fd6;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;white-space:nowrap;pointer-events:none}
 
 @media (max-width:860px){
   .app{grid-template-columns:minmax(0,1fr);grid-template-rows:46dvh minmax(0,1fr)}
@@ -108,6 +152,7 @@ table.near td.n{font-weight:700}
   .side{order:2;border-right:0;border-top:1px solid var(--line)}
   .side-head{padding:12px 16px 10px}
   .scroll{padding:10px 16px 40px}
+  .mapbar{bottom:14px}
 }
 @media (max-width:860px) and (max-height:520px){
   .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
@@ -122,11 +167,11 @@ table.near td.n{font-weight:700}
       <h1 class="title">오사카·교토 맛집 지도</h1>
       <p class="sub">유튜브 댓글 추천 가게 + 우리가 고른 가게 + 유명 관광지·지역 + 우리 숙소</p>
       <div class="legend">
+        <span><i class="dot r1"></i>1순위</span><span><i class="dot r2"></i>2순위</span><span><i class="dot r3"></i>3순위</span>
         <span><i class="dot food"></i>맛집</span>
-        <span><i class="dot cand"></i>맛집 후보(지점 미확정)</span>
         <span><i class="dot hotel"></i>숙소</span>
         <span><i class="dot spot"></i>관광지</span>
-        <span><i class="dot zone"></i>유명 지역(음영)</span>
+        <span><i class="dot zone"></i>유명 지역</span>
       </div>
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button>
@@ -136,6 +181,7 @@ table.near td.n{font-weight:700}
       <div class="chips">
         <button class="chip" data-filter="all" aria-pressed="true">전체</button>
         <button class="chip" data-filter="food" aria-pressed="false">맛집</button>
+        <button class="chip" data-filter="ranked" aria-pressed="false">순위 맛집</button>
         <button class="chip" data-filter="hotel" aria-pressed="false">숙소</button>
         <button class="chip" data-filter="spot" aria-pressed="false">관광지</button>
       </div>
@@ -152,11 +198,16 @@ table.near td.n{font-weight:700}
         <div class="result" id="result"></div>
       </section>
       <div id="list"></div>
-      <p class="credit">관광지 좌표: 2026-11-12 Google 지도 확인(Wikidata·OSM과 대조). 지역 음영: 오사카는 町丁目 행정경계를 합친 범위, 교토는 町 위치를 감싼 대략 범위(기온은 OSM 역사지구 경계) — 경계 데이터 © OpenStreetMap contributors (ODbL).</p>
+      <p class="credit">
+        도보 시간·거리: 누를 때마다 Google Routes API로 실시간 계산. 지하철·버스: Google API가 일본 대중교통 경로를 제공하지 않아(2026-11-14 확인), Google 지도 길찾기 화면을 지도 영역에 그대로 띄워 실시간으로 표시.<br>
+        가게 사진·평점·영업시간·홈페이지: Google 지도 장소 정보(Places API)를 카드를 열 때 불러옴. 순위(①②③)는 이 기기 브라우저에 저장돼요.<br>
+        관광지 좌표: 2026-11-12 Google 지도 확인. 지역 음영 경계 데이터 © OpenStreetMap contributors (ODbL).
+      </p>
     </div>
   </aside>
-  <main class="mapwrap">
-    <iframe id="gmap" title="Google 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  <main class="mapwrap" id="mapwrap">
+    <div id="gmap"><div class="mapmsg">지도를 불러오는 중…</div></div>
+    <iframe id="embed" title="Google 지도 길찾기" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     <div class="mapbar" id="mapbar"></div>
   </main>
 </div>
@@ -165,84 +216,238 @@ table.near td.n{font-weight:700}
 <script src="data/places.js"></script>
 <script src="data/spots.js"></script>
 <script>window.PLACES.push(...(window.SPOTS||[]));</script>
-<script src="data/routes.js"></script>
+<script src="data/districts.js"></script>
 <script>
 (function(){
+/* Google Maps Platform 브라우저 키 — 콘솔에서 웹사이트(HTTP 리퍼러)·API 제한을 걸어 둔 공개용 키 */
+const GKEY = 'AIzaSyB2CPI2TJ3u5JcDOXyrnhjCimsOct_b6pc';
+
 const P = window.PLACES || [];
-const R = window.ROUTES || {};
-const META = window.ROUTES_META || {};
+const DIST = window.DISTRICTS || [];
 const byId = Object.fromEntries(P.map(p=>[p.id,p]));
 const CITY = {osaka:{name:'오사카',center:[34.676,135.508],zoom:13}, kyoto:{name:'교토',center:[35.005,135.745],zoom:12}, nara:{name:'나라',center:[34.686,135.835],zoom:14}};
-const LINE_COLORS = {'미도스지선':'#e5171f','다니마치선':'#522886','요츠바시선':'#0078ba','주오선':'#019a66','센니치마에선':'#e44d93','사카이스지선':'#814721','나가호리쓰루미료쿠치선':'#a9cc51','이마자토스지선':'#ee7b1a','오사카 순환선':'#f15a22','JR':'#f15a22','한신':'#0d4ea1','긴테쓰':'#d40000','난카이':'#ff6600','게이한':'#00a0e9','한큐':'#7a1e2b'};
-const lineColor = n => { if(!n) return '#555'; for(const k in LINE_COLORS){ if(n.includes(k)) return LINE_COLORS[k]; } return '#555'; };
+const RANK_COLOR = {1:'#e0452b',2:'#f08c00',3:'#e2b100'};
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmtMin = m => m==null ? '미확인' : (m>=60 ? `${Math.floor(m/60)}시간 ${m%60}분` : `${m}분`);
-const fmtDist = m => m==null ? '' : (m>=1000 ? `${(m/1000).toFixed(1)}km` : `${m}m`);
-const fmtYen = y => y==null ? '요금 미확인' : `¥${y.toLocaleString()}`;
+const fmtMin = m => m==null||!Number.isFinite(m) ? '미확인' : (m>=60 ? `${Math.floor(m/60)}시간 ${Math.round(m%60)}분` : `${Math.round(m)}분`);
+const fmtDist = m => m==null ? '' : (m>=1000 ? `${(m/1000).toFixed(1)}km` : `${Math.round(m)}m`);
 const fmtAt = iso => { if(!iso) return '일시 미확인'; const d=new Date(iso); return d.toLocaleString('ko-KR',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',weekday:'short',hour:'numeric',minute:'2-digit'})+' 일본시간'; };
-const gmap = (a,b,mode) => `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}&travelmode=${mode}`;
+const gdir = (a,b,mode) => `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}&travelmode=${mode}`;
 const gplace = p => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.nameJa+' '+p.address)}`;
+const BED = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>';
+const lsGet = (k,d) => { try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } };
+const lsSet = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
 
 const state = {city:'osaka', filter:'all', sel:null, from:'', to:'', mode:null};
 
-/* ---------- map: Google 내 지도(맛집·숙소 핀) + Google 길찾기 임베드(경로) ---------- */
-const MID_SHADE = '1HcytTfswQ8eT6mKa0_MPwfZjCFWzHgI';  // 맛집+관광지+지역 음영
-const MID_PLAIN = '1iovZdjIqgczi0szkajegoqPq1BC9z0c';  // 같은 지도에서 지역 음영 레이어만 뺀 사본
-let shade = true; try{ if(localStorage.getItem('shade')==='off') shade=false; }catch(e){}
-const mid = () => shade ? MID_SHADE : MID_PLAIN;
-const BED = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>';
-const gframe = document.getElementById('gmap'), mapbar = document.getElementById('mapbar');
-let view = {kind:'pins', lat:CITY.osaka.center[0], lng:CITY.osaka.center[1], z:CITY.osaka.zoom};
-function setFrame(url){ if(gframe.dataset.src!==url){ gframe.dataset.src=url; gframe.src=url; } }
-function renderMap(){
-  let url, bar;
-  if(view.kind==='route'){
-    const {a,b,mode}=view;
-    url=`https://www.google.com/maps?saddr=${a.lat},${a.lng}&daddr=${b.lat},${b.lng}&dirflg=${mode==='walk'?'w':'r'}&hl=ko&output=embed`;
-    bar=`<span class="pill on">${mode==='walk'?'🚶 도보':'🚇 대중교통'} 경로 · Google 지도</span><button class="pill" data-back>← 맛집 지도로</button>`;
-  } else {
-    url=`https://www.google.com/maps/d/embed?mid=${mid()}&hl=ko&ll=${view.lat},${view.lng}&z=${view.z}`;
-    bar=`<button class="pill${shade?' on':''}" data-shade role="switch" aria-checked="${shade}">지역 음영 ${shade?'켜짐':'꺼짐'}</button><a class="pill" href="https://www.google.com/maps/d/viewer?mid=${mid()}" target="_blank" rel="noopener">크게 보기 ↗</a>`;
-  }
-  gframe.parentElement.classList.toggle('crop', view.kind!=='route');
-  setFrame(url); mapbar.innerHTML=bar;
+/* ---------- 순위 (①②③) : 데이터 기본값 p.rank + 이 기기에서 바꾼 값 ---------- */
+let RANKS = lsGet('ranks', {});
+const rankOf = p => { if(p.type!=='food') return 0; const v = RANKS[p.id]; return v===undefined ? (p.rank||0) : v; };
+function setRank(id, r){ const p=byId[id]; RANKS[id] = rankOf(p)===r ? 0 : r; lsSet('ranks', RANKS); renderList(); refreshMarkers(); if(state.sel && byId[state.sel].type==='hotel') showHotelRanks(byId[state.sel]); }
+
+/* ---------- 실시간 도보 (Routes API) ---------- */
+const WALK = {};           // "a|b" -> {min, m} | {err}
+const ll = p => ({location:{latLng:{latitude:p.lat,longitude:p.lng}}});
+async function gpost(url, mask, body){
+  const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json','X-Goog-Api-Key':GKEY,'X-Goog-FieldMask':mask}, body:JSON.stringify(body)});
+  const j = await res.json().catch(()=>null);
+  if(!res.ok) throw new Error((j&&j.error&&j.error.message)||('HTTP '+res.status));
+  return j;
 }
-mapbar.addEventListener('click',e=>{ if(e.target.closest('[data-back]')) setRoute('','');
-  if(e.target.closest('[data-shade]')){ shade=!shade; try{ localStorage.setItem('shade', shade?'on':'off'); }catch(_){} renderMap(); } });
-function showPins(lat,lng,z){ view={kind:'pins',lat,lng,z}; renderMap(); }
-function refreshMarkers(){}
+const inflight = {};
+async function walkMatrix(origins, dests){
+  const need = []; origins.forEach(o=>dests.forEach(d=>{ if(o.id!==d.id && (!WALK[`${o.id}|${d.id}`] || WALK[`${o.id}|${d.id}`].err)) need.push([o,d]); }));
+  if(!need.length) return;
+  const os=[...new Set(need.map(x=>x[0]))], ds=[...new Set(need.map(x=>x[1]))];
+  const key = os.map(o=>o.id).join(',')+'>'+ds.map(d=>d.id).join(',');
+  if(!inflight[key]) inflight[key] = gpost('https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix','originIndex,destinationIndex,duration,distanceMeters,condition,status',
+      {origins:os.map(o=>({waypoint:ll(o)})), destinations:ds.map(d=>({waypoint:ll(d)})), travelMode:'WALK'})
+    .then(arr=>{ (arr||[]).forEach(e=>{ const o=os[e.originIndex], d=ds[e.destinationIndex]; if(!o||!d) return;
+        WALK[`${o.id}|${d.id}`] = e.condition==='ROUTE_EXISTS' && e.duration ? {min:Math.round(parseInt(e.duration)/60), m:e.distanceMeters||0, at:new Date().toISOString()} : {err:'경로 없음'}; }); })
+    .catch(err=>{ need.forEach(([o,d])=>{ WALK[`${o.id}|${d.id}`]={err:String(err.message||err)}; }); console.warn('route matrix', err); })
+    .finally(()=>{ delete inflight[key]; });
+  return inflight[key];
+}
+const ROUTEPATH = {};
+async function walkRoute(a,b){
+  const k=`${a.id}|${b.id}`; if(ROUTEPATH[k]) return ROUTEPATH[k];  // 실패는 캐시하지 않음
+  const j = await gpost('https://routes.googleapis.com/directions/v2:computeRoutes','routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline',
+    {origin:ll(a), destination:ll(b), travelMode:'WALK', languageCode:'ko'});
+  const r = j.routes && j.routes[0]; if(!r) throw new Error('경로 없음');
+  const v = {min:Math.round(parseInt(r.duration)/60), m:r.distanceMeters, enc:r.polyline&&r.polyline.encodedPolyline, at:new Date().toISOString()};
+  WALK[k] = {min:v.min, m:v.m, at:v.at};
+  return ROUTEPATH[k] = v;
+}
+/* ---------- Google 장소 정보 (Places API New) ---------- */
+const GP = {};  // id -> {status:'loading'|'ok'|'nomatch'|'error', place, msg}
+function haversine(a,b){ const R6=6371000, t=x=>x*Math.PI/180; const dLat=t(b.lat-a.lat), dLng=t(b.lng-a.lng); const h=Math.sin(dLat/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLng/2)**2; return 2*R6*Math.asin(Math.sqrt(h)); }
+async function loadPlace(p){
+  if(GP[p.id] && GP[p.id].status!=='error') return;
+  GP[p.id] = {status:'loading'}; fillPlace(p);
+  try{
+    const j = await gpost('https://places.googleapis.com/v1/places:searchText',
+      'places.id,places.displayName,places.location,places.rating,places.userRatingCount,places.websiteUri,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.weekdayDescriptions,places.currentOpeningHours.openNow,places.photos.name,places.photos.authorAttributions,places.reservable,places.googleMapsUri,places.businessStatus',
+      {textQuery:`${p.nameJa} ${p.address}`, languageCode:'ko', regionCode:'JP', pageSize:3, locationBias:{circle:{center:{latitude:p.lat,longitude:p.lng}, radius:300}}});
+    // 우리 좌표에서 250m 안에 있는 결과만 같은 가게로 인정 (엉뚱한 가게 정보가 붙는 것을 막음)
+    const cands = (j.places||[]).map(x=>({x, d: x.location ? haversine(p,{lat:x.location.latitude,lng:x.location.longitude}) : 1e9})).sort((a,b)=>a.d-b.d);
+    const best = cands.find(c=>c.d<=250);
+    GP[p.id] = best ? {status:'ok', place:best.x, d:best.d} : {status:'nomatch'};
+  }catch(err){ GP[p.id] = {status:'error', msg:String(err.message||err)}; }
+  fillPlace(p);
+}
+function placeHTML(p){
+  const g = GP[p.id];
+  if(!g || g.status==='loading') return '<div class="meta">Google 지도 장소 정보 불러오는 중…</div>';
+  if(g.status==='error') return `<div class="meta">Google 장소 정보를 불러오지 못했어요 (${esc(g.msg)})</div>`;
+  if(g.status==='nomatch') return '<div class="meta">Google 지도에서 이 위치와 일치하는 장소를 찾지 못해 사진·평점은 표시하지 않아요.</div>';
+  const x = g.place; let h='';
+  const photos = (x.photos||[]).slice(0,4);
+  if(photos.length) h += '<div class="gp-photos">'+photos.map(ph=>{ const a=(ph.authorAttributions||[])[0];
+    return `<figure><img loading="lazy" alt="${esc((x.displayName&&x.displayName.text)||p.name)} 사진" src="https://places.googleapis.com/v1/${esc(ph.name)}/media?maxWidthPx=480&maxHeightPx=330&key=${GKEY}"><figcaption>사진: ${a?(a.uri?`<a href="${esc(a.uri)}" target="_blank" rel="noopener">${esc(a.displayName)}</a>`:esc(a.displayName)):'Google 지도'}</figcaption></figure>`; }).join('')+'</div>';
+  let row = '';
+  if(x.rating) row += `<span>⭐ <b>${x.rating.toFixed(1)}</b> <span class="meta">(${(x.userRatingCount||0).toLocaleString()})</span></span>`;
+  if(x.businessStatus && x.businessStatus!=='OPERATIONAL') row += `<span class="gp-open off">${x.businessStatus==='CLOSED_PERMANENTLY'?'폐업':'임시 휴업'}</span>`;
+  else if(x.currentOpeningHours && typeof x.currentOpeningHours.openNow==='boolean') row += `<span class="gp-open ${x.currentOpeningHours.openNow?'on':'off'}">${x.currentOpeningHours.openNow?'지금 영업 중':'지금 영업 종료'}</span>`;
+  if(x.reservable===true) row += '<span class="tag hotel">Google 예약 가능</span>';
+  if(row) h += `<div class="gp-row">${row}</div>`;
+  const wd = x.regularOpeningHours && x.regularOpeningHours.weekdayDescriptions;
+  if(wd&&wd.length) h += `<details><summary>영업시간</summary><ul>${wd.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></details>`;
+  h += '<div class="links">';
+  if(x.googleMapsUri) h += `<a class="btn small book" href="${esc(x.googleMapsUri)}" target="_blank" rel="noopener">🗓 ${p.type==='food'?'Google 예약·지도':'Google 지도'}</a>`;
+  if(x.websiteUri) h += `<a class="btn small" href="${esc(x.websiteUri)}" target="_blank" rel="noopener">🌐 홈페이지</a>`;
+  const tel = x.internationalPhoneNumber || x.nationalPhoneNumber;
+  if(tel) h += `<a class="btn small" href="tel:${esc(tel.replace(/\s/g,''))}">📞 ${esc(x.nationalPhoneNumber||tel)}</a>`;
+  h += '</div>';
+  h += `<div class="gp-src">Google 지도 장소 정보 · “${esc(x.displayName&&x.displayName.text)}” (표시 좌표에서 ${Math.round(g.d)}m)${p.type==='food'&&x.reservable!==true?' · 예약 버튼은 Google 지도에 예약 기능이 있는 가게만 나와요':''}</div>`;
+  return h;
+}
+function fillPlace(p){ const el=listEl.querySelector(`[data-gp="${p.id}"]`); if(el) el.innerHTML=placeHTML(p); }
 
+/* ---------- 지도 (Maps JavaScript API) ---------- */
+let map=null, markers={}, overlays=[], zoneObjs=[], zoneLabels=[];
+let gen=0; const newGen=()=>++gen;  // 늦게 도착한 비동기 응답이 최신 화면을 덮어쓰지 않도록
+let shade = lsGet('shade', true)!==false;
+const mapwrap=document.getElementById('mapwrap'), embedEl=document.getElementById('embed'), mapbar=document.getElementById('mapbar');
+let view = {kind:'pins'};
 
+window.__initMap = async function(){
+  const {Map} = await google.maps.importLibrary('maps');
+  await google.maps.importLibrary('marker'); await google.maps.importLibrary('geometry');
+  const c=CITY[state.city];
+  map = new Map(document.getElementById('gmap'), {center:{lat:c.center[0],lng:c.center[1]}, zoom:c.zoom, mapId:'DEMO_MAP_ID', gestureHandling:'greedy', clickableIcons:false, mapTypeControl:false, streetViewControl:false, fullscreenControl:false});
+  // 지역 음영
+  DIST.forEach(d=>{ const f = map.data.addGeoJson({type:'Feature', geometry:d.geojson, properties:{id:d.id}}); zoneObjs.push(...f);
+    const el=document.createElement('div'); el.className='zlabel'; el.textContent=d.ko;
+    zoneLabels.push(new google.maps.marker.AdvancedMarkerElement({position:{lat:d.center[0],lng:d.center[1]}, content:el, zIndex:1})); });
+  map.data.setStyle({fillColor:'#7c4dff', fillOpacity:.13, strokeColor:'#7c4dff', strokeOpacity:.6, strokeWeight:1.2, clickable:false});
+  applyShade();
+  // 핀
+  P.forEach(p=>{ const el=document.createElement('div');
+    const m = new google.maps.marker.AdvancedMarkerElement({map, position:{lat:p.lat,lng:p.lng}, content:el, title:p.name, gmpClickable:true});
+    m.addListener('click', ()=>select(p.id===state.sel?null:p.id, true));
+    markers[p.id]={m,el}; });
+  refreshMarkers(); renderBar();
+  if(state.sel) select(state.sel,false); else if(state.from&&state.to) renderRoute();
+};
+window.gm_authFailure = function(){ document.getElementById('gmap').innerHTML='<div class="mapmsg">Google 지도 키 인증에 실패했어요. (키 제한 설정에 이 사이트 주소와 Maps JavaScript API가 들어 있는지 확인)</div>'; };
+
+function applyShade(){ if(!map) return; zoneObjs.forEach(f=>map.data.overrideStyle(f,{visible:shade})); zoneLabels.forEach(l=>l.map=shade?map:null); }
+function refreshMarkers(){
+  if(!map) return;
+  const hotelSel = state.sel && byId[state.sel].type==='hotel' ? byId[state.sel] : null;
+  P.forEach(p=>{ const k=markers[p.id]; if(!k) return; const r=rankOf(p);
+    const show = state.filter==='all' || state.filter===p.type || (state.filter==='ranked' && (p.type==='hotel' || (p.type==='food' && r>0)));
+    k.el.className = ['pin', p.type, p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', hotelSel&&p.type==='food'&&p.city===hotelSel.city&&!r?'dim':''].join(' ');
+    k.el.innerHTML = p.type==='hotel' ? BED : p.type==='spot' ? (p.emoji||'📍') : (r ? String(r) : (p.emoji||'🍴'));
+    k.m.zIndex = p.type==='hotel'?30 : r ? 20-r : 5;
+    k.m.map = show ? map : null; });
+}
+function clearOverlays(){ overlays.forEach(o=>{ if(o.setMap) o.setMap(null); else o.map=null; }); overlays=[]; }
+function panTo(lat,lng,z){ if(!map) return; map.panTo({lat,lng}); if(z) map.setZoom(z); }
+function fit(points){ if(!map||!points.length) return; const b=new google.maps.LatLngBounds(); points.forEach(p=>b.extend({lat:p.lat,lng:p.lng})); map.fitBounds(b, 60); }
+function renderBar(){
+  if(view.kind==='embed'){ mapbar.innerHTML=`<span class="pill on">🚇 대중교통 경로 · Google 지도</span><button class="pill" data-back>← 우리 지도로</button>`; return; }
+  mapbar.innerHTML=`<button class="pill${shade?' on':''}" data-shade role="switch" aria-checked="${shade}">지역 음영 ${shade?'켜짐':'꺼짐'}</button>`+(overlays.length?'<button class="pill" data-clearlines>선 지우기</button>':'');
+}
+mapbar.addEventListener('click',e=>{
+  if(e.target.closest('[data-back]')){ showEmbed(null); }
+  if(e.target.closest('[data-shade]')){ shade=!shade; lsSet('shade',shade); applyShade(); renderBar(); }
+  if(e.target.closest('[data-clearlines]')){ newGen(); clearOverlays(); renderBar(); }
+});
+function showEmbed(url){
+  if(url){ if(embedEl.dataset.src!==url){ embedEl.dataset.src=url; embedEl.src=url; } view={kind:'embed'}; mapwrap.classList.add('embed'); }
+  else { view={kind:'pins'}; mapwrap.classList.remove('embed'); }
+  renderBar();
+}
+function addLine(a,b,color,weight,label){
+  const line = new google.maps.Polyline({map, path:[{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}], geodesic:true, strokeColor:color, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1', strokeOpacity:.9, strokeWeight:weight, strokeColor:color, scale:3}, offset:'0', repeat:'12px'}], clickable:false, zIndex:2});
+  overlays.push(line);
+  if(label){ const el=document.createElement('div'); el.className='tlabel'; el.style.color=color; el.innerHTML=label;
+    overlays.push(new google.maps.marker.AdvancedMarkerElement({map, position:{lat:(a.lat+b.lat)/2,lng:(a.lng+b.lng)/2}, content:el, zIndex:40})); }
+}
+
+/* ---------- 숙소 → 순위 맛집 ---------- */
+function rankedFoods(h){ return P.filter(q=>q.type==='food' && q.city===h.city && rankOf(q)>0).sort((a,b)=>rankOf(a)-rankOf(b)); }
+const avg = xs => xs.length ? xs.reduce((s,x)=>s+x,0)/xs.length : null;
+function rankSummaryHTML(h){
+  const foods = rankedFoods(h);
+  if(!foods.length) return `<div class="empty" style="margin-top:8px">아래 맛집 카드의 <b>①②③</b> 버튼으로 순위를 매기면, 이 숙소에서 순위별 맛집까지 선을 그리고 평균 시간을 보여줘요.</div>`;
+  let h2='<div class="ranksum">';
+  for(const r of [1,2,3]){ const fs=foods.filter(q=>rankOf(q)===r);
+    if(!fs.length){ h2+=`<div><span class="rk r${r}">${r}</span> 순위<br><span class="meta">지정 없음</span></div>`; continue; }
+    const ws=fs.map(q=>WALK[`${h.id}|${q.id}`]).filter(w=>w&&Number.isFinite(w.min));
+    const pending = fs.some(q=>!WALK[`${h.id}|${q.id}`]);
+    h2+=`<div><span class="rk r${r}">${r}</span> 순위 · ${fs.length}곳<b>🚶 ${ws.length?fmtMin(avg(ws.map(w=>w.min))):(pending?'계산 중…':'—')}</b>${ws.length?`<span class="meta">평균 ${fmtDist(avg(ws.map(w=>w.m)))} · 최단 ${fmtMin(Math.min(...ws.map(w=>w.min)))}</span>`:''}</div>`;
+  }
+  return h2+'</div><p class="note">🚶 도보 평균 = Google 실시간 계산. 🚇 지하철·버스는 아래 표에서 가게를 누르면 Google 지도 실시간 경로로 보여줘요 (Google API가 일본 대중교통 시간 숫자를 제공하지 않아 평균은 낼 수 없어요).</p>';
+}
+async function showHotelRanks(h){
+  const g=newGen();
+  if(map) clearOverlays();
+  const allFoods = P.filter(q=>q.type==='food'&&q.city===h.city);
+  const foods = rankedFoods(h);
+  const draw = ()=>{
+    if(state.sel!==h.id || g!==gen) return;
+    const box=listEl.querySelector(`[data-ranksum="${h.id}"]`); if(box) box.innerHTML=rankSummaryHTML(h);
+    const tb=listEl.querySelector(`[data-near="${h.id}"]`); if(tb) tb.innerHTML=nearTable(h);
+    if(!map || state.from&&state.to) return;
+    clearOverlays();
+    foods.forEach(q=>{ const r=rankOf(q), w=WALK[`${h.id}|${q.id}`];
+      const lab = w&&Number.isFinite(w.min)?`🚶${fmtMin(w.min)} · ${fmtDist(w.m)}`:'';
+      addLine(h,q,RANK_COLOR[r], r===1?4:r===2?3:2.5, lab); });
+    renderBar();
+  };
+  if(map){ draw(); fit([h, ...(foods.length?foods:[])]); if(!foods.length) panTo(h.lat,h.lng,15); }
+  if(allFoods.length){ await walkMatrix([h], allFoods); draw(); }
+}
+
+/* ---------- 리스트 ---------- */
 const listEl = document.getElementById('list');
 function nearTable(p){
-  // hotel -> each food in same city ; food -> each hotel in same city
   if(p.type==='spot') return '';
   const others = P.filter(q=>q.city===p.city && q.id!==p.id && (p.type==='hotel' ? q.type==='food' : q.type==='hotel'));
   if(!others.length) return '';
   const rows = others.map(q=>{
-    const key = p.type==='hotel' ? `${p.id}|${q.id}` : `${q.id}|${p.id}`;
-    const r = R[key];
-    return {q, r, t: r&&r.transit&&Number.isFinite(r.transit.total) ? r.transit.total : 1e9};
-  }).sort((a,b)=>a.t-b.t);
+    const a = p.type==='hotel' ? p : q, b = p.type==='hotel' ? q : p;
+    const w = WALK[`${a.id}|${b.id}`];
+    const sortKey = (w&&Number.isFinite(w.min)) ? w.min : 1e9;
+    return {q,a,b,w,sortKey, r: p.type==='hotel'?rankOf(q):0};
+  }).sort((x,y)=> p.type==='hotel' ? ((x.r||9)-(y.r||9) || x.sortKey-y.sortKey) : x.sortKey-y.sortKey);
   const head = p.type==='hotel' ? '숙소 → 맛집' : '숙소 → 이 가게';
-  return `<table class="near"><thead><tr><th>${head}</th><th>🚶 도보</th><th>🚇 대중교통</th></tr></thead><tbody>${rows.map(({q,r})=>{
-    const w = r&&r.walk ? `${fmtMin(r.walk.min)}<div class="meta">${fmtDist(r.walk.m)}</div>` : '<span class="meta">미수집</span>';
-    let t = '<span class="meta">미수집</span>';
-    if(r&&r.transit){
-      if(r.transit.walkOnly) t = '<span class="meta">Google 안내: 도보</span>';
-      else if(!Array.isArray(r.transit.legs) || r.transit.incomplete) t = '<span class="meta">미확인</span>';
-      else { const lines=[...new Set(r.transit.legs.filter(l=>l.mode==='ride').map(l=>l.line))];
-        t = `${fmtMin(r.transit.total)} · ${fmtYen(r.transit.fare)}<div class="meta">${esc(lines.join(' → '))}</div>`; }
-    }
-    const a = p.type==='hotel' ? p.id : q.id, b = p.type==='hotel' ? q.id : p.id;
-    return `<tr data-route="${a}|${b}"><td class="n">${esc(q.name.replace(' (후보)',''))}</td><td>${w}</td><td>${t}</td></tr>`;
-  }).join('')}</tbody></table>`;
+  return `<table class="near"><thead><tr><th>${head}</th><th>🚶 도보 (실시간)</th><th>🚇 지하철·버스</th></tr></thead><tbody>${rows.map(({q,a,b,w,r})=>{
+    const wc = !w ? '<span class="meta">계산 중…</span>' : w.err ? `<span class="meta">${esc(w.err)}</span>` : `${fmtMin(w.min)}<div class="meta">${fmtDist(w.m)}</div>`;
+    const tc = '<span class="meta" style="color:#1a73e8;font-weight:700">실시간 경로 보기 →</span>';
+    return `<tr data-route="${a.id}|${b.id}"><td class="n">${r?`<span class="rk r${r}">${r}</span> `:''}${esc(q.name.replace(' (후보)',''))}</td><td>${wc}</td><td>${tc}</td></tr>`;
+  }).join('')}</tbody></table><p class="note">행을 누르면 지도에 경로가 나와요 — 가까우면 도보 경로, 멀면 Google 지도 실시간 지하철·버스 경로.</p>`;
 }
 function cardHTML(p){
+  const r = rankOf(p);
   const cls = ['card',p.type, p.candidate?'cand':'', state.sel===p.id?'sel':''].join(' ');
   const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : p.type==='spot' ? '<span class="tag spot">관광지</span>' : `<span class="tag">${esc(p.group)}</span>${p.candidate?'<span class="tag cand">후보</span>':''}${p.branchUnsure?'<span class="tag cand">지점 미확정</span>':''}`;
   const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
+  const rankset = p.type==='food' ? `<div class="rankset" role="group" aria-label="순위">${[1,2,3].map(n=>`<button class="r${n}" data-rank="${n}" data-id="${p.id}" aria-pressed="${r===n}" title="${n}순위">${n}</button>`).join('')}</div>` : '';
   let body = '';
+  if(p.type==='hotel') body += `<p class="quote-h">순위 맛집까지 평균 (지도에 순위 색 선으로 표시)</p><div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
+  body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
   if(p.comment) body += `<p class="quote-h">💬 유튜브 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
   if(p.origin==='list') body += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름: “${esc(p.typed)}”</p>`;
   if(p.origin==='blog') body += `<p class="quote-h">📰 네이버 블로그 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.blog)}</div>`;
@@ -252,45 +457,56 @@ function cardHTML(p){
   body += `<p class="addr">📍 ${esc(p.address)}</p>`;
   body += `<div class="links">`+
     (p.agoda?`<a class="btn small" href="${esc(p.agoda)}" target="_blank" rel="noopener">아고다에서 보기</a>`:'')+
-    `<a class="btn small" href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`+
     (p.sources||[]).map(s=>`<a class="btn small" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')+
     `<button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small" data-setto="${p.id}">여기로 도착</button></div>`;
-  body += nearTable(p);
-  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}${esc(p.area)}</div></div></div><div class="detail">${body}</div></article>`;
+  body += `<div data-near="${p.id}">${nearTable(p)}</div>`;
+  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${r?`<span class="rk r${r}">${r}</span> `:''}${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}${esc(p.area)}</div></div>${rankset}</div><div class="detail">${body}</div></article>`;
 }
 function renderList(){
   const items = P.filter(p=>p.city===state.city);
   const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food'), spots = items.filter(p=>p.type==='spot');
-  let h='';
-  if(state.filter==='all'||state.filter==='hotel'){
+  const f = state.filter; let h='';
+  if(f==='all'||f==='hotel'||f==='ranked'){
     h += `<div class="sec">숙소 ${hotels.length}</div>`;
-    h += hotels.length ? hotels.map(cardHTML).join('') : `<div class="empty">아직 등록된 ${CITY[state.city].name} 숙소가 없어요. 아고다 링크를 주시면 위치를 확인해서 추가합니다.</div>`;
+    h += hotels.length ? hotels.map(cardHTML).join('') : `<div class="empty">아직 등록된 ${CITY[state.city].name} 숙소가 없어요.</div>`;
   }
-  if(state.filter==='all'||state.filter==='food'){
-    const groups = [...new Set(foods.map(f=>f.group))];
-    if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
-    groups.forEach(g=>{ const fs=foods.filter(f=>f.group===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
+  if(f==='all'||f==='food'||f==='ranked'){
+    const ranked = foods.filter(q=>rankOf(q)>0).sort((a,b)=>rankOf(a)-rankOf(b));
+    if(ranked.length) h += `<div class="sec">순위 맛집 ${ranked.length}</div>` + ranked.map(cardHTML).join('');
+    if(f!=='ranked'){
+      const rest = foods.filter(q=>!rankOf(q)); const groups=[...new Set(rest.map(x=>x.group))];
+      if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
+      groups.forEach(g=>{ const fs=rest.filter(x=>x.group===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
+    } else if(!ranked.length) h += `<div class="sec">순위 맛집 0</div><div class="empty">맛집 카드 오른쪽의 ①②③ 버튼으로 순위를 매겨 보세요.</div>`;
   }
-  if((state.filter==='all'||state.filter==='spot') && spots.length){
-    h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
-  }
+  if((f==='all'||f==='spot') && spots.length) h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
   listEl.innerHTML = h;
 }
 listEl.addEventListener('click',e=>{
+  const rk=e.target.closest('[data-rank]'); if(rk){ e.stopPropagation(); setRank(rk.dataset.id, +rk.dataset.rank); return; }
   const sf=e.target.closest('[data-setfrom]'), st=e.target.closest('[data-setto]'), tr=e.target.closest('tr[data-route]');
   if(sf){ e.stopPropagation(); setRoute(sf.dataset.setfrom, state.to); return; }
   if(st){ e.stopPropagation(); setRoute(state.from, st.dataset.setto); return; }
   if(tr){ e.stopPropagation(); const [a,b]=tr.dataset.route.split('|'); setRoute(a,b); return; }
-  if(e.target.closest('a')) return;
+  if(e.target.closest('a,details')) return;
   const c=e.target.closest('.card'); if(c) select(c.dataset.id===state.sel?null:c.dataset.id,false);
 });
 
 function select(id, fromMap){
-  state.sel=id; renderList(); refreshMarkers();
-  if(!id) return;
+  state.sel=id;
+  if(id && byId[id].city!==state.city){ setCity(byId[id].city, true); }
+  renderList(); refreshMarkers();
+  if(!id){ clearOverlays(); renderBar(); return; }
   const p=byId[id];
-  if(p.city!==state.city){ setCity(p.city, true); }
-  if(!(state.from&&state.to)) showPins(p.lat,p.lng,16);
+  if(view.kind==='embed') showEmbed(null);
+  if(!(state.from&&state.to)) clearOverlays();
+  loadPlace(p);
+  if(p.type==='hotel') showHotelRanks(p);
+  else {
+    if(!(state.from&&state.to)) panTo(p.lat,p.lng,16);
+    if(p.type==='food'){ const hs=P.filter(q=>q.type==='hotel'&&q.city===p.city); if(hs.length) walkMatrix(hs,[p]).then(()=>{ const tb=listEl.querySelector(`[data-near="${p.id}"]`); if(tb&&state.sel===p.id) tb.innerHTML=nearTable(p); }); }
+  }
+  renderBar();
   const el=listEl.querySelector(`[data-id="${id}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
@@ -300,12 +516,12 @@ function setCity(c, keepRoute){
   if(!keepRoute){ const a=byId[state.from], b=byId[state.to]; if((a&&a.city!==c)||(b&&b.city!==c)) setRoute('',''); }
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===c));
   renderList(); refreshMarkers();
-  if(!(state.from&&state.to)) showPins(CITY[c].center[0], CITY[c].center[1], CITY[c].zoom);
+  if(!keepRoute && !(state.from&&state.to)){ clearOverlays(); renderBar(); panTo(CITY[c].center[0], CITY[c].center[1], CITY[c].zoom); }
 }
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ state.sel=null; setCity(t.dataset.city); });
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ state.sel=null; if(view.kind==='embed') showEmbed(null); setCity(t.dataset.city); });
 document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ state.filter=c.dataset.filter; document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); renderList(); refreshMarkers(); });
 
-/* ---------- route box ---------- */
+/* ---------- 이동 방법 ---------- */
 const fromSel=document.getElementById('from'), toSel=document.getElementById('to'), resEl=document.getElementById('result');
 function fillSelects(){
   const opt = p=>`<option value="${p.id}">${p.type==='hotel'?'🛏 ':(p.emoji||'')+' '}${esc(p.name)}</option>`;
@@ -327,63 +543,71 @@ function setRoute(a,b){
   state.from=a||''; state.to=b||''; state.mode=null;
   fromSel.value=state.from; toSel.value=state.to;
   const A=byId[state.from], B=byId[state.to];
-  if(A&&B&&A.city===B.city&&A.city!==state.city){ state.city=A.city; document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===A.city)); renderList(); refreshMarkers(); }
+  if(A&&B&&A.city===B.city&&A.city!==state.city){ state.city=A.city; document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===A.city)); renderList(); }
+  refreshMarkers();
   renderRoute();
   try{ history.replaceState(null,'', state.from||state.to ? `#from=${state.from}&to=${state.to}` : location.pathname); }catch(e){}
   if(a && b) document.getElementById('scroll').scrollTo({top:0,behavior:'smooth'});
 }
-function renderRoute(){
+async function renderRoute(){
   const a=byId[state.from], b=byId[state.to];
-  if(!a||!b||a.id===b.id){ if(view.kind==='route'){ const c=CITY[state.city]; showPins(c.center[0],c.center[1],c.zoom); } }
-  if(!a||!b){ resEl.innerHTML = a||b ? '<p class="note">출발지와 도착지를 모두 고르세요. 리스트의 표 행을 눌러도 바로 경로가 나와요.</p>' : ''; return; }
-  if(a.id===b.id){ resEl.innerHTML='<p class="note">출발지와 도착지가 같아요.</p>'; return; }
-  const r0=R[`${a.id}|${b.id}`], rev=R[`${b.id}|${a.id}`];
-  const r = r0 ? {...r0} : (rev && rev.walk ? {o:a.id,d:b.id,walk:rev.walk,walkAt:rev.walkAt,walkFromReverse:true} : null);
-  let revNote='';
-  if(r && (!r.transit || r.transit.incomplete)){
-    delete r.transit;
-    const rt = rev && rev.transit && !rev.transit.incomplete && !rev.transit.walkOnly ? rev.transit : null;
-    if(rt){ const ls=[...new Set((rt.legs||[]).filter(l=>l.mode==='ride').map(l=>l.line))];
-      revNote=`<div class="warn" style="margin-bottom:8px">이 방향의 대중교통은 아직 조회하지 못했어요. 참고로 <b>반대 방향(${esc(b.name)} → ${esc(a.name)})</b> 조회값은 ${fmtMin(rt.total)} · ${esc(ls.join(' → ')||'—')} · ${fmtYen(rt.fare)} 이에요. 정확한 경로는 아래 Google 지도 버튼으로 확인하세요.</div>`; }
+  if(!a||!b||a.id===b.id){
+    if(view.kind==='embed') showEmbed(null);
+    resEl.innerHTML = !a&&!b ? '' : a&&b ? '<p class="note">출발지와 도착지가 같아요.</p>' : '<p class="note">출발지와 도착지를 모두 고르세요. 숙소·가게 카드의 표 행을 눌러도 바로 경로가 나와요.</p>';
+    if(state.sel && byId[state.sel].type==='hotel') showHotelRanks(byId[state.sel]);
+    else { newGen(); if(map) clearOverlays(); renderBar(); }
+    return;
   }
-  const links=`<div class="links"><a class="btn small" target="_blank" rel="noopener" href="${gmap(a,b,'transit')}">Google 지도에서 최신 대중교통 경로</a><a class="btn small" target="_blank" rel="noopener" href="${gmap(a,b,'walking')}">도보 경로</a></div>`;
-  if(!r){
-    resEl.innerHTML=`<div class="warn">이 구간은 미리 조회해 둔 경로가 없어요${a.type==='spot'||b.type==='spot'?' (관광지 구간은 미리 조회하지 않았어요)':(a.candidate||b.candidate?' (지점 미확정 후보 가게는 경로를 미리 조회하지 않았어요)':'')}. 오른쪽 지도에 Google 실시간 경로가 표시되고, 아래 버튼으로 자세히 볼 수 있어요.</div>${links}`;
-    view={kind:'route',a,b,mode:'transit'}; renderMap(); return;
-  }
-  const t=r.transit, w=r.walk && Number.isFinite(r.walk.min) ? r.walk : null;
-  const transitUseful = t && !t.walkOnly && !t.incomplete && Array.isArray(t.legs) && t.legs.some(l=>l.mode==='ride');
-  if(!state.mode) state.mode = transitUseful && !(w && w.min<=15) ? 'transit' : 'walk';
-  if(!transitUseful) state.mode='walk';
-  let h=revNote+'<div class="modes">';
-  h+=`<button class="mode" data-mode="walk" aria-pressed="${state.mode==='walk'}"><small>🚶 도보</small><b>${w?fmtMin(w.min):'미확인'}</b><small>${w?fmtDist(w.m):''}</small></button>`;
-  if(transitUseful) h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 대중교통</small><b>${fmtMin(t.total)}</b><small>${fmtYen(t.fare)}</small></button>`;
-  else h+=`<button class="mode" disabled style="opacity:.6"><small>🚇 대중교통</small><b>—</b><small>${t&&t.walkOnly?'가까워서 도보 추천':'미확인'}</small></button>`;
-  h+='</div>';
+  const seq=newGen();
+  const wk = WALK[`${a.id}|${b.id}`];
+  // 기본은 Google 지도 실시간 대중교통. 가까운 구간(도보 12분 이하)만 도보로 시작
+  if(!state.mode){ state.modeAuto=true; state.mode = (wk && Number.isFinite(wk.min) && wk.min<=12) ? 'walk' : 'transit'; }
+  const links=`<div class="links"><a class="btn small primary" target="_blank" rel="noopener" href="${gdir(a,b,'transit')}">Google 지도 앱에서 지하철 경로 열기</a><a class="btn small" target="_blank" rel="noopener" href="${gdir(a,b,'walking')}">도보 경로 열기</a></div>`;
+  const draw = ()=>{
+    const w = WALK[`${a.id}|${b.id}`];
+    let h='<div class="modes">';
+    h+=`<button class="mode" data-mode="walk" aria-pressed="${state.mode==='walk'}"><small>🚶 도보 (실시간)</small><b>${w&&Number.isFinite(w.min)?fmtMin(w.min):(w&&w.err?'—':'계산 중…')}</b><small>${w&&w.m?fmtDist(w.m):(w&&w.err?esc(w.err):'')}</small></button>`;
+    h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 지하철·버스 (실시간)</small><b>Google 지도</b><small>시간·노선·요금은 지도에 표시</small></button>`;
+    h+='</div>';
+    if(state.mode==='transit'){
+      h+=`<p class="note">오른쪽 지도는 <b>Google 지도 길찾기 화면을 그대로</b> 띄운 거예요. 지금 시각 출발 기준으로 Google이 계산한 지하철·버스 경로, 소요시간, 요금이 지도 위 상자에 나와요. 상자의 경로를 누르면 다른 경로도 볼 수 있어요.</p>`;
+    } else if(w && Number.isFinite(w.min)){
+      h+=`<ol class="steps"><li class="step"><span class="ic">🚶</span><div>${esc(b.name)}까지 걷기<div class="meta">${fmtMin(w.min)} · ${fmtDist(w.m)}</div></div></li></ol><p class="note">도보: Google Routes API 실시간 계산 (${esc(fmtAt(w.at))}). 지도에 초록 선으로 표시했어요.</p>`;
+    } else if(w && w.err){ h+=`<div class="warn">도보 경로를 계산하지 못했어요 (${esc(w.err)}).</div>`; }
+    h+=links;
+    resEl.innerHTML=h;
+    resEl.querySelectorAll('.mode[data-mode]').forEach(m=>m.onclick=()=>{ state.mode=m.dataset.mode; state.modeAuto=false; renderRoute(); });
+  };
+  draw();
   if(state.mode==='transit'){
-    h+='<ol class="steps">'+t.legs.map((l,i)=>{
-      if(l.mode==='walk') return `<li class="step"><span class="ic">🚶</span><div>${esc(i===t.legs.length-1?b.name:l.to)}까지 걷기<div class="meta">약 ${fmtMin(l.min)}${l.m?` · ${fmtDist(l.m)}`:''}</div></div></li>`;
-      if(l.mode!=='ride') return `<li class="step"><span class="ic">❔</span><div>${esc(l.from)} → ${esc(l.to)}<div class="meta">구간 정보 해석 불가 — Google 지도에서 확인</div></div></li>`;
-      const c=lineColor(l.line);
-      return `<li class="step"><span class="ic" style="background:${c}22">🚇</span><div><span class="badge" style="background:${c}">${esc(l.line)}</span><div style="margin-top:4px"><b>${esc(l.from)}</b> 승차 → <b>${esc(l.to)}</b> 하차</div><div class="meta">${fmtMin(l.min)}${l.nonstop?' · 무정차':(l.stops?` · ${l.stops}개 역`:'')}${l.lineUnverified?' · 노선명 원문 그대로':''}</div></div></li>`;
-    }).join('')+'</ol>';
-    const alts=(t.options||[]).slice(1);
-    if(alts.length) h+=`<div class="alts"><b>다른 방법</b><ul style="margin:4px 0 0;padding-left:16px">${alts.map(o=>`<li>${fmtMin(o.min)} · ${esc(o.lines.join(' → ')||'—')}</li>`).join('')}</ul></div>`;
-  } else if(w){
-    h+=`<ol class="steps"><li class="step"><span class="ic">🚶</span><div>${esc(b.name)}까지 걷기<div class="meta">${fmtMin(w.min)} · ${fmtDist(w.m)}${w.via?` · ${esc(w.via)}`:''}${r.walkFromReverse?' · 반대 방향으로 조회한 도보값':''}</div></div></li></ol>`;
+    if(map) clearOverlays();
+    showEmbed(`https://www.google.com/maps?saddr=${a.lat},${a.lng}&daddr=${b.lat},${b.lng}&dirflg=r&hl=ko&output=embed`);
+    if(!wk || wk.err) walkMatrix([a],[b]).then(()=>{ if(seq!==gen) return; const w=WALK[`${a.id}|${b.id}`];
+      if(state.modeAuto && w && Number.isFinite(w.min) && w.min<=12){ state.mode='walk'; renderRoute(); } else draw(); });
+    return;
   }
-  const at = (state.mode==='transit'?t&&t.at:r.walkAt);
-  h+=`<p class="note">시간·노선·요금 출처: Google 지도 길찾기 (${esc(fmtAt(at))} 조회, 조회 시점 출발 기준). 요금은 Google이 표시한 금액이며 적용 조건(IC/승차권·성인 등)은 표시되지 않았어요. 요일·시간대에 따라 달라질 수 있어요.<br>오른쪽 지도의 경로선은 Google 지도가 <b>지금 시각 기준</b>으로 실시간 표시하는 길찾기라, 위 저장값과 조금 다를 수 있어요.</p>`;
-  h+=links;
-  resEl.innerHTML=h;
-  resEl.querySelectorAll('.mode[data-mode]').forEach(m=>m.onclick=()=>{state.mode=m.dataset.mode; renderRoute();});
-  view={kind:'route',a,b,mode:state.mode}; renderMap();
+  showEmbed(null);
+  try{
+    const v = await walkRoute(a,b);
+    if(seq!==gen) return;
+    draw();
+    if(map){
+      clearOverlays();
+      const path = v.enc ? google.maps.geometry.encoding.decodePath(v.enc) : [{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}];
+      overlays.push(new google.maps.Polyline({map, path, strokeColor:'#11875d', strokeOpacity:.95, strokeWeight:5, zIndex:3}));
+      const bb=new google.maps.LatLngBounds(); path.forEach(x=>bb.extend(x)); map.fitBounds(bb,60); renderBar();
+    }
+  }catch(err){ if(seq!==gen) return; WALK[`${a.id}|${b.id}`]={err:String(err.message||err)}; draw(); }
 }
 
 /* ---------- init ---------- */
 fillSelects(); setCity('osaka');
 const hp=new URLSearchParams(location.hash.slice(1));
 if(hp.get('from')||hp.get('to')) setRoute(byId[hp.get('from')]?hp.get('from'):'', byId[hp.get('to')]?hp.get('to'):'');
+const s=document.createElement('script');
+s.src=`https://maps.googleapis.com/maps/api/js?key=${GKEY}&v=weekly&language=ko&region=JP&loading=async&callback=__initMap`;
+s.async=true; s.onerror=()=>{ document.getElementById('gmap').innerHTML='<div class="mapmsg">Google 지도 스크립트를 불러오지 못했어요.</div>'; };
+document.head.appendChild(s);
 })();
 </script>
 </body>

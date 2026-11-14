@@ -1,6 +1,14 @@
 # 오사카·교토 맛집 지도
 
-오사카 거주자가 유튜브 댓글로 추천한 맛집과 숙소 위치를 지도에 표시하고, 출발/도착을 골라 이동 방법(도보·대중교통, 소요시간, 요금)을 확인하는 정적 페이지.
+오사카 거주자가 유튜브 댓글로 추천한 맛집과 숙소 위치를 지도에 표시하고, 출발/도착을 골라 이동 방법을 확인하는 정적 페이지.
+
+## 2026-11-14 Google Maps Platform 전환
+- 지도: Maps JavaScript API (AdvancedMarkerElement, mapId DEMO_MAP_ID, gestureHandling greedy). 키는 index.html의 GKEY — 콘솔에서 HTTP 리퍼러(nofaildesignoffice.github.io/*, 127.0.0.1:8766/*) + API 제한(Maps JavaScript / Routes / Places (New)).
+- 도보: Routes API computeRouteMatrix / computeRoutes 를 브라우저에서 실시간 호출.
+- 지하철·버스: Routes API는 일본 대중교통을 반환하지 않음(2026-11-14 확인: 오사카·도쿄 TRANSIT → 빈 응답/도보만, 서울·런던은 정상). 그래서 google.com/maps?…&dirflg=r&output=embed 화면을 지도 영역에 실시간으로 띄움. data/routes.js(미리 수집한 값)는 더 이상 페이지에서 쓰지 않음.
+- 순위 ①②③: 맛집 카드에서 지정, localStorage('ranks')에 저장(기기별). 데이터 기본값은 places의 rank 필드.
+- 숙소 선택 → 순위 맛집까지 순위 색 점선 + 도보 시간 라벨, 순위별 평균 도보 시간.
+- 장소 정보: Places API (New) searchText 결과 중 우리 좌표 250m 이내만 채택 → 사진(최대 4장, 작성자 표시)·평점·영업시간·홈페이지·전화·Google 지도(예약) 링크.
 
 - 지도: Google 내 지도(My Maps) 임베드 — https://www.google.com/maps/d/viewer?mid=1HcytTfswQ8eT6mKa0_MPwfZjCFWzHgI
   - 핀 데이터는 Google 시트(mymaps/places.tsv 를 붙여넣음)에서 가져옴. 숙소 추가 시 시트에 행 추가 → 내 지도 레이어 '데이터 업데이트'
