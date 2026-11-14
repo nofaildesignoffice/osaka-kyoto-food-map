@@ -948,7 +948,7 @@ function drawNotif(){
   const list = ev.filter(e=>notifTab==='all'||cat(e)===notifTab);
   const run = NOTI.running.map(r=>`<div class="nrow"><b style="color:#1a5fb4">⏳ AI 분석 중</b> <span class="meta">${TYPE_LABEL[r.cat]||''}</span><div class="meta">입력: “${esc(r.text)}”</div><div class="meta">${Object.entries(r.steps||{}).map(([k,v])=>`${esc(k)}: ${esc(v)}`).join(' · ')||'시작함'}</div></div>`).join('');
   modalEl.querySelector('.modal').innerHTML = `
-    <div class="modal-h"><h2>알림</h2><p>${NOTI.bridgeOk?'🤖 AI 연결됨':'🤖 AI 꺼짐 — 추가 결과는 GitHub 반영 후(1~2분) 보여요'}</p>
+    <div class="modal-h"><h2>알림</h2><p>${NOTI.bridgeOk?'🤖 AI 연결됨 (이 PC)':NOTI.bridgeOk===false?'🤖 AI 꺼짐 — 추가 결과는 GitHub 반영 후(1~2분) 보여요':'추가·실패 알림은 AI를 실행한 PC에서 올린 기록이에요 (반영까지 1~2분)'}</p>
       <div class="seg">${[['all','전체'],['added','추가'],['failed','실패'],['deleted','삭제']].map(([k,l])=>`<button data-ntab="${k}" aria-pressed="${k===notifTab}">${l} ${cnt(k)}</button>`).join('')}</div></div>
     <div class="modal-b">${run}${list.length?list.map(evHTML).join(''):(run?'':'<div class="empty">알림이 없어요.</div>')}</div>
     <div class="modal-f"><span class="meta"></span><button class="btn" data-cancel>닫기</button></div>`;
@@ -987,7 +987,7 @@ function openAddModal(){
       <div class="modal-f"><span class="meta"></span>${ai===false?'<button class="btn" data-plain>AI 없이 구글 검색</button>':''}<button class="btn" data-cancel>닫기</button><button class="btn primary" data-go ${ai?'':'disabled'}>추가하기</button></div>`;
   };
   openModal(''); modalEl.dataset.kind='add'; document.addEventListener('keydown', escClose);
-  bridge('/health').then(h=>{ NOTI.bridgeOk=!!(h.ok&&h.claude&&h.codex); if(h.ok) lsSet('bridgeUsed',true); }).catch(()=>{ NOTI.bridgeOk=false; }).finally(()=>{ if(modalEl&&modalEl.dataset.kind==='add') draw(); });
+  bridge('/health').then(h=>{ NOTI.bridgeOk=!!(h.ok&&h.claude&&h.codex); if(h.ok){ const first=!lsGet('bridgeUsed',false); lsSet('bridgeUsed',true); if(first) pollBridge(); } }).catch(()=>{ NOTI.bridgeOk=false; }).finally(()=>{ if(modalEl&&modalEl.dataset.kind==='add') draw(); });
   modalEl.addEventListener('input',e=>{ if(e.target.id==='addText') input=e.target.value; });
   modalEl.addEventListener('change',e=>{ if(e.target.id==='addCat') cat=e.target.value; });
   modalEl.addEventListener('click', async e=>{
