@@ -211,6 +211,24 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .nlink{display:block;border:0;background:none;padding:3px 0;font:inherit;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px}
 .lpin{display:inline-block;width:12px;height:16px;vertical-align:-3px;margin-right:4px;background:var(--c);border:1.5px solid var(--d);border-radius:50% 50% 50% 0;transform:rotate(-45deg) scale(.85);box-sizing:border-box}
 .ico.has-thumb{box-shadow:none}
+.ctl{position:relative;margin-top:12px}
+.ctlbtn{display:flex;align-items:center;gap:9px;width:100%;height:44px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;text-align:left}
+.ctlbtn .ctlk{flex:none;font-size:11.5px;font-weight:700;color:var(--ink3)}
+.ctlbtn .ctlv{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ctlbtn>svg{flex:none;opacity:.55;transition:transform .16s}
+.ctl.open .ctlbtn{border-color:var(--ink)}
+.ctl.open .ctlbtn>svg{transform:rotate(180deg)}
+.ctlpanel{position:absolute;left:0;right:0;top:calc(100% + 7px);z-index:60;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.10);padding:4px 16px;opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s,transform .14s,visibility .14s}
+.ctl.open .ctlpanel{opacity:1;visibility:visible;transform:none}
+.ctlpanel .frow{display:flex;flex-direction:column;gap:8px;padding:12px 0}
+.ctlpanel .frow+.frow{border-top:1px solid var(--line)}
+.ctlpanel .fkey{font-size:11.5px;font-weight:700;color:var(--ink3);letter-spacing:.02em}
+.ctlpanel .fval{display:flex;flex-wrap:wrap;gap:8px}
+.ctlpanel .tab,.ctlpanel .chip{flex:none;padding:7px 14px;border-radius:999px;border:1px solid #e9e9e9;background:#fff;color:var(--ink3);font-size:13px;font-weight:500;cursor:pointer}
+.ctlpanel .tab:hover,.ctlpanel .chip:hover{border-color:#c8c8c8}
+.ctlpanel .tab[aria-selected=true],.ctlpanel .chip[aria-pressed=true]{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);font-weight:600}
+.bell .badge[hidden]{display:none}
+.osm-attr{position:absolute;left:6px;bottom:26px;z-index:5;font-size:10px;color:#555;background:rgba(255,255,255,.75);padding:1px 5px;border-radius:4px;pointer-events:none}
 </style>
 </head>
 <body>
@@ -228,17 +246,12 @@ table.near tr[data-route]:hover td{background:var(--bg)}
         <span><i class="lpin" style="--c:var(--pin-spot);--d:var(--pin-spot-d)"></i>관광지</span>
         <span><i class="dot zone"></i>유명 지역</span>
       </div>
-      <div class="tabs" role="tablist">
-        <button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button>
-        <button class="tab" role="tab" data-city="kyoto" aria-selected="false">교토</button>
-        <button class="tab" role="tab" data-city="nara" aria-selected="false">나라</button>
-      </div>
-      <div class="chips">
-        <button class="chip" data-filter="all" aria-pressed="true">전체</button>
-        <button class="chip" data-filter="food" aria-pressed="false">맛집</button>
-        <button class="chip" data-filter="ranked" aria-pressed="false">순위 맛집</button>
-        <button class="chip" data-filter="hotel" aria-pressed="false">숙소</button>
-        <button class="chip" data-filter="spot" aria-pressed="false">관광지</button>
+      <div class="ctl" id="viewCtl">
+        <button class="ctlbtn" type="button" aria-expanded="false" aria-haspopup="true"><span class="ctlk">보기</span><span class="ctlv" id="ctlv">오사카 · 전체</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="ctlpanel" role="dialog" aria-label="지역·종류 선택">
+          <div class="frow"><div class="fkey">지역</div><div class="fval" role="tablist"><button class="tab" role="tab" data-city="osaka" aria-selected="true">오사카</button><button class="tab" role="tab" data-city="kyoto" aria-selected="false">교토</button><button class="tab" role="tab" data-city="nara" aria-selected="false">나라</button></div></div>
+          <div class="frow"><div class="fkey">종류</div><div class="fval"><button class="chip" data-filter="all" aria-pressed="true">전체</button><button class="chip" data-filter="food" aria-pressed="false">맛집</button><button class="chip" data-filter="ranked" aria-pressed="false">순위 맛집</button><button class="chip" data-filter="hotel" aria-pressed="false">숙소</button><button class="chip" data-filter="spot" aria-pressed="false">관광지</button></div></div>
+        </div>
       </div>
     </div>
     <div class="scroll" id="scroll">
@@ -253,11 +266,6 @@ table.near tr[data-route]:hover td{background:var(--bg)}
         <div class="result" id="result"></div>
       </section>
       <div id="list"></div>
-      <p class="credit">
-        도보 시간·거리: 누를 때마다 Google Routes API로 실시간 계산. 지하철+도보: Google API가 일본 대중교통을 제공하지 않아(Google 공식 FAQ) NAVITIME 경로 탐색 API로 누를 때 조회 — 철도는 평균 소요시간 기준, 버스 미포함. 다음 열차·지연은 구글 지도 앱 버튼으로.<br>
-        가게 사진·평점·영업시간·홈페이지: Google 지도 장소 정보(Places API)를 카드를 열 때 불러옴. 순위(①②③)는 이 기기 브라우저에 저장돼요.<br>
-        관광지 좌표: 2026-11-12 Google 지도 확인. 지역 음영 경계 데이터 © OpenStreetMap contributors (ODbL).
-      </p>
     </div>
   </aside>
   <main class="mapwrap" id="mapwrap">
@@ -476,7 +484,7 @@ window.__initMap = async function(){
 };
 window.gm_authFailure = function(){ document.getElementById('gmap').innerHTML='<div class="mapmsg">Google 지도 키 인증에 실패했어요. (키 제한 설정에 이 사이트 주소와 Maps JavaScript API가 들어 있는지 확인)</div>'; };
 
-function applyShade(){ if(!map) return; zoneObjs.forEach(f=>map.data.overrideStyle(f,{visible:shade})); zoneLabels.forEach(l=>l.map=shade?map:null); }
+function applyShade(){ let at=document.getElementById('osmAttr'); if(!at){ at=document.createElement('div'); at.id='osmAttr'; at.className='osm-attr'; at.textContent='지역 경계 © OpenStreetMap'; document.getElementById('gmap').parentElement.appendChild(at); } at.hidden=!shade; if(!map) return; zoneObjs.forEach(f=>map.data.overrideStyle(f,{visible:shade})); zoneLabels.forEach(l=>l.map=shade?map:null); }
 const RANK_ICON = {1:'👑', 2:'🥈', 3:'🥉'};
 const PIN_COL = {food:['var(--pin-food)','var(--pin-food-d)'], hotel:['var(--pin-hotel)','var(--pin-hotel-d)'], spot:['var(--pin-spot)','var(--pin-spot-d)']};
 // GPS 핀 모양: 물방울 + 가운데 흰 원 (끝점이 실제 위치)
@@ -523,7 +531,7 @@ function rankedFoods(h){ return P.filter(q=>q.type==='food' && q.city===h.city &
 const avg = xs => xs.length ? xs.reduce((s,x)=>s+x,0)/xs.length : null;
 function rankSummaryHTML(h){
   const foods = rankedFoods(h);
-  if(!foods.length) return `<div class="empty" style="margin-top:8px">아래 맛집 카드의 <b>①②③</b> 버튼으로 순위를 매기면, 이 숙소에서 순위별 맛집까지 선을 그리고 평균 시간을 보여줘요.</div>`;
+  if(!foods.length) return `<div class="empty" style="margin-top:8px">아래 맛집 카드의 <b>👑🥈🥉</b> 버튼으로 순위를 매기면, 이 숙소에서 순위별 맛집까지 선을 그리고 평균 시간을 보여줘요.</div>`;
   let h2='<div class="ranksum">';
   for(const r of [1,2,3]){ const fs=foods.filter(q=>rankOf(q)===r);
     if(!fs.length){ h2+=`<div><span class="rk r${r}">${r}</span> 순위<br><span class="meta">지정 없음</span></div>`; continue; }
@@ -636,7 +644,7 @@ function renderList(){
       const rest = foods.filter(q=>!rankOf(q)); const groups=[...new Set(rest.map(x=>x.group))];
       if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
       groups.forEach(g=>{ const fs=rest.filter(x=>x.group===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
-    } else if(!ranked.length) h += `<div class="sec">순위 맛집 0</div><div class="empty">맛집 카드 오른쪽의 ①②③ 버튼으로 순위를 매겨 보세요.</div>`;
+    } else if(!ranked.length) h += `<div class="sec">순위 맛집 0</div><div class="empty">맛집 카드 오른쪽의 👑🥈🥉 버튼으로 순위를 매겨 보세요.</div>`;
   }
   if((f==='all'||f==='spot') && spots.length) h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
   listEl.innerHTML = h;
@@ -676,10 +684,17 @@ function select(id, fromMap){
 function setCity(c, keepRoute){
   state.city=c;
   if(!keepRoute){ const a=byId[state.from], b=byId[state.to]; if((a&&a.city!==c)||(b&&b.city!==c)) setRoute('',''); }
-  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===c));
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.city===c)); if(typeof updCtl==='function') updCtl();
   renderList(); refreshMarkers();
   if(!keepRoute && !(state.from&&state.to)){ clearOverlays(); renderBar(); panTo(CITY[c].center[0], CITY[c].center[1], CITY[c].zoom); }
 }
+const viewCtl=document.getElementById('viewCtl');
+function updCtl(){ const c=document.querySelector('.tab[aria-selected=true]'), f=document.querySelector('.chip[aria-pressed=true]');
+  document.getElementById('ctlv').textContent=`${c?c.textContent:''} · ${f?f.textContent:''}`; }
+viewCtl.querySelector('.ctlbtn').onclick=()=>{ const o=!viewCtl.classList.contains('open'); viewCtl.classList.toggle('open',o); viewCtl.querySelector('.ctlbtn').setAttribute('aria-expanded',o); };
+document.addEventListener('click',e=>{ if(!viewCtl.contains(e.target) && viewCtl.classList.contains('open')){ viewCtl.classList.remove('open'); viewCtl.querySelector('.ctlbtn').setAttribute('aria-expanded',false); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && viewCtl.classList.contains('open')){ viewCtl.classList.remove('open'); viewCtl.querySelector('.ctlbtn').focus(); } });
+viewCtl.querySelector('.ctlpanel').addEventListener('click',()=>setTimeout(updCtl));
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ state.sel=null; if(view.kind==='embed') showEmbed(null); setCity(t.dataset.city); });
 document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ state.filter=c.dataset.filter; document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); renderList(); refreshMarkers(); });
 
