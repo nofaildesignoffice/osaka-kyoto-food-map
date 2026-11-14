@@ -32,11 +32,11 @@
 - 저장 위치: localStorage('added', 'removed') — **기기마다 따로**. 일행 모두에게 반영하려면 data/*.js에 넣어 커밋해야 함.
 - 리스트 카드 아이콘 자리에 Google 지도 첫 사진(화면에 보일 때만 조회, 250m 일치 확인, Place ID는 보관·사진 이름은 3일 캐시). USJ·신사이바시스지처럼 넓은 장소는 일치하는 사진이 없어 아이콘 유지.
 
-## 2026-11-14 AI 장소 추가 (Claude + Codex 교차 확인)
-- 내 PC에서 `start_ai_bridge.bat` 실행 → `tools/ai_bridge.py`가 127.0.0.1:8777 에서 대기 (사이트 주소 github.io / 127.0.0.1:8766 에서 온 요청만 받음).
-- + 추가 모달 → 메모를 브리지로 보냄 → Claude CLI(`claude -p`, WebSearch/WebFetch만 허용)와 Codex CLI(`codex exec -s read-only`, 웹 검색)가 같은 질문·같은 JSON 형식으로 동시에 분석.
-- 각 AI 후보의 search_query를 Google Places(간사이 범위)로 확인 → 같은 Place ID를 두 AI가 가리키면 ✅, 한쪽만이면 ⚠️, AI가 말한 이름과 Google 이름이 다르면 ❌(추가 불가), Google에서 못 찾으면 '확인 안 됨'(추가 불가).
-- 이름·주소·좌표·사진은 Google 값만 저장. AI 근거(출처 URL)는 카드에 표시.
-- + 를 누르면 data/added.js 에 기록 후 git commit·push → 1~2분 뒤 모든 사람 지도에 반영 (그 사이에는 이 기기에 먼저 표시).
-- 짧은 구글 지도 공유 링크(maps.app.goo.gl)는 브리지가 서버에서 풀어서 씀.
-- 브리지가 꺼져 있으면 'AI 없이 구글 검색'(이 기기에만 저장)만 가능. 테스트: `AI_BRIDGE_DRYRUN=1` 이면 git 생략.
+## 2026-11-14 AI 장소 자동 추가 (Claude + Codex 교차 확인) + 알림
+- 내 PC에서 `start_ai_bridge.bat` 실행 → `tools/ai_bridge.py`가 127.0.0.1:8777 에서 대기 (github.io / 127.0.0.1:8766 에서 온 요청만 받음).
+- + 추가: 카테고리 + 메모 입력 → 브리지로 보내고 창은 닫힘(백그라운드 진행). Claude CLI(`claude -p`, WebSearch/WebFetch만)와 Codex CLI(`codex exec -s read-only`, 웹 검색)가 같은 질문·같은 JSON 형식으로 동시에 분석.
+- 각 AI 후보를 Google Places(간사이 범위)로 확인. **두 AI가 같은 Place ID를 가리킨 곳만 자동 추가**(폐업·이미 있는 곳 제외) → data/added.js + data/events.js 기록 후 git push.
+- 그 외(한쪽만·이름 불일치·Google에서 못 찾음·AI 실패)는 '추가 실패' 알림. 한쪽만 찾은 후보는 알림에서 지도 확인 후 '그래도 추가' 가능(/force).
+- 🔔 알림 버튼: 빨간 숫자 = 안 읽은 알림, 파란 ⋯ = AI 분석 중. 탭: 전체/추가/실패/삭제. 추가·실패는 data/events.js(모두 공유), 삭제·복원은 이 기기 localStorage('localEvents').
+- 이름·주소·좌표·사진은 Google 값만 저장. AI 근거(출처 URL)는 카드와 알림에 표시.
+- 브리지를 한 번이라도 쓴 기기만 127.0.0.1에 연결 시도(다른 사람 폰에 로컬 네트워크 권한 창이 뜨지 않게). 테스트: `AI_BRIDGE_DRYRUN=1` 이면 git 생략.

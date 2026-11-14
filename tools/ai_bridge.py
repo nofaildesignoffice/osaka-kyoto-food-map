@@ -190,13 +190,66 @@ def analyze(job):
     order = {"both": 0, "one": 1, "mismatch": 2}
     cands.sort(key=lambda c: (order[c["level"]], -(c["rating"] or 0)))
     job["steps"]["Google 지도 확인"] = f"완료 (확인된 장소 {len(cands)}곳)"
-    job["result"] = {"cands": cands, "unresolved": unresolved, "bothRan": both_ran,
-                     "notes": {a: (res[a] or {}).get("note", "") for a in ("Claude", "Codex") if res.get(a)}}
+    both_ran = all(res.get(a) for a in ("Claude", "Codex"))
+    notes = {a: (res[a] or {}).get("note", "") for a in ("Claude", "Codex") if res.get(a)}
+    job["result"] = {"cands": cands, "unresolved": unresolved, "bothRan": both_ran, "notes": notes}
+
+    # ---- 자동 추가: 두 AI가 같은 Google 장소를 가리킨 것만 ----
+    job["steps"]["자동 추가"] = "저장 중"
+    existing = existing_coords()
+    added, dup, others = [], [], []
+    for c in cands:
+        if c["level"] == "both" and c.get("status") != "CLOSED_PERMANENTLY":
+            if is_existing(c, existing): dup.append(c["name"])
+            else: added.append(make_record(job, c, cat)); existing.append((c["lat"], c["lng"], c["pid"]))
+        else: others.append(c)
+    base = {"at": now_iso(), "text": job["text"], "cat": cat, "job": job["id"]}
+    evs = []
+    if added:
+        evs.append({**base, "id": uuid.uuid4().hex, "type": "added", "places": [brief(r) for r in added],
+                    "note": ("이미 지도에 있음: " + ", ".join(dup)) if dup else ""})
+    if not added:
+        if dup: reason = "이미 지도에 있는 장소예요: " + ", ".join(dup)
+        elif not both_ran: reason = "한쪽 AI가 실패해서 교차 확인을 못 했어요."
+        elif not cands: reason = "AI가 찾은 장소를 Google 지도에서 확인하지 못했어요. 일본어 이름이나 지점·동네를 더 적어 보세요."
+        else: reason = "두 AI의 답이 같은 장소로 모이지 않았어요. 아래 후보를 확인하고 맞으면 직접 추가하세요."
+        evs.append({**base, "id": uuid.uuid4().hex, "type": "duplicate" if dup and not others else "failed", "reason": reason,
+                    "cands": [slim(c) for c in others], "unresolved": unresolved[:6], "notes": notes, "steps": dict(job["steps"])})
+    st = save(added, evs, f"AI auto-add: {', '.join(r['name'] for r in added) or 'no match'} ({cat})")
+    job["steps"]["자동 추가"] = (f"{len(added)}곳 추가" if added else "추가 없음") + ("" if st else " (GitHub 업로드 실패)")
     job["status"] = "done"
-    log("job", job["id"], "done", [(c["name"], c["level"]) for c in cands])
+    log("job", job["id"], "done", [(c["name"], c["level"]) for c in cands], "added", [r["name"] for r in added])
 
 
-# ---------------- data/added.js 에 저장 + push ----------------
+def now_iso():
+    import datetime; return datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+def brief(r): return {k: r.get(k) for k in ("id", "gpid", "name", "nameJa", "city", "type", "verified")}
+def slim(c): return {k: c.get(k) for k in ("pid", "level", "votes", "name", "nameJa", "address", "lat", "lng", "types", "typeKo", "rating", "ratingCount", "photo", "mapsUri", "status", "ai")}
+
+def existing_coords():
+    out = []
+    for fn in ("places.js", "hotels.js", "spots.js", "added.js"):
+        p = os.path.join(ROOT, "data", fn)
+        if not os.path.exists(p): continue
+        s = open(p, encoding="utf-8").read()
+        for m in re.finditer(r'"lat":\s*(-?\d+\.\d+)[^{}]{0,400}?"lng":\s*(-?\d+\.\d+)', s): out.append((float(m.group(1)), float(m.group(2)), None))
+        for m in re.finditer(r'"gpid":\s*"([^"]+)"', s): out.append((None, None, m.group(1)))
+    return out
+
+def dist(a, b):
+    import math
+    R = 6371000; t = math.radians
+    h = math.sin(t(b[0]-a[0])/2)**2 + math.cos(t(a[0]))*math.cos(t(b[0]))*math.sin(t(b[1]-a[1])/2)**2
+    return 2*R*math.asin(math.sqrt(h))
+
+def is_existing(c, existing):
+    for lat, lng, pid in existing:
+        if pid and pid == c["pid"]: return True
+        if lat is not None and dist((lat, lng), (c["lat"], c["lng"])) < 25: return True
+    return False
+
+
+# ---------------- data/added.js · data/events.js 저장 + push ----------------
 def city_of(lat, lng):
     if lng > 135.76 and lat < 34.80: return "nara"
     if lat > 34.86: return "kyoto"
@@ -207,42 +260,63 @@ EMO = [("ramen", "🍜"), ("sushi", "🍣"), ("yakiniku", "🥩"), ("barbecue", 
        ("park", "🌳"), ("market", "🛍"), ("shopping", "🛍"), ("tourist_attraction", "📸")]
 def emoji_of(types, cat):
     if cat == "hotel": return ""
-    s = " ".join(types)
+    s = " ".join(types or [])
     for k, e in EMO:
         if k in s: return e
     return "📍" if cat == "spot" else "🍴"
 
-def read_added():
-    if not os.path.exists(ADDED_JS): return []
-    s = open(ADDED_JS, encoding="utf-8").read()
-    m = re.search(r"window\.ADDED\s*=\s*(\[.*\]);", s, re.S)
+def make_record(job_or_text, c, cat, forced=False):
+    text = job_or_text["text"] if isinstance(job_or_text, dict) else job_or_text
+    return {"id": "a-" + re.sub(r"[^A-Za-z0-9]", "", c["pid"])[-14:], "gpid": c["pid"], "type": cat, "city": city_of(c["lat"], c["lng"]),
+            "lat": round(c["lat"], 7), "lng": round(c["lng"], 7), "name": c["name"], "nameJa": c.get("nameJa", ""), "address": c.get("address", ""),
+            "area": c.get("typeKo", ""), "group": {"food": "AI로 추가한 맛집", "spot": "관광지", "hotel": ""}[cat], "emoji": emoji_of(c.get("types"), cat),
+            "origin": "ai", "typed": text[:300], "verified": c.get("votes", []), "forced": forced,
+            "aiEvidence": [{"ai": a["ai"], "evidence": (a.get("evidence") or "")[:400]} for a in c.get("ai", [])],
+            "addedAt": time.strftime("%Y-%m-%d"), "notes": []}
+
+def read_js(path, var):
+    if not os.path.exists(path): return []
+    m = re.search(r"window\." + var + r"\s*=\s*(\[.*\]);", open(path, encoding="utf-8").read(), re.S)
     return json.loads(m.group(1)) if m else []
 
-def commit(job, idx, cat):
-    c = job["result"]["cands"][idx]
-    if c["level"] == "mismatch": raise ValueError("이름이 맞지 않는 후보는 추가할 수 없어요")
-    rec = {"id": "a-" + re.sub(r"[^A-Za-z0-9]", "", c["pid"])[-14:], "gpid": c["pid"], "type": cat, "city": city_of(c["lat"], c["lng"]),
-           "lat": round(c["lat"], 7), "lng": round(c["lng"], 7), "name": c["name"], "nameJa": c["nameJa"], "address": c["address"],
-           "area": c["typeKo"], "group": {"food": "AI로 추가한 맛집", "spot": "관광지", "hotel": ""}[cat], "emoji": emoji_of(c["types"], cat),
-           "origin": "ai", "typed": job["text"][:300], "verified": c["votes"],
-           "aiEvidence": [{"ai": a["ai"], "evidence": (a.get("evidence") or "")[:400]} for a in c["ai"]],
-           "addedAt": time.strftime("%Y-%m-%d"), "notes": []}
+EVENTS_JS = os.path.join(ROOT, "data", "events.js")
+def save(records, events, msg):
+    """added.js·events.js 에 기록하고 commit·push. 성공하면 True."""
     with GIT_LOCK:
-        cur = read_added()
-        if any(x.get("gpid") == rec["gpid"] for x in cur): return rec, "already"
-        cur.append(rec)
-        body = "// AI(Claude+Codex) 분석 → Google Places 확인 후 추가한 장소. tools/ai_bridge.py 가 자동 기록.\nwindow.ADDED = " + json.dumps(cur, ensure_ascii=False, indent=1) + ";\n"
-        open(ADDED_JS, "w", encoding="utf-8", newline="\n").write(body)
-        if os.environ.get("AI_BRIDGE_DRYRUN"): log("DRYRUN: git 생략"); return rec, "pushed"
+        cur = read_js(ADDED_JS, "ADDED"); have = {x.get("gpid") for x in cur}
+        for r in records:
+            if r["gpid"] not in have: cur.append(r); have.add(r["gpid"])
+        open(ADDED_JS, "w", encoding="utf-8", newline="\n").write(
+            "// AI(Claude+Codex) 분석 → Google Places 확인 후 자동 추가한 장소. tools/ai_bridge.py 가 기록.\nwindow.ADDED = " + json.dumps(cur, ensure_ascii=False, indent=1) + ";\n")
+        ev = read_js(EVENTS_JS, "EVENTS"); ev.extend(events); ev = ev[-200:]
+        open(EVENTS_JS, "w", encoding="utf-8", newline="\n").write(
+            "// 장소 추가 알림 (추가됨·실패). tools/ai_bridge.py 가 기록.\nwindow.EVENTS = " + json.dumps(ev, ensure_ascii=False, indent=1) + ";\n")
+        if os.environ.get("AI_BRIDGE_DRYRUN"): log("DRYRUN: git 생략"); return True
         g = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
-        g("add", "data/added.js")
-        g("commit", "-m", f"Add place via AI bridge: {rec['name']} ({cat}, verified by {'+'.join(rec['verified'])})\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>")
+        g("add", "data/added.js", "data/events.js")
+        g("commit", "-m", msg + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>")
         p = g("push")
-        if p.returncode != 0:
-            g("pull", "--rebase"); p = g("push")
-        pushed = p.returncode == 0
-    log("commit", rec["name"], "pushed" if pushed else "PUSH FAILED " + p.stderr[-200:])
-    return rec, "pushed" if pushed else "push-failed"
+        if p.returncode != 0: g("pull", "--rebase"); p = g("push")
+        if p.returncode != 0: log("PUSH FAILED", p.stderr[-300:])
+        return p.returncode == 0
+
+def force_add(event_id, idx):
+    ev = read_js(EVENTS_JS, "EVENTS")
+    e = next((x for x in ev if x.get("id") == event_id), None)
+    if not e or e.get("type") != "failed": raise ValueError("알림을 찾을 수 없어요")
+    c = (e.get("cands") or [])[idx]
+    if c["level"] == "mismatch": raise ValueError("이름이 맞지 않는 후보는 추가할 수 없어요")
+    if is_existing(c, existing_coords()): raise ValueError("이미 지도에 있는 장소예요")
+    r = make_record(e.get("text", ""), c, e.get("cat", "food"), forced=True)
+    with GIT_LOCK:
+        ev = read_js(EVENTS_JS, "EVENTS")
+        for x in ev:
+            if x.get("id") == event_id: x.setdefault("resolved", []).append(c["pid"])
+        open(EVENTS_JS, "w", encoding="utf-8", newline="\n").write(
+            "// 장소 추가 알림 (추가됨·실패). tools/ai_bridge.py 가 기록.\nwindow.EVENTS = " + json.dumps(ev, ensure_ascii=False, indent=1) + ";\n")
+    new_ev = {"id": uuid.uuid4().hex, "type": "added", "at": now_iso(), "text": e.get("text", ""), "cat": e.get("cat"), "places": [brief(r)], "note": "알림에서 직접 확인 후 추가 (AI 한쪽만 찾은 후보)"}
+    ok = save([r], [new_ev], f"Add place from notification: {r['name']}")
+    return r, new_ev, ok
 
 
 # ---------------- HTTP ----------------
@@ -267,6 +341,10 @@ class H(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._origin_ok(): return self._json(403, {"error": "origin"})
         if self.path == "/health": return self._json(200, {"ok": True, "claude": bool(CLAUDE_EXE and os.path.exists(CLAUDE_EXE)), "codex": bool(NODE and os.path.exists(CODEX_JS))})
+        if self.path == "/added": return self._json(200, {"added": read_js(ADDED_JS, "ADDED")})
+        if self.path == "/events":
+            running = [{"job": j["id"], "text": j["text"], "cat": j["cat"], "steps": j["steps"], "at": j.get("at")} for j in JOBS.values() if j["status"] == "running"]
+            return self._json(200, {"events": read_js(EVENTS_JS, "EVENTS"), "running": running})
         m = re.match(r"^/job/([a-f0-9]{32})$", self.path)
         if m and m.group(1) in JOBS:
             j = JOBS[m.group(1)]; return self._json(200, {k: j.get(k) for k in ("id", "status", "steps", "result", "error")})
@@ -282,20 +360,19 @@ class H(BaseHTTPRequestHandler):
             text = str(body.get("text", "")).strip()[:1500]
             if not text: return self._json(400, {"error": "empty"})
             jid = uuid.uuid4().hex
-            JOBS[jid] = {"id": jid, "status": "running", "text": text, "cat": cat, "steps": {}, "result": None}
+            JOBS[jid] = {"id": jid, "status": "running", "text": text, "cat": cat, "steps": {}, "result": None, "at": now_iso()}
             log("job", jid, cat, text[:80].replace("\n", " "))
             def run():
                 try: analyze(JOBS[jid])
-                except Exception as e: JOBS[jid]["status"] = "error"; JOBS[jid]["error"] = str(e)[:300]; log("job error", e)
+                except Exception as e:
+                    JOBS[jid]["status"] = "error"; JOBS[jid]["error"] = str(e)[:300]; log("job error", e)
+                    save([], [{"id": uuid.uuid4().hex, "type": "failed", "at": now_iso(), "text": text, "cat": cat, "job": jid, "reason": "분석 중 오류: " + str(e)[:200], "cands": []}], "AI add failed")
             threading.Thread(target=run, daemon=True).start()
             return self._json(200, {"id": jid})
-        if self.path == "/commit":
-            j = JOBS.get(str(body.get("job", "")))
-            if not j or j["status"] != "done": return self._json(400, {"error": "job not ready"})
-            try:
-                idx = int(body.get("idx")); rec, st = commit(j, idx, cat)
+        if self.path == "/force":
+            try: r, ev, ok = force_add(str(body.get("event", "")), int(body.get("idx")))
             except Exception as e: return self._json(400, {"error": str(e)[:300]})
-            return self._json(200, {"place": rec, "state": st})
+            return self._json(200, {"place": r, "event": ev, "pushed": ok})
         self._json(404, {"error": "not found"})
 
 
