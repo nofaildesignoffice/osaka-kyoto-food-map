@@ -1,0 +1,381 @@
+{
+ "id": "hanabusa",
+ "google": {
+  "id": "ChIJ_zj-YyHnAGARu91rndAChKY",
+  "location": {
+   "latitude": 34.6838562,
+   "longitude": 135.5096059
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=11998718402239389115&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "https://twitter.com/_menyahanabusa",
+  "displayName": {
+   "text": "麺屋はなぶさ",
+   "languageCode": "ja"
+  },
+  "reservable": false,
+  "photos": [
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLdHl-zx2U5UeYi0Gm4ocQotSwEnUVTskBuGe8V-VwHRjyfgcPXdgrnD-m1lml63NCtOfh9trfG3lW3MA1acelTcstwjDFj1-k1A-6ig4fODBWqonSBLu7VecYv4yMwPIB4uIPM6P68doakY1zWyoXK5VBLuq0RBefax0pZ9GG2Ll9ekRGpUqE0Jj01ZAvyJ9vtPTjJlwYKGfLAl3fO_kY_feZBJbz6sawL6Q93L17LlM_qY5p7op364kJnEVknW3lkSr-6FF5sQ1aIcBd7OnPTIW3wEiJmwTsYNmbUINAA_QwtUSNHn7V2OweZhMnmL2YoUvUbfL9goa-FSQezFMKSb1RNOuELkx12IsPru-rjatp80nMdcLH9fO4cqOFG1JMb5xh2EySLD3YRpucAQ_3tPvNZm80eqOX3honyuoqv4Wg",
+    "widthPx": 3578,
+    "heightPx": 3578,
+    "authorAttributions": [
+     {
+      "displayName": "Mr.PO-",
+      "uri": "https://maps.google.com/maps/contrib/100137952536262712454",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUpF4ilIuIkOa8W14QE7wvR-tZswFVRbMuHEjlD0ib4aBzzog=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLcTXBjHcOW1JTlcnOEX1bSYb2FAEjraZhA_mO7RUT6nOFEiRPkCy8Rff7kSeBR454MeZe9Xml4UazCWXlLfiVAPr8d_inhMvN5i9ZPvE8Mc_2htG5ojeUeSSrv-04fj1WpqjnVLweXfGdeDHNpRqj_36eaCeJPx7wyQ3JO1R90aKk2YjtQOz91MMWXyjE14jXEw_GDKulu4c9Rag_gzabEhK9Q7jC0mbuxmbn7nDz1rtuMqhrumeZ5vC5s6KLh9HAWEY2CYZHtci-9t-LNS3mW5O4RJeL9cj97NoDF8wYyv8WLEb1lP0k0pRpsbdH-qnPn_e2qd53nQ-jn27PTKSRZLI1DA4wgU7UlPub8QkwnpEOjmHdqDMcKoJivaaQtl3oKYF7CZLA5GACJNE-Z1jb651iQ",
+    "widthPx": 1920,
+    "heightPx": 1080,
+    "authorAttributions": [
+     {
+      "displayName": "。 食べ歩き愛好家 (‪食べ歩き愛好家‬)",
+      "uri": "https://maps.google.com/maps/contrib/111496651233167149556",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLLGhnUW4N5oMP_McEhRvbdRQQIA9NBZn_7e-v8wIRUUtUkCA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLeQgmNmEJX4-KPZEXVUwX0x3ZV6yyj25VOv7cfhyptlFjTVTeKHMM8JaYudbqzwlkzB-LReMrv2IsHWzYt4pdoSzhkfI8wgpwzng9vmQH5pJvpDDM1P743Vr-SofdB1N2lSdW9zxh6edWiQsIm46iyUhcHDjb5PSG24Gwj5V1CfNreQyQND_Zi-Z3wr-hBCBoScJZMWvaV_KsTCl4cO1q8W-Nv9pHFaArXD2fG-Py6fJuLNeptOZtsEd3K0B3f_HGihsIXhFIT7tn5gguCCM9sC5EXAtqfjpluE3BUhpFborCX5RP1YQIZ6sZMa5I5b_NcISrE7C1lAEWVpRcIY-_N7iA1ZBZyUs0yEWBYumlN5OmRGPCUj0DNcKZrTdg4Ybkw0IpB5JfVytcP5szPh3gGdbc6xLSG6vz6aW9VMXZgAqQ",
+    "widthPx": 3024,
+    "heightPx": 4032,
+    "authorAttributions": [
+     {
+      "displayName": "ma_ma san",
+      "uri": "https://maps.google.com/maps/contrib/117674104166371979024",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU5Asj_1ucLZqshEY6IvyFxagwocDIVKAIpPxFpQf4wWVmK66Y=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLciu615P0_oObXbgGrbrGNMsGGCDXdgCmGDMvKuSsXsx96AT2eC4wFvcnQyFlIxjZ_LNzxJPRm_OjD2Ool8RZaHT9gOJvFF8LeAVNqNoE2FqvD6jMQqGgcn671pDCC7iot7GgWrS8ntJJD2yjSfvFYPjGHTBIA0Inxs1byB8ImI_UcHzAonuX52--dZGbMPqtJei3XriD558e2ipJBiiKZn39eh6zjp-nKUYNKAf43WEUQfiIbQVuGOsfRbKgw-FXwTkCf97LmLGKYsKYEdM2SwYYOyFlKtEQ4p8vlWspTAquE_X4ZO7E5Ynk5GP_tIWm-PSgRt09e9Kq2jp9i3W_912Q7KAE1fBFKc5phDYNzMfRVQTdW-4wWdeh9IBMp5Uq1FZTJmMF7C3CXlVp-LPaYFQl65Ci05rhhHWk61AiCSlQ",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "Jazzy Rider",
+      "uri": "https://maps.google.com/maps/contrib/101177422264293521007",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVA2Zpe3mq2tVrBc7kfZbcwrmxU_aqAal3izoxvHbWH0zn_ANid=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLdPQ_NLR48GOSRkm9au7EJaufsffMrYp1ea5gxifBvYFxeqWJ5qgublYL-8zHBAJj4vFvQII1kj_sLqibPuBPdAUZ6L_kFGy7hobied_11YO0ZPOPmk64r_oDbsQ2_zG-sUnSCNbU6Ptk1GFuj1RVJCoOU6zHVBS_0x-xp6fZUzLHRF6bNXZTtwhIIY9j2KpcRT18jcTCRZT-5QNrpeZvONGZnDwSCz0DwlIPHNrii3qDQkydJeFxMYdh_5tf5spYrpx_ebRkZQXvtk7vI_9A2gm1Emyt37SALPi_j3rOm95L-ShfNCWDwBfDP1s-94bGZoAz2gDhOKMVv8Oe6EgqiSTIsviIB5Qa_Zr-EzlpbbkTGD2KvEIoVJkylR4hUSLjHZXfprwRxdDyvI65MTjo2dy217fQsmNQwv_GWsOOnq",
+    "widthPx": 1080,
+    "heightPx": 1350,
+    "authorAttributions": [
+     {
+      "displayName": "Ryo",
+      "uri": "https://maps.google.com/maps/contrib/118176381709677698226",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUB-nWqBL9WxJRfCoJhkVyKpUawh-XOhXPyX1BNXIDDesuqUbM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLdoWqc4ou_2CzeJJ4E86FqPRLoaGM7IxQ60H_RSOKyxB-K2Fcnk2RPmnPqU85nSEAKHdOhtrIkMvbUNzopxdjmdCwak5ZnTBf1AHJ7v35ks8C-_tJCb7vPwlHW0_Si3BF5qE1_5Z1V6Wixh6SP3KuKhcnJxdPN4QZp67iTyMcb7tr8c4pWwt_iBSmL9YRkyCRqPu7KVVQCNHyFKf9saXd4THL2jQCn-c8sP3BByTw6y5QHE386V6n7RAxfxsW5m1qGgZ3UC0Qk80mmULAyB81Tu7WI-GNg6m9ix5m7BXlClJA8rbLrPfnol5_FOT-Sy-zBRylFNPd7os7fW9AgLNRr3Yct3n8oE-Sm27bS4dy3tNcSw8c4sAhA9zPvLHUb-oDtPEXKLFoOHDr95PCDUQmcp6Q6FR6wG5G3xVDzCoLg5ng",
+    "widthPx": 4080,
+    "heightPx": 3060,
+    "authorAttributions": [
+     {
+      "displayName": "大田大作",
+      "uri": "https://maps.google.com/maps/contrib/109208140089532185086",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJB0dJrtrVMvBlzfOkFXY4ffbqCEtGQeKC02iCWCvckKwOabg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLeQRwj4IB5R6_D8zCjlhQ8V3gbMGiYU1UtAkbQ-uHTEu3GUhod2tskkaVmACiYTmbxjzpWpXx-nCkflPxw-Vjc-3gsX1S01UxKimUpiZxFsWMaKUsdYg-bp4uOX4hSsTOUoKRgzyNCfUHZQs8i10UvoMLPsWsdB7iestM8o27dS_T3RisVzeRb2Ni8IJegd0RegDxyN6m_-J64ANEwD_OyqW3waM4e9NFIJdZoaIM265Nze4-vNCyoQZAEJMJkG8XGiyDvARA8cqRTKkP2snYNGGh9qUnNVIkVk76qot3Dw4lhU40c6k0KR57rHew3pJ177Fb1cMPkBxP3yPFaMiMNPoXgFyH18wMOfCAhudFapSgiTJTvcyKBmDG_IOsJgcN9k4lfb0AD4ub1TPh0bZ4deWikJbgc",
+    "widthPx": 1284,
+    "heightPx": 971,
+    "authorAttributions": [
+     {
+      "displayName": "グルメダイスキング",
+      "uri": "https://maps.google.com/maps/contrib/101994699185269491386",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVoSneku_wihQHQUzlLXXto-lOp54J0sKVp_hXaPFASJpPhXsI=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLfyMp-8h82AOUNHut9TSxyC-zy10_DThuU4ky6OQC4_64RYuj4jHvJUOv_D_ldW9PplMNAsQi4fk1m-vH9C6yBVBcqE4mTGYClRhNYnCkTkfQ1FEaIXVoaL4AIvSylhof_dqFyN7TnzVe5kedHB3bWAPf-aJqUNlq_IFyBD42W2e5d8iomDV3ymVA8JAFn4gyvkUDVH4Kk4g8vT4NMdmV8V3xN-JKDzFTRyVYyiVeEP1wzFw-Uo1B2nQ0mHrOziwQQChbsFs9c2LZqodY8vcxYpCB1clDp4FSzYOZGRcm0IpYC8vQCbFgFOQSYPi8vtBFPYCeW4St9dvZ_Kq7uUIpPX7PmTEXUtLJVmVP7Cjkdsete0XO9xQjmLl-DBnmf83RnrOwTRGXGorkEWT4ESgN7jzA",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "H Sa",
+      "uri": "https://maps.google.com/maps/contrib/117364931221660617101",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUblTkM83vczZ2rZzAiRwEpPveGsBpBiQrctfc6BnwF3XxM9YxXyg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLdNNa2m2frhMGTVDcSeLFV-gHOQUtyUIc7W16wYsazBiizChnk0DZ-al72h8iBKa8LyI957Q9ZA8KTB0r75gtPy0ttKJSPuMLHus3axUM6H-mbhVXXVqE_IgJaLy5DBPSMtSM4rEx97s8YPi05hwe7-oyOgxcTJuuTmvaAx2Rqu4jj9vqle9pTJtvDhHToRu7Z-LbL1fUugFoliw74S2WsVXCH6G69h-NC-vkJBWdr3IHOefnNZEd217sOTJU8tg2FJ8FhNNJAEC2Y2jQcrhdtCNmm9Ligx6R0bXh6-t4vT7TPh-ziB8Ds8psRbIYHuWK3EWMo4eNMHilI6cXDBoAoDeSgZjTVHuZr7d0mIwJwRF5PMEiy1m1GTUzSInjIqEr84kNSc0D2qBvrpGl9-T6CBFMfGgDY",
+    "widthPx": 4656,
+    "heightPx": 2620,
+    "authorAttributions": [
+     {
+      "displayName": "chungchun lin",
+      "uri": "https://maps.google.com/maps/contrib/113556496107711797213",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJa4052UkOmH-8RLxvKgqFHHGmbpQ1zrIHH8X-MGhO__sagJg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLdu-hRmjVmSs7v-pwrhwi1jcOkEkzIG2JLKfh_XP7uD_nC1bMslFjJho1RWDCFJhsBJatrOBRNQ6REk0-is39OpQwFmxwwL6fvnndyRsjkMpnnssxuzpVj5XVWfv5vnytpdKEZxCd4GJUw3zivIHInsKBPDe4fYuWOkmwS2WIWgJ2mdVT-Rc4N0saZco6R2H5Sag7uZtnO4vI6hNT-_OsUMdvUcNrLR0E6J_SE6X66TPs5a2_XI6J8CkLxnl-ZWIjRq9On1Py45k-WrdB7rvUBQnzmgBWYSwqb6EXX_Isv7-4oveCZ8nAl4-yvm3ClVAQ4ChyeoOsQhQDkgn8tdUgSBoZsZP0Knuap-bjRsUqQjUGydmId7Iq7cv5k69qsnIfEGj6wqaURfNp9xUoqG6PRYQcAdlhg",
+    "widthPx": 1440,
+    "heightPx": 1440,
+    "authorAttributions": [
+     {
+      "displayName": "H F",
+      "uri": "https://maps.google.com/maps/contrib/107946637228876937383",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLcZTP9AN8TrLmZZIP5lXSWqADRGlx6Ys30bAlWkrGBTqEy=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "鶏そばプレミアム",
+    "name_ko": "토리소바 프리미엄",
+    "desc_ko": "나고야 코친 통닭으로 우린 무화학조미료 닭 육수에 간장 다레를 더한 대표 닭 라멘",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/matome/15314/",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://wanderlog.com/place/details/1252512/menya-hanabusa",
+     "https://foodle.pro/restaurants/osaka/menya-hanabusa"
+    ]
+   },
+   {
+    "name_ja": "中華そば",
+    "name_ko": "주카소바",
+    "desc_ko": "해산물 계열 수프에 큼직한 차슈와 맛달걀을 올린 간장 라멘",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/matome/15314/",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://4travel.jp/dm_shisetsu/11500412"
+    ]
+   },
+   {
+    "name_ja": "和えそば",
+    "name_ko": "아에소바",
+    "desc_ko": "국물 없이 소스에 비벼 먹는 비빔면. 작은 공기밥(ごはん小)을 추가할 수 있음",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://4travel.jp/dm_shisetsu/11500412"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "not_accepted",
+   "methods": [],
+   "note_ko": "타베로그 기준 예약 불가. 카운터 7석뿐이고, 식권을 먼저 산 뒤 앉는 방식. 현금만 받음(카드·전자머니·QR 결제 불가). 수프가 떨어지면 영업 종료. 2017년 리뷰에 점심때 가끔 줄이 생긴다는 언급이 있음.",
+   "source_urls": [
+    "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+    "https://4travel.jp/dm_shisetsu/11500412"
+   ]
+  },
+  "note": "타베로그 일본어 페이지는 403으로 막혀서 영어판(tabelog.com/en)으로 확인함. 가격 정보가 출처마다 다름: 타베로그 영어판 사진 캡션에는 中華そば 650엔·和えそば 700엔, 타베로그 마토메 기사에는 鶏そばプレミアム 並 930엔·中華そば 並 850엔, 4travel의 2016~2018년 리뷰에는 中華そば 700~780엔·和えそば 750엔으로 나옴. 언제 기준인지 모르고 최근 확인도 안 돼서 price_jpy는 모두 null로 둠. 메뉴별 인기 순위를 보여 주는 자료는 없었음. 토리소바 프리미엄을 대표 메뉴로 다룬 출처가 가장 많아서 1위로 둠. 좌석 수도 출처마다 다름(타베로그 7석, 마토메 8석). 영업시간은 타베로그 기준 월·화·목·금 11:00-14:30/18:00-21:00, 수·토는 점심만, 일요일·공휴일 휴무이며, 공식 X(Twitter)에서 최신 공지를 확인하라는 안내가 있음(X는 직접 열어 보지 못함). 구글 리뷰는 직접 확인하지 못함. 2024년 리뷰 중에 맛이 예전보다 못하다는 의견이 있었다는 검색 요약을 봤지만 원문은 확인하지 못함."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "中華そば",
+    "name_ko": "중화소바",
+    "desc_ko": "닭 청탕 육수에 간장으로 맛을 낸 라멘.",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270106/27071670/dtlmenu/",
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   },
+   {
+    "name_ja": "塩そば",
+    "name_ko": "시오소바",
+    "desc_ko": "해산물 육수를 사용하는 소금맛 라멘.",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270106/27071670/dtlmenu/",
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   },
+   {
+    "name_ja": "鶏そばプレミアム",
+    "name_ko": "닭소바 프리미엄",
+    "desc_ko": "나고야 코친 닭을 사용한 크리미한 닭 백탕 라멘.",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "not_accepted",
+   "methods": [],
+   "note_ko": "타베로그에 예약 불가로 명시되어 있습니다. 2024년 11월 방문 후기에는 11시 5분에 만석이 되고 뒤로 실내 대기 2명이 있었다고 기록되어 있습니다.",
+   "source_urls": [
+    "https://tabelog.com/osaka/A2701/A270106/27071670/",
+    "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/"
+   ]
+  },
+  "note": "중화소바의 '인기 1위' 표시는 2016년 갱신된 타베로그 메뉴에 근거합니다. 현재 인기 순위와 나머지 메뉴 간 순위는 확인하지 못했습니다. 여러 페이지에서 반복 확인한 대표 메뉴 3개만 수록했습니다. 현재 세금 포함 가격을 확인하지 못해 가격은 null로 두었습니다. 공식 X는 본문을 열람하지 못했습니다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "鶏そばプレミアム",
+    "name_ko": "토리소바 프리미엄",
+    "desc_ko": "나고야 코친 통닭으로 우린 무화학조미료 닭 육수에 간장 다레를 더한 대표 닭 라멘",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 2,
+    "source_urls": [
+     "https://tabelog.com/matome/15314/",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://wanderlog.com/place/details/1252512/menya-hanabusa",
+     "https://foodle.pro/restaurants/osaka/menya-hanabusa",
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   },
+   {
+    "name_ja": "中華そば",
+    "name_ko": "주카소바",
+    "desc_ko": "닭 청탕 육수에 간장으로 맛을 낸 라멘.",
+    "price_jpy": null,
+    "a_index": 1,
+    "b_index": 0,
+    "source_urls": [
+     "https://tabelog.com/matome/15314/",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://4travel.jp/dm_shisetsu/11500412",
+     "https://tabelog.com/osaka/A2701/A270106/27071670/dtlmenu/",
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   }
+  ],
+  "reservation_status": "not_accepted",
+  "reservation_agree": true,
+  "methods": [],
+  "reservation_note_ko": "타베로그 기준 예약 불가. 점심시간에 만석이 되거나 줄이 생긴다는 후기가 있음.",
+  "disagreements_ko": "인기 순위: A는 鶏そばプレミアム을 1위로, B는 中華そば를 1위로 둠(B는 2016년 타베로그 메뉴의 '인기 1위' 표시가 근거). 메뉴 구성: A에만 和えそば(아에소바), B에만 塩そば(시오소바)가 있음. 中華そば 설명: A는 해산물 계열 수프, B는 닭 청탕+간장이라고 함(B는 해산물 육수를 塩そば 쪽 특징으로 봄). 鶏そばプレミアム 설명: A는 닭 육수+간장 다레, B는 크리미한 닭 백탕이라고 함. 예약 관련 부가 정보: A는 카운터 7석·식권제·현금만 가능·수프 소진 시 영업 종료와 2017년 점심 대기를 언급했고, B는 2024년 11월 11:05 만석·실내 대기 2명을 언급함."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관 (간판, 입간판 메뉴)"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "맑고 옅은 국물 라멘과 연어 밥 세트 (시오소바로 보여 불확실)"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": 0,
+    "what_ko": "탁하고 거품 있는 닭 백탕 라멘 면 들어올린 사진 (토리소바 프리미엄)"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "차슈 2장, 반숙란, 파 올린 황금빛 국물 라멘 (종류 불확실)"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "식권 발매기"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "메뉴판 (시오소바·주카소바·토리소바 프리미엄)"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "세로쓰기 메뉴판 (오시나가키)"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "연어·김·시소 올린 밥"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "차슈 덮밥 (차멘동)"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "차슈·멘마·파 올린 덮밥/비빔면 그릇"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 입구와 간판, 입간판이 보이는 외관"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "맑은 국물 라멘과 연어를 올린 밥으로, 라멘 종류는 확정하기 어려움"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": 0,
+    "what_ko": "탁하고 진한 닭 육수의 토리소바 프리미엄에서 면을 들어 올린 모습"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "차슈와 반숙 달걀을 올린 라멘으로, 국물만으로 메뉴를 확정하기 어려움"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "라멘과 추가 토핑, 밥 메뉴를 판매하는 식권 자판기"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "시오소바·주카소바·토리소바 프리미엄 등이 적힌 메뉴판"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "라멘 종류와 토핑, 밥, 음료가 적힌 메뉴판"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "연어와 김, 시소 잎을 올린 밥"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "잘게 썬 양념 차슈와 파, 멘마를 올린 덮밥"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "얇게 썬 차슈와 파, 멘마를 듬뿍 올린 덮밥"
+   }
+  ]
+ }
+}

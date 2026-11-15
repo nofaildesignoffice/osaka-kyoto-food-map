@@ -186,6 +186,41 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .gp-photos figcaption{font-size:10.5px;color:var(--ink3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gp-photos figcaption a{color:inherit}
 .gp-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;margin-top:6px}
+/* 상세 섹션 (슬라이더 아래) */
+.d-sum{display:flex;align-items:center;gap:8px;margin-top:12px}
+.d-rate{display:inline-flex;align-items:baseline;gap:6px;font-size:17px;font-weight:800;color:var(--ink)}
+.d-rate{color:#e8a400} .d-rate .d-cnt{font-size:12px;font-weight:600;color:var(--ink3)}
+.d-open{font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px}
+.d-open.on{background:#e3f6e8;color:#1b7a3a} .d-open.off{background:#ffe3e1;color:#c4231b}
+.d-hours{margin-top:8px;border:1px solid var(--line);border-radius:10px;font-size:13px}
+.d-hours summary{display:flex;gap:10px;align-items:center;padding:9px 12px;cursor:pointer;list-style:none}
+.d-hours summary::-webkit-details-marker{display:none}
+.d-hours summary::after{content:'';margin-left:auto;width:7px;height:7px;border-right:2px solid var(--ink3);border-bottom:2px solid var(--ink3);transform:rotate(45deg);transition:transform .15s}
+.d-hours[open] summary::after{transform:rotate(-135deg)}
+.d-k{color:var(--ink3);font-weight:700;font-size:12px;flex:none} .d-v{font-weight:700;color:var(--ink);min-width:0}
+.d-hours ul{margin:0;padding:2px 12px 10px 12px;list-style:none;line-height:1.75;color:var(--ink2);font-size:12.5px}
+.d-hours li.today{color:var(--ink);font-weight:800}
+.d-acts{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;margin-top:10px}
+.d-act{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px;border:1px solid var(--line);border-radius:12px;font-size:12px;font-weight:700;color:var(--ink);text-decoration:none;background:#fff;transition:border-color .15s,background .15s}
+.d-act span{font-size:18px;line-height:1} .d-act:hover{border-color:var(--brand);background:var(--brand-soft)}
+.gp-src{font-size:10.5px;color:var(--ink3);margin-top:6px}
+.dsec{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.dsec-h{display:flex;align-items:baseline;gap:8px;margin:0 0 10px;font-size:15px;font-weight:800;color:var(--ink)}
+.dsec-s{font-size:11.5px;font-weight:600;color:var(--ink3)}
+.dsec .quote-h{font-size:12px;color:var(--ink2);margin:10px 0 5px}
+.dsec .quote-h:first-of-type{margin-top:0}
+.dsec .quote{font-size:13.5px;line-height:1.65;margin-bottom:6px}
+.whymenu{font-size:13px;color:var(--ink2);margin:8px 0 0} .whymenu b{color:var(--ink)}
+.dsec .facts{font-size:13px;line-height:1.65}
+.d-addr{margin:0;font-size:13.5px;color:var(--ink);line-height:1.5}
+.d-route{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.d-route .btn{justify-content:center;padding:10px;font-size:13px}
+.btn.ghost{border-color:transparent;background:var(--bg);color:var(--ink2)}
+.rsv.big{font-size:13px;padding:5px 12px} .rsv.r-g{background:#e8f0fe;color:#1a56c4}
+.rmeth{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.rm{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);font-size:13px}
+.rm b{flex:none} .rm span{color:var(--ink3);font-size:12px;line-height:1.45;min-width:0} .rm i{margin-left:auto;font-style:normal;color:var(--ink3);font-size:18px}
+a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .gp-open{font-weight:700} .gp-open.on{color:var(--walk)} .gp-open.off{color:var(--food)}
 .gp details{font-size:12.5px;color:var(--ink2);margin-top:4px}
 .gp details ul{margin:4px 0 0;padding-left:16px;line-height:1.6}
@@ -406,8 +441,8 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 </div>
 
 <script src="data/hotels.js?v=20261115-hotels9"></script>
-<script src="data/places.js?v=20261115b"></script>
-<script src="data/menus.js?v=20261115m1"></script>
+<script src="data/places.js?v=20261115r1"></script>
+<script src="data/menus.js?v=20261115m2"></script>
 <script src="data/spots.js?v=20261115b"></script>
 <script src="data/added.js"></script>
 <script src="data/events.js"></script>
@@ -585,19 +620,19 @@ function menuSummary(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
 function menuHTML(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
   let h='';
   if(M.menus.length){
-    h+=`<p class="quote-h">🍽 인기 메뉴 <span class="meta">· Claude·Codex 둘 다 꼽은 메뉴만</span></p><ol class="mlist">`+M.menus.map(m=>
-      `<li><div class="ml-n"><b>${esc(m.name_ko)}</b>${m.price_jpy?`<span class="ml-p">¥${m.price_jpy.toLocaleString()}</span>`:''}</div><div class="ml-ja">${esc(m.name_ja)}</div>${m.desc_ko?`<div class="ml-d">${esc(m.desc_ko)}</div>`:''}</li>`).join('')+'</ol>';
+    h+=`<section class="dsec"><h4 class="dsec-h">인기 메뉴<span class="dsec-s">Claude·Codex 둘 다 꼽은 메뉴</span></h4><ol class="mlist">`+M.menus.map(m=>
+      `<li><div class="ml-n"><b>${esc(m.name_ko)}</b>${m.price_jpy?`<span class="ml-p">¥${m.price_jpy.toLocaleString()}</span>`:''}</div><div class="ml-ja">${esc(m.name_ja)}</div>${m.desc_ko?`<div class="ml-d">${esc(m.desc_ko)}</div>`:''}</li>`).join('')+'</ol></section>';
   }
   const R=M.reserve, r=RSV[R.status]||RSV.unknown;
-  h+=`<p class="quote-h">📅 예약</p><div class="rbox2"><div class="rb2-top"><span class="rsv ${r[1]}">${r[0]}</span>${R.agree?'':(R.single?`<span class="meta">${esc(R.single.who)}만 확인: ${esc((RSV[R.single.status]||RSV.unknown)[0])}</span>`:'<span class="meta">두 AI 의견이 반대라 확정 못함</span>')}${R.googleReservable===true?'<span class="tag hotel">Google 예약 가능</span>':''}</div>`;
-  if(R.note) h+=`<div class="rb2-note">${esc(R.note)}</div>`;
-  if(R.hint) h+=`<div class="rb2-mn">· ${esc(R.hint)}</div>`;
-  if(R.methods&&R.methods.length) h+='<div class="links">'+R.methods.map(m=>{ const u=m.url||''; const ok=/^(https?:|tel:)/.test(u);
-      return ok?`<a class="btn small" href="${esc(u)}" target="_blank" rel="noopener" title="${esc(m.note_ko||'')}">${esc(RSV_M[m.type]||m.type)}${m.type==='phone'?' '+esc(u.replace(/^tel:/,'')):''}</a>`:`<span class="btn small" title="${esc(m.note_ko||'')}">${esc(RSV_M[m.type]||m.type)}</span>`; }).join('')+'</div>'+
-      R.methods.filter(m=>m.note_ko).map(m=>`<div class="rb2-mn">· ${esc(RSV_M[m.type]||m.type)}: ${esc(m.note_ko)}</div>`).join('');
-  h+='</div>';
+  h+=`<section class="dsec"><h4 class="dsec-h">예약</h4><div class="rb2-top"><span class="rsv big ${r[1]}">${r[0]}</span>${R.googleReservable===true?'<span class="rsv r-g">Google 예약 가능</span>':''}</div>`;
+  if(!R.agree) h+=`<div class="rb2-mn">${R.single?`${esc(R.single.who)}만 확인: ${esc((RSV[R.single.status]||RSV.unknown)[0])}`:'두 AI 조사가 서로 달라 확정하지 않았어요'}</div>`;
+  if(R.note) h+=`<p class="rb2-note">${esc(R.note)}</p>`;
+  if(R.hint) h+=`<p class="rb2-mn">${esc(R.hint)}</p>`;
+  if(R.methods&&R.methods.length) h+='<div class="rmeth">'+R.methods.map(m=>{ const u=m.url||''; const ok=/^(https?:|tel:)/.test(u);
+      const lab=`<b>${esc(RSV_M[m.type]||m.type)}${m.type==='phone'?' '+esc(u.replace(/^tel:/,'')):''}</b>${m.note_ko?`<span>${esc(m.note_ko)}</span>`:''}`;
+      return ok?`<a class="rm" href="${esc(u)}" ${m.type==='phone'?'':'target="_blank" rel="noopener"'}>${lab}<i>›</i></a>`:`<div class="rm">${lab}</div>`; }).join('')+'</div>';
   const src=[...new Set(M.menus.flatMap(m=>m.source_urls||[]))].filter(u=>/^https?:/.test(u));
-  h+=`<details class="msrc"><summary>조사 근거 · ${esc(M.checkedAt)} 확인</summary>${src.length?'<ul>'+src.map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/,'').slice(0,60))}</a></li>`).join('')+'</ul>':''}${M.disagree?`<div class="meta">두 AI가 다르게 본 점: ${esc(M.disagree)}</div>`:''}</details>`;
+  h+=`<details class="msrc"><summary>조사 근거 · ${esc(M.checkedAt)}</summary>${src.length?'<ul>'+src.map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/,'').slice(0,60))}</a></li>`).join('')+'</ul>':''}${M.disagree?`<div class="meta">두 AI가 다르게 본 점: ${esc(M.disagree)}</div>`:''}</details></section>`;
   return h;
 }
 function placeHTML(p){
@@ -609,21 +644,22 @@ function placeHTML(p){
   const photos = menuPhotoList(p, x);
   if(photos.length) h += '<div class="gp-slider"><button type="button" class="gp-nav prev" data-gpnav="-1" aria-label="이전 사진" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><div class="gp-photos">'+photos.map(ph=>
     `<figure${ph.label?' class="mph"':''}><img loading="lazy" alt="${esc(ph.label||((x.displayName&&x.displayName.text)||p.name)+' 사진')}" src="https://places.googleapis.com/v1/${esc(ph.name)}/media?maxWidthPx=480&maxHeightPx=330&key=${GKEY}" onerror="this.closest('figure').remove()">${ph.label?`<span class="mph-tag">🍽 ${esc(ph.label)}</span>`:''}<figcaption>사진: ${ph.uri?`<a href="${esc(ph.uri)}" target="_blank" rel="noopener">${esc(ph.author||'Google 지도')}</a>`:esc(ph.author||'Google 지도')}</figcaption></figure>`).join('')+'</div><button type="button" class="gp-nav next" data-gpnav="1" aria-label="다음 사진"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div>';
-  let row = '';
-  if(x.rating) row += `<span>⭐ <b>${x.rating.toFixed(1)}</b> <span class="meta">(${(x.userRatingCount||0).toLocaleString()})</span></span>`;
-  if(x.businessStatus && x.businessStatus!=='OPERATIONAL') row += `<span class="gp-open off">${x.businessStatus==='CLOSED_PERMANENTLY'?'폐업':'임시 휴업'}</span>`;
-  else if(x.currentOpeningHours && typeof x.currentOpeningHours.openNow==='boolean') row += `<span class="gp-open ${x.currentOpeningHours.openNow?'on':'off'}">${x.currentOpeningHours.openNow?'지금 영업 중':'지금 영업 종료'}</span>`;
-  if(x.reservable===true) row += '<span class="tag hotel">Google 예약 가능</span>';
-  if(row) h += `<div class="gp-row">${row}</div>`;
+  const open = x.businessStatus && x.businessStatus!=='OPERATIONAL' ? ['off', x.businessStatus==='CLOSED_PERMANENTLY'?'폐업':'임시 휴업']
+    : (x.currentOpeningHours && typeof x.currentOpeningHours.openNow==='boolean') ? [x.currentOpeningHours.openNow?'on':'off', x.currentOpeningHours.openNow?'영업 중':'영업 종료'] : null;
   const wd = x.regularOpeningHours && x.regularOpeningHours.weekdayDescriptions;
-  if(wd&&wd.length) h += `<details><summary>영업시간</summary><ul>${wd.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></details>`;
-  h += '<div class="links">';
-  if(x.googleMapsUri) h += `<a class="btn small book" href="${esc(x.googleMapsUri)}" target="_blank" rel="noopener">🗓 ${p.type==='food'?'Google 예약·지도':'Google 지도'}</a>`;
-  if(x.websiteUri) h += `<a class="btn small" href="${esc(x.websiteUri)}" target="_blank" rel="noopener">🌐 홈페이지</a>`;
-  const tel = x.internationalPhoneNumber || x.nationalPhoneNumber;
-  if(tel) h += `<a class="btn small" href="tel:${esc(tel.replace(/\s/g,''))}">📞 ${esc(x.nationalPhoneNumber||tel)}</a>`;
+  const today = wd && wd.length===7 ? String(wd[(new Date().getDay()+6)%7]).replace(/^[^:：]+[:：]\s*/,'') : '';
+  h += '<div class="d-sum">';
+  if(x.rating) h += `<span class="d-rate">★ ${x.rating.toFixed(1)}<span class="d-cnt">리뷰 ${(x.userRatingCount||0).toLocaleString()}</span></span>`;
+  if(open) h += `<span class="d-open ${open[0]}">${open[1]}</span>`;
   h += '</div>';
-  h += `<div class="gp-src">Google 지도 장소 정보 · “${esc(x.displayName&&x.displayName.text)}” (표시 좌표에서 ${Math.round(g.d)}m)${p.type==='food'&&x.reservable!==true?' · 예약 버튼은 Google 지도에 예약 기능이 있는 가게만 나와요':''}</div>`;
+  if(wd&&wd.length) h += `<details class="d-hours"><summary><span class="d-k">영업시간</span><span class="d-v">${today?'오늘 '+esc(today):'요일별 보기'}</span></summary><ul>${wd.map((t,k)=>`<li${k===(new Date().getDay()+6)%7?' class="today"':''}>${esc(t)}</li>`).join('')}</ul></details>`;
+  const tel = x.internationalPhoneNumber || x.nationalPhoneNumber;
+  const tiles = [];
+  if(x.googleMapsUri) tiles.push(`<a class="d-act" href="${esc(x.googleMapsUri)}" target="_blank" rel="noopener"><span>🗺</span>Google 지도</a>`);
+  if(tel) tiles.push(`<a class="d-act" href="tel:${esc(tel.replace(/\s/g,''))}"><span>📞</span>전화</a>`);
+  if(x.websiteUri) tiles.push(`<a class="d-act" href="${esc(x.websiteUri)}" target="_blank" rel="noopener"><span>🌐</span>홈페이지</a>`);
+  if(tiles.length) h += `<div class="d-acts">${tiles.join('')}</div>`;
+  h += `<div class="gp-src">Google 지도 정보 · “${esc(x.displayName&&x.displayName.text)}”${tel?' · '+esc(x.nationalPhoneNumber||tel):''}</div>`;
   return h;
 }
 function fillPlace(p){ document.querySelectorAll(`[data-gp="${p.id}"]`).forEach(el=>el.innerHTML=placeHTML(p)); }
@@ -858,20 +894,21 @@ function cardHTML(p){
   if(p.type==='hotel') body += `<p class="quote-h">순위 맛집까지 평균 (지도에 순위 색 선으로 표시)</p><div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
   if(p.type==='food') body += menuHTML(p);
-  if(p.comment) body += `<p class="quote-h">💬 유튜브 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
-  if(p.origin==='list') body += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름: “${esc(p.typed)}”</p>`;
-  if(p.origin==='ai') body += `<p class="quote-h">🤖 AI로 추가 — ${p.verified&&p.verified.length===2?'Claude·Codex 둘 다 같은 곳으로 확인':'AI 한쪽만 찾음 → 알림에서 직접 확인 후 추가'}${p.pending?' (반영 중)':''} · 입력: “${esc(p.typed)}”</p>${(p.aiEvidence||[]).map(a=>`<div class="quote"><b>${esc(a.ai)}</b>: ${esc(a.evidence)}</div>`).join('')}`;
-  if(p.origin==='added') body += `<p class="quote-h">➕ 직접 추가 (이 기기에 저장) — 입력: “${esc(p.typed)}”</p>`;
-  if(p.origin==='blog') body += `<p class="quote-h">📰 네이버 블로그 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.blog)}</div>`;
-  if(p.tip) body += `<div class="tip">💡 ${esc(p.tip)}</div>`;
-  if(p.menu) body += `<p class="addr">🍽 추천: <b>${esc(p.menu)}</b></p>`;
-  if(p.notes&&p.notes.length) body += `<ul class="facts">${p.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`;
-  body += `<p class="addr">📍 ${esc(p.address)}</p>`;
-  body += `<div class="links">`+
-    (p.agoda?`<a class="btn small" href="${esc(p.agoda)}" target="_blank" rel="noopener">아고다에서 보기</a>`:'')+
-    (p.sources||[]).map(s=>`<a class="btn small" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')+
-    `<button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small" data-setto="${p.id}">여기로 도착</button></div>`;
-  body += `<div data-near="${p.id}">${nearTable(p)}</div>`;
+  let why='';
+  if(p.comment) why += `<p class="quote-h">💬 유튜브 댓글 (캡처에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
+  if(p.origin==='list') why += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름 “${esc(p.typed)}”</p>`;
+  if(p.origin==='ai') why += `<p class="quote-h">🤖 AI 추천 — ${p.verified&&p.verified.length===2?'Claude·Codex 둘 다 같은 곳 추천':'AI 한쪽만 찾음'}${p.pending?' (반영 중)':''} · “${esc(p.typed)}”</p>${(p.aiEvidence||[]).map(a=>`<div class="quote"><b>${esc(a.ai)}</b> ${esc(a.evidence)}</div>`).join('')}`;
+  if(p.origin==='added') why += `<p class="quote-h">➕ 직접 추가 (이 기기에 저장) — “${esc(p.typed)}”</p>`;
+  if(p.origin==='blog') why += `<p class="quote-h">📰 네이버 블로그 (캡처에서 옮겨 적음)</p><div class="quote">${esc(p.blog)}</div>`;
+  if(p.tip) why += `<div class="tip">💡 ${esc(p.tip)}</div>`;
+  if(p.menu) why += `<p class="whymenu">댓글 추천 메뉴 <b>${esc(p.menu)}</b></p>`;
+  if(p.notes&&p.notes.length) why += `<ul class="facts">${p.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`;
+  if(why) body += `<section class="dsec"><h4 class="dsec-h">${p.type==='food'?'추천 이유':'메모'}</h4>${why}</section>`;
+  body += `<section class="dsec"><h4 class="dsec-h">위치 · 가는 법</h4><p class="d-addr">${esc(p.address)}</p>`+
+    `<div class="d-route"><button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small primary" data-setto="${p.id}">여기로 도착</button></div>`;
+  const ext=(p.agoda?`<a class="btn small" href="${esc(p.agoda)}" target="_blank" rel="noopener">아고다에서 보기</a>`:'')+(p.sources||[]).map(s=>`<a class="btn small ghost" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('');
+  if(ext) body += `<div class="links">${ext}</div>`;
+  body += `<div data-near="${p.id}">${nearTable(p)}</div></section>`;
   return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div>${p.type==='hotel'?hotelRateHTML(p,true):''}${p.type==='food'?menuSummary(p):''}</div>${rankset}</div><div class="detail">${body}</div></article>`;
 }
 function renderList(){

@@ -1,0 +1,448 @@
+{
+ "claude": {
+  "shops": [
+   {
+    "name_ja": "麺屋 丈六 なんば店",
+    "name_ko": "멘야 조로쿠 난바점",
+    "address_ja": "大阪府大阪市中央区難波千日前6-16",
+    "why_ko": "타베로그 라멘 百名店 OSAKA 2025 선정. 타베로그 평점 3.73(리뷰 2,764건)으로 이번 10곳 중 가장 높음. 난바 숙소에서 걸어갈 수 있음(수요일 휴무).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270202/27084754/"
+    ]
+   },
+   {
+    "name_ja": "NEXT□",
+    "name_ko": "넥스트 시카쿠",
+    "address_ja": "大阪府大阪市中央区難波千日前9-12 道具屋筋商店街",
+    "why_ko": "百名店 OSAKA 2025 첫 선정. 타베로그 3.69(리뷰 1,297건). 난바 도구야스지 상점가 안에 있고 연중무휴(12/30~1/3만 휴무).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124383/"
+    ]
+   },
+   {
+    "name_ja": "麺のようじ",
+    "name_ko": "멘노 요지",
+    "address_ja": "大阪府大阪市中央区高津2-1-2 大越ビル 1F",
+    "why_ko": "百名店 WEST 2017~2022, OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,494건). 닛폰바시역 근처(옛 상호는 大阪拳).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270202/27072765/"
+    ]
+   },
+   {
+    "name_ja": "無鉄砲 大阪店",
+    "name_ko": "무뎃포 오사카점",
+    "address_ja": "大阪府大阪市浪速区戎本町1-5-21 米田ビル 1F",
+    "why_ko": "진한 돈코츠 라멘으로 유명. 百名店 WEST 2019~2022, OSAKA 2023~2025 선정. 타베로그 3.71(리뷰 2,507건). 이마미야에비스역 근처로 난바·신세카이 사이(월요일 휴무). 본점이 아니라 지점.",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270206/27005006/"
+    ]
+   },
+   {
+    "name_ja": "友愛亭",
+    "name_ko": "유아이테이",
+    "address_ja": "大阪府大阪市浪速区日本橋4-12-1 旭日旅行ビル 1F",
+    "why_ko": "百名店 OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,102건). 에비스초역 근처라 신세카이·닛폰바시 숙소에서 가까움(월요일 휴무).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270202/27079226/"
+    ]
+   },
+   {
+    "name_ja": "麺屋 はなぶさ",
+    "name_ko": "멘야 하나부사",
+    "address_ja": "大阪府大阪市中央区本町1-1-4",
+    "why_ko": "百名店 WEST 2017·2019~2022, OSAKA 2023~2025 선정. 타베로그 3.69(리뷰 1,132건). 사카이스지혼마치역 바로 앞(일요일·공휴일 휴무).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/"
+    ]
+   },
+   {
+    "name_ja": "らーめん久遠",
+    "name_ko": "라멘 쿠온",
+    "address_ja": "大阪府大阪市中央区船場中央1-4-3 船場センタービル3号館 B2F",
+    "why_ko": "百名店 OSAKA 2024·2025 선정. 타베로그 3.70(리뷰 1,047건). 사카이스지혼마치에 있음. 일요일 휴무이고 수프가 떨어지면 일찍 닫음.",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270106/27115366/"
+    ]
+   },
+   {
+    "name_ja": "麺元素",
+    "name_ko": "멘겐소",
+    "address_ja": "大阪府大阪市北区天神橋5-2-16",
+    "why_ko": "百名店 WEST 2020~2022, OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,665건). 덴마·덴진바시스지 상점가 쪽.",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270103/27042439/"
+    ]
+   },
+   {
+    "name_ja": "大阪麺哲",
+    "name_ko": "오사카 멘테츠",
+    "address_ja": "大阪府大阪市北区曾根崎2-10-27",
+    "why_ko": "百名店 WEST 2018~2022, OSAKA 2023~2025 선정. 타베로그 3.71(리뷰 2,482건). 히가시우메다역 근처(우메다 지역).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270101/27080479/"
+    ]
+   },
+   {
+    "name_ja": "唯一無二のらぁ麺専門店 イ袋ワシづかみ",
+    "name_ko": "이부쿠로 와시즈카미",
+    "address_ja": "大阪府大阪市天王寺区四天王寺2-2-7",
+    "why_ko": "百名店 OSAKA 2024·2025 선정. 타베로그 3.69(리뷰 548건). 시텐노지마에유히가오카역 근처로 덴노지 지역. 시텐노지 관광과 같이 가기 좋음.",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270203/27127973/"
+    ]
+   }
+  ],
+  "note": "10곳 모두 타베로그 공식 「ラーメン 百名店 OSAKA 2025」(2025-12-02 발표) 명단에 있습니다(award.tabelog.com에서 직접 확인). 주소·평점·리뷰 수·휴무는 각 가게의 타베로그 영어판 페이지에서 확인했고, 10곳 모두 폐업·이전 공지는 없었습니다. 일본어판 tabelog.com은 403 오류로 열리지 않았습니다. 평점은 확인 시점 값이라 바뀔 수 있습니다. 출처는 사실상 타베로그 한 곳이고, 구글 평점은 확인하지 못했습니다. 지점 구분: 無鉄砲 大阪店은 교토 본점의 지점이고, 麺屋 丈六은 「なんば店」이라는 정식 상호로 표기했습니다(체인 안에서 본점인지는 확인하지 못함). イ袋ワシづかみ 페이지에는 '돈코츠 전문 業態 裏イ袋ワシづかみ는 10월경까지 휴업, 일반 메뉴는 계속 운영'이라는 공지가 있었는데, 언제 올린 공지인지 불분명하니 방문 전에 다시 확인하세요. 후보에서 뺀 곳: なにわ 麺次郎(難波, 百名店 2023~2025, 3.71)은 긴테쓰 오사카난바역 개찰구 안에 있어 입장권이나 승차권이 있어야 들어갈 수 있어서 제외. 麺匠至誠(四ツ橋, 百名店 2023~2025, 3.68)은 신사이바시 서쪽에 있어 대체 후보로 둘 만합니다. 塩々는 주소가 福島区 玉川이라 지역 기준에 맞지 않아 제외했습니다. 휴무일이 바뀔 수 있으니 방문 전에 확인하세요."
+ },
+ "codex": {
+  "note": "2026-11-15 웹 확인 기준. 공식 영업 안내 또는 최근 방문 후기와 현재 매장 정보를 확인한 10곳입니다. 모두 타베로그 라멘 OSAKA 백명점 선정 이력이 있으며, 선정 연도는 매장별로 표시했습니다. 주소는 현재 매장 기준이고 source_urls에는 실제로 연 페이지만 담았습니다. 임시휴무는 방문 직전 확인하세요.",
+  "shops": [
+   {
+    "name_ja": "麺屋 丈六 なんば店",
+    "name_ko": "멘야 조로쿠 난바점",
+    "address_ja": "大阪府大阪市中央区難波千日前6-16",
+    "why_ko": "2025 OSAKA 백명점 선정; 진한 간장색의 다카이다식 라멘으로 유명하며 난바·닛폰바시 숙소에서 접근하기 좋음.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27084754/"
+    ]
+   },
+   {
+    "name_ja": "なにわ 麺次郎",
+    "name_ko": "나니와 멘지로",
+    "address_ja": "大阪府大阪市中央区難波4-1-17 近鉄大阪難波駅 改札内",
+    "why_ko": "2025 OSAKA 백명점 선정; 조개 육수 라멘이 인기인 난바 매장이며, 긴테쓰 오사카난바역 개찰구 안에 위치하므로 입장 동선에 주의.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27112089/"
+    ]
+   },
+   {
+    "name_ja": "麺のようじ 大阪本店",
+    "name_ko": "멘노요지 오사카 본점",
+    "address_ja": "大阪府大阪市中央区高津2-1-2 大越ビル1F",
+    "why_ko": "2025 OSAKA 백명점 선정; 공식 사이트에서 오사카 본점임을 확인했으며 닛폰바시에서 닭 육수 라멘·츠케멘을 즐기기 좋은 곳.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27072765/",
+     "https://menno-yoji.com/works/"
+    ]
+   },
+   {
+    "name_ja": "鶏Soba 座銀 にぼし店",
+    "name_ko": "토리소바 자긴 니보시점",
+    "address_ja": "大阪府大阪市中央区南船場3-9-6",
+    "why_ko": "2024 OSAKA 백명점 선정 이력 확인; 크리미한 닭백탕 계열로 알려진 신사이바시 지점으로 쇼핑 일정과 연결하기 좋음.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270201/27086371/"
+    ]
+   },
+   {
+    "name_ja": "無鉄砲 大阪店",
+    "name_ko": "무텟포 오사카점",
+    "address_ja": "大阪府大阪市浪速区戎本町1-5-21 米田ビル1F",
+    "why_ko": "2025 OSAKA 백명점 선정; 초농후 돈코츠로 유명한 오사카 지점이며 다이코쿠초·이마미야에비스역과 가까워 신세카이 숙소에서 편리함.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270206/27005006/"
+    ]
+   },
+   {
+    "name_ja": "上方レインボー",
+    "name_ko": "가미가타 레인보우",
+    "address_ja": "大阪府大阪市天王寺区勝山4-6-3",
+    "why_ko": "2025 OSAKA 백명점 선정; 개성 있는 간장 라멘과 한정 메뉴로 유명하며, 텐노지구 소재지만 실제 접근은 모모다니역 도보 약 5분.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270203/27116315/"
+    ]
+   },
+   {
+    "name_ja": "麺元素",
+    "name_ko": "멘겐소",
+    "address_ja": "大阪府大阪市北区天神橋5-2-16",
+    "why_ko": "2025 OSAKA 백명점 선정; 닭·어패류 육수와 자가제면이 특징이며 텐마역 도보 약 3분으로 상점가 관광과 함께 방문하기 좋음.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270103/27042439/"
+    ]
+   },
+   {
+    "name_ja": "総大醤",
+    "name_ko": "소다이쇼",
+    "address_ja": "大阪府大阪市北区浮田2-4-16",
+    "why_ko": "2025 OSAKA 백명점 선정; 유아사 간장을 사용하는 라멘으로 알려졌으며 텐진바시스지로쿠초메역 인근, 공식 안내상 자정까지 영업.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270103/27003383/",
+     "https://www.soudaisyou.com/access.html"
+    ]
+   },
+   {
+    "name_ja": "銀座 篝 ルクア大阪店",
+    "name_ko": "긴자 카가리 루쿠아 오사카점",
+    "address_ja": "大阪府大阪市北区梅田3-1-3 ルクアB2F",
+    "why_ko": "2025 OSAKA 백명점 선정; 닭백탕 소바가 대표 메뉴인 루쿠아 지점으로, 오사카역과 연결되어 우메다 관광 중 방문하기 편리함.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270101/27102306/",
+     "https://www.lucua.jp/shopguide/id804.html"
+    ]
+   },
+   {
+    "name_ja": "麺屋 はなぶさ",
+    "name_ko": "멘야 하나부사",
+    "address_ja": "大阪府大阪市中央区本町1-1-4",
+    "why_ko": "2025 OSAKA 백명점 선정; 나고야 코친 닭 육수의 중화소바로 알려졌으며 사카이스지혼마치역 도보 3~4분으로 숙소 주변 식사에 적합.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270106/27071670/"
+    ]
+   }
+  ]
+ },
+ "agreed": [
+  {
+   "claude": {
+    "name_ja": "麺屋 丈六 なんば店",
+    "name_ko": "멘야 조로쿠 난바점",
+    "address_ja": "大阪府大阪市中央区難波千日前6-16",
+    "why_ko": "타베로그 라멘 百名店 OSAKA 2025 선정. 타베로그 평점 3.73(리뷰 2,764건)으로 이번 10곳 중 가장 높음. 난바 숙소에서 걸어갈 수 있음(수요일 휴무).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270202/27084754/"
+    ]
+   },
+   "codex": {
+    "name_ja": "麺屋 丈六 なんば店",
+    "name_ko": "멘야 조로쿠 난바점",
+    "address_ja": "大阪府大阪市中央区難波千日前6-16",
+    "why_ko": "2025 OSAKA 백명점 선정; 진한 간장색의 다카이다식 라멘으로 유명하며 난바·닛폰바시 숙소에서 접근하기 좋음.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27084754/"
+    ]
+   },
+   "google": {
+    "id": "ChIJVRkzJ2rnAGARQqsC-omixzg",
+    "types": [
+     "ramen_restaurant",
+     "noodle_shop",
+     "japanese_restaurant",
+     "restaurant",
+     "food",
+     "point_of_interest",
+     "establishment"
+    ],
+    "formattedAddress": "〒542-0075 大阪府大阪市中央区難波千日前６−１６",
+    "location": {
+     "latitude": 34.6636708,
+     "longitude": 135.5048598
+    },
+    "rating": 3.8,
+    "businessStatus": "OPERATIONAL",
+    "userRatingCount": 1745,
+    "displayName": {
+     "text": "麺屋 丈六",
+     "languageCode": "ja"
+    },
+    "primaryType": "ramen_restaurant"
+   }
+  },
+  {
+   "claude": {
+    "name_ja": "麺のようじ",
+    "name_ko": "멘노 요지",
+    "address_ja": "大阪府大阪市中央区高津2-1-2 大越ビル 1F",
+    "why_ko": "百名店 WEST 2017~2022, OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,494건). 닛폰바시역 근처(옛 상호는 大阪拳).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270202/27072765/"
+    ]
+   },
+   "codex": {
+    "name_ja": "麺のようじ 大阪本店",
+    "name_ko": "멘노요지 오사카 본점",
+    "address_ja": "大阪府大阪市中央区高津2-1-2 大越ビル1F",
+    "why_ko": "2025 OSAKA 백명점 선정; 공식 사이트에서 오사카 본점임을 확인했으며 닛폰바시에서 닭 육수 라멘·츠케멘을 즐기기 좋은 곳.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27072765/",
+     "https://menno-yoji.com/works/"
+    ]
+   },
+   "google": {
+    "id": "ChIJVVUR0kbnAGAR9U9PWC5eOKQ",
+    "types": [
+     "ramen_restaurant",
+     "japanese_restaurant",
+     "restaurant",
+     "food",
+     "point_of_interest",
+     "establishment"
+    ],
+    "formattedAddress": "〒542-0072 大阪府大阪市中央区高津２丁目１−２",
+    "location": {
+     "latitude": 34.668290299999995,
+     "longitude": 135.511335
+    },
+    "rating": 4.4,
+    "businessStatus": "OPERATIONAL",
+    "userRatingCount": 1288,
+    "displayName": {
+     "text": "麺のようじ",
+     "languageCode": "ja"
+    },
+    "primaryType": "ramen_restaurant"
+   }
+  },
+  {
+   "claude": {
+    "name_ja": "無鉄砲 大阪店",
+    "name_ko": "무뎃포 오사카점",
+    "address_ja": "大阪府大阪市浪速区戎本町1-5-21 米田ビル 1F",
+    "why_ko": "진한 돈코츠 라멘으로 유명. 百名店 WEST 2019~2022, OSAKA 2023~2025 선정. 타베로그 3.71(리뷰 2,507건). 이마미야에비스역 근처로 난바·신세카이 사이(월요일 휴무). 본점이 아니라 지점.",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270206/27005006/"
+    ]
+   },
+   "codex": {
+    "name_ja": "無鉄砲 大阪店",
+    "name_ko": "무텟포 오사카점",
+    "address_ja": "大阪府大阪市浪速区戎本町1-5-21 米田ビル1F",
+    "why_ko": "2025 OSAKA 백명점 선정; 초농후 돈코츠로 유명한 오사카 지점이며 다이코쿠초·이마미야에비스역과 가까워 신세카이 숙소에서 편리함.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270206/27005006/"
+    ]
+   },
+   "google": {
+    "id": "ChIJVVUxOmTnAGARNuV6uBQbBQ0",
+    "types": [
+     "ramen_restaurant",
+     "japanese_restaurant",
+     "restaurant",
+     "food",
+     "point_of_interest",
+     "establishment"
+    ],
+    "formattedAddress": "〒556-0013 大阪府大阪市浪速区戎本町１丁目５−２１",
+    "location": {
+     "latitude": 34.6546002,
+     "longitude": 135.5002183
+    },
+    "rating": 3.9,
+    "businessStatus": "OPERATIONAL",
+    "userRatingCount": 2887,
+    "displayName": {
+     "text": "無鉄砲 大阪本店",
+     "languageCode": "ja"
+    },
+    "primaryType": "ramen_restaurant"
+   }
+  },
+  {
+   "claude": {
+    "name_ja": "麺屋 はなぶさ",
+    "name_ko": "멘야 하나부사",
+    "address_ja": "大阪府大阪市中央区本町1-1-4",
+    "why_ko": "百名店 WEST 2017·2019~2022, OSAKA 2023~2025 선정. 타베로그 3.69(리뷰 1,132건). 사카이스지혼마치역 바로 앞(일요일·공휴일 휴무).",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/"
+    ]
+   },
+   "codex": {
+    "name_ja": "麺屋 はなぶさ",
+    "name_ko": "멘야 하나부사",
+    "address_ja": "大阪府大阪市中央区本町1-1-4",
+    "why_ko": "2025 OSAKA 백명점 선정; 나고야 코친 닭 육수의 중화소바로 알려졌으며 사카이스지혼마치역 도보 3~4분으로 숙소 주변 식사에 적합.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270106/27071670/"
+    ]
+   },
+   "google": {
+    "id": "ChIJ_zj-YyHnAGARu91rndAChKY",
+    "types": [
+     "ramen_restaurant",
+     "japanese_restaurant",
+     "restaurant",
+     "food",
+     "point_of_interest",
+     "establishment"
+    ],
+    "formattedAddress": "〒541-0053 大阪府大阪市中央区本町１丁目１−４",
+    "location": {
+     "latitude": 34.6838562,
+     "longitude": 135.5096059
+    },
+    "rating": 3.9,
+    "businessStatus": "OPERATIONAL",
+    "userRatingCount": 303,
+    "displayName": {
+     "text": "麺屋はなぶさ",
+     "languageCode": "ja"
+    },
+    "primaryType": "ramen_restaurant"
+   }
+  },
+  {
+   "claude": {
+    "name_ja": "麺元素",
+    "name_ko": "멘겐소",
+    "address_ja": "大阪府大阪市北区天神橋5-2-16",
+    "why_ko": "百名店 WEST 2020~2022, OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,665건). 덴마·덴진바시스지 상점가 쪽.",
+    "source_urls": [
+     "https://award.tabelog.com/hyakumeiten/ramen_osaka",
+     "https://tabelog.com/en/osaka/A2701/A270103/27042439/"
+    ]
+   },
+   "codex": {
+    "name_ja": "麺元素",
+    "name_ko": "멘겐소",
+    "address_ja": "大阪府大阪市北区天神橋5-2-16",
+    "why_ko": "2025 OSAKA 백명점 선정; 닭·어패류 육수와 자가제면이 특징이며 텐마역 도보 약 3분으로 상점가 관광과 함께 방문하기 좋음.",
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270103/27042439/"
+    ]
+   },
+   "google": {
+    "id": "ChIJ7Y5wobjmAGAR_DtBZ8dfR-Y",
+    "types": [
+     "ramen_restaurant",
+     "japanese_restaurant",
+     "restaurant",
+     "food",
+     "point_of_interest",
+     "establishment"
+    ],
+    "formattedAddress": "〒531-0041 大阪府大阪市北区天神橋５丁目２−２−１６",
+    "location": {
+     "latitude": 34.707203,
+     "longitude": 135.512135
+    },
+    "rating": 4,
+    "businessStatus": "OPERATIONAL",
+    "userRatingCount": 760,
+    "displayName": {
+     "text": "麺元素",
+     "languageCode": "ja"
+    },
+    "primaryType": "ramen_restaurant"
+   }
+  }
+ ],
+ "only_claude": [
+  "NEXT□（ネクストシカク）",
+  "友愛亭",
+  "らーめん久遠",
+  "大阪 麺哲",
+  "唯一無二のらぁ麺専門店 イ袋ワシづかみ"
+ ],
+ "only_codex": [
+  "なにわ麺次郎",
+  "鶏Soba 座銀 にぼし店",
+  "上方レインボー",
+  "総大醤",
+  "銀座 篝 ルクア大阪店"
+ ]
+}

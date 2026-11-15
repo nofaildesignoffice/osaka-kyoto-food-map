@@ -418,3 +418,217 @@ window.PLACES.push(...([
   "comment": ""
  }
 ]));
+
+// 2026-11-15 라멘: 'Claude·Codex 각자 오사카 라멘 10곳 조사 → Google Places로 장소 확정 → 둘 다 고른 같은 Place ID만' (tools/ramen_pick.py)
+window.PLACES.push(...([
+ {
+  "id": "jouroku",
+  "type": "food",
+  "city": "osaka",
+  "group": "라멘",
+  "emoji": "🍜",
+  "name": "멘야 조로쿠",
+  "nameJa": "麺屋 丈六",
+  "area": "난바·센니치마에 (千日前)",
+  "address": "大阪府大阪市中央区難波千日前6-16",
+  "lat": 34.6636708,
+  "lng": 135.5048598,
+  "menu": "",
+  "origin": "ai",
+  "verified": [
+   "claude",
+   "codex"
+  ],
+  "typed": "오사카 라멘 맛집 (숙소 근처)",
+  "aiEvidence": [
+   {
+    "ai": "Claude",
+    "evidence": "타베로그 라멘 百名店 OSAKA 2025 선정. 타베로그 평점 3.73(리뷰 2,764건)으로 이번 10곳 중 가장 높음. 난바 숙소에서 걸어갈 수 있음(수요일 휴무)."
+   },
+   {
+    "ai": "Codex",
+    "evidence": "2025 OSAKA 백명점 선정; 진한 간장색의 다카이다식 라멘으로 유명하며 난바·닛폰바시 숙소에서 접근하기 좋음."
+   }
+  ],
+  "notes": [],
+  "sources": [
+   {
+    "label": "타베로그",
+    "url": "https://tabelog.com/osaka/A2701/A270202/27084754/"
+   },
+   {
+    "label": "라멘 百名店 OSAKA",
+    "url": "https://award.tabelog.com/hyakumeiten/ramen_osaka"
+   }
+  ],
+  "comment": ""
+ },
+ {
+  "id": "men-no-youji",
+  "type": "food",
+  "city": "osaka",
+  "group": "라멘",
+  "emoji": "🍜",
+  "name": "멘노요지",
+  "nameJa": "麺のようじ",
+  "area": "닛폰바시·고즈 (高津)",
+  "address": "大阪府大阪市中央区高津2丁目1-2",
+  "lat": 34.6682903,
+  "lng": 135.511335,
+  "menu": "",
+  "origin": "ai",
+  "verified": [
+   "claude",
+   "codex"
+  ],
+  "typed": "오사카 라멘 맛집 (숙소 근처)",
+  "aiEvidence": [
+   {
+    "ai": "Claude",
+    "evidence": "百名店 WEST 2017~2022, OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,494건). 닛폰바시역 근처(옛 상호는 大阪拳)."
+   },
+   {
+    "ai": "Codex",
+    "evidence": "2025 OSAKA 백명점 선정; 공식 사이트에서 오사카 본점임을 확인했으며 닛폰바시에서 닭 육수 라멘·츠케멘을 즐기기 좋은 곳."
+   }
+  ],
+  "notes": [],
+  "sources": [
+   {
+    "label": "타베로그",
+    "url": "https://tabelog.com/osaka/A2701/A270202/27072765/"
+   },
+   {
+    "label": "라멘 百名店 OSAKA",
+    "url": "https://award.tabelog.com/hyakumeiten/ramen_osaka"
+   }
+  ],
+  "comment": ""
+ },
+ {
+  "id": "muteppou",
+  "type": "food",
+  "city": "osaka",
+  "group": "라멘",
+  "emoji": "🍜",
+  "name": "무텟포 오사카 본점",
+  "nameJa": "無鉄砲 大阪本店",
+  "area": "이마미야·에비스초 (戎本町)",
+  "address": "大阪府大阪市浪速区戎本町1丁目5-21",
+  "lat": 34.6546002,
+  "lng": 135.5002183,
+  "menu": "",
+  "origin": "ai",
+  "verified": [
+   "claude",
+   "codex"
+  ],
+  "typed": "오사카 라멘 맛집 (숙소 근처)",
+  "aiEvidence": [
+   {
+    "ai": "Claude",
+    "evidence": "진한 돈코츠 라멘으로 유명. 百名店 WEST 2019~2022, OSAKA 2023~2025 선정. 타베로그 3.71(리뷰 2,507건). 이마미야에비스역 근처로 난바·신세카이 사이(월요일 휴무). 본점이 아니라 지점."
+   },
+   {
+    "ai": "Codex",
+    "evidence": "2025 OSAKA 백명점 선정; 초농후 돈코츠로 유명한 오사카 지점이며 다이코쿠초·이마미야에비스역과 가까워 신세카이 숙소에서 편리함."
+   }
+  ],
+  "notes": [],
+  "sources": [
+   {
+    "label": "타베로그",
+    "url": "https://tabelog.com/osaka/A2701/A270206/27005006/"
+   },
+   {
+    "label": "라멘 百名店 OSAKA",
+    "url": "https://award.tabelog.com/hyakumeiten/ramen_osaka"
+   }
+  ],
+  "comment": ""
+ },
+ {
+  "id": "hanabusa",
+  "type": "food",
+  "city": "osaka",
+  "group": "라멘",
+  "emoji": "🍜",
+  "name": "멘야 하나부사",
+  "nameJa": "麺屋はなぶさ",
+  "area": "사카이스지혼마치 (本町)",
+  "address": "大阪府大阪市中央区本町1丁目1-4",
+  "lat": 34.6838562,
+  "lng": 135.5096059,
+  "menu": "",
+  "origin": "ai",
+  "verified": [
+   "claude",
+   "codex"
+  ],
+  "typed": "오사카 라멘 맛집 (숙소 근처)",
+  "aiEvidence": [
+   {
+    "ai": "Claude",
+    "evidence": "百名店 WEST 2017·2019~2022, OSAKA 2023~2025 선정. 타베로그 3.69(리뷰 1,132건). 사카이스지혼마치역 바로 앞(일요일·공휴일 휴무)."
+   },
+   {
+    "ai": "Codex",
+    "evidence": "2025 OSAKA 백명점 선정; 나고야 코친 닭 육수의 중화소바로 알려졌으며 사카이스지혼마치역 도보 3~4분으로 숙소 주변 식사에 적합."
+   }
+  ],
+  "notes": [],
+  "sources": [
+   {
+    "label": "타베로그",
+    "url": "https://tabelog.com/osaka/A2701/A270106/27071670/"
+   },
+   {
+    "label": "라멘 百名店 OSAKA",
+    "url": "https://award.tabelog.com/hyakumeiten/ramen_osaka"
+   }
+  ],
+  "comment": ""
+ },
+ {
+  "id": "mengenso",
+  "type": "food",
+  "city": "osaka",
+  "group": "라멘",
+  "emoji": "🍜",
+  "name": "멘겐소",
+  "nameJa": "麺元素",
+  "area": "텐마 (天神橋)",
+  "address": "大阪府大阪市北区天神橋5丁目2-2-16",
+  "lat": 34.707203,
+  "lng": 135.512135,
+  "menu": "",
+  "origin": "ai",
+  "verified": [
+   "claude",
+   "codex"
+  ],
+  "typed": "오사카 라멘 맛집 (숙소 근처)",
+  "aiEvidence": [
+   {
+    "ai": "Claude",
+    "evidence": "百名店 WEST 2020~2022, OSAKA 2023~2025 선정. 타베로그 3.70(리뷰 1,665건). 덴마·덴진바시스지 상점가 쪽."
+   },
+   {
+    "ai": "Codex",
+    "evidence": "2025 OSAKA 백명점 선정; 닭·어패류 육수와 자가제면이 특징이며 텐마역 도보 약 3분으로 상점가 관광과 함께 방문하기 좋음."
+   }
+  ],
+  "notes": [],
+  "sources": [
+   {
+    "label": "타베로그",
+    "url": "https://tabelog.com/osaka/A2701/A270103/27042439/"
+   },
+   {
+    "label": "라멘 百名店 OSAKA",
+    "url": "https://award.tabelog.com/hyakumeiten/ramen_osaka"
+   }
+  ],
+  "comment": ""
+ }
+]));

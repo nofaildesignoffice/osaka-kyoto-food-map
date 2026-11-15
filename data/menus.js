@@ -1717,5 +1717,330 @@ window.MENUS = {
   },
   "disagree": "예약 상태: A는 '예약 가능(accepted)'으로 봤고, 예약이 필수인지는 확인하지 못했다고 했습니다. B는 2026년 2월 후기(평일에도 만석이라 예약 권장)를 근거로 '예약 권장(recommended)'으로 봤습니다. 다만 B도 2026년 5월에 예약 없이 빈 카운터 2석에 들어간 후기를 함께 적었습니다. A는 대기나 만석에 대한 언급을 찾지 못했다고 했습니다. 메뉴: A는 오반자이와 스시(이쿠라·우니·엔가와 등) 2개를 적었습니다. B는 초밥과 오반자이가 후기에 나온다는 점은 인정했지만, 인기 순위와 정확한 표기를 확인하지 못해 목록을 비워 두었습니다. 그래서 양쪽에 공통으로 남은 메뉴는 없습니다. 기타: A는 타베로그 영어판만 확인했고, B는 타베로그 일본어판과 Retty를 확인했습니다. B는 Retty에 다른 전화번호가 적혀 있다고 했습니다.",
   "checkedAt": "2026-11-15"
+ },
+ "jouroku": {
+  "menus": [
+   {
+    "name_ja": "中華そば（並）",
+    "name_ko": "주카소바 (보통)",
+    "desc_ko": "히가시오사카 다카이다식 간장 라멘. 국물 색은 검지만 맛은 의외로 깔끔하고, 굵은 자가제면을 쓴다.",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/restaurant/100000030435/",
+     "https://foodle.pro/restaurants/osaka/jouroku",
+     "https://foodle.pro/post/114350",
+     "https://www.timeout.jp/osaka/ja/レストラン/menya-jouroku-namba",
+     "https://retty.me/area/PRE27/ARE94/SUB9501/100000030435/"
+    ]
+   }
+  ],
+  "photos": [
+   {
+    "name": "places/ChIJVRkzJ2rnAGARQqsC-omixzg/photos/AV-0GLcLof6Xt7liGoD2RbJkfEEsc1YIwkjinJrVlnNbGZaa26BKhXOHIIeJvUpphgvHMmA71nXQN-2D7fgN8_SX_Xf4u0kTWIfFHqIJk6CumDk95ydnCuk7Aa9mnETe1dkeFCamsyjLdofh0H4Xqgr3iKNMzhPloCqEnF9e__88Oa4_hR4F4ipt8r18HSbU131yCGLhc_ShUw_NoR6ylXH6mhw0k_T0w0Q6hZgO7Epf-APX4cge3Qc2VsWOKXQ9oJwOvQN32Hro93Goi1AO-jjeaDpFCUMPQTJw4ZcZrTV3MhAre8dqJ25qnsbpasJBfnk0DPb0JlarHaSolEIlE64t3cch1m08fuhXHHoBIfZwom8Ga2IjCWzFofz-wBx9ZnHL0z2W4MDcLwGjoqRMEylk7S6Q_Q",
+    "menu": 0,
+    "w": 2048,
+    "h": 1536,
+    "author": "麺屋 丈六",
+    "authorUri": "https://maps.google.com/maps/contrib/102848297640625068210"
+   },
+   {
+    "name": "places/ChIJVRkzJ2rnAGARQqsC-omixzg/photos/AV-0GLfN7Z12FNbNMwZxGX8jMDtGGgFLi4ocMo0h-8_hqN_zDx1R1D9SWjoofwwfSjkUJbRsWYOn4V1VEqfOk0FMDZU901EjJS45PVorOykw9F4P9-Xnj9voWmsZQoxHP0xPkJpcpKV0waiCqL3dZROqtX7FxDe0vsrMSidWc4DQt7dsMPbdCdaoVisUdV7RRrXLTSJGmv2XsVHKRMdOb4Pv-aPh1l9EqhRRvs_1lHp1BD1PXFVbBpEhWPkecRVo8ZmuSkrLtg7gDiTfZmDnyMfcbm4a0AdC-sW3kxZxOQK9nNjhTHj8pdX-eu40BQADPWWBhFu8ihuVi7EC2D_0j75A-mEl9BY7L7j2j5AieQws6KhsBIeAQ_Bn3itfCqYnmZWiBF-l6InHmDC-IOclXYdhtqE3aH8HKSacHNLq0IJq4T_rTQ",
+    "menu": 0,
+    "w": 4096,
+    "h": 3072,
+    "author": "José María H.G.",
+    "authorUri": "https://maps.google.com/maps/contrib/113641808974675574959"
+   },
+   {
+    "name": "places/ChIJVRkzJ2rnAGARQqsC-omixzg/photos/AV-0GLdYdKlmZSiYi-8z225UKrZL1bLaLAyKmiho6rQPKhLB9RpzFOvwjFlSopKPOecGCMOS-uZDBZUEMyTTd3Xn5rRv9tD3QvRVQpYPNcF6mucNnOB5lpteKsfTDe88RpH_qf4vNyceo2hW7XqQnj50ij5WASFfwosRzrqZ2uIeg7zJCNfpLAnjaYOQv140_oL_EFGd5amAkaqxrU_yf8mvl2c2FXLEnzEVx6GOOxxSxgs5HRGZbM7xoZ7sWA4SJxnefk32GYqp937fYn6zbxCa3jw2M-o_SkFZ2zwOXQZiQL5_hLDLCSBV345pa7pNfQJDd2DuqrUWCZsYNoR_L89Ptbjs3t5VqPtsfq0vnLsPUxn1r5h10qDGFunhRclYuQnXN9wScTe_oxn-7nn8bmIy3mEmW44lP9x3mirbry3VdVJW6A",
+    "menu": 0,
+    "w": 4096,
+    "h": 3072,
+    "author": "藻日マリ",
+    "authorUri": "https://maps.google.com/maps/contrib/101143144859358657895"
+   },
+   {
+    "name": "places/ChIJVRkzJ2rnAGARQqsC-omixzg/photos/AV-0GLfg0BpxrsgodIj_nN_vhzjCD7mmq22wKHrRUrJCSrqqMdcAych2Eykmv_-wwAqttPk9MdgLqfJH2JQ846lEGDjD94CcQPmySLiRPb70VXQPjCIDc60yocLAIbfIKV-gUX3Lwbd_DIJT02nhVQbKEL5aIaR80L6T2GFOrOQOgGKANw4Vif6PVwoI11DBVaZymtzhOR0aq73rVFhM4-MjiWIc51ZHh_1jAW3pnzZCwkyRLbFv9D3tObosyWOKtGskqpOfPxatu7ZicHfVtUU3ZwQ5RKdqecTrSW6l2_vQmBO8_8x-vJxMCE7B5g7Pa7P9ej5JiRPLJ5uzqYHJXSlL60PGLV2HDE1GJoQVIqmOX9DFIvwiPh7MsQSGa1POzfw0iJACxhMhYETFeto27qbr2aYcbupR3x_X8zPK0kGIniwe9A",
+    "menu": 0,
+    "w": 4080,
+    "h": 3072,
+    "author": "池内孝夫（くみちょう）",
+    "authorUri": "https://maps.google.com/maps/contrib/117944441192548460082"
+   },
+   {
+    "name": "places/ChIJVRkzJ2rnAGARQqsC-omixzg/photos/AV-0GLeP9ngdfBhHDp1bIvxb4SJjO9ZdRWDflvIkb11BoCrVUeQC7rIsl4RNs8N-Ivooq3Ff20fODyGFlgbCrwR9i3DsHMS0oHQHIQTpuy0r6gdJMr-6H5N5mP-AFN25nMX5e_B_bEuMWRD9SCW8YS0wSuyNCCMd51qxojegxuv9-1cqI3TFuxT5ZxNJucUdfh8yX5oDYT0WD93LbLXdtfRs8CV7otssm7BISmswG-dGawcVGx3gO-1wEu49C8a8JvWNnWLWmgbPYfYtXeQkLrfEUy6GPuHf-o8zlNWVrlYcAMWOZoJHEOUWzgZrGVuAhbZCMXZ1A356lO8YaLW4-vLDBdFwvlBPb518LOA7NYlmlgWDqv3LZlrJOkW2vQbTGSvqKRu9PcLTx1FpPsC8iQrEfQ97CuhFqe5SlLlVw_W3m_Gs",
+    "menu": 0,
+    "w": 3024,
+    "h": 4032,
+    "author": "t.k",
+    "authorUri": "https://maps.google.com/maps/contrib/109931853623929592977"
+   }
+  ],
+  "reserve": {
+   "status": "not_accepted",
+   "agree": true,
+   "single": null,
+   "hint": "",
+   "methods": [],
+   "note": "타베로그에 '예약 불가'로 나와 있어 현장에서 줄을 서야 함.",
+   "googleReservable": false
+  },
+  "disagree": "공통 메뉴는 주카소바(보통) 하나뿐임. A는 그 밖에 양념 반숙 달걀 토핑(100엔)과 날달걀 밥(350엔)을, B는 하야즈시(고등어 눌림초밥)를 넣었음. 주카소바 가격은 A가 1,000엔(2026년 후기 기준)으로 적었고, B는 2023년 기사의 900엔과 2026년 후기의 1,000엔이 달라 비워 두었음. 그래서 가격은 null로 처리함. 면 설명도 다름: A는 '굵은 자가제면', B는 '중간 굵기 스트레이트 면'이라고 적었음. 대기 정보도 결이 다름: A는 늘 줄이 서고 피크를 피하면 빨리 들어간다고 했고, B는 실내 대기 의자가 있으며 평일 저녁은 대기가 비교적 적다고 했음(2023년 타임아웃 기사).",
+  "checkedAt": "2026-11-15"
+ },
+ "men-no-youji": {
+  "menus": [
+   {
+    "name_ja": "鶏節極塩らーめん",
+    "name_ko": "토리부시 고쿠시오 라멘 (닭가쓰오 소금 라멘)",
+    "desc_ko": "닭과 채소를 바탕으로 한 소금맛 라멘으로, 공식 메뉴에서 인기 1위로 소개한다.",
+    "price_jpy": 950,
+    "source_urls": [
+     "https://www.naralunch.com/tukemen/mennoyoji.html",
+     "https://nori-net.jp/blog/?p=43248",
+     "https://ameblo.jp/anpanman-gogo-gogo-gogo/entry-12883827160.html",
+     "https://kansai-tabearuki.com/osaka/osaka-ramen/mennoyouji/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27072765/",
+     "https://menno-yoji.com/menu/",
+     "https://tabelog.com/osaka/A2701/A270202/27072765/"
+    ]
+   },
+   {
+    "name_ja": "鶏ドロつけ麺",
+    "name_ko": "토리도로 츠케멘 (진한 닭 츠케멘)",
+    "desc_ko": "걸쭉한 닭백탕 츠케지루를 돌냄비에 보글보글 끓는 상태로 내주는 찍먹 면",
+    "price_jpy": 1300,
+    "source_urls": [
+     "https://www.naralunch.com/tukemen/mennoyoji.html",
+     "https://ameblo.jp/shinya1230/entry-12955063890.html",
+     "https://ameblo.jp/anpanman-gogo-gogo-gogo/entry-12883827160.html",
+     "https://menno-yoji.com/menu/",
+     "https://tabelog.com/osaka/A2701/A270202/27072765/"
+    ]
+   },
+   {
+    "name_ja": "鶏節極醤油らーめん",
+    "name_ko": "토리부시 고쿠쇼유 라멘 (닭가쓰오 간장 라멘)",
+    "desc_ko": "통닭과 닭뼈에서 우려낸 감칠맛을 강조한 간장 라멘.",
+    "price_jpy": 950,
+    "source_urls": [
+     "https://www.naralunch.com/tukemen/mennoyoji.html",
+     "https://ameblo.jp/anpanman-gogo-gogo-gogo/entry-12883827160.html",
+     "https://ameblo.jp/shinya1230/entry-12955063890.html",
+     "https://menno-yoji.com/menu/",
+     "https://tabelog.com/osaka/A2701/A270202/27072765/"
+    ]
+   }
+  ],
+  "photos": [
+   {
+    "name": "places/ChIJVVUR0kbnAGAR9U9PWC5eOKQ/photos/AV-0GLfT2s4tlLEjolGeDjFraHqa3uVi8U95zFBhghuR9NpSb0WK0dZzwi0b3fHxSxOx3413Dhzs7oJJSW6BBjHkUBHeuSZbwGQdDE-N_wWBlvTw8Y90hmdnMM8NI1eN_mhNswuI6DHHw5POY43E9-1ISCNV5RS-xyQqJdEVLLXsmOFprW1PpFt9VJ9AAJ7y-_BMcdtJg67QzTZM3Pf2hFr897L6oC-TroRfny6VyX7R-FXoQVjricSOE4ia_J9JocTGMtaUDfasGp1vzapsncSFvtd33_0ewpj2BxqCLM2LlpFyOi7f_DGHMFTQOqEMa3x3YD2A_f_sw1Mjk_k0VYHjnlvvbemcd4-cgi9zcZNS6ENxD0YlurRXkwkVPZZgNlN5SND9nPCu5vD5BZlsGePmq8DbM6q9knVidzVsXLMJzZGG",
+    "menu": 0,
+    "w": 4771,
+    "h": 3181,
+    "author": "麺のようじ",
+    "authorUri": "https://maps.google.com/maps/contrib/100545798900625931879"
+   },
+   {
+    "name": "places/ChIJVVUR0kbnAGAR9U9PWC5eOKQ/photos/AV-0GLeXUQ1dIymApEFwqqJJgMxm8adiDw3FyPZrrpopZTISpWRO9v6r4rJwONUimkphRuWz5DmNS99JTzXyT_502F4q_vk-kNSAvTnZB_miyD0L1VVZdlqnf2mh0mRaLTFVX2fzuUxgrDWprM5VsYV1nCC4iHpQzsW-7O8ZNDbrmrc4t1wYcaExIdhauUEUntJW6fPd3S7N0s8U5j-rNOvSme9NP81oRKdT6lj9Y_Gl595w6AZssz7OZInGJNVR00tty6qj28JpeSEf2LiEyRnn4a175qvrKaIhboVmNtLHVUVctUKo0RLDorComKUcvXPsFHNcsrQ1x3OSuysKqWt6upxzP9f5NPliaAR18Ir3fBxT3FNaSwLB66hA34FuEAHqDzJSFsCbTPxRy7Dog-JUZ6F5dsv7XrsFsw3Ifjlq14PC",
+    "menu": 1,
+    "w": 4031,
+    "h": 2267,
+    "author": "kazu",
+    "authorUri": "https://maps.google.com/maps/contrib/110890635498027122021"
+   },
+   {
+    "name": "places/ChIJVVUR0kbnAGAR9U9PWC5eOKQ/photos/AV-0GLcS8rrHGKCz_KfCHyMgSP1gnMMn6YOI5BmQXyJjMThMoAjc6XlTaouDHTMuuEFZno6MoVKfZmZNjttRdVl2U7H_D_e0ISNz65ahMuMgbB6WJeoclN5_dI1FQfrI2jKp2JiVb66kPvPXsaBZiPog0ZK-kasmVgag3-AzISW8I77rfx6JxUZDSrgtkIZ2zCWdTK7BCeNct29231-2gmZFStHTRpaLGiKR0QsgHyOUHV_g8KXWtHcAqKDQ2zNy3hTMxLMNiF1opp1L6hlf9pyqR5LtmoypVPiHIjfHbzVXcdxWYwZUVc62tC4gEkNPv3wWdwpRkMKqVJmoWggnemPzrkjXoB6ZaKaEDpiW7tOFq-1IW9drWrTOESIalDhne8bfteb1FafhejTFMmmZcJ1RiKbZz2gp1bd9Z02kfkLBeHdb5g",
+    "menu": 1,
+    "w": 4800,
+    "h": 3600,
+    "author": "이상도",
+    "authorUri": "https://maps.google.com/maps/contrib/114419292668105644144"
+   }
+  ],
+  "reserve": {
+   "status": "not_accepted",
+   "agree": true,
+   "single": null,
+   "hint": "",
+   "methods": [],
+   "note": "타베로그에 예약 불가로 표기됨. 가게 밖 식권기에서 식권을 먼저 산 뒤 줄을 서는 방식.",
+   "googleReservable": false
+  },
+  "disagree": "A에는 鶏塩らーめん(950엔)이 하나 더 있음. 2·3위 순서가 다름(A: 츠케멘→간장, B: 간장→츠케멘). 다만 둘 다 2위 이하는 순위 근거가 약하다고 밝힘. 가격 출처도 다름: A는 블로그 naralunch.com 기준이고 공식 사이트를 찾지 못했다고 했으며, B는 공식 홈페이지(menno-yoji.com)의 세금 포함 가격 기준. 소금 라멘이 인기 1위라는 근거도 A는 블로그 언급, B는 공식 메뉴 표기. A에만 있는 정보: 8석(카운터 4, 테이블 4), 현금만 가능, 대기 수 분~5분, 18시 무렵이 덜 붐빔.",
+  "checkedAt": "2026-11-15"
+ },
+ "muteppou": {
+  "menus": [
+   {
+    "name_ja": "とんこつラーメン",
+    "name_ko": "돈코츠 라멘",
+    "desc_ko": "국산 돼지뼈와 물만으로 오래 끓인 아주 진하고 걸쭉한 돈코츠 라멘. 면 굵기·국물 농도(코테리 등)·파 양을 고를 수 있음",
+    "price_jpy": null,
+    "source_urls": [
+     "https://ameblo.jp/j2mori0416/entry-12912539755.html",
+     "https://map.yahoo.co.jp/v3/place/5bnMreLU9Kk/review",
+     "https://www.gltjp.com/ja/directory/item/12248/",
+     "https://retty.me/restaurant/100000028708/",
+     "https://r.gnavi.co.jp/2f77n36u0000/",
+     "https://retty.me/area/PRE27/ARE94/SUB62309/100000028708/",
+     "https://kuze-nikki.com/post-0-234-5823"
+    ]
+   },
+   {
+    "name_ja": "Wスープラーメン",
+    "name_ko": "W수프 라멘",
+    "desc_ko": "돈코츠 국물과 생선 육수 기반 간장(오사카 한정) 국물을 6:4로 섞은 라멘",
+    "price_jpy": null,
+    "source_urls": [
+     "https://www.gltjp.com/ja/directory/item/12248/",
+     "https://retty.me/restaurant/100000028708/",
+     "https://map.yahoo.co.jp/v3/place/5bnMreLU9Kk/review",
+     "https://r.gnavi.co.jp/2f77n36u0000/",
+     "https://retty.me/area/PRE27/ARE94/SUB62309/100000028708/",
+     "https://ameblo.jp/s-machami/entry-10654880284.html"
+    ]
+   }
+  ],
+  "photos": [],
+  "reserve": {
+   "status": "not_accepted",
+   "agree": true,
+   "single": null,
+   "hint": "",
+   "methods": [],
+   "note": "예약을 받지 않고 줄을 서는 가게. 기다렸다가 라멘을 받기까지 최대 30분 정도 걸렸다는 후기가 있음.",
+   "googleReservable": false
+  },
+  "disagree": "- 메뉴 수: A는 4개, B는 2개. 돈코츠 차슈멘과 헤타고항(밥)은 A에만 있어서 뺐음.\n- 가격: A는 리뷰를 근거로 돈코츠 라멘을 1,000엔으로 적었고, B는 현재 가격을 확인하지 못해 null로 둠. 그래서 null로 처리함.\n- 예약 불가의 근거: A는 예약 불가라고 적힌 출처를 찾지 못하고 예약 수단이 없다는 점과 줄서기 후기로 추정했음(타베로그 접속 실패). B는 타베로그에 예약 불가라고 명시돼 있다고 적었음.\n- 인기순 근거: A는 리뷰를 바탕으로 정했고, B는 구루나비의 메뉴 순위를 근거로 함. A는 구루나비 접속에 실패했다고 적었음.\n- 대기시간: A는 5~30분이라고 적었고, B는 30분 정도 걸린 후기 1건만 적었음.",
+  "checkedAt": "2026-11-15"
+ },
+ "hanabusa": {
+  "menus": [
+   {
+    "name_ja": "鶏そばプレミアム",
+    "name_ko": "토리소바 프리미엄",
+    "desc_ko": "나고야 코친 통닭으로 우린 무화학조미료 닭 육수에 간장 다레를 더한 대표 닭 라멘",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/matome/15314/",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://wanderlog.com/place/details/1252512/menya-hanabusa",
+     "https://foodle.pro/restaurants/osaka/menya-hanabusa",
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   },
+   {
+    "name_ja": "中華そば",
+    "name_ko": "주카소바",
+    "desc_ko": "닭 청탕 육수에 간장으로 맛을 낸 라멘.",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/matome/15314/",
+     "https://tabelog.com/en/osaka/A2701/A270106/27071670/",
+     "https://4travel.jp/dm_shisetsu/11500412",
+     "https://tabelog.com/osaka/A2701/A270106/27071670/dtlmenu/",
+     "https://retty.me/area/PRE27/ARE91/SUB9102/100000792616/",
+     "https://mamiran.jp/menya-hanabusa/"
+    ]
+   }
+  ],
+  "photos": [
+   {
+    "name": "places/ChIJ_zj-YyHnAGARu91rndAChKY/photos/AV-0GLeQgmNmEJX4-KPZEXVUwX0x3ZV6yyj25VOv7cfhyptlFjTVTeKHMM8JaYudbqzwlkzB-LReMrv2IsHWzYt4pdoSzhkfI8wgpwzng9vmQH5pJvpDDM1P743Vr-SofdB1N2lSdW9zxh6edWiQsIm46iyUhcHDjb5PSG24Gwj5V1CfNreQyQND_Zi-Z3wr-hBCBoScJZMWvaV_KsTCl4cO1q8W-Nv9pHFaArXD2fG-Py6fJuLNeptOZtsEd3K0B3f_HGihsIXhFIT7tn5gguCCM9sC5EXAtqfjpluE3BUhpFborCX5RP1YQIZ6sZMa5I5b_NcISrE7C1lAEWVpRcIY-_N7iA1ZBZyUs0yEWBYumlN5OmRGPCUj0DNcKZrTdg4Ybkw0IpB5JfVytcP5szPh3gGdbc6xLSG6vz6aW9VMXZgAqQ",
+    "menu": 0,
+    "w": 3024,
+    "h": 4032,
+    "author": "ma_ma san",
+    "authorUri": "https://maps.google.com/maps/contrib/117674104166371979024"
+   }
+  ],
+  "reserve": {
+   "status": "not_accepted",
+   "agree": true,
+   "single": null,
+   "hint": "",
+   "methods": [],
+   "note": "타베로그 기준 예약 불가. 점심시간에 만석이 되거나 줄이 생긴다는 후기가 있음.",
+   "googleReservable": false
+  },
+  "disagree": "인기 순위: A는 鶏そばプレミアム을 1위로, B는 中華そば를 1위로 둠(B는 2016년 타베로그 메뉴의 '인기 1위' 표시가 근거). 메뉴 구성: A에만 和えそば(아에소바), B에만 塩そば(시오소바)가 있음. 中華そば 설명: A는 해산물 계열 수프, B는 닭 청탕+간장이라고 함(B는 해산물 육수를 塩そば 쪽 특징으로 봄). 鶏そばプレミアム 설명: A는 닭 육수+간장 다레, B는 크리미한 닭 백탕이라고 함. 예약 관련 부가 정보: A는 카운터 7석·식권제·현금만 가능·수프 소진 시 영업 종료와 2017년 점심 대기를 언급했고, B는 2024년 11월 11:05 만석·실내 대기 2명을 언급함.",
+  "checkedAt": "2026-11-15"
+ },
+ "mengenso": {
+  "menus": [
+   {
+    "name_ja": "中々",
+    "name_ko": "나카나카",
+    "desc_ko": "어패류 육수와 닭백탕(토리파이탄)을 합친 더블 수프 라멘. 가게 추천 메뉴이며 리뷰에서 가장 많이 언급되는 대표 메뉴",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/restaurant/100000007806/",
+     "https://retty.me/theme/101992500/",
+     "https://tabelog.com/en/osaka/A2701/A270103/27042439/",
+     "https://osakalucci.jp/tenroku-ramen",
+     "https://retty.me/area/PRE27/ARE92/SUB62105/100000007806/",
+     "https://tabelog.com/osaka/A2701/A270103/27042439/dtlmenu/"
+    ]
+   },
+   {
+    "name_ja": "レタスチャーハン（半チャーハン）",
+    "name_ko": "양상추 볶음밥 (반 볶음밥)",
+    "desc_ko": "양상추를 넣은 볶음밥. 라멘에 곁들이는 사이드로 여러 리뷰에서 언급됨",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/restaurant/100000007806/",
+     "https://retty.me/theme/101992500/",
+     "https://osakalucci.jp/tenroku-ramen",
+     "https://retty.me/area/PRE27/ARE92/SUB62105/100000007806/"
+    ]
+   },
+   {
+    "name_ja": "鶏元素 濃厚醤油",
+    "name_ko": "토리겐소 진한 간장 라멘",
+    "desc_ko": "닭백탕 베이스에 간장으로 맛을 낸 진한 간장 라멘",
+    "price_jpy": 1080,
+    "source_urls": [
+     "https://retty.me/restaurant/100000007806/",
+     "https://tabelog.com/en/osaka/A2701/A270103/27042439/dtlmenu/",
+     "https://osakalucci.jp/tenroku-ramen",
+     "https://retty.me/area/PRE27/ARE92/SUB62105/100000007806/"
+    ]
+   },
+   {
+    "name_ja": "魚元素 塩",
+    "name_ko": "우오겐소 시오(소금) 라멘",
+    "desc_ko": "어패류 육수 베이스의 소금 라멘. 스다치(영귤)를 곁들여 나옴",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/theme/101992500/",
+     "https://tabelog.com/en/osaka/A2701/A270103/27042439/dtlmenu/",
+     "https://osakalucci.jp/tenroku-ramen",
+     "https://tabelog.com/osaka/A2701/A270103/27042439/dtlmenu/"
+    ]
+   }
+  ],
+  "photos": [
+   {
+    "name": "places/ChIJ7Y5wobjmAGAR_DtBZ8dfR-Y/photos/AV-0GLcakvTr0qL8TU_kZ6crBvWwUEmEyblUweqqu3qNhAog24jxJnKBCoaYmppWkh7WMWRHo1TmVbI7ARtnK9r0ULvyhDHZi-M2id2tH8nVpxd3Ao84mpiFex2CfE82nYuCegny_ZtMJUEQOvuxaArKbEAvu4LwydatiMlSoZFp58UkIrs5ckodY3kTrc_CdXcqYScvwONLnxa_rr3OZirTJVX7oCYveFULmx6jk7C5x-kb0am-gfs0azePVWy0RoB70VJiDc2ijgrMyhRjmY1DAzuZbZniljuoCYH_qP208xBiPeZDIP6JQECwEQTHU3k5kCTFaWcEf9MXU5KPhyvZ3uMZk9Fh_2TTqJ_AANkGQMQFsWnYNHeYg8-2C5ClKyJKUXgis9gL5ZBKuccr8sNbCDyO9lsxxRlR8xrzNkflbWo8",
+    "menu": 1,
+    "w": 3361,
+    "h": 2521,
+    "author": "Rin Zen (zenrin)",
+    "authorUri": "https://maps.google.com/maps/contrib/107930267128706679171"
+   }
+  ],
+  "reserve": {
+   "status": "not_accepted",
+   "agree": true,
+   "single": null,
+   "hint": "",
+   "methods": [],
+   "note": "타베로그 기준 예약 불가(선착순). 수프가 떨어지면 영업을 일찍 끝낼 수 있음.",
+   "googleReservable": false
+  },
+  "disagree": "가격 차이: 中々는 A 970엔(Retty 리뷰), B 1,050엔(오사카 루치 2026년 기사). 魚元素 塩은 A에 가격이 없고 B는 1,060엔. 볶음밥은 A가 반 사이즈(半チャーハン) 290엔, B가 보통 사이즈(並チャーハン) 600엔(평일 15시까지 500엔)이라 같은 양상추 볶음밥이어도 사이즈가 달라 가격을 비교할 수 없음. 인기 순서도 다름: A는 간장 라멘이 소금 라멘보다 앞이고 B는 그 반대. 주소 표기 문제(天神橋5-2-16)는 B만 언급함.",
+  "checkedAt": "2026-11-15"
  }
 };
