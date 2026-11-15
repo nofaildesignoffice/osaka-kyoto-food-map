@@ -69,6 +69,7 @@ button,select{font:inherit;color:inherit}
 /* list */
 .cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px calc(-1 * var(--sx)) 0;padding:2px var(--sx) 4px}
 .cats::-webkit-scrollbar{display:none}
+@media (pointer:fine){.cats{cursor:grab;user-select:none}.cats.dragging,.cats.dragging .cat{cursor:grabbing}}
 .cat{flex:none;padding:6px 13px;border-radius:999px;border:1px solid #e9e9e9;background:#fff;color:var(--ink3);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 .cat b{font-weight:700;margin-left:3px;opacity:.55;font-size:11px}
 .cat[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
@@ -681,9 +682,18 @@ function renderList(){
     } else if(!ranked.length) h += `<div class="sec">순위 맛집 0</div><div class="empty">맛집 카드 오른쪽의 👑🥈🥉 버튼으로 순위를 매겨 보세요.</div>`;
   }
   if((f==='all'||f==='spot') && spots.length) h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
+  const prevCats = listEl.querySelector('.cats'); const keepX = prevCats ? prevCats.scrollLeft : 0;
   listEl.innerHTML = h;
+  const nc = listEl.querySelector('.cats'); if(nc) nc.scrollLeft = keepX;
   observeThumbs();
 }
+// 카테고리 줄: 데스크탑에서도 마우스로 잡고 끌어서 좌우 슬라이드 + 휠로 가로 스크롤
+let catDrag=null, catSuppress=false;
+listEl.addEventListener('pointerdown',e=>{ const c=e.target.closest('.cats'); if(!c||e.pointerType!=='mouse'||e.button!==0) return; catDrag={c,x:e.clientX,sl:c.scrollLeft,moved:false}; });
+window.addEventListener('pointermove',e=>{ if(!catDrag) return; const dx=e.clientX-catDrag.x; if(!catDrag.moved && Math.abs(dx)>4){ catDrag.moved=true; catDrag.c.classList.add('dragging'); } if(catDrag.moved){ catDrag.c.scrollLeft=catDrag.sl-dx; e.preventDefault(); } });
+window.addEventListener('pointerup',()=>{ if(!catDrag) return; if(catDrag.moved){ catSuppress=true; catDrag.c.classList.remove('dragging'); setTimeout(()=>catSuppress=false,0); } catDrag=null; });
+listEl.addEventListener('click',e=>{ if(catSuppress && e.target.closest('.cats')){ e.stopPropagation(); e.preventDefault(); catSuppress=false; } },true);
+listEl.addEventListener('wheel',e=>{ const c=e.target.closest('.cats'); if(!c||Math.abs(e.deltaX)>Math.abs(e.deltaY)) return; if(c.scrollWidth<=c.clientWidth) return; c.scrollLeft+=e.deltaY; e.preventDefault(); },{passive:false});
 listEl.addEventListener('click',e=>{
   const ct=e.target.closest('[data-cat]'); if(ct){ state.cat=ct.dataset.cat; renderList(); refreshMarkers(); return; }
   const rk=e.target.closest('[data-rank]'); if(rk){ e.stopPropagation(); setRank(rk.dataset.id, +rk.dataset.rank); return; }
