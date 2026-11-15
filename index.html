@@ -167,6 +167,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   /* 모바일: 상단 헤더(제목·버튼·지역/종류)는 화면 위에 고정, 그 아래 지도, 그 아래 목록만 스크롤 */
   .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);position:relative;overflow:hidden}
   .side{display:contents}
+  .title{font-size:17px}
   .side-head{order:0;position:relative;z-index:20;background:var(--panel);padding:14px 16px 14px}
   .mapwrap{order:1}
   /* 목록 = 지도 위에 겹친 바텀시트. 지도는 시트 뒤까지 꽉 차 있어서 끌어내려도 빈 공간이 안 보임 */
@@ -191,7 +192,18 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 }
 /* head actions */
 .title-row{display:flex;align-items:center;gap:8px}
-.title-row .title{flex:1;min-width:0}
+.title-row .title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbtn.edit{gap:6px;padding:7px 12px}
+.hot-tg{flex:none;display:inline-flex;align-items:center;gap:7px;padding:5px 6px 5px 11px;border-radius:999px;border:1px solid var(--line);background:#fff;font:inherit;font-size:12.5px;font-weight:800;color:var(--ink);cursor:pointer}
+.hot-tg .sw{position:relative;width:32px;height:19px;border-radius:99px;background:#d9d5cd;transition:background .18s}
+.hot-tg .sw i{position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s}
+.hot-tg[aria-checked=true] .sw{background:#7c4dff}
+.hot-tg[aria-checked=true] .sw i{transform:translateX(13px)}
+.edit-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.edit-opt{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff;font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+.edit-opt:hover{border-color:var(--ink);box-shadow:var(--shadow)}
+.edit-opt .circ{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:19px;font-weight:800;line-height:1}
+.edit-opt b{font-size:15px} .edit-opt small{font-size:12px;color:var(--ink3);line-height:1.45}
 .hbtn{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12.5px;font-weight:800;cursor:pointer;color:var(--ink)}
 .hbtn .circ{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:15px;line-height:1;color:#fff;font-weight:800}
 .hbtn.add .circ{background:var(--walk)} .hbtn.del .circ{background:var(--food)}
@@ -292,8 +304,8 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   <aside class="side">
     <div class="side-head">
       <div class="title-row"><h1 class="title">오사카·교토 맛집 지도</h1>
-        <button class="hbtn add" id="btnAdd" type="button"><span class="circ">+</span>추가</button>
-        <button class="hbtn del" id="btnDel" type="button"><span class="circ">−</span>삭제</button>
+        <button class="hbtn edit" id="btnEdit" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>수정</button>
+        <button class="hot-tg" id="btnHot" type="button" role="switch" aria-checked="true" title="핫플 지역 음영 켜기/끄기"><span>핫플</span><span class="sw" aria-hidden="true"><i></i></span></button>
         <button class="bell" id="btnBell" type="button" aria-label="알림" title="알림"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge" hidden></span></button></div>
       <div class="legend">
         <span><span class="rk r1">1</span>1순위</span><span><span class="rk r2">2</span>2순위</span><span><span class="rk r3">3</span>3순위</span>
@@ -575,7 +587,8 @@ function panTo(lat,lng,z){ if(!map) return; map.panTo({lat,lng}); if(z) map.setZ
 function fit(points){ if(!map||!points.length) return; const b=new google.maps.LatLngBounds(); points.forEach(p=>b.extend({lat:p.lat,lng:p.lng})); map.fitBounds(b, 60); }
 function renderBar(){
   if(view.kind==='embed'){ mapbar.innerHTML=`<span class="pill on">🚇 대중교통 경로 · Google 지도</span><button class="pill" data-back>← 우리 지도로</button>`; return; }
-  mapbar.innerHTML=`<button class="pill${shade?' on':''}" data-shade role="switch" aria-checked="${shade}">지역 음영 ${shade?'켜짐':'꺼짐'}</button>`+(overlays.length?'<button class="pill" data-clearlines>선 지우기</button>':'');
+  mapbar.innerHTML=(overlays.length?'<button class="pill" data-clearlines>선 지우기</button>':'');
+  const hb=document.getElementById('btnHot'); if(hb) hb.setAttribute('aria-checked',shade);
 }
 mapbar.addEventListener('click',e=>{
   if(e.target.closest('[data-back]')){ showEmbed(null); }
@@ -1227,8 +1240,20 @@ function openAddModal(){
   });
   draw();
 }
-document.getElementById('btnAdd').onclick=openAddModal;
-document.getElementById('btnDel').onclick=openDeleteModal;
+// 수정 = 추가/삭제를 고르는 모달
+function openEditModal(){
+  openModal(`<div class="modal-h"><h2>수정</h2><p>무엇을 할지 고르세요.</p></div>
+    <div class="modal-b"><div class="edit-opts">
+      <button class="edit-opt" data-act="add" type="button"><span class="circ" style="background:var(--walk)">+</span><b>추가</b><small>가게·숙소·관광지를 AI로 찾아 지도에 추가</small></button>
+      <button class="edit-opt" data-act="del" type="button"><span class="circ" style="background:var(--food)">−</span><b>삭제</b><small>지도·목록에서 장소 지우기 (되돌리기 가능)</small></button>
+    </div></div>
+    <div class="modal-f"><span class="meta"></span><button class="btn" data-cancel>닫기</button></div>`);
+  modalEl.dataset.kind='edit'; document.addEventListener('keydown', escClose);
+  modalEl.addEventListener('click',e=>{ const a=e.target.closest('[data-act]'); if(a){ a.dataset.act==='add'?openAddModal():openDeleteModal(); return; } if(e.target.closest('[data-cancel]')) closeModal(); });
+}
+document.getElementById('btnEdit').onclick=openEditModal;
+document.getElementById('btnHot').onclick=()=>{ shade=!shade; lsSet('shade',shade); applyShade(); renderBar(); };
+document.getElementById('btnHot').setAttribute('aria-checked',shade);
 
 /* ---------- 리스트 썸네일 (Google 지도 사진) ---------- */
 const THUMB = lsGet('thumbs',{});   // id -> {pid, photo, at}  (Place ID는 장기 보관 가능, 사진 이름은 3일만)
