@@ -23,7 +23,8 @@ button,select{font:inherit;color:inherit}
 .side-head{padding:20px 18px 18px;border-bottom:1px solid var(--line)}
 .title{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0}
 .sub{font-size:12.5px;color:var(--ink3);margin:4px 0 0}
-.legend{display:flex;gap:10px;margin-top:16px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
+.legend{display:flex;gap:10px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
+.map-legend{position:absolute;right:12px;bottom:26px;z-index:4;max-width:min(230px,calc(100% - 24px));gap:6px 10px;padding:8px 11px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.10);font-size:11.5px;pointer-events:none}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
 .dot.food{background:#fff;border:2px solid var(--food)} .dot.hotel{background:var(--hotel);border-radius:3px}
@@ -40,7 +41,8 @@ button,select{font:inherit;color:inherit}
 .scroll.sheet-drag{user-select:none;cursor:grabbing}
 #selSlot:empty{display:none}
 .sel-label{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin:2px 4px 8px}
-#selSlot{margin-bottom:14px}
+#selSlot{margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+#selSlot .card{border:0;border-radius:0;box-shadow:none;background:none;padding:2px 2px 0;margin:0;cursor:default}
 
 /* route box */
 .routebox{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0 calc(-1 * var(--sx)) 14px;padding:4px var(--sx) 18px}
@@ -176,18 +178,21 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   .mapbar{transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
   .app.sheet-dragging .mapbar{transition:none}
   #gmap{transition:none}
-  .sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;position:sticky;top:0;z-index:6;width:calc(100% + 2 * var(--sx));margin:0 calc(-1 * var(--sx)) 6px;padding:8px 0 8px;border:0;background:var(--panel);border-radius:18px 18px 0 0;cursor:pointer;touch-action:none;color:var(--ink3);font:inherit;font-size:11px;font-weight:600}
+  .sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;position:sticky;top:0;z-index:6;width:calc(100% + 2 * var(--sx));margin:0 calc(-1 * var(--sx)) 4px;padding:14px 0 12px;border:0;background:var(--panel);border-radius:18px 18px 0 0;cursor:pointer;touch-action:none;color:var(--ink3);font:inherit;font-size:11px;font-weight:600}
   .sheet-handle i{display:block;width:40px;height:5px;border-radius:99px;background:#d6d3cc}
   .sheet-handle:focus{outline:none} .sheet-handle:focus-visible i{background:var(--ink3)}
   .app.sheet-min .scroll{overflow:hidden}
   .mapbar{bottom:calc(var(--sv,55dvh) + 14px)}
+  .map-legend{bottom:calc(var(--sv,55dvh) + 12px);right:10px;transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
+  .app.sheet-dragging .map-legend{transition:none}
+  .app.sheet-full .map-legend,.app.sheet-full .mapbar,.app.sheet-full .osm-attr{opacity:0}
   .mapwrap .osm-attr{bottom:calc(var(--sv,55dvh) - 6px);transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
   .app.sheet-dragging .mapwrap .osm-attr{transition:none}
 }
 @media (max-width:860px) and (max-height:520px){
   .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
   .app{overflow:visible} .side{display:flex} .side-head{order:0} .scroll{order:0;position:static;height:auto;transform:none;transition:none;border-radius:0;box-shadow:none;padding-top:10px} .sheet-handle{display:none}
-  .app.sheet-min .scroll{overflow-y:auto} .mapbar{bottom:26px} .mapwrap .osm-attr{bottom:4px}
+  .app.sheet-min .scroll{overflow-y:auto} .mapbar{bottom:26px} .mapwrap .osm-attr{bottom:4px} .map-legend{bottom:26px}
   .mapwrap{order:2} .side{order:1;border-top:0;border-right:1px solid var(--line)}
 }
 /* head actions */
@@ -307,12 +312,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
         <button class="hbtn edit" id="btnEdit" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>수정</button>
         <button class="hot-tg" id="btnHot" type="button" role="switch" aria-checked="true" title="핫플 지역 음영 켜기/끄기"><span>핫플</span><span class="sw" aria-hidden="true"><i></i></span></button>
         <button class="bell" id="btnBell" type="button" aria-label="알림" title="알림"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge" hidden></span></button></div>
-      <div class="legend">
-        <span><span class="rk r1">1</span>1순위</span><span><span class="rk r2">2</span>2순위</span><span><span class="rk r3">3</span>3순위</span>
-        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>맛집</span>
-        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-hotel)" stroke="var(--pin-hotel-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>숙소</span>
-        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-spot)" stroke="var(--pin-spot-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>관광지</span>
-      </div>
+
       <div class="ctlgrp">
         <div class="ctl" id="cityCtl">
           <button class="ctlbtn" type="button" aria-expanded="false" aria-haspopup="true"><span class="ctlk">지역</span><span class="ctlv">오사카</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -325,7 +325,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
       </div>
     </div>
     <div class="scroll" id="scroll">
-      <button class="sheet-handle" id="sheetHandle" type="button" aria-expanded="true" aria-controls="scroll"><i></i><span>목록 접기</span></button>
+      <button class="sheet-handle" id="sheetHandle" type="button" aria-expanded="true" aria-controls="scroll" aria-label="목록 접기/펼치기"><i></i></button>
       <div id="selSlot"></div>
       <section class="routebox" aria-label="이동 방법">
         <p class="rb-title">길찾기</p>
@@ -344,6 +344,12 @@ table.near tr[data-route]:hover td{background:var(--bg)}
     <div id="gmap"><div class="mapmsg">지도를 불러오는 중…</div></div>
     <iframe id="embed" title="Google 지도 길찾기" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     <div class="mapbar" id="mapbar"></div>
+    <div class="legend map-legend">
+        <span><span class="rk r1">1</span>1순위</span><span><span class="rk r2">2</span>2순위</span><span><span class="rk r3">3</span>3순위</span>
+        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>맛집</span>
+        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-hotel)" stroke="var(--pin-hotel-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>숙소</span>
+        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-spot)" stroke="var(--pin-spot-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>관광지</span>
+      </div>
   </main>
 </div>
 
@@ -542,7 +548,7 @@ window.__initMap = async function(){
   const {Map} = await google.maps.importLibrary('maps');
   await google.maps.importLibrary('marker'); await google.maps.importLibrary('geometry');
   const c=CITY[state.city];
-  map = new Map(document.getElementById('gmap'), {center:{lat:c.center[0],lng:c.center[1]}, zoom:c.zoom, mapId:'DEMO_MAP_ID', gestureHandling:'greedy', clickableIcons:false, mapTypeControl:false, streetViewControl:false, fullscreenControl:false});
+  map = new Map(document.getElementById('gmap'), {center:{lat:c.center[0],lng:c.center[1]}, zoom:c.zoom, mapId:'DEMO_MAP_ID', gestureHandling:'greedy', clickableIcons:false, mapTypeControl:false, streetViewControl:false, fullscreenControl:false, cameraControl:false, zoomControl:false});
   // 지역 음영
   DIST.forEach(d=>{ const f = map.data.addGeoJson({type:'Feature', geometry:d.geojson, properties:{id:d.id}}); zoneObjs.push(...f);
     const el=document.createElement('div'); el.className='zlabel'; el.textContent=d.ko;
@@ -660,52 +666,54 @@ async function showHotelRanks(h){
 /* ---------- 리스트 ---------- */
 const listEl = document.getElementById('list'), sheetEl = document.getElementById('scroll'), selSlot = document.getElementById('selSlot');
 const mobSheet = ()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
-// 모바일: 목록 바텀시트 — 손잡이 탭/클릭, 또는 손가락·마우스로 위아래로 끌어서 접기/펴기 (손 따라 부드럽게 움직임)
+// 모바일: 목록 바텀시트 — 3단계(접힘 / 반 / 전체화면). 손잡이 탭, 또는 손가락·마우스로 끌어서 이동
 (function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'), sc=document.getElementById('scroll'), gm=document.getElementById('gmap');
   const isMob=()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
-  const isMin=()=>app.classList.contains('sheet-min');
-  let SH=0, MIN=44, off=0;
-  const maxOff=()=>Math.max(0,SH-MIN);
-  // 지도 크기를 시트 위쪽까지로 맞추되, 화면에 보이는 지도 위치는 그대로 유지
+  let FULL=0, HALF=0, MIN=34, off=0, st='half';
+  const isMin=()=>st==='min';
+  const offOf=x=> x==='full'?0 : x==='half'?FULL-HALF : FULL-MIN;
   function mapInset(px){ const old=parseFloat(gm.style.bottom)||0; if(Math.abs(old-px)<1) return;
     let c=null; try{ c=map&&map.getCenter(); }catch(e){}
     gm.style.bottom=px+'px';
     try{ const pr=map&&map.getProjection(); if(c&&pr){ const s=2**map.getZoom(), wp=pr.fromLatLngToPoint(c); wp.y-=(px-old)/2/s; map.setCenter(pr.fromPointToLatLng(wp)); } }catch(e){} }
-  function apply(o, anim){ off=Math.min(Math.max(o,0),maxOff()); sc.classList.toggle('sheet-drag',!anim);
-    app.style.setProperty('--so',off+'px'); app.style.setProperty('--sv',(SH-off)+'px'); }
-  function settle(){ if(isMob()) mapInset(Math.max(0,SH-off-10)); }
-  function layout(){ if(!isMob()){ ['--sh','--so','--sv'].forEach(k=>app.style.removeProperty(k)); gm.style.bottom=''; return; }
+  function paint(o, anim){ off=o; sc.classList.toggle('sheet-drag',!anim); app.style.setProperty('--so',o+'px'); app.style.setProperty('--sv',Math.max(0,FULL-Math.max(o,0))+'px'); }
+  function settle(){ if(!isMob()||st==='full') return; mapInset(Math.max(0,FULL-off-10)); }
+  function layout(){ if(!isMob()){ ['--sh','--so','--sv'].forEach(k=>app.style.removeProperty(k)); gm.style.bottom=''; app.classList.remove('sheet-min','sheet-full'); st='half'; return; }
     const headB=document.querySelector('.side-head').getBoundingClientRect().bottom - app.getBoundingClientRect().top;
-    SH=Math.round(app.clientHeight-headB-Math.round(innerHeight*.40)+16); MIN=h.offsetHeight||44;
-    app.style.setProperty('--sh',SH+'px'); apply(isMin()?maxOff():0,false); requestAnimationFrame(()=>sc.classList.remove('sheet-drag')); settle(); }
-  const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기';
-    if(!isMob()) return; mapInset(0); apply(min?maxOff():0,true); clearTimeout(set.t); set.t=setTimeout(settle,360); };
+    FULL=Math.round(app.clientHeight-headB); HALF=Math.round(FULL-innerHeight*.40+16); MIN=h.offsetHeight||34;
+    app.style.setProperty('--sh',FULL+'px'); paint(offOf(st),false); requestAnimationFrame(()=>sc.classList.remove('sheet-drag')); settle(); }
+  function set(x){ st=x; app.classList.toggle('sheet-min',x==='min'); app.classList.toggle('sheet-full',x==='full'); h.setAttribute('aria-expanded',x!=='min');
+    if(!isMob()) return; mapInset(0); paint(offOf(x),true); clearTimeout(set.t); set.t=setTimeout(settle,360); }
   let justDragged=false;
-  h.addEventListener('click',()=>{ if(justDragged) return; set(!isMin()); });
-  h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!isMin()); } });
-  // 공통 드래그 로직 (터치·마우스)
+  h.addEventListener('click',()=>{ if(justDragged) return; set(st==='min'?'half':'min'); });
+  h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(st==='min'?'half':'min'); } });
+  // 드래그: 손잡이는 위·아래 모두, 목록 내용은 맨 위에서 아래로 당길 때만(위로는 목록 스크롤)
   let d=null;
   function dStart(y,x,target){ if(!isMob()) return; d={y,x,top:sc.scrollTop<=0,onHandle:!!target.closest('.sheet-handle'),base:off,active:false,lastY:y,lastT:performance.now(),v:0}; }
   function dMove(y,x){ if(!d) return false; const dy=y-d.y, dx=x-d.x;
     if(!d.active){ if(Math.abs(dy)<6 || Math.abs(dx)>Math.abs(dy)) return false;
-      if(isMin() ? dy<0 : (dy>0 && (d.top||d.onHandle))){ d.active=true; d.y=y; app.classList.add('sheet-dragging'); mapInset(0); } else { d=null; return false; } }
+      const ok = d.onHandle || st==='min' || (dy>0 && d.top);
+      if(ok && !(st==='min'&&dy>0) && !(st==='full'&&dy<0&&!d.onHandle)){ d.active=true; d.y=y; app.classList.add('sheet-dragging'); mapInset(0); } else { d=null; return false; } }
     const now=performance.now(), dt=Math.max(1,now-d.lastT); d.v=(y-d.lastY)/dt; d.lastY=y; d.lastT=now;
-    let o=d.base+(y-d.y); if(o<0) o=o/3; // 위로 더 당기면 살짝 저항
-    off=o; sc.classList.add('sheet-drag'); app.style.setProperty('--so',Math.max(o,-40)+'px'); app.style.setProperty('--sv',(SH-Math.max(o,0))+'px'); return true; }
+    let o=d.base+(y-d.y); if(o<0) o=o/3; o=Math.min(o,FULL-MIN+30);
+    sc.classList.add('sheet-drag'); app.style.setProperty('--so',Math.max(o,-40)+'px'); app.style.setProperty('--sv',(FULL-Math.max(o,0))+'px'); off=o; return true; }
   function dEnd(){ if(!d) return; const {active,v}=d; d=null; app.classList.remove('sheet-dragging'); if(!active) return;
     justDragged=true; setTimeout(()=>justDragged=false,0);
-    const min = v>0.45 ? true : v<-0.45 ? false : off > maxOff()/2;
-    set(min); }
+    const snaps=['full','half','min'].map(x=>[x,offOf(x)]);
+    let pick;
+    if(Math.abs(v)>0.45){ const dir=v>0?1:-1; const cand=snaps.filter(([,o])=>dir>0?o>off+1:o<off-1).sort((a,b)=>dir>0?a[1]-b[1]:b[1]-a[1]); pick=(cand[0]||snaps.reduce((a,b)=>Math.abs(b[1]-off)<Math.abs(a[1]-off)?b:a))[0]; }
+    else pick=snaps.reduce((a,b)=>Math.abs(b[1]-off)<Math.abs(a[1]-off)?b:a)[0];
+    set(pick); }
   sc.addEventListener('touchstart',e=>{ if(e.touches.length===1) dStart(e.touches[0].clientY,e.touches[0].clientX,e.target); else d=null; },{passive:true});
   sc.addEventListener('touchmove',e=>{ if(d && dMove(e.touches[0].clientY,e.touches[0].clientX) && e.cancelable) e.preventDefault(); },{passive:false});
   sc.addEventListener('touchend',dEnd); sc.addEventListener('touchcancel',dEnd);
-  sc.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0) return; if(e.target.closest('select,input,textarea,a,.cats,.rankset,.routebox button')) return; dStart(e.clientY,e.clientX,e.target); });
+  sc.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0) return; if(e.target.closest('select,input,textarea,a,.cats,.rankset,.routebox button,.rbox')) return; dStart(e.clientY,e.clientX,e.target); });
   window.addEventListener('pointermove',e=>{ if(e.pointerType==='mouse' && d && dMove(e.clientY,e.clientX)) e.preventDefault(); });
   window.addEventListener('pointerup',e=>{ if(e.pointerType==='mouse') dEnd(); });
   sc.addEventListener('click',e=>{ if(justDragged){ e.stopPropagation(); e.preventDefault(); } },true);
   window.addEventListener('resize',()=>{ clearTimeout(layout.t); layout.t=setTimeout(layout,120); });
   layout(); window.addEventListener("load",layout); window.sheetLayout=layout;
-  window.openSheet=()=>{ if(isMin()) set(false); };
+  window.openSheet=()=>{ if(isMin()) set('half'); };
 })();
 function trCellHTML(k){
   const t=TR[k];
@@ -766,7 +774,7 @@ function renderList(){
   if(state.cat!=='all' && !cnt[state.cat]) state.cat='all';
   const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
   const slotId = mobSheet() && state.sel && byId[state.sel] && byId[state.sel].city===state.city ? state.sel : null;
-  selSlot.innerHTML = slotId ? `<div class="sel-label">선택한 장소</div>${cardHTML(byId[slotId])}` : '';
+  selSlot.innerHTML = slotId ? cardHTML(byId[slotId]) : '';
   const items = all.filter(catOK).filter(p=>p.id!==slotId);
   const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food'), spots = items.filter(p=>p.type==='spot');
   const T = state.types, none = !T.size; let h=catBar; const catOn = state.cat!=='all';
