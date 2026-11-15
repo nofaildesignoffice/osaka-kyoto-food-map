@@ -66,7 +66,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270202/27134304/" }]
   },
   {
-    id: "allegro-umeda", type: "food", city: "osaka", group: "피자·카페", emoji: "🍕", candidate: true,
+    id: "allegro-umeda", type: "food", city: "osaka", group: "피자", emoji: "🍕", candidate: true,
     name: "아레그로 우메다점 (후보)", nameJa: "トラットリア ピッツェリア アレグロ 梅田店", area: "우메다 (梅田)",
     address: "大阪府大阪市北区曽根崎2-14-7 グランデ曽根崎ビル1F", lat: 34.7009583, lng: 135.5010896,
     menu: "피자, 멸치 브루스케타",
@@ -75,7 +75,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270101/27073823/" }]
   },
   {
-    id: "allegro-temma", type: "food", city: "osaka", group: "피자·카페", emoji: "🍕", candidate: true,
+    id: "allegro-temma", type: "food", city: "osaka", group: "피자", emoji: "🍕", candidate: true,
     name: "아레그로 텐마점 (후보)", nameJa: "大衆イタリア食堂 アレグロ 天満店", area: "텐마 (天満)",
     address: "大阪府大阪市北区同心2-5-20 森下ビル1F", lat: 34.7025697, lng: 135.5138147,
     menu: "피자, 멸치 브루스케타",
@@ -84,7 +84,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270103/27018209/" }]
   },
   {
-    id: "allegro-namba", type: "food", city: "osaka", group: "피자·카페", emoji: "🍕", candidate: true,
+    id: "allegro-namba", type: "food", city: "osaka", group: "피자", emoji: "🍕", candidate: true,
     name: "아레그로 난바점 (후보)", nameJa: "トラットリア ピッツェリア アレグロ 難波店", area: "난바 (難波)",
     address: "大阪府大阪市中央区千日前2-6-6", lat: 34.6664345, lng: 135.5044933,
     menu: "피자, 멸치 브루스케타",
@@ -93,7 +93,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270202/27108977/" }]
   },
   {
-    id: "henrys-pizza", type: "food", city: "osaka", group: "피자·카페", emoji: "🍕",
+    id: "henrys-pizza", type: "food", city: "osaka", group: "피자", emoji: "🍕",
     name: "헨리스 피자", nameJa: "Henry's PIZZA", area: "타니마치4초메 (谷町四丁目)",
     address: "大阪府大阪市中央区谷町4-2-2", lat: 34.6805967, lng: 135.5184751,
     menu: "미국식(뉴욕 스타일) 피자, 감자튀김",
@@ -102,7 +102,7 @@ window.PLACES = [
     sources: [{ label: "Time Out", url: "https://www.timeout.jp/osaka/ja/レストラン/henrys-pizza" }]
   },
   {
-    id: "amoya", type: "food", city: "osaka", group: "피자·카페", emoji: "🍡",
+    id: "amoya", type: "food", city: "osaka", group: "디저트", emoji: "🍡",
     name: "아모야 미나미카스가 시텐노지점", nameJa: "あもや南春日 四天王寺店", area: "텐노지 (天王寺)",
     address: "大阪府大阪市天王寺区堀越町8-15 吉田ビル", lat: 34.6507216, lng: 135.513946,
     menu: "카린토 만쥬 (かりんとう饅頭)",
@@ -111,7 +111,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270203/27056343/" }]
   },
   {
-    id: "spanola", type: "food", city: "osaka", group: "피자·카페", emoji: "☕",
+    id: "spanola", type: "food", city: "osaka", group: "카페", emoji: "☕",
     name: "커피점 스파뇨라", nameJa: "珈琲店 スパニョラ", area: "우메다 (梅田)",
     address: "大阪府大阪市北区梅田1-1-3 大阪駅前第3ビル B2F", lat: 34.6991301, lng: 135.4990767,
     menu: "몽블랑 토스트",
@@ -120,7 +120,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270101/27010558/" }]
   },
   {
-    id: "king-of-kings", type: "food", city: "osaka", group: "피자·카페", emoji: "🍨",
+    id: "king-of-kings", type: "food", city: "osaka", group: "카페", emoji: "🍨",
     name: "킹 오브 킹스", nameJa: "King of Kings（キングオブキングス）", area: "우메다 (梅田)",
     address: "大阪府大阪市北区梅田1-3-1 大阪駅前第1ビル B1F", lat: 34.6987126, lng: 135.4965419,
     menu: "프루트 파르페, 주류",
@@ -129,7 +129,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270101/27043454/" }]
   },
   {
-    id: "jinbee", type: "food", city: "osaka", group: "피자·카페", emoji: "🥟",
+    id: "jinbee", type: "food", city: "osaka", group: "교자", emoji: "🥟",
     name: "교자노 진베에", nameJa: "ぎょうざのじんべえ", area: "난바 (難波)",
     address: "大阪府大阪市中央区難波千日前2-17", lat: 34.665107, lng: 135.5044994,
     menu: "가라아게, 시소(차조기) 교자",

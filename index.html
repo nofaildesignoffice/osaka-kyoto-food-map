@@ -67,11 +67,17 @@ button,select{font:inherit;color:inherit}
 .links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 
 /* list */
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px calc(-1 * var(--sx)) 0;padding:2px var(--sx) 4px}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;padding:6px 13px;border-radius:999px;border:1px solid #e9e9e9;background:#fff;color:var(--ink3);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.cat b{font-weight:700;margin-left:3px;opacity:.55;font-size:11px}
+.cat[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.cat[aria-pressed=true] b{opacity:.8}
 .sec{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin:16px 4px 8px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;transition:box-shadow .15s,border-color .15s}
 .card:hover{box-shadow:var(--shadow)}
 .card.sel{border-color:var(--ink);box-shadow:var(--shadow)}
-.card-top{display:flex;gap:10px;align-items:flex-start}
+.card-top{display:flex;gap:10px;align-items:flex-start;position:relative;width:100%;box-sizing:border-box}
 .card-main{flex:1;min-width:0}
 .ico{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:var(--pin-food);box-shadow:inset 0 0 0 7px var(--pin-food),inset 0 0 0 40px #fff}
 .card.hotel .ico{background:var(--pin-hotel);box-shadow:inset 0 0 0 7px var(--pin-hotel),inset 0 0 0 40px #fff}
@@ -84,7 +90,7 @@ button,select{font:inherit;color:inherit}
 .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--food-soft);color:var(--food);margin-right:4px}
 .area{display:flex;align-items:center;flex-wrap:wrap;column-gap:0}
 .area .area-t{min-width:0}
-.area .flag{margin-left:auto;padding-left:8px;font-size:11px;font-weight:700;color:var(--food);white-space:nowrap}
+.area .flag{position:absolute;right:0;bottom:2px;padding-left:8px;font-size:11px;font-weight:700;color:var(--food);white-space:nowrap}
 .tag.hotel{background:var(--hotel-soft);color:var(--hotel)}
 .tag.spot{background:var(--spot-soft);color:var(--spot)}
 .rk{position:relative;display:inline-block!important;width:22px;height:22px;flex:none;border-radius:50%;font-size:0!important;color:transparent;padding:0;vertical-align:-6px;border:1.5px solid transparent;box-sizing:border-box;overflow:hidden}
@@ -318,7 +324,7 @@ const BED = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke=
 const lsGet = (k,d) => { try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } };
 const lsSet = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
 
-const state = {city:'osaka', filter:'all', sel:null, from:'', to:'', mode:null};
+const state = {city:'osaka', filter:'all', cat:'all', sel:null, from:'', to:'', mode:null};
 
 /* ---------- 순위 (①②③) : 데이터 기본값 p.rank + 이 기기에서 바꾼 값 ---------- */
 let RANKS = lsGet('ranks', {});
@@ -505,17 +511,23 @@ const PIN_COL = {food:['var(--pin-food)','var(--pin-food-d)'], hotel:['var(--pin
 // GPS 핀 모양: 물방울 + 가운데 흰 원 (끝점이 실제 위치)
 function pinSVG(type, cand){ const [c,d]=PIN_COL[type]||PIN_COL.food;
   return `<svg class="pbg" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="${c}" stroke="${d}" stroke-width="1.4"${cand?' stroke-dasharray="3 2"':''}/><circle cx="15" cy="15" r="9.6" fill="#fff"/></svg>`; }
+const GENERIC_GROUP = new Set(['AI로 추가한 맛집','직접 추가한 맛집','']);
+const EMOJI_GROUP = {'🍣':'스시','🍜':'라멘','🥩':'고기','🍖':'고기','🍕':'피자','☕':'카페','🍰':'디저트','🍨':'디저트','🍡':'디저트','🍩':'디저트','🥞':'오코노미야키','🍢':'야키토리','🥟':'교자','🍛':'카레','🍱':'일식'};
+function catOf(p){ if(p.type==='hotel') return '숙소'; if(p.type==='spot') return '관광지';
+  return GENERIC_GROUP.has(p.group||'') ? (EMOJI_GROUP[p.emoji]||'기타') : p.group; }
+function catOK(p){ return state.cat==='all' || catOf(p)===state.cat; }
 function refreshMarkers(){
   if(!map) return;
   const hotelSel = state.sel && byId[state.sel].type==='hotel' ? byId[state.sel] : null;
   P.forEach(p=>{ const k=markers[p.id]; if(!k) return; const r=rankOf(p);
     const show = state.filter==='all' || state.filter===p.type || (state.filter==='ranked' && (p.type==='hotel' || (p.type==='food' && r>0)));
+    const shown = show && catOK(p);
     const big = p.type==='hotel' || r>0;
     k.el.className = ['pin', p.type, big?'big':'', p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', hotelSel&&p.type==='food'&&p.city===hotelSel.city&&!r?'dim':''].join(' ');
     const icon = p.type==='hotel' ? BED : p.type==='spot' ? (p.emoji||'📍') : (r ? RANK_ICON[r] : (p.emoji||'🍴'));
     k.el.innerHTML = pinSVG(p.type, p.candidate) + `<span class="pico">${icon}</span>`;
     k.m.zIndex = p.type==='hotel'?30 : r ? 20-r : 5;
-    k.m.map = show ? map : null; });
+    k.m.map = shown ? map : null; });
 }
 function clearOverlays(){ overlays.forEach(o=>{ if(o.setMap) o.setMap(null); else o.map=null; }); overlays=[]; }
 function panTo(lat,lng,z){ if(!map) return; map.panTo({lat,lng}); if(z) map.setZoom(z); }
@@ -622,7 +634,7 @@ function nearTable(p){
 function cardHTML(p){
   const r = rankOf(p);
   const cls = ['card',p.type, p.candidate?'cand':'', state.sel===p.id?'sel':''].join(' ');
-  const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : p.type==='spot' ? '<span class="tag spot">관광지</span>' : `<span class="tag">${esc(p.group)}</span>`;
+  const tags = p.type==='hotel' ? '<span class="tag hotel">숙소</span>' : p.type==='spot' ? '<span class="tag spot">관광지</span>' : `<span class="tag">${esc(catOf(p))}</span>`;
   const flags = [p.candidate?'후보':'', p.branchUnsure?'지점 미확정':''].filter(Boolean).join(' · ');
   const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
   const rankset = p.type==='food' ? `<div class="rankset" role="group" aria-label="순위">${[1,2,3].map(n=>`<button class="r${n}" data-rank="${n}" data-id="${p.id}" aria-pressed="${r===n}" title="${n}순위">${RANK_ICON[n]}</button>`).join('')}</div>` : '';
@@ -646,10 +658,16 @@ function cardHTML(p){
   return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div></div>${rankset}</div><div class="detail">${body}</div></article>`;
 }
 function renderList(){
-  const items = P.filter(p=>p.city===state.city);
+  const all = P.filter(p=>p.city===state.city);
+  const typeOK = p => state.filter==='all' || state.filter===p.type || (state.filter==='ranked' && (p.type==='hotel' || (p.type==='food' && rankOf(p)>0)));
+  const cnt = {}; all.filter(typeOK).forEach(p=>{ const c=catOf(p); cnt[c]=(cnt[c]||0)+1; });
+  const order = Object.keys(cnt).sort((a,b)=> (a==='숙소'?-1:b==='숙소'?1:0) || (a==='관광지'?1:b==='관광지'?-1:0) || (a==='기타'?1:b==='기타'?-1:0) || cnt[b]-cnt[a]);
+  if(state.cat!=='all' && !cnt[state.cat]) state.cat='all';
+  const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
+  const items = all.filter(catOK);
   const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food'), spots = items.filter(p=>p.type==='spot');
-  const f = state.filter; let h='';
-  if(f==='all'||f==='hotel'||f==='ranked'){
+  const f = state.filter; let h=catBar; const catOn = state.cat!=='all';
+  if((f==='all'||f==='hotel'||f==='ranked') && !(catOn && !hotels.length)){
     h += `<div class="sec">숙소 ${hotels.length}</div>`;
     h += hotels.length ? hotels.map(cardHTML).join('') : `<div class="empty">아직 등록된 ${CITY[state.city].name} 숙소가 없어요.</div>`;
   }
@@ -657,9 +675,9 @@ function renderList(){
     const ranked = foods.filter(q=>rankOf(q)>0).sort((a,b)=>rankOf(a)-rankOf(b));
     if(ranked.length) h += `<div class="sec">순위 맛집 ${ranked.length}</div>` + ranked.map(cardHTML).join('');
     if(f!=='ranked'){
-      const rest = foods.filter(q=>!rankOf(q)); const groups=[...new Set(rest.map(x=>x.group))];
-      if(!foods.length) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
-      groups.forEach(g=>{ const fs=rest.filter(x=>x.group===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
+      const rest = foods.filter(q=>!rankOf(q)); const groups=[...new Set(rest.map(catOf))];
+      if(!foods.length && !catOn) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
+      groups.forEach(g=>{ const fs=rest.filter(x=>catOf(x)===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
     } else if(!ranked.length) h += `<div class="sec">순위 맛집 0</div><div class="empty">맛집 카드 오른쪽의 👑🥈🥉 버튼으로 순위를 매겨 보세요.</div>`;
   }
   if((f==='all'||f==='spot') && spots.length) h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
@@ -667,6 +685,7 @@ function renderList(){
   observeThumbs();
 }
 listEl.addEventListener('click',e=>{
+  const ct=e.target.closest('[data-cat]'); if(ct){ state.cat=ct.dataset.cat; renderList(); refreshMarkers(); return; }
   const rk=e.target.closest('[data-rank]'); if(rk){ e.stopPropagation(); setRank(rk.dataset.id, +rk.dataset.rank); return; }
   const sf=e.target.closest('[data-setfrom]'), st=e.target.closest('[data-setto]'), tr=e.target.closest('tr[data-route]');
   if(sf){ e.stopPropagation(); setRoute(sf.dataset.setfrom, state.to); return; }
