@@ -28,7 +28,8 @@ button,select{font:inherit;color:inherit}
 .d2-close{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink2);padding:0}
 .d2-close:hover{border-color:var(--ink);color:var(--ink)}
 .d2-body{overflow-y:auto;flex:1;min-height:0;padding:18px 18px 40px}
-.d2-body .card{border:0;border-radius:0;box-shadow:none;background:none;padding:0 40px 0 0;margin:0;cursor:default}
+.side2,.d2-body,.d2-body .card,.d2-body .card.sel{background:#fff!important}
+.d2-body .card{border:0;border-radius:0;box-shadow:none!important;padding:0 40px 0 0;margin:0;cursor:default}
 .d2-body .card .detail{padding-right:0;margin-right:-40px}
 @media (min-width:861px){ #list .card.sel .detail{display:none} }
 @media (max-width:860px){ .side2{display:none!important} .app.has-detail{grid-template-columns:minmax(0,1fr)} }
