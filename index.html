@@ -354,7 +354,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   </main>
 </div>
 
-<script src="data/hotels.js?v=20261115b"></script>
+<script src="data/hotels.js?v=20261115-hotels4"></script>
 <script src="data/places.js?v=20261115b"></script>
 <script src="data/spots.js?v=20261115b"></script>
 <script src="data/added.js"></script>
@@ -742,6 +742,15 @@ function nearTable(p){
     return `<tr data-route="${a.id}|${b.id}"><td class="n">${r?`<span class="rk r${r}">${r}</span> `:''}${esc(q.name.replace(' (후보)',''))}</td><td>${wc}</td><td>${tc}</td></tr>`;
   }).join('')}</tbody></table><p class="note">⚡ = 더 빠른 방법. 행을 누르면 갈아타는 역·출구·요금까지 단계별로 보여주고 지도에 경로를 그려요.</p>`;
 }
+function hotelRateHTML(p,compact=false){
+  const r=p.stayRate; if(!r) return '';
+  const price=Number.isFinite(r.totalKRW)?Math.round(r.totalKRW/r.nights).toLocaleString('ko-KR')+'원':'확인 필요';
+  if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--hotel)">1박 평균 ${price} <span class="meta">· ${esc(r.checkIn.slice(5).replace('-','/'))}부터 ${r.nights}박</span></div>`;
+  return `<div class="tip"><b>1박 평균 ${price}</b><div>${esc(r.checkIn)} 체크인 → ${esc(r.checkOut)} 체크아웃 · ${r.nights}박</div>
+    <div>성인 ${r.adults}명 · 객실 ${r.rooms}개 · 3박 총액 ${r.totalKRW.toLocaleString('ko-KR')}원</div>
+    <div>${esc(r.room)} · ${esc(r.conditions)}</div>
+    <div class="meta">${esc(r.checkedAt)} 아고다 조회 · 표시된 세금·봉사료 포함 · 현지 숙박세 별도 여부는 예약 시 확인 · 할인·환율·재고에 따라 변동</div></div>`;
+}
 function cardHTML(p){
   const r = rankOf(p);
   const cls = ['card',p.type, p.candidate?'cand':'', state.sel===p.id?'sel':''].join(' ');
@@ -749,7 +758,7 @@ function cardHTML(p){
   const flags = [p.candidate?'후보':'', p.branchUnsure?'지점 미확정':''].filter(Boolean).join(' · ');
   const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
   const rankset = p.type==='food' ? `<div class="rankset" role="group" aria-label="순위">${[1,2,3].map(n=>`<button class="r${n}" data-rank="${n}" data-id="${p.id}" aria-pressed="${r===n}" title="${n}순위">${RANK_ICON[n]}</button>`).join('')}</div>` : '';
-  let body = '';
+  let body = p.type==='hotel'?hotelRateHTML(p):'';
   if(p.type==='hotel') body += `<p class="quote-h">순위 맛집까지 평균 (지도에 순위 색 선으로 표시)</p><div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
   if(p.comment) body += `<p class="quote-h">💬 유튜브 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
@@ -766,7 +775,7 @@ function cardHTML(p){
     (p.sources||[]).map(s=>`<a class="btn small" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')+
     `<button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small" data-setto="${p.id}">여기로 도착</button></div>`;
   body += `<div data-near="${p.id}">${nearTable(p)}</div>`;
-  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div></div>${rankset}</div><div class="detail">${body}</div></article>`;
+  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div>${p.type==='hotel'?hotelRateHTML(p,true):''}</div>${rankset}</div><div class="detail">${body}</div></article>`;
 }
 function renderList(){
   const all = P.filter(p=>p.city===state.city);

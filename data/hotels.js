@@ -1,4 +1,4 @@
-// 숙소 데이터 — 2026-11-14 사용자가 보낸 아고다 공유 링크로 숙소명·주소 확인, 좌표·주소는 Google 지도 장소 페이지에서 조회.
+// 숙소 데이터 — Google Places 좌표·주소 대조. stayRate는 지정 날짜의 아고다 조회 시점 요금이며 실시간 가격이 아님.
 window.HOTELS = [
  {
   "id": "hotel-mikasa",
@@ -66,5 +66,137 @@ window.HOTELS = [
   "agoda": "https://www.agoda.com/sh-app/FbumT4Y6sFZ",
   "type": "hotel",
   "notes": []
+ },
+ {
+  "id": "hotel-mrt-namba-east43",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "MR.T Hotel Namba East43",
+  "nameJa": "Tanimachikun Hotel Nambahigashi 43",
+  "area": "닛폰바시·에비스초",
+  "address": "大阪市浪速区日本橋5-10-11",
+  "lat": 34.6584244,
+  "lng": 135.5053087,
+  "gpid": "ChIJgwzmFQrnAGARtOjc50eXhtQ",
+  "agoda": "https://www.agoda.com/ko-kr/tanimachi-namba-east43/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 379717,
+   "room": "1베드룸 디럭스 · 32m²",
+   "conditions": "무료 Wi-Fi · 11/22 전 무료 취소 · 회원·쿠폰 할인 적용",
+   "checkedAt": "2026-11-15T16:28+09:00"
+  },
+  "notes": [
+   "Google 지도에서는 Tanimachikun Hotel Nambahigashi 43으로 표시. 아고다와 주소 일치 확인."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJgwzmFQrnAGARtOjc50eXhtQ&query_place_id=ChIJgwzmFQrnAGARtOjc50eXhtQ"
+   }
+  ]
+ },
+ {
+  "id": "hotel-onefive-shinsekai",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "더 원파이브 오사카 신세카이",
+  "nameJa": "The OneFive Osaka Shinsekai",
+  "area": "신세카이·츠텐카쿠",
+  "address": "大阪市浪速区恵美須東2-1-24",
+  "lat": 34.6514055,
+  "lng": 135.5069768,
+  "gpid": "ChIJV8SnHOrnAGARFVztLFIEt34",
+  "agoda": "https://www.agoda.com/ko-kr/the-b-osaka-shinsekai-h47780705/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 200741,
+   "room": "슈페리어 트윈 · 18m² · 싱글베드 2개",
+   "conditions": "Room-Only Plan · 11/24 전 무료 취소 · 쿠폰 할인 적용",
+   "checkedAt": "2026-11-15T16:28+09:00"
+  },
+  "notes": [
+   "사용자가 보낸 the-b-osaka-shinsekai URL은 현재 The OneFive Osaka Shinsekai로 표시됨."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJV8SnHOrnAGARFVztLFIEt34&query_place_id=ChIJV8SnHOrnAGARFVztLFIEt34"
+   }
+  ]
+ },
+ {
+  "id": "hotel-b-namba4-a",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "b&Namba 4 (A관)",
+  "nameJa": "b&難波4号店A館 (b&Namba4 A)",
+  "area": "이마미야·기타히라키",
+  "address": "大阪市西成区北開1-2-25",
+  "lat": 34.6536381,
+  "lng": 135.4911872,
+  "gpid": "ChIJ9aS0bj_nAGARgD8Gqedtsh4",
+  "agoda": "https://www.agoda.com/ko-kr/b-namba4/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 306812,
+   "room": "패밀리룸 4 · 27m² · 더블베드 1개 + 요이불",
+   "conditions": "환불 불가 · 회원·장기 투숙·쿠폰 할인 적용",
+   "checkedAt": "2026-11-15T16:28+09:00"
+  },
+  "notes": [
+   "Google 지도 A관(北開1-2-25)을 아고다 주소와 대조. B관(1-2-6)과 구분. 숙박세 별도 안내."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJ9aS0bj_nAGARgD8Gqedtsh4&query_place_id=ChIJ9aS0bj_nAGARgD8Gqedtsh4"
+   }
+  ]
+ },
+ {
+  "id": "hotel-apartment11-shinsekai",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "아파트먼트 호텔 11 신세카이",
+  "nameJa": "Apartment Hotel 11 Shinsekai",
+  "area": "신세카이·에비스초",
+  "address": "大阪市浪速区恵美須東1-13-14",
+  "lat": 34.6540451,
+  "lng": 135.5062561,
+  "gpid": "ChIJTc1BnmDnAGARwbLQ0nk_IZw",
+  "agoda": "https://www.agoda.com/ko-kr/hotel-shinsekai/hotel/all/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 374524,
+   "room": "쿼드러플룸 · 34m² · 싱글베드 2개 + 더블베드 1개",
+   "conditions": "성인 2명 요금 · 환불 불가 · 쿠폰 할인 적용",
+   "checkedAt": "2026-11-15T16:28+09:00"
+  },
+  "notes": [
+   "Google 지도 동일 이름·恵美須東1丁目13 확인. 인근 다른 Apartment Hotel 11 지점과 구분. 숙박세 별도 안내."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJTc1BnmDnAGARwbLQ0nk_IZw&query_place_id=ChIJTc1BnmDnAGARwbLQ0nk_IZw"
+   }
+  ]
  }
 ];
