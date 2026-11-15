@@ -162,23 +162,28 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 
 @media (max-width:860px){
   /* 모바일: 상단 헤더(제목·버튼·지역/종류)는 화면 위에 고정, 그 아래 지도, 그 아래 목록만 스크롤 */
-  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 40dvh minmax(0,1fr)}
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);position:relative;overflow:hidden}
   .side{display:contents}
   .side-head{order:0;position:relative;z-index:20;background:var(--panel);padding:14px 16px 14px}
   .mapwrap{order:1}
-  .scroll{order:2;background:var(--panel);--sx:16px;padding:0 var(--sx) 40px;position:relative;z-index:5;margin-top:-16px;border-radius:18px 18px 0 0;box-shadow:0 -6px 18px rgba(0,0,0,.10);overscroll-behavior-y:contain}
+  /* 목록 = 지도 위에 겹친 바텀시트. 지도는 시트 뒤까지 꽉 차 있어서 끌어내려도 빈 공간이 안 보임 */
+  .scroll{order:2;background:var(--panel);--sx:16px;padding:0 var(--sx) 40px;position:absolute;left:0;right:0;bottom:0;height:var(--sh,55dvh);z-index:5;border-radius:18px 18px 0 0;box-shadow:0 -6px 18px rgba(0,0,0,.10);overscroll-behavior-y:contain;transform:translate3d(0,var(--so,0px),0);transition:transform .34s cubic-bezier(.22,.9,.24,1);will-change:transform}
+  .scroll.sheet-drag{transition:none}
+  .mapbar{transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
+  .app.sheet-dragging .mapbar{transition:none}
+  #gmap{transition:none}
   .sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;position:sticky;top:0;z-index:6;width:calc(100% + 2 * var(--sx));margin:0 calc(-1 * var(--sx)) 6px;padding:8px 0 8px;border:0;background:var(--panel);border-radius:18px 18px 0 0;cursor:pointer;touch-action:none;color:var(--ink3);font:inherit;font-size:11px;font-weight:600}
   .sheet-handle i{display:block;width:40px;height:5px;border-radius:99px;background:#d6d3cc}
-  .app.sheet-min{grid-template-rows:auto minmax(0,1fr) auto}
-  .app.sheet-min .scroll{overflow:hidden;padding-bottom:0}
-  .app.sheet-min .scroll>:not(.sheet-handle){display:none}
-  .app.sheet-min .sheet-handle{margin-bottom:0;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
-  .mapbar{bottom:30px}
+  .sheet-handle:focus{outline:none} .sheet-handle:focus-visible i{background:var(--ink3)}
+  .app.sheet-min .scroll{overflow:hidden}
+  .mapbar{bottom:calc(var(--sv,55dvh) + 14px)}
+  .mapwrap .osm-attr{bottom:calc(var(--sv,55dvh) + 4px);transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
+  .app.sheet-dragging .mapwrap .osm-attr{transition:none}
 }
 @media (max-width:860px) and (max-height:520px){
   .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
-  .side{display:flex} .side-head{order:0} .scroll{order:0;margin-top:0;border-radius:0;box-shadow:none;padding-top:10px} .sheet-handle{display:none}
-  .app.sheet-min{grid-template-rows:1fr} .app.sheet-min .scroll{overflow-y:auto} .app.sheet-min .scroll>:not(.sheet-handle){display:revert}
+  .app{overflow:visible} .side{display:flex} .side-head{order:0} .scroll{order:0;position:static;height:auto;transform:none;transition:none;border-radius:0;box-shadow:none;padding-top:10px} .sheet-handle{display:none}
+  .app.sheet-min .scroll{overflow-y:auto} .mapbar,.mapwrap .osm-attr{bottom:26px}
   .mapwrap{order:2} .side{order:1;border-top:0;border-right:1px solid var(--line)}
 }
 /* head actions */
@@ -620,40 +625,51 @@ async function showHotelRanks(h){
 
 /* ---------- 리스트 ---------- */
 const listEl = document.getElementById('list');
-// 모바일: 목록 시트 접기/펴기 — 손잡이 탭, 또는 시트를 위/아래로 스와이프
-(function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'), sc=document.getElementById('scroll');
+// 모바일: 목록 바텀시트 — 손잡이 탭/클릭, 또는 손가락·마우스로 위아래로 끌어서 접기/펴기 (손 따라 부드럽게 움직임)
+(function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'), sc=document.getElementById('scroll'), gm=document.getElementById('gmap');
   const isMob=()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
   const isMin=()=>app.classList.contains('sheet-min');
-  const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기'; if(!min) sc.scrollTop=0; };
-  // 손잡이: 탭/클릭 (드래그 직후의 클릭은 무시)
+  let SH=0, MIN=44, off=0;
+  const maxOff=()=>Math.max(0,SH-MIN);
+  // 지도 크기를 시트 위쪽까지로 맞추되, 화면에 보이는 지도 위치는 그대로 유지
+  function mapInset(px){ const old=parseFloat(gm.style.bottom)||0; if(Math.abs(old-px)<1) return;
+    let c=null; try{ c=map&&map.getCenter(); }catch(e){}
+    gm.style.bottom=px+'px';
+    try{ const pr=map&&map.getProjection(); if(c&&pr){ const s=2**map.getZoom(), wp=pr.fromLatLngToPoint(c); wp.y-=(px-old)/2/s; map.setCenter(pr.fromPointToLatLng(wp)); } }catch(e){} }
+  function apply(o, anim){ off=Math.min(Math.max(o,0),maxOff()); sc.classList.toggle('sheet-drag',!anim);
+    app.style.setProperty('--so',off+'px'); app.style.setProperty('--sv',(SH-off)+'px'); }
+  function settle(){ if(isMob()) mapInset(Math.max(0,SH-off-10)); }
+  function layout(){ if(!isMob()){ ['--sh','--so','--sv'].forEach(k=>app.style.removeProperty(k)); gm.style.bottom=''; return; }
+    const headB=document.querySelector('.side-head').getBoundingClientRect().bottom - app.getBoundingClientRect().top;
+    SH=Math.round(app.clientHeight-headB-Math.round(innerHeight*.40)+16); MIN=h.offsetHeight||44;
+    app.style.setProperty('--sh',SH+'px'); apply(isMin()?maxOff():0,false); requestAnimationFrame(()=>sc.classList.remove('sheet-drag')); settle(); }
+  const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기';
+    if(!isMob()) return; mapInset(0); apply(min?maxOff():0,true); clearTimeout(set.t); set.t=setTimeout(settle,360); };
   let justDragged=false;
   h.addEventListener('click',()=>{ if(justDragged) return; set(!isMin()); });
   h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!isMin()); } });
-  // 시트 어디서든 스와이프: 펼친 상태에선 목록 맨 위에서 아래로 쓸면 접힘, 접힌 상태에선 위로 쓸면 펼침
-  let t=null;
-  sc.addEventListener('touchstart',e=>{ if(!isMob()||e.touches.length!==1) { t=null; return; }
-    t={y:e.touches[0].clientY, x:e.touches[0].clientX, top:sc.scrollTop<=0, onHandle:!!e.target.closest('.sheet-handle'), dy:0, active:false}; },{passive:true});
-  sc.addEventListener('touchmove',e=>{ if(!t) return; const dy=e.touches[0].clientY-t.y, dx=e.touches[0].clientX-t.x; t.dy=dy;
-    if(!t.active){ if(Math.abs(dy)<8 || Math.abs(dx)>Math.abs(dy)) return;
-      if(isMin() ? dy<0 : (dy>0 && (t.top||t.onHandle))) t.active=true; else { t=null; return; } }
-    e.preventDefault();
-    sc.style.transition='none'; sc.style.transform=`translateY(${isMin()?Math.max(dy,-80)*.5:Math.max(dy,0)*.6}px)`; },{passive:false});
-  const end=()=>{ if(!t) return; const {dy,active}=t; t=null; sc.style.transition='transform .18s'; sc.style.transform='';
-    if(!active) return; if(isMin() && dy<-30) set(false); else if(!isMin() && dy>50) set(true); };
-  sc.addEventListener('touchend',end); sc.addEventListener('touchcancel',end);
-  // 데스크탑(마우스): 시트를 잡고 위/아래로 끌기 — 규칙은 터치와 같음
-  let m=null;
-  sc.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0||!isMob()) return;
-    if(e.target.closest('select,input,textarea,a,.cats,.rankset,.routebox button')) return;
-    m={y:e.clientY, top:sc.scrollTop<=0, dy:0, active:false}; });
-  window.addEventListener('pointermove',e=>{ if(!m) return; const dy=e.clientY-m.y; m.dy=dy;
-    if(!m.active){ if(Math.abs(dy)<6) return; if(isMin() ? dy<0 : (dy>0 && m.top)) { m.active=true; sc.classList.add('sheet-drag'); } else { m=null; return; } }
-    e.preventDefault(); sc.style.transition='none'; sc.style.transform=`translateY(${isMin()?Math.max(dy,-80)*.5:Math.max(dy,0)*.6}px)`; });
-  window.addEventListener('pointerup',()=>{ if(!m) return; const {dy,active}=m; m=null; if(!active) return;
-    sc.classList.remove('sheet-drag'); sc.style.transition='transform .18s'; sc.style.transform='';
+  // 공통 드래그 로직 (터치·마우스)
+  let d=null;
+  function dStart(y,x,target){ if(!isMob()) return; d={y,x,top:sc.scrollTop<=0,onHandle:!!target.closest('.sheet-handle'),base:off,active:false,lastY:y,lastT:performance.now(),v:0}; }
+  function dMove(y,x){ if(!d) return false; const dy=y-d.y, dx=x-d.x;
+    if(!d.active){ if(Math.abs(dy)<6 || Math.abs(dx)>Math.abs(dy)) return false;
+      if(isMin() ? dy<0 : (dy>0 && (d.top||d.onHandle))){ d.active=true; d.y=y; app.classList.add('sheet-dragging'); mapInset(0); } else { d=null; return false; } }
+    const now=performance.now(), dt=Math.max(1,now-d.lastT); d.v=(y-d.lastY)/dt; d.lastY=y; d.lastT=now;
+    let o=d.base+(y-d.y); if(o<0) o=o/3; // 위로 더 당기면 살짝 저항
+    off=o; sc.classList.add('sheet-drag'); app.style.setProperty('--so',Math.max(o,-40)+'px'); app.style.setProperty('--sv',(SH-Math.max(o,0))+'px'); return true; }
+  function dEnd(){ if(!d) return; const {active,v}=d; d=null; app.classList.remove('sheet-dragging'); if(!active) return;
     justDragged=true; setTimeout(()=>justDragged=false,0);
-    if(isMin() && dy<-30) set(false); else if(!isMin() && dy>50) set(true); });
+    const min = v>0.45 ? true : v<-0.45 ? false : off > maxOff()/2;
+    set(min); }
+  sc.addEventListener('touchstart',e=>{ if(e.touches.length===1) dStart(e.touches[0].clientY,e.touches[0].clientX,e.target); else d=null; },{passive:true});
+  sc.addEventListener('touchmove',e=>{ if(d && dMove(e.touches[0].clientY,e.touches[0].clientX) && e.cancelable) e.preventDefault(); },{passive:false});
+  sc.addEventListener('touchend',dEnd); sc.addEventListener('touchcancel',dEnd);
+  sc.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0) return; if(e.target.closest('select,input,textarea,a,.cats,.rankset,.routebox button')) return; dStart(e.clientY,e.clientX,e.target); });
+  window.addEventListener('pointermove',e=>{ if(e.pointerType==='mouse' && d && dMove(e.clientY,e.clientX)) e.preventDefault(); });
+  window.addEventListener('pointerup',e=>{ if(e.pointerType==='mouse') dEnd(); });
   sc.addEventListener('click',e=>{ if(justDragged){ e.stopPropagation(); e.preventDefault(); } },true);
+  window.addEventListener('resize',()=>{ clearTimeout(layout.t); layout.t=setTimeout(layout,120); });
+  layout(); window.addEventListener("load",layout); window.sheetLayout=layout;
   window.openSheet=()=>{ if(isMin()) set(false); };
 })();
 function trCellHTML(k){
