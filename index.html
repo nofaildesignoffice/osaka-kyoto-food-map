@@ -38,6 +38,9 @@ button,select{font:inherit;color:inherit}
 .scroll{--sx:14px;overflow-y:auto;flex:1;min-height:0;padding:12px var(--sx) 40px}
 .sheet-handle{display:none}
 .scroll.sheet-drag{user-select:none;cursor:grabbing}
+#selSlot:empty{display:none}
+.sel-label{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin:2px 4px 8px}
+#selSlot{margin-bottom:14px}
 
 /* route box */
 .routebox{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0 calc(-1 * var(--sx)) 14px;padding:4px var(--sx) 18px}
@@ -294,6 +297,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
     </div>
     <div class="scroll" id="scroll">
       <button class="sheet-handle" id="sheetHandle" type="button" aria-expanded="true" aria-controls="scroll"><i></i><span>목록 접기</span></button>
+      <div id="selSlot"></div>
       <section class="routebox" aria-label="이동 방법">
         <p class="rb-title">길찾기</p>
         <div class="rb-grid">
@@ -496,7 +500,7 @@ function placeHTML(p){
   h += `<div class="gp-src">Google 지도 장소 정보 · “${esc(x.displayName&&x.displayName.text)}” (표시 좌표에서 ${Math.round(g.d)}m)${p.type==='food'&&x.reservable!==true?' · 예약 버튼은 Google 지도에 예약 기능이 있는 가게만 나와요':''}</div>`;
   return h;
 }
-function fillPlace(p){ const el=listEl.querySelector(`[data-gp="${p.id}"]`); if(el) el.innerHTML=placeHTML(p); }
+function fillPlace(p){ const el=sheetEl.querySelector(`[data-gp="${p.id}"]`); if(el) el.innerHTML=placeHTML(p); }
 
 /* ---------- 지도 (Maps JavaScript API) ---------- */
 let map=null, markers={}, overlays=[], zoneObjs=[], zoneLabels=[];
@@ -606,8 +610,8 @@ async function showHotelRanks(h){
   let raf=0;
   const draw = ()=>{
     if(state.sel!==h.id || g!==hGen) return;
-    const box=listEl.querySelector(`[data-ranksum="${h.id}"]`); if(box) box.innerHTML=rankSummaryHTML(h);
-    const tb=listEl.querySelector(`[data-near="${h.id}"]`); if(tb) tb.innerHTML=nearTable(h);
+    const box=sheetEl.querySelector(`[data-ranksum="${h.id}"]`); if(box) box.innerHTML=rankSummaryHTML(h);
+    const tb=sheetEl.querySelector(`[data-near="${h.id}"]`); if(tb) tb.innerHTML=nearTable(h);
     if(!map || state.from&&state.to) return;
     clearOverlays();
     foods.forEach(q=>{ const r=rankOf(q), k=`${h.id}|${q.id}`, w=WALK[k], t=trBest(k);
@@ -624,7 +628,8 @@ async function showHotelRanks(h){
 }
 
 /* ---------- 리스트 ---------- */
-const listEl = document.getElementById('list');
+const listEl = document.getElementById('list'), sheetEl = document.getElementById('scroll'), selSlot = document.getElementById('selSlot');
+const mobSheet = ()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
 // 모바일: 목록 바텀시트 — 손잡이 탭/클릭, 또는 손가락·마우스로 위아래로 끌어서 접기/펴기 (손 따라 부드럽게 움직임)
 (function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'), sc=document.getElementById('scroll'), gm=document.getElementById('gmap');
   const isMob=()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
@@ -730,7 +735,9 @@ function renderList(){
   const order = Object.keys(cnt).sort((a,b)=> (a==='숙소'?-1:b==='숙소'?1:0) || (a==='관광지'?1:b==='관광지'?-1:0) || (a==='기타'?1:b==='기타'?-1:0) || cnt[b]-cnt[a]);
   if(state.cat!=='all' && !cnt[state.cat]) state.cat='all';
   const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
-  const items = all.filter(catOK);
+  const slotId = mobSheet() && state.sel && byId[state.sel] && byId[state.sel].city===state.city ? state.sel : null;
+  selSlot.innerHTML = slotId ? `<div class="sel-label">선택한 장소</div>${cardHTML(byId[slotId])}` : '';
+  const items = all.filter(catOK).filter(p=>p.id!==slotId);
   const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food'), spots = items.filter(p=>p.type==='spot');
   const T = state.types, none = !T.size; let h=catBar; const catOn = state.cat!=='all';
   const showH = none||T.has('hotel'), showF = none||T.has('food')||T.has('ranked'), onlyRanked = !none && T.has('ranked') && !T.has('food'), showS = none||T.has('spot');
@@ -760,7 +767,7 @@ window.addEventListener('pointermove',e=>{ if(!catDrag) return; const dx=e.clien
 window.addEventListener('pointerup',()=>{ if(!catDrag) return; if(catDrag.moved){ catSuppress=true; catDrag.c.classList.remove('dragging'); setTimeout(()=>catSuppress=false,0); } catDrag=null; });
 listEl.addEventListener('click',e=>{ if(catSuppress && e.target.closest('.cats')){ e.stopPropagation(); e.preventDefault(); catSuppress=false; } },true);
 listEl.addEventListener('wheel',e=>{ const c=e.target.closest('.cats'); if(!c||Math.abs(e.deltaX)>Math.abs(e.deltaY)) return; if(c.scrollWidth<=c.clientWidth) return; c.scrollLeft+=e.deltaY; e.preventDefault(); },{passive:false});
-listEl.addEventListener('click',e=>{
+sheetEl.addEventListener('click',e=>{
   const ct=e.target.closest('[data-cat]'); if(ct){ state.cat=ct.dataset.cat; renderList(); refreshMarkers(); return; }
   const rk=e.target.closest('[data-rank]'); if(rk){ e.stopPropagation(); setRank(rk.dataset.id, +rk.dataset.rank); return; }
   const sf=e.target.closest('[data-setfrom]'), st=e.target.closest('[data-setto]'), tr=e.target.closest('tr[data-route]');
@@ -784,11 +791,12 @@ function select(id, fromMap){
   else {
     if(!(state.from&&state.to)) panTo(p.lat,p.lng,16);
     if(p.type==='food'){ const hs=P.filter(q=>q.type==='hotel'&&q.city===p.city);
-      const up=()=>{ const tb=listEl.querySelector(`[data-near="${p.id}"]`); if(tb&&state.sel===p.id) tb.innerHTML=nearTable(p); };
+      const up=()=>{ const tb=sheetEl.querySelector(`[data-near="${p.id}"]`); if(tb&&state.sel===p.id) tb.innerHTML=nearTable(p); };
       if(hs.length){ walkMatrix(hs,[p]).then(up); hs.forEach(h=>transitQuery(h,p).then(up)); } }
   }
   renderBar();
-  const el=listEl.querySelector(`[data-id="${id}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(mobSheet()) sheetEl.scrollTo({top:0,behavior:'smooth'});
+  else { const el=sheetEl.querySelector(`[data-id="${id}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'}); }
 }
 
 /* ---------- city / filter ---------- */
@@ -1195,13 +1203,13 @@ async function fetchThumb(p){
 }
 function paintThumb(id){
   const t=THUMB[id]; if(!t||!t.photo) return;
-  listEl.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .ico`).forEach(ico=>{ ico.classList.add('has-thumb'); ico.innerHTML=`<img class="thumb" alt="" loading="lazy" src="${photoURL(t.photo,160)}">`; });
+  sheetEl.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .ico`).forEach(ico=>{ ico.classList.add('has-thumb'); ico.innerHTML=`<img class="thumb" alt="" loading="lazy" src="${photoURL(t.photo,160)}">`; });
 }
 const thumbIO = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; thumbIO.unobserve(e.target);
   const id=e.target.closest('.card').dataset.id, p=byId[id]; if(!p) return; const t=THUMB[id];
   if(t && t.at && Date.now()-Date.parse(t.at)<PHOTO_TTL){ paintThumb(id); return; }
   if(!thumbBusy.has(id)){ thumbBusy.add(id); thumbQ.push(p); pumpThumb(); } }), {root:document.getElementById('scroll'), rootMargin:'200px'}) : null;
-function observeThumbs(){ if(!thumbIO) return; listEl.querySelectorAll('.card .ico').forEach(el=>{ const id=el.closest('.card').dataset.id; const t=THUMB[id];
+function observeThumbs(){ if(!thumbIO) return; sheetEl.querySelectorAll('.card .ico').forEach(el=>{ const id=el.closest('.card').dataset.id; const t=THUMB[id];
   if(t&&t.photo&&t.at&&Date.now()-Date.parse(t.at)<PHOTO_TTL){ paintThumb(id); } else thumbIO.observe(el); }); }
 
 /* ---------- init ---------- */
