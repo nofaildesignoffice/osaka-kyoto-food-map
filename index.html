@@ -336,7 +336,7 @@ const BED = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke=
 const lsGet = (k,d) => { try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } };
 const lsSet = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
 
-const state = {city:'osaka', filter:'all', cat:'all', sel:null, from:'', to:'', mode:null};
+const state = {city:'osaka', types:new Set(), cat:'all', sel:null, from:'', to:'', mode:null};
 
 /* ---------- 순위 (①②③) : 데이터 기본값 p.rank + 이 기기에서 바꾼 값 ---------- */
 let RANKS = lsGet('ranks', {});
@@ -527,12 +527,14 @@ const GENERIC_GROUP = new Set(['AI로 추가한 맛집','직접 추가한 맛집
 const EMOJI_GROUP = {'🍣':'스시','🍜':'라멘','🥩':'고기','🍖':'고기','🍕':'피자','☕':'카페','🍰':'디저트','🍨':'디저트','🍡':'디저트','🍩':'디저트','🥞':'오코노미야키','🍢':'야키토리','🥟':'교자','🍛':'카레','🍱':'일식'};
 function catOf(p){ if(p.type==='hotel') return '숙소'; if(p.type==='spot') return '관광지';
   return GENERIC_GROUP.has(p.group||'') ? (EMOJI_GROUP[p.emoji]||'기타') : p.group; }
+// 종류 필터: 여러 개 선택 가능, 아무것도 안 고르면 전체
+function typeOK(p){ const T=state.types; if(!T.size||T.has(p.type)) return true; return T.has('ranked') && p.type==='food' && rankOf(p)>0; }
 function catOK(p){ return state.cat==='all' || catOf(p)===state.cat; }
 function refreshMarkers(){
   if(!map) return;
   const hotelSel = state.sel && byId[state.sel].type==='hotel' ? byId[state.sel] : null;
   P.forEach(p=>{ const k=markers[p.id]; if(!k) return; const r=rankOf(p);
-    const show = state.filter==='all' || state.filter===p.type || (state.filter==='ranked' && (p.type==='hotel' || (p.type==='food' && r>0)));
+    const show = typeOK(p);
     const shown = show && catOK(p);
     const big = p.type==='hotel' || r>0;
     k.el.className = ['pin', p.type, big?'big':'', p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', hotelSel&&p.type==='food'&&p.city===hotelSel.city&&!r?'dim':''].join(' ');
@@ -679,28 +681,28 @@ function cardHTML(p){
 }
 function renderList(){
   const all = P.filter(p=>p.city===state.city);
-  const typeOK = p => state.filter==='all' || state.filter===p.type || (state.filter==='ranked' && (p.type==='hotel' || (p.type==='food' && rankOf(p)>0)));
   const cnt = {}; all.filter(typeOK).forEach(p=>{ const c=catOf(p); cnt[c]=(cnt[c]||0)+1; });
   const order = Object.keys(cnt).sort((a,b)=> (a==='숙소'?-1:b==='숙소'?1:0) || (a==='관광지'?1:b==='관광지'?-1:0) || (a==='기타'?1:b==='기타'?-1:0) || cnt[b]-cnt[a]);
   if(state.cat!=='all' && !cnt[state.cat]) state.cat='all';
   const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
   const items = all.filter(catOK);
   const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food'), spots = items.filter(p=>p.type==='spot');
-  const f = state.filter; let h=catBar; const catOn = state.cat!=='all';
-  if((f==='all'||f==='hotel'||f==='ranked') && !(catOn && !hotels.length)){
+  const T = state.types, none = !T.size; let h=catBar; const catOn = state.cat!=='all';
+  const showH = none||T.has('hotel'), showF = none||T.has('food')||T.has('ranked'), onlyRanked = !none && T.has('ranked') && !T.has('food'), showS = none||T.has('spot');
+  if(showH && !(catOn && !hotels.length)){
     h += `<div class="sec">숙소 ${hotels.length}</div>`;
     h += hotels.length ? hotels.map(cardHTML).join('') : `<div class="empty">아직 등록된 ${CITY[state.city].name} 숙소가 없어요.</div>`;
   }
-  if(f==='all'||f==='food'||f==='ranked'){
+  if(showF){
     const ranked = foods.filter(q=>rankOf(q)>0).sort((a,b)=>rankOf(a)-rankOf(b));
     if(ranked.length) h += `<div class="sec">순위 맛집 ${ranked.length}</div>` + ranked.map(cardHTML).join('');
-    if(f!=='ranked'){
+    if(!onlyRanked){
       const rest = foods.filter(q=>!rankOf(q)); const groups=[...new Set(rest.map(catOf))];
       if(!foods.length && !catOn) h += `<div class="sec">맛집 0</div><div class="empty">${CITY[state.city].name}에는 아직 등록된 맛집이 없어요.</div>`;
       groups.forEach(g=>{ const fs=rest.filter(x=>catOf(x)===g); h += `<div class="sec">${esc(g)} ${fs.length}</div>` + fs.map(cardHTML).join(''); });
     } else if(!ranked.length) h += `<div class="sec">순위 맛집 0</div><div class="empty">맛집 카드 오른쪽의 👑🥈🥉 버튼으로 순위를 매겨 보세요.</div>`;
   }
-  if((f==='all'||f==='spot') && spots.length) h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
+  if(showS && spots.length) h += `<div class="sec">관광지 ${spots.length}</div>` + spots.map(cardHTML).join('');
   const prevCats = listEl.querySelector('.cats'); const keepX = prevCats ? prevCats.scrollLeft : 0;
   listEl.innerHTML = h;
   const nc = listEl.querySelector('.cats'); if(nc) nc.scrollLeft = keepX;
@@ -754,16 +756,20 @@ function setCity(c, keepRoute){
 }
 const CTLS=[...document.querySelectorAll('.ctlgrp .ctl')];
 function setOpen(ctl,o){ ctl.classList.toggle('open',o); ctl.querySelector('.ctlbtn').setAttribute('aria-expanded',o); }
-function updCtl(){ const c=document.querySelector('.tab[aria-selected=true]'), f=document.querySelector('.chip[aria-pressed=true]');
-  document.querySelector('#cityCtl .ctlv').textContent=c?c.textContent:''; document.querySelector('#typeCtl .ctlv').textContent=f?f.textContent:''; }
+function updCtl(){ const c=document.querySelector('.tab[aria-selected=true]'), fs=[...document.querySelectorAll('.chip[aria-pressed=true]')].filter(x=>x.dataset.filter!=='all');
+  document.querySelector('#cityCtl .ctlv').textContent=c?c.textContent:''; document.querySelector('#typeCtl .ctlv').textContent=fs.length?fs.map(x=>x.textContent).join(', '):'전체'; }
 CTLS.forEach(ctl=>{
   ctl.querySelector('.ctlbtn').onclick=()=>{ const o=!ctl.classList.contains('open'); CTLS.forEach(x=>setOpen(x,false)); setOpen(ctl,o); };
-  ctl.querySelector('.ctlpanel').addEventListener('click',e=>{ if(e.target.closest('.tab,.chip')) setTimeout(()=>{ updCtl(); setOpen(ctl,false); }); });
+  ctl.querySelector('.ctlpanel').addEventListener('click',e=>{ if(e.target.closest('.tab')) setTimeout(()=>{ updCtl(); setOpen(ctl,false); }); else if(e.target.closest('.chip')) setTimeout(updCtl); });
 });
 document.addEventListener('click',e=>{ CTLS.forEach(x=>{ if(!x.contains(e.target)) setOpen(x,false); }); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') CTLS.forEach(x=>{ if(x.classList.contains('open')){ setOpen(x,false); x.querySelector('.ctlbtn').focus(); } }); });
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{ state.sel=null; if(view.kind==='embed') showEmbed(null); setCity(t.dataset.city); });
-document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ state.filter=c.dataset.filter; document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); renderList(); refreshMarkers(); });
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ const v=c.dataset.filter, T=state.types;
+  if(v==='all') T.clear(); else if(T.has(v)) T.delete(v); else T.add(v);
+  if(T.size===4) T.clear(); // 다 고르면 = 전체
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.filter==='all' ? !T.size : T.has(x.dataset.filter)));
+  renderList(); refreshMarkers(); });
 
 /* ---------- 이동 방법 ---------- */
 const fromSel=document.getElementById('from'), toSel=document.getElementById('to'), resEl=document.getElementById('result');
