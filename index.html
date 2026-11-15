@@ -241,12 +241,12 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .pill.on{background:var(--brand);color:#fff}
 .mapmsg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink2);font-size:14px;line-height:1.6}
 /* markers */
-.pin{position:relative;width:30px;height:40px;cursor:pointer;transform-origin:50% 100%;transition:transform .12s;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.pin{--k:var(--pz,1);position:relative;flex:none;min-width:0;min-height:0;width:calc(32px*var(--k));height:calc(42.7px*var(--k));cursor:pointer;transition:width .16s ease,height .16s ease,opacity .16s;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .pin svg.pbg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.pin .pico{position:absolute;left:50%;top:37.5%;transform:translate(-50%,-50%);width:66%;height:50%;display:grid;place-items:center;font-size:14px;line-height:1;color:#5a4300}
-.pin .pico svg{width:16px;height:16px}
-.pin.big{width:38px;height:50px} .pin.big .pico{font-size:18px} .pin.big .pico svg{width:19px;height:19px}
-.pin.sel{transform:scale(1.25);z-index:9}
+.pin .pico{position:absolute;left:50%;top:37.5%;transform:translate(-50%,-50%);width:66%;height:50%;display:grid;place-items:center;font-size:calc(15px*var(--k));line-height:1;color:#5a4300}
+.pin .pico svg{width:calc(17px*var(--k));height:calc(17px*var(--k))}
+.pin:hover{--k:calc(var(--pz,1) * 1.12)}
+.pin.sel{--k:max(1.2, var(--pz,1) * 1.32);filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
 .pin.dim{opacity:.4}
 .tlabel{transform:translateY(50%);background:#fff;border-radius:999px;padding:2px 7px;font-size:11.5px;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.25);white-space:nowrap;border:2px solid currentColor}
 .zlabel{transform:translateY(50%);font-size:11px;font-weight:800;color:#5a2fd6;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;white-space:nowrap;pointer-events:none}
@@ -682,6 +682,8 @@ window.__initMap = async function(){
     zoneLabels.push(new google.maps.marker.AdvancedMarkerElement({position:{lat:d.center[0],lng:d.center[1]}, content:el, zIndex:1})); });
   map.data.setStyle({fillColor:'#7c4dff', fillOpacity:.13, strokeColor:'#7c4dff', strokeOpacity:.6, strokeWeight:1.2, clickable:false});
   applyShade();
+  // 핀 크기: 줌 단계별 보간 (모든 종류 동일, 선택 시 1.32배·최소 1.2)
+  map.addListener('zoom_changed', pinZoom); pinZoom();
   // 핀
   syncMarkers();
   refreshMarkers(); renderBar();
@@ -690,6 +692,10 @@ window.__initMap = async function(){
 window.gm_authFailure = function(){ document.getElementById('gmap').innerHTML='<div class="mapmsg">Google 지도 키 인증에 실패했어요. (키 제한 설정에 이 사이트 주소와 Maps JavaScript API가 들어 있는지 확인)</div>'; };
 
 function applyShade(){ let at=document.getElementById('osmAttr'); if(!at){ at=document.createElement('div'); at.id='osmAttr'; at.className='osm-attr'; at.textContent='지역 경계 © OpenStreetMap'; document.getElementById('gmap').parentElement.appendChild(at); } at.hidden=!shade; if(!map) return; zoneObjs.forEach(f=>map.data.overrideStyle(f,{visible:shade})); zoneLabels.forEach(l=>l.map=shade?map:null); }
+const PIN_ZOOM = [[10,.56],[11,.64],[12,.74],[13,.86],[14,.96],[15,1.04],[16,1.1],[18,1.16]];
+function pinZoom(){ const z=map.getZoom(); let k=PIN_ZOOM[0][1];
+  for(let i=0;i<PIN_ZOOM.length;i++){ const [z1,k1]=PIN_ZOOM[i]; if(z>=z1){ k=k1; const n=PIN_ZOOM[i+1]; if(n&&z<n[0]) k=k1+(n[1]-k1)*(z-z1)/(n[0]-z1); } }
+  document.getElementById('gmap').style.setProperty('--pz', k.toFixed(3)); }
 const RANK_ICON = {1:'👑', 2:'🥈', 3:'🥉'};
 const PIN_COL = {food:['var(--pin-food)','var(--pin-food-d)'], hotel:['var(--pin-hotel)','var(--pin-hotel-d)'], spot:['var(--pin-spot)','var(--pin-spot-d)']};
 // GPS 핀 모양: 물방울 + 가운데 흰 원 (끝점이 실제 위치)
@@ -708,8 +714,7 @@ function refreshMarkers(){
   P.forEach(p=>{ const k=markers[p.id]; if(!k) return; const r=rankOf(p);
     const show = typeOK(p);
     const shown = show && catOK(p);
-    const big = p.type==='hotel' || r>0;
-    k.el.className = ['pin', p.type, big?'big':'', p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', hotelSel&&p.type==='food'&&p.city===hotelSel.city&&!r?'dim':''].join(' ');
+        k.el.className = ['pin', p.type, p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', hotelSel&&p.type==='food'&&p.city===hotelSel.city&&!r?'dim':''].join(' ');
     const icon = p.type==='hotel' ? BED : p.type==='spot' ? (p.emoji||'📍') : (r ? RANK_ICON[r] : (p.emoji||'🍴'));
     k.el.innerHTML = pinSVG(p.type, p.candidate) + `<span class="pico">${icon}</span>`;
     k.m.zIndex = p.type==='hotel'?30 : r ? 20-r : 5;
