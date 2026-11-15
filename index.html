@@ -36,6 +36,7 @@ button,select{font:inherit;color:inherit}
 .chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;cursor:pointer;color:var(--ink2)}
 .chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .scroll{--sx:14px;overflow-y:auto;flex:1;min-height:0;padding:12px var(--sx) 40px}
+.sheet-handle{display:none}
 
 /* route box */
 .routebox{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0 calc(-1 * var(--sx)) 14px;padding:4px var(--sx) 18px}
@@ -159,15 +160,24 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .zlabel{transform:translateY(50%);font-size:11px;font-weight:800;color:#5a2fd6;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;white-space:nowrap;pointer-events:none}
 
 @media (max-width:860px){
-  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:46dvh minmax(0,1fr)}
+  /* 모바일: 상단 헤더(제목·버튼·지역/종류)는 화면 위에 고정, 그 아래 지도, 그 아래 목록만 스크롤 */
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 40dvh minmax(0,1fr)}
+  .side{display:contents}
+  .side-head{order:0;position:relative;z-index:20;background:var(--panel);padding:14px 16px 14px}
   .mapwrap{order:1}
-  .side{order:2;border-right:0;border-top:1px solid var(--line)}
-  .side-head{padding:16px 16px 16px}
-  .scroll{--sx:16px;padding:10px var(--sx) 40px}
-  .mapbar{bottom:14px}
+  .scroll{order:2;background:var(--panel);--sx:16px;padding:0 var(--sx) 40px;position:relative;z-index:5;margin-top:-16px;border-radius:18px 18px 0 0;box-shadow:0 -6px 18px rgba(0,0,0,.10)}
+  .sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;position:sticky;top:0;z-index:6;width:calc(100% + 2 * var(--sx));margin:0 calc(-1 * var(--sx)) 6px;padding:8px 0 8px;border:0;background:var(--panel);border-radius:18px 18px 0 0;cursor:pointer;touch-action:none;color:var(--ink3);font:inherit;font-size:11px;font-weight:600}
+  .sheet-handle i{display:block;width:40px;height:5px;border-radius:99px;background:#d6d3cc}
+  .app.sheet-min{grid-template-rows:auto minmax(0,1fr) auto}
+  .app.sheet-min .scroll{overflow:hidden;padding-bottom:0}
+  .app.sheet-min .scroll>:not(.sheet-handle){display:none}
+  .app.sheet-min .sheet-handle{margin-bottom:0;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+  .mapbar{bottom:30px}
 }
 @media (max-width:860px) and (max-height:520px){
   .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
+  .side{display:flex} .side-head{order:0} .scroll{order:0;margin-top:0;border-radius:0;box-shadow:none;padding-top:10px} .sheet-handle{display:none}
+  .app.sheet-min{grid-template-rows:1fr} .app.sheet-min .scroll{overflow-y:auto} .app.sheet-min .scroll>:not(.sheet-handle){display:revert}
   .mapwrap{order:2} .side{order:1;border-top:0;border-right:1px solid var(--line)}
 }
 /* head actions */
@@ -277,6 +287,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
       </div>
     </div>
     <div class="scroll" id="scroll">
+      <button class="sheet-handle" id="sheetHandle" type="button" aria-expanded="true" aria-controls="scroll"><i></i><span>목록 접기</span></button>
       <section class="routebox" aria-label="이동 방법">
         <p class="rb-title">길찾기</p>
         <div class="rb-grid">
@@ -606,6 +617,14 @@ async function showHotelRanks(h){
 
 /* ---------- 리스트 ---------- */
 const listEl = document.getElementById('list');
+// 모바일: 목록 시트 접기/펴기 (탭 또는 위/아래로 스와이프)
+(function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'); let y0=null;
+  const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기'; if(!min) document.getElementById('scroll').scrollTop=0; };
+  h.addEventListener('pointerdown',e=>{ y0=e.clientY; });
+  h.addEventListener('pointerup',e=>{ if(y0===null) return; const dy=e.clientY-y0; y0=null; const min=app.classList.contains('sheet-min'); if(dy>30) set(true); else if(dy<-30) set(false); else set(!min); });
+  h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!app.classList.contains('sheet-min')); } });
+  window.openSheet=()=>{ if(app.classList.contains('sheet-min')) set(false); };
+})();
 function trCellHTML(k){
   const t=TR[k];
   if(!t || t.status==='loading') return '<span class="meta">조회 중…</span>';
@@ -706,7 +725,7 @@ listEl.addEventListener('click',e=>{
 });
 
 function select(id, fromMap){
-  state.sel=id;
+  state.sel=id; if(id && fromMap && window.openSheet) openSheet();
   if(id && byId[id].city!==state.city){ setCity(byId[id].city, true); }
   renderList(); refreshMarkers();
   if(!id){ clearOverlays(); renderBar(); return; }
