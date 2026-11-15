@@ -165,7 +165,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   .side{display:contents}
   .side-head{order:0;position:relative;z-index:20;background:var(--panel);padding:14px 16px 14px}
   .mapwrap{order:1}
-  .scroll{order:2;background:var(--panel);--sx:16px;padding:0 var(--sx) 40px;position:relative;z-index:5;margin-top:-16px;border-radius:18px 18px 0 0;box-shadow:0 -6px 18px rgba(0,0,0,.10)}
+  .scroll{order:2;background:var(--panel);--sx:16px;padding:0 var(--sx) 40px;position:relative;z-index:5;margin-top:-16px;border-radius:18px 18px 0 0;box-shadow:0 -6px 18px rgba(0,0,0,.10);overscroll-behavior-y:contain}
   .sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;position:sticky;top:0;z-index:6;width:calc(100% + 2 * var(--sx));margin:0 calc(-1 * var(--sx)) 6px;padding:8px 0 8px;border:0;background:var(--panel);border-radius:18px 18px 0 0;cursor:pointer;touch-action:none;color:var(--ink3);font:inherit;font-size:11px;font-weight:600}
   .sheet-handle i{display:block;width:40px;height:5px;border-radius:99px;background:#d6d3cc}
   .app.sheet-min{grid-template-rows:auto minmax(0,1fr) auto}
@@ -619,13 +619,31 @@ async function showHotelRanks(h){
 
 /* ---------- 리스트 ---------- */
 const listEl = document.getElementById('list');
-// 모바일: 목록 시트 접기/펴기 (탭 또는 위/아래로 스와이프)
-(function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'); let y0=null;
-  const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기'; if(!min) document.getElementById('scroll').scrollTop=0; };
-  h.addEventListener('pointerdown',e=>{ y0=e.clientY; });
-  h.addEventListener('pointerup',e=>{ if(y0===null) return; const dy=e.clientY-y0; y0=null; const min=app.classList.contains('sheet-min'); if(dy>30) set(true); else if(dy<-30) set(false); else set(!min); });
-  h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!app.classList.contains('sheet-min')); } });
-  window.openSheet=()=>{ if(app.classList.contains('sheet-min')) set(false); };
+// 모바일: 목록 시트 접기/펴기 — 손잡이 탭, 또는 시트를 위/아래로 스와이프
+(function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'), sc=document.getElementById('scroll');
+  const isMob=()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
+  const isMin=()=>app.classList.contains('sheet-min');
+  const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기'; if(!min) sc.scrollTop=0; };
+  // 손잡이: 탭(또는 마우스 드래그)
+  let py=null;
+  h.addEventListener('pointerdown',e=>{ py=e.clientY; });
+  h.addEventListener('pointerup',e=>{ if(py===null) return; const dy=e.clientY-py; py=null;
+    if(e.pointerType==='touch' && Math.abs(dy)>=10) return; // 터치 스와이프는 아래 터치 처리에서
+    if(dy>30) set(true); else if(dy<-30) set(false); else set(!isMin()); });
+  h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!isMin()); } });
+  // 시트 어디서든 스와이프: 펼친 상태에선 목록 맨 위에서 아래로 쓸면 접힘, 접힌 상태에선 위로 쓸면 펼침
+  let t=null;
+  sc.addEventListener('touchstart',e=>{ if(!isMob()||e.touches.length!==1) { t=null; return; }
+    t={y:e.touches[0].clientY, x:e.touches[0].clientX, top:sc.scrollTop<=0, onHandle:!!e.target.closest('.sheet-handle'), dy:0, active:false}; },{passive:true});
+  sc.addEventListener('touchmove',e=>{ if(!t) return; const dy=e.touches[0].clientY-t.y, dx=e.touches[0].clientX-t.x; t.dy=dy;
+    if(!t.active){ if(Math.abs(dy)<8 || Math.abs(dx)>Math.abs(dy)) return;
+      if(isMin() ? dy<0 : (dy>0 && (t.top||t.onHandle))) t.active=true; else { t=null; return; } }
+    e.preventDefault();
+    sc.style.transition='none'; sc.style.transform=`translateY(${isMin()?Math.max(dy,-80)*.5:Math.max(dy,0)*.6}px)`; },{passive:false});
+  const end=()=>{ if(!t) return; const {dy,active}=t; t=null; sc.style.transition='transform .18s'; sc.style.transform='';
+    if(!active) return; if(isMin() && dy<-30) set(false); else if(!isMin() && dy>50) set(true); };
+  sc.addEventListener('touchend',end); sc.addEventListener('touchcancel',end);
+  window.openSheet=()=>{ if(isMin()) set(false); };
 })();
 function trCellHTML(k){
   const t=TR[k];
