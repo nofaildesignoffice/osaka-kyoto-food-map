@@ -265,7 +265,24 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .rbox:focus-within{border-color:var(--ink)}
 .rbox .ctlk{flex:none;font-size:11.5px;font-weight:700;color:var(--ink3)}
 .rbox select{flex:1;min-width:0;height:100%;border:0;background:transparent;font:inherit;font-size:14px;font-weight:600;color:var(--ink);-webkit-appearance:none;appearance:none;cursor:pointer;outline:none;padding:0;text-overflow:ellipsis}
-.rbox .chev{flex:none;opacity:.55;pointer-events:none}
+.rbox .chev{flex:none;opacity:.55;pointer-events:none;transition:transform .15s}
+.rbox select{pointer-events:none}
+.rbox.open{border-color:var(--ink)} .rbox.open .chev{transform:rotate(180deg)}
+/* 출발/도착 커스텀 드롭다운 (지역/종류 박스와 같은 스타일) */
+.rpanel{position:absolute;left:-1px;top:calc(100% + 7px);width:calc(100% + 54px);z-index:60;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.10);padding:8px;opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s,transform .14s,visibility .14s;cursor:default}
+.rbox.open .rpanel{opacity:1;visibility:visible;transform:none}
+.rp-search{display:block;width:100%;box-sizing:border-box;height:38px;border:1px solid #e9e9e9;border-radius:9px;padding:0 12px;font:inherit;font-size:14px;color:var(--ink);background:#faf9f7;outline:none;margin-bottom:6px}
+.rp-search:focus{border-color:var(--ink);background:#fff}
+.rp-list{max-height:min(320px,46dvh);overflow-y:auto;overscroll-behavior:contain;margin:0 -4px;padding:0 4px}
+.rp-g{font-size:11.5px;font-weight:800;color:var(--ink3);letter-spacing:.04em;padding:10px 8px 5px}
+.rp-o{display:flex;align-items:center;gap:9px;width:100%;border:0;background:none;text-align:left;padding:9px 8px;border-radius:8px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer}
+.rp-o:hover,.rp-o.kb{background:#f5f3ef}
+.rp-o .e{flex:none;width:20px;text-align:center}
+.rp-o .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rp-o[aria-selected=true]{font-weight:700}
+.rp-o[aria-selected=true]::after{content:'';flex:none;width:14px;height:8px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg) translate(1px,-2px)}
+.rp-clear{color:var(--ink3);font-size:13px}
+.rp-empty{padding:14px 8px;color:var(--ink3);font-size:13px}
 .ibtn{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink2);padding:0}
 .ibtn:hover{border-color:var(--ink);color:var(--ink)}
 </style>
@@ -839,6 +856,40 @@ function fillSelects(){
 }
 fromSel.onchange=()=>setRoute(fromSel.value,state.to);
 toSel.onchange=()=>setRoute(state.from,toSel.value);
+// 출발/도착: 기본 select 팝업 대신 커스텀 패널 (값·이벤트는 원래 select 그대로 사용)
+(function(){
+  const boxes=[...document.querySelectorAll('.rbox')];
+  const close=()=>boxes.forEach(b=>{ b.classList.remove('open'); const p=b.querySelector('.rpanel'); if(p) p.remove(); });
+  function open(box){ const sel=box.querySelector('select'); close();
+    if(typeof CTLS!=='undefined') CTLS.forEach(x=>setOpen(x,false));
+    const pn=document.createElement('div'); pn.className='rpanel'; pn.setAttribute('role','listbox');
+    pn.innerHTML=`<input class="rp-search" type="search" placeholder="장소 검색" aria-label="장소 검색" autocomplete="off"><div class="rp-list"></div>`;
+    box.appendChild(pn); box.classList.add('open');
+    const list=pn.querySelector('.rp-list'), q=pn.querySelector('.rp-search');
+    const draw=()=>{ const k=q.value.trim().toLowerCase(); let h='';
+      if(sel.value && !k) h+=`<button type="button" class="rp-o rp-clear" data-v=""><span class="e">✕</span><span class="t">선택 해제</span></button>`;
+      [...sel.children].forEach(g=>{ if(g.tagName!=='OPTGROUP') return;
+        const os=[...g.children].filter(o=>!k||o.textContent.toLowerCase().includes(k)); if(!os.length) return;
+        h+=`<div class="rp-g">${esc(g.label)}</div>`+os.map(o=>{ const t=o.textContent.trim(), i=t.indexOf(' '), e=i>0?t.slice(0,i):'', n=i>0?t.slice(i+1):t;
+          return `<button type="button" class="rp-o" role="option" data-v="${esc(o.value)}" aria-selected="${o.value===sel.value}"><span class="e">${esc(e?e.replace(/️/g,'')+'️':'')}</span><span class="t">${esc(n)}</span></button>`; }).join(''); });
+      list.innerHTML=h||'<div class="rp-empty">검색 결과가 없어요</div>'; };
+    draw(); q.addEventListener('input',draw);
+    const cur=list.querySelector('[aria-selected=true]'); if(cur) list.scrollTop=cur.offsetTop-list.clientHeight/2;
+    requestAnimationFrame(()=>pn.scrollIntoView({block:'nearest',behavior:'smooth'}));
+    if(matchMedia('(pointer:fine)').matches) q.focus({preventScroll:true});
+    pn.addEventListener('click',e=>{ e.stopPropagation(); const o=e.target.closest('.rp-o'); if(!o) return;
+      sel.value=o.dataset.v; close(); sel.dispatchEvent(new Event('change')); });
+    q.addEventListener('keydown',e=>{ const os=[...list.querySelectorAll('.rp-o')]; let i=os.findIndex(x=>x.classList.contains('kb'));
+      if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); os.forEach(x=>x.classList.remove('kb')); i=e.key==='ArrowDown'?Math.min(i+1,os.length-1):Math.max(i-1,0); if(os[i]){ os[i].classList.add('kb'); os[i].scrollIntoView({block:'nearest'}); } }
+      else if(e.key==='Enter'){ e.preventDefault(); (os[i]||os[0])?.click(); }
+      else if(e.key==='Escape'){ close(); box.focus(); } });
+  }
+  boxes.forEach(b=>{ b.tabIndex=0; b.querySelector('select').tabIndex=-1;
+    b.addEventListener('click',e=>{ e.preventDefault(); if(e.target.closest('.rpanel')) return; if(b.classList.contains('open')) close(); else open(b); });
+    b.addEventListener('keydown',e=>{ if(e.target!==b) return; if(e.key==='Enter'||e.key===' '||e.key==='ArrowDown'){ e.preventDefault(); open(b); } }); });
+  document.addEventListener('click',e=>{ if(!e.target.closest('.rbox')) close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+})();
 document.getElementById('swap').onclick=()=>setRoute(state.to,state.from);
 document.getElementById('clear').onclick=()=>setRoute('','');
 
