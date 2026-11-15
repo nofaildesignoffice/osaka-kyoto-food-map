@@ -30,7 +30,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270203/27110196/" }]
   },
   {
-    id: "nikudoushi", type: "food", city: "osaka", group: "고기", emoji: "🥩",
+    id: "nikudoushi", type: "food", city: "osaka", group: "야키니쿠", emoji: "🥩",
     name: "야키니쿠 니쿠도우시 우라난바점", nameJa: "焼肉 肉どうし 裏難波店", area: "난바 (難波)",
     address: "大阪府大阪市中央区難波千日前14-6 太星食器ビル別館 B区画", lat: 34.6638061, lng: 135.503264,
     menu: "서비스 사로인 (サービスサーロイン)",
@@ -39,7 +39,7 @@ window.PLACES = [
     sources: [{ label: "hamoni", url: "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71" }, { label: "운영사", url: "https://oz-company.com/shop/nikudoushi-uranamba/" }]
   },
   {
-    id: "genbe-abeno", type: "food", city: "osaka", group: "고기", emoji: "🥩",
+    id: "genbe-abeno", type: "food", city: "osaka", group: "스테이크", emoji: "🥩",
     name: "겐베에 텐노지 아베노점", nameJa: "源兵衛 天王寺あべの店", area: "텐노지·아베노 (天王寺)",
     address: "大阪府大阪市阿倍野区阿倍野筋2-4-45", lat: 34.6433187, lng: 135.5126276,
     menu: "덩어리 고기 스테이크, 오이무침(きゅうり)",
@@ -48,7 +48,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270203/27102430/" }]
   },
   {
-    id: "genbe-namba", type: "food", city: "osaka", group: "고기", emoji: "🥩",
+    id: "genbe-namba", type: "food", city: "osaka", group: "스테이크", emoji: "🥩",
     name: "겐베에 난바점", nameJa: "源兵衛 なんば店", area: "난바 (難波)",
     address: "大阪府大阪市中央区難波千日前7-15", lat: 34.6634987, lng: 135.5041752,
     menu: "덩어리 고기 스테이크, 오이무침(きゅうり)",
@@ -57,7 +57,7 @@ window.PLACES = [
     sources: [{ label: "타베로그", url: "https://tabelog.com/osaka/A2701/A270202/27108460/" }]
   },
   {
-    id: "sumikara", type: "food", city: "osaka", group: "고기", emoji: "🍢",
+    id: "sumikara", type: "food", city: "osaka", group: "야키토리", emoji: "🍢",
     name: "스미카라 스미마데 난바신사이바시점", nameJa: "炭焼きと焼き鳥 炭から隅まで 難波心斎橋店", area: "신사이바시 (心斎橋)",
     address: "大阪府大阪市中央区東心斎橋2-6-19 三ツ寺ギャラクシービル5号館 1F", lat: 34.6704726, lng: 135.5033343,
     menu: "야키토리 — 안창살 꼬치",
@@ -231,7 +231,7 @@ window.PLACES.push(...([
  {
   "id": "goku-kawaramachi",
   "city": "kyoto",
-  "group": "고기",
+  "group": "스키야키",
   "emoji": "🥩",
   "candidate": true,
   "name": "고쿠 교토 가와라마치점 (후보)",
@@ -254,7 +254,7 @@ window.PLACES.push(...([
  {
   "id": "goku-dotonbori",
   "city": "osaka",
-  "group": "고기",
+  "group": "스키야키",
   "emoji": "🥩",
   "candidate": true,
   "name": "고쿠 오사카 도톤보리점 (후보)",
@@ -338,7 +338,7 @@ window.PLACES.push(...([
  {
   "id": "hashiba-nikusara",
   "city": "osaka",
-  "group": "고기",
+  "group": "야키니쿠",
   "emoji": "🥩",
   "name": "하시바케 니쿠사라",
   "nameJa": "羽柴家 肉皿",
