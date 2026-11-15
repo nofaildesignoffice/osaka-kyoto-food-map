@@ -20,11 +20,24 @@ button,select{font:inherit;color:inherit}
 .app{display:grid;grid-template-columns:420px minmax(0,1fr);height:100dvh}
 .side,.mapwrap{min-width:0}
 .side{display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);min-height:0;z-index:2}
+/* PC: 장소를 고르면 목록 오른쪽에 상세 사이드 섹션 */
+.app.has-detail{grid-template-columns:420px 400px minmax(0,1fr)}
+.side2{display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);min-height:0;min-width:0;z-index:2;position:relative}
+.side2[hidden]{display:none}
+.d2-head{position:absolute;top:10px;right:10px;z-index:3}
+.d2-close{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink2);padding:0}
+.d2-close:hover{border-color:var(--ink);color:var(--ink)}
+.d2-body{overflow-y:auto;flex:1;min-height:0;padding:18px 18px 40px}
+.d2-body .card{border:0;border-radius:0;box-shadow:none;background:none;padding:0 40px 0 0;margin:0;cursor:default}
+.d2-body .card .detail{padding-right:0;margin-right:-40px}
+@media (min-width:861px){ #list .card.sel .detail{display:none} }
+@media (max-width:860px){ .side2{display:none!important} .app.has-detail{grid-template-columns:minmax(0,1fr)} }
 .side-head{padding:20px 18px 18px;border-bottom:1px solid var(--line)}
 .title{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0}
 .sub{font-size:12.5px;color:var(--ink3);margin:4px 0 0}
 .legend{display:flex;gap:10px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
-.map-legend{position:absolute;right:12px;bottom:26px;z-index:4;max-width:min(230px,calc(100% - 24px));gap:6px 10px;padding:8px 11px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.10);font-size:11.5px;pointer-events:none}
+.map-legend{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;flex-wrap:nowrap;justify-content:flex-end;align-items:center;gap:12px;padding:46px 14px 24px;background:linear-gradient(to top,rgba(20,18,15,.78) 0%,rgba(20,18,15,.5) 45%,rgba(20,18,15,0) 100%);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.map-legend>span{flex:none}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
 .dot.food{background:#fff;border:2px solid var(--food)} .dot.hotel{background:var(--hotel);border-radius:3px}
@@ -151,7 +164,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 #gmap{position:absolute;inset:0;background:#e9e5dd}
 #embed{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#e9e5dd;z-index:3}
 .mapwrap.embed #embed{display:block}
-.mapbar{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;z-index:5;display:flex;gap:6px;flex-wrap:nowrap;align-items:center;white-space:nowrap}
+.mapbar{position:absolute;left:50%;transform:translateX(-50%);bottom:64px;z-index:5;display:flex;gap:6px;flex-wrap:nowrap;align-items:center;white-space:nowrap}
 .pill{background:rgba(255,255,255,.96);border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;box-shadow:var(--shadow);border:0;color:var(--ink);text-decoration:none;cursor:pointer;font-family:inherit}
 .pill.on{background:var(--brand);color:#fff}
 .mapmsg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink2);font-size:14px;line-height:1.6}
@@ -183,8 +196,8 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   .sheet-handle i{display:block;width:40px;height:5px;border-radius:99px;background:#d6d3cc}
   .sheet-handle:focus{outline:none} .sheet-handle:focus-visible i{background:var(--ink3)}
   .app.sheet-min .scroll{overflow:hidden}
-  .mapbar{bottom:calc(var(--sv,55dvh) + 14px)}
-  .map-legend{bottom:calc(var(--sv,55dvh) + 12px);right:10px;transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
+  .mapbar{bottom:calc(var(--sv,55dvh) + 50px)}
+  .map-legend{bottom:calc(var(--sv,55dvh) - 12px);padding:44px 12px 38px;gap:10px;font-size:11.5px;justify-content:center;transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
   .app.sheet-dragging .map-legend{transition:none}
   .app.sheet-full .map-legend,.app.sheet-full .mapbar,.app.sheet-full .osm-attr{opacity:0}
   .mapwrap .osm-attr{bottom:calc(var(--sv,55dvh) - 6px);transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
@@ -193,7 +206,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 @media (max-width:860px) and (max-height:520px){
   .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
   .app{overflow:visible} .side{display:flex} .side-head{order:0} .scroll{order:0;position:static;height:auto;transform:none;transition:none;border-radius:0;box-shadow:none;padding-top:10px} .sheet-handle{display:none}
-  .app.sheet-min .scroll{overflow-y:auto} .mapbar{bottom:26px} .mapwrap .osm-attr{bottom:4px} .map-legend{bottom:26px}
+  .app.sheet-min .scroll{overflow-y:auto} .mapbar{bottom:64px} .mapwrap .osm-attr{bottom:4px} .map-legend{bottom:0;padding:46px 14px 24px}
   .mapwrap{order:2} .side{order:1;border-top:0;border-right:1px solid var(--line)}
 }
 /* head actions */
@@ -341,6 +354,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
       <div id="list"></div>
     </div>
   </aside>
+  <aside class="side2" id="detailPane" hidden aria-label="장소 상세"><div class="d2-head"><button class="d2-close" type="button" data-close aria-label="상세 닫기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div><div class="d2-body" id="detailBody"></div></aside>
   <main class="mapwrap" id="mapwrap">
     <div id="gmap"><div class="mapmsg">지도를 불러오는 중…</div></div>
     <iframe id="embed" title="Google 지도 길찾기" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -536,7 +550,7 @@ function placeHTML(p){
   h += `<div class="gp-src">Google 지도 장소 정보 · “${esc(x.displayName&&x.displayName.text)}” (표시 좌표에서 ${Math.round(g.d)}m)${p.type==='food'&&x.reservable!==true?' · 예약 버튼은 Google 지도에 예약 기능이 있는 가게만 나와요':''}</div>`;
   return h;
 }
-function fillPlace(p){ const el=sheetEl.querySelector(`[data-gp="${p.id}"]`); if(el) el.innerHTML=placeHTML(p); }
+function fillPlace(p){ document.querySelectorAll(`[data-gp="${p.id}"]`).forEach(el=>el.innerHTML=placeHTML(p)); }
 
 /* ---------- 지도 (Maps JavaScript API) ---------- */
 let map=null, markers={}, overlays=[], zoneObjs=[], zoneLabels=[];
@@ -647,8 +661,8 @@ async function showHotelRanks(h){
   let raf=0;
   const draw = ()=>{
     if(state.sel!==h.id || g!==hGen) return;
-    const box=sheetEl.querySelector(`[data-ranksum="${h.id}"]`); if(box) box.innerHTML=rankSummaryHTML(h);
-    const tb=sheetEl.querySelector(`[data-near="${h.id}"]`); if(tb) tb.innerHTML=nearTable(h);
+    document.querySelectorAll(`[data-ranksum="${h.id}"]`).forEach(box=>box.innerHTML=rankSummaryHTML(h));
+    document.querySelectorAll(`[data-near="${h.id}"]`).forEach(tb=>tb.innerHTML=nearTable(h));
     if(!map || state.from&&state.to) return;
     clearOverlays();
     foods.forEach(q=>{ const r=rankOf(q), k=`${h.id}|${q.id}`, w=WALK[k], t=trBest(k);
@@ -665,7 +679,8 @@ async function showHotelRanks(h){
 }
 
 /* ---------- 리스트 ---------- */
-const listEl = document.getElementById('list'), sheetEl = document.getElementById('scroll'), selSlot = document.getElementById('selSlot');
+const listEl = document.getElementById('list'), sheetEl = document.getElementById('scroll'), selSlot = document.getElementById('selSlot'), detailPane = document.getElementById('detailPane'), detailBody = document.getElementById('detailBody');
+const deskPane = ()=>matchMedia('(min-width:861px)').matches;
 const mobSheet = ()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
 // 모바일: 목록 바텀시트 — 3단계(접힘 / 반 / 전체화면). 손잡이 탭, 또는 손가락·마우스로 끌어서 이동
 (function(){ const h=document.getElementById('sheetHandle'), app=document.querySelector('.app'), sc=document.getElementById('scroll'), gm=document.getElementById('gmap');
@@ -790,6 +805,10 @@ function renderList(){
   const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
   const slotId = mobSheet() && state.sel && byId[state.sel] && byId[state.sel].city===state.city ? state.sel : null;
   selSlot.innerHTML = slotId ? cardHTML(byId[slotId]) : '';
+  const paneId = deskPane() && state.sel && byId[state.sel] ? state.sel : null;
+  if(paneId!==detailPane.dataset.id) detailBody.scrollTop=0;
+  detailPane.dataset.id = paneId||''; detailBody.innerHTML = paneId ? cardHTML(byId[paneId]) : '';
+  detailPane.hidden = !paneId; document.querySelector('.app').classList.toggle('has-detail', !!paneId);
   const items = all.filter(catOK).filter(p=>p.id!==slotId);
   const hotels = items.filter(p=>p.type==='hotel'), foods = items.filter(p=>p.type==='food'), spots = items.filter(p=>p.type==='spot');
   const T = state.types, none = !T.size; let h=catBar; const catOn = state.cat!=='all';
@@ -820,7 +839,7 @@ window.addEventListener('pointermove',e=>{ if(!catDrag) return; const dx=e.clien
 window.addEventListener('pointerup',()=>{ if(!catDrag) return; if(catDrag.moved){ catSuppress=true; catDrag.c.classList.remove('dragging'); setTimeout(()=>catSuppress=false,0); } catDrag=null; });
 listEl.addEventListener('click',e=>{ if(catSuppress && e.target.closest('.cats')){ e.stopPropagation(); e.preventDefault(); catSuppress=false; } },true);
 listEl.addEventListener('wheel',e=>{ const c=e.target.closest('.cats'); if(!c||Math.abs(e.deltaX)>Math.abs(e.deltaY)) return; if(c.scrollWidth<=c.clientWidth) return; c.scrollLeft+=e.deltaY; e.preventDefault(); },{passive:false});
-sheetEl.addEventListener('click',e=>{
+const onListClick=e=>{
   const ct=e.target.closest('[data-cat]'); if(ct){ state.cat=ct.dataset.cat; renderList(); refreshMarkers(); return; }
   const rk=e.target.closest('[data-rank]'); if(rk){ e.stopPropagation(); setRank(rk.dataset.id, +rk.dataset.rank); return; }
   const sf=e.target.closest('[data-setfrom]'), st=e.target.closest('[data-setto]'), tr=e.target.closest('tr[data-route]');
@@ -828,8 +847,10 @@ sheetEl.addEventListener('click',e=>{
   if(st){ e.stopPropagation(); setRoute(state.from, st.dataset.setto); return; }
   if(tr){ e.stopPropagation(); const [a,b]=tr.dataset.route.split('|'); setRoute(a,b); return; }
   if(e.target.closest('a,details')) return;
+  if(e.currentTarget===detailPane){ if(e.target.closest('[data-close]')) select(null,false); return; }
   const c=e.target.closest('.card'); if(c) select(c.dataset.id===state.sel?null:c.dataset.id,false);
-});
+};
+sheetEl.addEventListener('click',onListClick); detailPane.addEventListener('click',onListClick);
 
 function select(id, fromMap){
   state.sel=id; if(id && fromMap && window.openSheet) openSheet();
@@ -844,7 +865,7 @@ function select(id, fromMap){
   else {
     if(!(state.from&&state.to)) panTo(p.lat,p.lng,16);
     if(p.type==='food'){ const hs=P.filter(q=>q.type==='hotel'&&q.city===p.city);
-      const up=()=>{ const tb=sheetEl.querySelector(`[data-near="${p.id}"]`); if(tb&&state.sel===p.id) tb.innerHTML=nearTable(p); };
+      const up=()=>{ if(state.sel===p.id) document.querySelectorAll(`[data-near="${p.id}"]`).forEach(tb=>tb.innerHTML=nearTable(p)); };
       if(hs.length){ walkMatrix(hs,[p]).then(up); hs.forEach(h=>transitQuery(h,p).then(up)); } }
   }
   renderBar();
@@ -1302,7 +1323,7 @@ async function fetchThumb(p){
 }
 function paintThumb(id){
   const t=THUMB[id]; if(!t||!t.photo) return;
-  sheetEl.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .ico`).forEach(ico=>{ ico.classList.add('has-thumb'); ico.innerHTML=`<img class="thumb" alt="" loading="lazy" src="${photoURL(t.photo,160)}">`; });
+  document.querySelectorAll(`.card[data-id="${CSS.escape(id)}"] .ico`).forEach(ico=>{ ico.classList.add('has-thumb'); ico.innerHTML=`<img class="thumb" alt="" loading="lazy" src="${photoURL(t.photo,160)}">`; });
 }
 const thumbIO = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; thumbIO.unobserve(e.target);
   const id=e.target.closest('.card').dataset.id, p=byId[id]; if(!p) return; const t=THUMB[id];
