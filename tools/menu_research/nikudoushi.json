@@ -1,0 +1,435 @@
+{
+ "id": "nikudoushi",
+ "google": {
+  "id": "ChIJIZHYjpDnAGARwuDRep2AKr4",
+  "location": {
+   "latitude": 34.663806099999995,
+   "longitude": 135.503264
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=13702906230086951106&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "https://oz-company.com/shop/nds4?utm_source=GBP&utm_medium=GBP&utm_term=GBP&utm_content=GBP&utm_campaign=GBP",
+  "displayName": {
+   "text": "焼肉 肉どうし 裏難波店",
+   "languageCode": "ja"
+  },
+  "reservable": true,
+  "photos": [
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLepKJgv5AgxdVHiUOGwcazAShoCYB_sI6gasH4pZyloYa2MNbCQAmtKpJ6GUMqyA_2yEgDdYavspJKcKslqk5Qd9yjoKWJrGfVd4C0Ns6NFT2J8M_k-TbwjK9erYWIq2yHosaM8mdf-OfP8CK3RFfomiWm7WO5Kg52p7NQsYnnTdjtZFWW-wSI8NjryQVyi9SRflwlUwJBAJ2pZEpW4OdstNmzWlw_punQ8Da5qN7_CWeFY3INKgYQyX6jB8LRTvDmtXP1RBdfEKHfJDvdjoFyHOiB21AypTb3nGRThALUCI6-sVdxfLUcm0cK2SdfD-Rw-aEYRQGkDFmwtoDQ8JMLSFA1uuxQ424KXwImTcQq8MtY0NHQxn_7ojYdMeacPy8YAG0X7j3AefuD1MMFbet_Cv0g",
+    "widthPx": 4800,
+    "heightPx": 3200,
+    "authorAttributions": [
+     {
+      "displayName": "焼肉 肉どうし 裏難波店",
+      "uri": "https://maps.google.com/maps/contrib/110449972574528002128",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLRRr_B1tdnnp1LRPZDOsVV8ONfSzaMXdlPOMFU1LE7JtMZwg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLdfUKyJH4W_mEHW9DpE77N712LHGWw-0ayFUF7u7UisYwgpYq4F046dDgVXAFDT70fCk7AvwZ-5wDJNZyikHOOEUvFAt4pS6Oy0sXQBeRh8RwjsWJIUfeRyW-uKNRzW6219NlAnRzTtUtnExp6Lnb-2IFg_VNg_tVOSvB0oCPRL6MfyyP5RuUgS9novxkNkxy2m7Qv2IkHPFctmKtWF79gP_wztsFjdZMPeuKtFwClpFYYBhox19E48kef0qPKVc0n5_3SVsp36sJetjxT7l1-Chkr2-4QtrR5c1zb4Qqwz7z28L0RwavdaCQEBmG43SPb6cHEnUwNAiygoBoukNiWD_APdvbJyIsOMls5L9TchkxGKXY6ZK0KXP1Qnlj8vs61oJ-uNiOJIbMgDFPr9njX-F72K_6HLgs62ZKTDygQ5Vw",
+    "widthPx": 787,
+    "heightPx": 787,
+    "authorAttributions": [
+     {
+      "displayName": "焼肉 肉どうし 裏難波店",
+      "uri": "https://maps.google.com/maps/contrib/110449972574528002128",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLRRr_B1tdnnp1LRPZDOsVV8ONfSzaMXdlPOMFU1LE7JtMZwg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLekV50ihID4GUHEXldIIffqtfoBtvzxPmOHW9-h7NokkWST_fOt9kOYY51-ea58zoU8qspPtoY-9KQYVMg6FbSzcUpG3A9uH98PFIJQrSPwSCRTjb5qhGxtUNB_D4wxLcJmu42XshegaDaDyvYwMoo_0nlaTFUDJd9Cao4h03fJaQuFzJ5AVoQiTjP5vAAOeTWOC5yu2N7Pv1TGKOPdFKgYPiSKI3Jubfw7Y9Tb372MfnFU-4CtGpdTn0NQXqsfktpvHlAqly52k_Z3od9w1WebvxebUZau2FH_9Brqp5qg2c35SSOkYPzuws-APgftjXpxpcHv3guELWo0NYuPbPtSiUW9C27G7bBIlSFNiyiFVbRNmli3IzUeG2eVaVU142CCKbcdZ6CH8qVnV9kSVdezMKydFQvOfygrTwPwLKkB",
+    "widthPx": 2159,
+    "heightPx": 2896,
+    "authorAttributions": [
+     {
+      "displayName": "武彦吉良",
+      "uri": "https://maps.google.com/maps/contrib/100250872034045498558",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLnvzTEz_H8W-lyYdhNsvTIHsrjDmYLu5hlJAGdzQb8nHDvcg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLf_FaIKcRMvYAKfgXbedWB629wowhOn7wdbOYoicNJoJrMHMfWlrDEk62QAno5iQGZLqkq5FywvJI9e-eKaNjMlacWZrD-IBol5AiLP4UA5hrtp3m4WcfuSP7GzL6Zqa6JUmzJLuTQbidOaPs-5USJrLttEvdImewtqTDELKN6h8TASFluaTa_rVIfsnenKOF9k3D0G2hgrbPrIrfJGKj1zpybvaRFfEuKIlJhG0lkllMrXohl6u4XAy3QvPskJfRmx0peQvRLOlSr6Ga-6BLBo0HBDfBPJadvSH-ZgdLt6wIJ7klWmJqLlQgntGE107gh9vYZVV3vyo_t3gLi9jFvwfH4zkcoWv8E2ou7x1EPeFLllIlQ2NdrSSBcYgnakzEzjN7O6OJo0rvh3Y1PraPnGG1rg5ApvCIlRakDw8kui",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "Nonstagram",
+      "uri": "https://maps.google.com/maps/contrib/114041881692066338617",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX4_lw9FDGPX_rH5-8M2lfMdVkFX93M_6-SvC__RkZUu1eBTQgF=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLcvCruOweTBtoXOV6f7GCdEkcN9EPKqASwR9Zgj3urZCzLC2w0xOzP_ZxxlcrvHuBWKT2RGWjB22d3OBxXSjyJCDIY-eQ1gzyEpcGykpnnWMH6W42gL1kW2qeccyCMzdVxkcgCibY-7TWr3YX7N3lTD-72bmpZEFvpEV0eTgqmbwaZoUXVl5F8uC1Wl_xKKtaT_Xe3M7RT9brlGhPoVk3lEd0kU_FwpofWGvzimoy7DA-XonWpa9YbrsXeVcTo2lT2vl-yGWdZkln337zbMSJA5aYVx5hCLWkH4ItkCwQG0wLLVT2WRztQRvxQDEs8vVDYd6wvJZD_snLAK4GZBRvsYV8BOrp-PkyIynb7_T7tOJOrzLHJ2G1ht6ubTTYoFMhJz8KVq6c7kIU19lypHlMr-A2YsL5IgjlQA6gzMocUZIA",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "ロッキー飯",
+      "uri": "https://maps.google.com/maps/contrib/104116917415395115451",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWB1YP2cLkxvV-ERqjHLlfl6LvGZiBdOju0WyOIDdTwi5cbPac=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLd3D-eWw9e5MLIJrId177MRlBwM-ybj_2seiNh__cdWlZqtx9iwdAQunxnt7Pf5LOm5p0ls85m_5jr1n-FxeqQa38PNunlm2jsHTnGimV5otGoOhxmxaFqN8xlN6NvjYLyy5rM0cdZ0EVcbNrHahwp4kKlz6Ld71ST33KVDMtwaLISzEcHUQw2dD1vROioBLBMTjc28Vbg0et6-Fc5eleFxuB4294Z4kxXI4_oMb4ivBAhAXq3KZfFm22UevmR5-ypFCw8Xg4dVXZUza2aJCt2X-nUpl3Dll3PhV-kG_HPOhwXahNaClgSapSNluL3qHKpNLj_zTQfdQDbRRzob6jsOYzeaXhHk035iGmxtrVb34g94PzEgfGa6oQDq3sZ74S3_ObbLfK62xLhWMR4Y7mK7D1xhkhjW7_GgAXbnDQOM",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "Hatch",
+      "uri": "https://maps.google.com/maps/contrib/106726294933586745470",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVb5Pea4oyNpusNHEFMU7wXvnd5gXbY8VFdzXLZoue2DJM-uUQ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLdf_mlwQGi_o9x1gfyjaDOQRPSUK9JUv74Jak4Kg1X9zArTn68O11sbavUBz2jJqY9mcMZSWmuC7Pw8LfZwsCLMsdQYcs0TJGwcXOdPsGv-2JUDNAoFd4mID9-7gj6tuOXXkChs4xQka3hShRQa9G8dXGLrpfdVSmL3_7C_IIdPUz4xcVIrjA7HU-P6_zvlsxj848z2mtgho9L97PXuvBArubX2nBK5Jzp9lkPJ4xfBS65tJ0G5pAUp61StkcUg67zO9h4EdrEUqMxjY1KnwPOIwfop_il5EncKNT-A0n9O1u1Okak_VndqcobFjmvyZDceibcMn--Mh_E2eNjFbgmzgbtCXt-6UvJ_nIbUPus5ZsaM5oIQaHgLIUOLU9DiGUz0yWlWELLg6ZD2OvFjeReso2NuAKmWww_DC3ASavkiLg",
+    "widthPx": 3024,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "かっしー",
+      "uri": "https://maps.google.com/maps/contrib/108780581919971881080",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVD35wI93S5WMcat-QLs4UduBhP-_YaMlH6NTkvq1c3mBvnUDo=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLc9R-692HWHMeF0f87X6IsegasrcXRbuuNa-U8Mtbmg8MFbVlQf-MA1VJMaMxc-1UGCJV_KXuwmIbWVGPqtd6d0ILGhRNNrhq-JzBJ9wUMkKO7__hIuF1S20JBj-oO2IbC4iVUvvWwOjhyzAKKqZb3yh4itbSgf2dqyoNSpGxQOk-C4kzSy6GIxcN6EVzkC2mzyXBK8blbyvEA2tGIr8zJnTQx3uqwIagetmHEslbXtbsbp8q_qhDAtOK34iXw7k7VLT9wWVMvyZXD863e2Ue8Yl0aO7dKOmpxyjpZPisOwVVxtU2ufbyig4BbKWF2w6KRsouslmSflP1nuqohYQrHKhwwp6sypkwozf45bB7li2TcAER7648fVhZxeDENUzK7jaCLuNyECqwwYbUS8Ou4NmzKO6t4TOwPQ8ichlQId",
+    "widthPx": 3024,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "かっしー",
+      "uri": "https://maps.google.com/maps/contrib/108780581919971881080",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVD35wI93S5WMcat-QLs4UduBhP-_YaMlH6NTkvq1c3mBvnUDo=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLeaP2B9pJO8p3MLAGo1FhLscq1gi2CxjEAB5G9CG3RyvEnkGgcQ1DfYTiB1yJFIuxIT7QdcLalUp8jfUGz2eqS1-zPEMOFf34ercwB3aaKQNZDOdmZYVqBJ3SAtXcCnmOPhwW12GD0ZgmH_RUHW8vFAy71uaa0TOY0iXDfPdlFg8L4eyVAHAeZsJuZubjecuAevqd0wPIEsgy23HN9gws0SHmvACt0EDXPR2Y0QSYIIbcSib-hFV4DWdDZeG6TOmC9G0LNg-HbPhIZoL7POTSjHh-Pyrla0j3ithd7Wu1T835A69bEJODNcVprzzGD73gnfAFTxtKheZlflzUr0OZlKH5q8r4cpEWBTtQUDE5tKgTWGSw7K0nVzEUjIJx1Ce1TWnnw5B5SnGIM0ryX8SMbWcHfcWjVR_m0PZdkXJIPL",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "チョコ“レイト”レイト",
+      "uri": "https://maps.google.com/maps/contrib/101304249967882710979",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIbSrhbIC3eEXR4V_KnYacJuhVnEuaG5SGHQM07jsY6cwnogovo=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJIZHYjpDnAGARwuDRep2AKr4/photos/AV-0GLev7sbaSPCdb5stYEBlms0tVm-dS3LXYwQL-jwJqBY8BkofoJIpY8P1NbW7IBd-FQi32nEyFSb3RkOiejn6vW_cGVmaJX8j8o2tgPLF8zSTFoauDQc7tl0dzaPyS41cFW3hj4yO_6RN6l-1O0XHF6yy8HVLh5N5f7fwvq5ePDeGFUAvkN3WHlYd9IXzfhW0vDYY7-FCcZSH66HnglflkTEWvXda5ckBWfs6QjieDxCM9kKmZzqBLtyZy5LTOhIgEqTQR8yd6x6ZCNrT9JidRpLebbzMBg4pLh75Moz1TxCfEZoD2STcKvzxofgPXZK63T_oNK6hLaOK_iJsK177LUnJpqfd2NuLqrpErrB2HbeoaBE3zLHilaRrlSxZYLT3BVV9GIYcRukF9kKwjCVXGhHM5g5QCziejdHZ9qrqkPK5ig",
+    "widthPx": 3072,
+    "heightPx": 4096,
+    "authorAttributions": [
+     {
+      "displayName": "安部良佑",
+      "uri": "https://maps.google.com/maps/contrib/104862314387851709706",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVk4duI-VGofmE9xsurPdiyX5db5BCA2oAVS64CK58J1lGVQ5ts=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "厚切り上塩タン",
+    "name_ko": "두툼하게 썬 상급 소금 우설",
+    "desc_ko": "두껍게 썬 상급 우설(소 혀)을 소금으로 양념해 구워 먹는 메뉴. 여러 리뷰에서 아주 두껍다고 언급됨",
+    "price_jpy": 2178,
+    "source_urls": [
+     "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlrvwlst/"
+    ]
+   },
+   {
+    "name_ja": "和牛厚切りハラミ",
+    "name_ko": "와규 두툼한 안창살(하라미)",
+    "desc_ko": "두껍게 썬 와규 하라미(횡격막 부위)를 굽는 메뉴. 소개 페이지에는 국산 소 하라미로 적혀 있음",
+    "price_jpy": 1980,
+    "source_urls": [
+     "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlrvwlst/"
+    ]
+   },
+   {
+    "name_ja": "サービスサーロイン",
+    "name_ko": "서비스 서로인(채끝 등심)",
+    "desc_ko": "가게 명물 서로인. 직원이 스키야키 스타일로 구워 주고, 달걀노른자와 밥에 곁들여 먹음",
+    "price_jpy": 1098,
+    "source_urls": [
+     "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlrvwlst/"
+    ]
+   },
+   {
+    "name_ja": "和牛ユッケ",
+    "name_ko": "와규 육회",
+    "desc_ko": "생 와규를 양념해 내는 한국식 육회",
+    "price_jpy": 1408,
+    "source_urls": [
+     "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlmenu/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "tabelog",
+     "url": "https://tabelog.com/en/osaka/A2701/A270202/27124795/",
+     "note_ko": "타베로그 온라인 예약(코스마다 예약 버튼 있음). 5명 이상은 전화로 예약"
+    },
+    {
+     "type": "phone",
+     "url": "tel:050-5600-7577",
+     "note_ko": "타베로그에 적힌 예약·문의 번호. 가게 번호는 06-6630-9229로도 나옴"
+    },
+    {
+     "type": "other",
+     "url": "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "note_ko": "Hamoni 페이지의 예약하기 버튼으로 AutoReserve 예약 가능"
+    }
+   ],
+   "note_ko": "타베로그에 예약 가능으로 나와 있고, 리뷰에는 예약하거나 반개인실을 예약해 방문한 사례가 있음. 줄서기나 대기에 대한 리뷰 언급은 찾지 못함. 최대 6명 개인실이 있고 최대 50명까지 통대관 가능.",
+   "source_urls": [
+    "https://tabelog.com/en/osaka/A2701/A270202/27124795/",
+    "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlrvwlst/",
+    "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71"
+   ]
+  },
+  "note": "공식 사이트(oz-company.com/shop/nds4)는 404가 떠서 열지 못했습니다. 타베로그 일본어판은 403으로 막혀서 타베로그 영문판(가게 정보·메뉴·리뷰)과 Hamoni만 근거로 썼습니다. name_ja 중 厚切り上塩タン만 Hamoni에서 일본어 표기를 확인했습니다. 和牛厚切りハラミ·サービスサーロイン·和牛ユッケ는 타베로그 영문 표기(Thick-Cut Wagyu Outside Skirt / Service·Signature Strip Loin / Wagyu Yukhoe)를 일본어로 되돌린 추정 표기라서 실제 메뉴판 이름과 다를 수 있습니다. 인기 순서는 리뷰 언급 빈도(우설 > 하라미 > 서로인 > 육회)를 기준으로 했지만, 리뷰 대부분이 중간에 잘려 있어서 표본이 적습니다. 구글 리뷰는 열어 보지 않았습니다. 코스 가격은 페이지 확인값(4,000/5,800/6,000엔)과 검색 요약(4,400/8,800엔)이 서로 달라 넣지 않았습니다."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "名物サーロイン",
+    "name_ko": "명물 서로인",
+    "desc_ko": "직원이 눈앞에서 구워 주는 커다란 서로인 한 장으로, 매장에서 명물로 소개하는 메뉴.",
+    "price_jpy": 1098,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://www.hotpepper.jp/strJ001277727/",
+     "https://suzakijunichi.com/nikudoushi-uranamba/"
+    ]
+   },
+   {
+    "name_ja": "和牛ユッケ",
+    "name_ko": "와규 육회",
+    "desc_ko": "달걀노른자를 올린 와규 육회로, 매장 소개와 방문 후기에서 대표 메뉴로 언급됨.",
+    "price_jpy": 1408,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27124795/",
+     "https://tabelog.com/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://suzakijunichi.com/nikudoushi-uranamba/"
+    ]
+   },
+   {
+    "name_ja": "霜降りもも肉山椒おろしポン酢",
+    "name_ko": "마블링 소고기 우둔살 산초 무즙 폰즈",
+    "desc_ko": "히우치·이치보 등의 부위를 얇게 썰어 산초 무즙 폰즈와 먹는 수량 한정 추천 메뉴.",
+    "price_jpy": 1408,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://suzakijunichi.com/nikudoushi-uranamba/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "tabelog",
+     "url": "https://yoyaku.tabelog.com/yoyaku/net_booking_form/index?rcd=27124795",
+     "note_ko": "공식 사이트의 예약 버튼이 연결되는 타베로그 온라인 예약 페이지."
+    },
+    {
+     "type": "phone",
+     "url": "tel:+81666309229",
+     "note_ko": "공식 사이트에 안내된 예약 전화. 타베로그 코스 안내에서는 5명 이상 예약을 전화로 접수한다고 명시."
+    }
+   ],
+   "note_ko": "예약 가능은 확인했으나, 예약 없이 방문할 때의 대기시간이나 입장 용이성은 확인하지 못함. 핫페퍼에는 현재 일반 예약을 받지 않는다고 표시되어 예약 수단에서 제외함.",
+   "source_urls": [
+    "https://oz-company.com/shop/nikudoushi-uranamba/",
+    "https://yoyaku.tabelog.com/yoyaku/net_booking_form/index?rcd=27124795",
+    "https://tabelog.com/osaka/A2701/A270202/27124795/",
+    "https://www.hotpepper.jp/strJ001277727/"
+   ]
+  },
+  "note": "메뉴별 실제 인기 순위는 확인되지 않아, 명물·추천 표기와 여러 페이지의 반복 언급이 확인된 3개만 수록했으며 배열은 확정 인기 순위가 아님. 가격은 해당 지점 타베로그 메뉴의 세금포함 표기를 채택함. 와규 육회는 블로그의 가격과 차이가 있음. 제공된 공식 URL은 404여서 동일 주소·전화번호가 확인되는 현재 공식 지점 페이지를 이용함."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "名物サーロイン",
+    "name_ko": "명물 서로인",
+    "desc_ko": "직원이 눈앞에서 구워 주는 커다란 서로인 한 장으로, 매장에서 명물로 소개하는 메뉴.",
+    "price_jpy": 1098,
+    "a_index": 2,
+    "b_index": 0,
+    "source_urls": [
+     "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlrvwlst/",
+     "https://tabelog.com/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://www.hotpepper.jp/strJ001277727/",
+     "https://suzakijunichi.com/nikudoushi-uranamba/"
+    ]
+   },
+   {
+    "name_ja": "和牛ユッケ",
+    "name_ko": "와규 육회",
+    "desc_ko": "달걀노른자를 올린 와규 육회로, 매장 소개와 방문 후기에서 대표 메뉴로 언급됨.",
+    "price_jpy": 1408,
+    "a_index": 3,
+    "b_index": 1,
+    "source_urls": [
+     "https://hamoni.jp/shop/BaIDS1CQR8WHmivXWw71",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/",
+     "https://tabelog.com/en/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://tabelog.com/osaka/A2701/A270202/27124795/",
+     "https://tabelog.com/osaka/A2701/A270202/27124795/dtlmenu/",
+     "https://suzakijunichi.com/nikudoushi-uranamba/"
+    ]
+   }
+  ],
+  "reservation_status": "accepted",
+  "reservation_agree": true,
+  "methods": [
+   {
+    "type": "tabelog",
+    "url": "https://yoyaku.tabelog.com/yoyaku/net_booking_form/index?rcd=27124795",
+    "note_ko": "타베로그 온라인 예약 페이지. 5명 이상은 전화로 예약."
+   },
+   {
+    "type": "phone",
+    "url": "tel:+81666309229",
+    "note_ko": "공식 사이트에 나온 예약 전화(06-6630-9229). 타베로그에는 050-5600-7577로도 나옴."
+   }
+  ],
+  "reservation_note_ko": "예약 가능하며 타베로그 온라인 예약을 받음. 5명 이상은 전화로 예약.",
+  "disagreements_ko": "메뉴: A는 厚切り上塩タン·和牛厚切りハラミ를 1·2위로 넣었으나 B에는 없음. B의 霜降りもも肉山椒おろしポン酢는 A에 없음. 서로인 이름은 A가 영문판에서 추정한 'サービスサーロイン', B는 일본어판 표기 '名物サーロイン'. A는 서로인을 스키야키식으로 구워 노른자·밥과 먹는다고 설명함. 예약: A는 전화번호로 타베로그 050-5600-7577을 넣었고 B는 공식 06-6630-9229를 넣음. A는 Hamoni(AutoReserve) 예약 경로를 추가로 들었고, B는 핫페퍼에 현재 일반 예약을 받지 않는다고 나와서 예약 수단에서 뺌. A는 개인실(최대 6명)·통대관(최대 50명) 정보를 적음. 인기 순서는 A는 리뷰 언급 빈도 기준(표본 적음), B는 확정된 인기순이 아니라고 밝힘."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "네온 조명과 원형 테이블이 있는 매장 실내"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "파채를 올린 얇게 썬 양념 와규 접시와 달걀노른자 소스(육회 아님)"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "김치와 스다치를 올린 냉면"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "접시에 담긴 마블링 생고기 여러 장(서로인 한 장 아님)"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "야간의 가게 외관과 간판"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "석쇠 위에서 굽고 있는 양념 고기(호르몬류)"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "해질녘의 가게 외관"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "구운 고기와 달걀노른자를 올린 덮밥(익힌 고기, 육회 아님)"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "접시에 담긴 생 우설 슬라이스와 지방 덩어리"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "두툼한 생 우설 슬라이스와 김치"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "테이블과 환기 덕트가 있는 야키니쿠 가게 실내"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "파채와 양념을 올린 얇은 생소고기와 별도 그릇의 날달걀"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "감귤 슬라이스와 김치를 올린 냉면"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "마블링이 있는 여러 조각의 생소고기 구이용 모둠"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "니쿠도우시 간판과 출입구가 보이는 가게 야간 외관"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "불판에서 굽고 있는 양념 내장류"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "간판과 출입구, 앞 골목이 보이는 가게 외관"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "작은 그릇에 구운 소고기와 달걀노른자를 올린 음식"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "얇게 썬 구이용 소혀와 흰 지방 조각"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "소금과 후추로 간한 구이용 소혀"
+   }
+  ]
+ }
+}

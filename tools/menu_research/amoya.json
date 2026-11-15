@@ -1,0 +1,399 @@
+{
+ "id": "amoya",
+ "google": {
+  "id": "ChIJAXYuO_fdAGARXgjJJ5ZSXL8",
+  "location": {
+   "latitude": 34.6507216,
+   "longitude": 135.513946
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=13788986963967674462&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "https://www.amoya.jp/",
+  "displayName": {
+   "text": "あもや南春日 四天王寺店",
+   "languageCode": "ja"
+  },
+  "photos": [
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLdu0Z3J1lx_Yy4QkCKt9VOr1UVt1PzcYdWa9OSxRwOtrCPyBnGpQ31Asq9ToDfQqYqhHXUYr1GzIV7_77u1BRsH5tk9KLyWmIODd_fAFJs4X6fJ7tCtYBfSXeRLD-FHe_gIeCcZvA2tXIDqN2Md9RFbv_siMXt26W3HRHsJR4NMoot6ggF2VXC3MOWisri8de8HzVf9eqhvNBKNqic2ZBno4Rz_rEsipNCL5H2OnM_AWXxvV8b4LxWHJcNAXm-rSpge3o2UiUxSTgVQ2y1CzUy_JKSQDaRelcvsCveRHrqY2-T8vUSIb6Vy3k5EYHQe42VFOlBc2Ryx6XapfHVw9IPtQ-7sFASXPabyDW4SLaixjysKQX91gsKbONrJ1TjjLi9ekAhQNnkHKzkKtDNS7kFKwUDcS6sHIbexP9h6rAGQ",
+    "widthPx": 4800,
+    "heightPx": 3200,
+    "authorAttributions": [
+     {
+      "displayName": "あもや南春日 四天王寺店",
+      "uri": "https://maps.google.com/maps/contrib/117311827400345144236",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU_vXYERmFpfsT9unmaX2mG78UWvhEPU7gDLsMAEoT94ax02PM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLcujXkddtIJ3lwCyzdKS93Aa4DgQIuHU2L6MtS5COYvucRog7s7KhVSVwXir3jz8XUTOig31zF123uQyc8fCGhQoydyL7icyFdkk_VFIu_x4K1-7VrOY3JH3r2Zi20hzFMFTKaOFEmwbDzfnO40SyQVM-j2m7YM5XVWaBM1Hi7XI1pcipHiUiCPCStswmputuvmnJP85z7XGekEPkTEbEIff5T9kfGjZFlBz6qk7QvQkqTQQQUvh0IYfaDqOx5Ld4jtnVBRk9UehvG67O10UvFwUUq1HC8o0n4ByYzCVfHOY2NxYLbNSIkD5aAg4WAMKYjTXfdSLnrZElAXfTMC0lSQi90xvT8rl7JrNNcQBUrV3HbB7GKZPJC4RB0TmtHsu6Qcf5XfAUMN1eyxXbYanEFailZNs23pTIldUVYhETSVjQ",
+    "widthPx": 3000,
+    "heightPx": 2000,
+    "authorAttributions": [
+     {
+      "displayName": "あもや南春日 四天王寺店",
+      "uri": "https://maps.google.com/maps/contrib/117311827400345144236",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU_vXYERmFpfsT9unmaX2mG78UWvhEPU7gDLsMAEoT94ax02PM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLf02Zc4fo5oLL0DdBRTslxciM8r7EyYrGeH0rVDUEYSZHUOer1hy6WykCIyQ776vqJC5jwInvMrgEKivWMkKD-gGMzRmWOlu59nWmy2JOgBLzmJh3_DYCBMjt3QS8xhfOU3-eZ5e-T-dZKgRMXXxZNedrVax5PyLl7ucHwo6L15YcthG2TNnhCNoep2FNsJSK5OWCdzSbwGsyq1y4GqMTxCyuxZ_c7hQsuwUznMYU52viWqKZBXqj1ReZauXu45hL6FyKJ-JFpImNgIFrDQgs8f9nfEQ-XgrToRYDTUsjLsl3oUIZJGV5MWst33FL0HGTCliYdHZmM6htSHcQUXYqlSraTxAqxMW12tXO6vUGwXB6SQ1zOLPuSXpZObsWvI07k42ZLtRnGpdsQKQqcUp39liD3d6hICSrWxg2x9Mb1GkQ",
+    "widthPx": 4080,
+    "heightPx": 3060,
+    "authorAttributions": [
+     {
+      "displayName": "ゴロー",
+      "uri": "https://maps.google.com/maps/contrib/111959535514105119345",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVODgqp98n38UfQJlNEOH5xJA5ssggS9QIF-IruwsV5qDRnoQBk=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLfawApk3D60Ikg2Yd60Ke8AU9ivg2Y2bTtCZ6Wfi-iO1YFUuhq06y9lrqJwJ9tYLoJM7AN0Pm9cKSJ1kg-4mUbiw19_5m5E7-v_aIya1fDsosMyT1J8skN_4C4P29YDTKzNAhZhzPRCwdfbER88pBEqvK48xwwKiY7Mg-GNUy6jJXOboORkx46NFKvKG_iYe2iieK8GzE7Vk-09beKEI_4LAD0DMzP3U8Kqusb2p2dJfkLbSzMTtNLNskoNWkvVCl_Fn0VeCK_W25cTAtvrUKgcxZ07Dh-zmw0sqERBMxyg4fKXyafg506Fs6mXI0l48M-MieHImhKVG6nbMGEMEI8hbHphh85CZBhNH1GAOtelkcpV3OB04qNljn-5j28Hr9QOqLjbEVAol_kSKo9Zfxzs703xSSWh8eRjFB-z7uz7FQ",
+    "widthPx": 4000,
+    "heightPx": 3000,
+    "authorAttributions": [
+     {
+      "displayName": "K T",
+      "uri": "https://maps.google.com/maps/contrib/104968169349021935637",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW9VmqCKiaYrhfdXqLgwID_-pgyGp0me92bnbndsjcF7emCLcez=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLeTAGwUy_IXGeG2wfIUJ8dtGANtKPIvrL0J8fDZgyqzjC7YWV9yhtYm5HE1Vz2BBOUafPW_qXBhLbN0czrbkMSlLRspRfU-yvD-jibr5s8W70O1uywK28iw-UYd3GhJUHFW3K0uniON9Uvmhc-6YaAwte4KYRMKd2qXMj6YcQ_XcIcJwka90yHuCRLIt-Vez7KnoiF2xJv-NsgwZ17Ze-gzR_fvinzzjBMpB0iiI25ZZhpC3DZDEm35yjprLaN3RwbmeKu2SdhlND6Qj4qPIrIkFBkIilsQExQi9oYM_emuCafKrtkiKSfqsV_RMH9Rxh4TfhP6amriQ0C3TJGhMPcNle735wI5cFy5PCdrgR64OccHbQHIjyhhjD8ZLpTvVifJEy7uqGCSo_D11_DzI0Map4DWyfQN8Qt0um3ma1ks",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "Abe HOPE",
+      "uri": "https://maps.google.com/maps/contrib/115503298537962238707",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVPv3ANrtkOXJWbTdPgZYxVdRsZbTT5kymPKPf2vzGy_WTYDgNM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLdH_sUupKygT-wcAsP0ezQl8IU5DzEWDuHWrAEi6LZQOdiuFyMbBBhi6M6V3zkcwEU9wJkkZM0R7cNrbY3pLXa82OLwu5ZSrEYA9ap0G3-smwsKKH2HBYDQWpZrOP4kWHmXFITkk7S6gZpF7bYwvkTWj6lN-jubkRX5TDOzRHTjMj9qBXRWHjEonkcPyiJHxp5tzCehAsAljTEHm79YTsHk2_w8rQ64PkQsH7F75jPmmP1V5O9YBCztXZc-3mNj5hOpHvCXF6YLR_W8cqHQpGH7bUivXGzdedIJgkeTBF7DxdGRIEulSCxlxZlDYI2INKiAz_5CvqOzFdMLGmsk3EI8S6aEI6VJnagA2j8iki1jqhhuuWQRO42kfVTvKcdYte8lvzLdWFO9N6gxu8jp1Hn4kzM2YsB7Pf4kA7SIW-K3kQ",
+    "widthPx": 4800,
+    "heightPx": 3199,
+    "authorAttributions": [
+     {
+      "displayName": "あもや南春日 四天王寺店",
+      "uri": "https://maps.google.com/maps/contrib/117311827400345144236",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU_vXYERmFpfsT9unmaX2mG78UWvhEPU7gDLsMAEoT94ax02PM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLdiZyZn90semrrwQ8H1PNRe6xPP726dK-acegzLyqsQABRNN62oPZ7mUvDId0Y8AqoBCVjhm0_cN9qliOBMQ1tREuYvrqvnlnFh7bZOABN3bG5pyUn1vHk4pdj4alHFrPKd3T2kR7S3ivYy3ZsgDAetswL3rw_zVVK7UChEkCDyLsUVtpWX9QxThBdwl6qH_7_DOTNhmIq6Geakr-GJaRkOATvkHGDgNGXQc1Yf1xyJta-F6_3ayXfKuMPcS59U3GW8XO78euS5MCKpFjiv3MvhIMZdV3-geI9KayfaraXsZaLGcm61rL7qFGsbDli6ho_LUl0M9Dbqbw-BxaW81yn55OMdIknaYbBYpmq1nRLfUVA3gMAmUGQnmwJ9swxGJRs0fg9n5aM3SWP3ZTWLEhVkMloZfD4rrjYT23LHtGgQKA",
+    "widthPx": 3333,
+    "heightPx": 3333,
+    "authorAttributions": [
+     {
+      "displayName": "あもや南春日 四天王寺店",
+      "uri": "https://maps.google.com/maps/contrib/117311827400345144236",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU_vXYERmFpfsT9unmaX2mG78UWvhEPU7gDLsMAEoT94ax02PM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLf99ZA0EgQ1qxk4kegyv2G46Pf8iofv0J4IlV6VpYT6H0dn6OUjugfyKLBa6wFnCmkkRDufV5imgGzh-M2QDwTxd3uQ7Lqql0NBIaatfKwM-SpSLYpXQxLJ42kg7_LusIInNjD75ybUpAhmtm0rVyZzUs7SXXop7nRZ-XSukVT604Qa5shBNbxba-Qkp9j76hlQBnSInwEIXqBN2lGrhI50touAvovwGCf5Dol0nHj2EvJ6eTvUmuJSSyespXWzCPBWW1-ml9j-1lZGty2GLwLEThGYZaKeVNja2ZxmWdSx1oNui5iwNlLFE47Y4v0jrIF1CYRcSBm3sMwyyRHQgfHM2i4U5P9RfaM-Zbq0zEZjnqcBZu6ob8jBR3lX9HGDNe2QE-8PKKRCkSoM_P807HGJ5B_wyqao1T-3ZMRchXS_VQ",
+    "widthPx": 4000,
+    "heightPx": 3000,
+    "authorAttributions": [
+     {
+      "displayName": "K T",
+      "uri": "https://maps.google.com/maps/contrib/104968169349021935637",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW9VmqCKiaYrhfdXqLgwID_-pgyGp0me92bnbndsjcF7emCLcez=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLeQVZY4XTtB5qJBi3_2iK_9OlnZEKPOPgUwSj5es-kDcxDPLYlXLwtbM3nP4iuTxhGNloQJ4NesreNdHEuhMe9J7U7INgi4V5rHoOfhHZYcri3U4bPESfzZozFbt2nt_DRVmDPfY1bVsdvDGDwRskpbWHjGgh21q53RF6mypZljyY3xhfW_DUn-8pBDkvkI0Duy9wGzKHt4R0UQnwvmMgW70zeYlTvCVzAUnroaCg1LRhulTskjZVSj8wxGb4EVYNUjOCgPeKzaB81bR5tcFYmLToNptkVXQw0OwA9UHbaj-NgMjO805U6-J8iA-XfuyXrG6ixv2z2ka1bxR7VZKJCESASMsfMNYPKF7wshp1v0j6zwssaYAu6KFaHNtYVxzQGZYwcjlfQgqFMf6FCZ4OBdMBLFuheuLhXPJKbv1Ss37w",
+    "widthPx": 4800,
+    "heightPx": 3600,
+    "authorAttributions": [
+     {
+      "displayName": "Linxuan",
+      "uri": "https://maps.google.com/maps/contrib/107391140627996942524",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWqxDRODHqiMphEu7F97GU_ioJocgwOCzQARgkA9t83Mirh-_6B=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJAXYuO_fdAGARXgjJJ5ZSXL8/photos/AV-0GLdi8HMVywGTOrtP1vb0PqFDhd8Ngw42QS647F11p4DsN0sAdY39vKZDCSoPgwkSDSFEe7MTwC-5AE9U4Mzz00a48CZkg8e1loDCeGvwbT8EKR56GaHFlcelNWnSGvVVxZ5e3Au4H3GCIETmRSUQVnODgtk38ZX_sPqfoVpNDfeliTw5CsXkS-lphUxOFN9zLDab-Y4Y2Wu7GjLT_TFut3qeDStrty4BLoXzBc7f-Z-0WTiJypVg9bsIklRdRfeDKTxs2fVMtp1naHGJJB8LjyuPci3E36mxE9CHMoajL-6BDJjcLJyEiAkaq2cviu5s5v6F-8kh6AwpRTw1d62J5rjuhAZqJX_u3qdTjkFqrxl2SRQjxaySIG8uWOqmB5pKkT8pT73oeSS8m1YeIRk4DKn4zzwofv1OYO_YlInKDugoEw",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "ムッシュゴン",
+      "uri": "https://maps.google.com/maps/contrib/105417422061178128194",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXh2_4-0m1Udctxl_BuurrVKti6YfpFOt1hUCxzU-SIg_U9I9K6=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "かりんとう饅頭（かりんとまんじゅう）",
+    "name_ko": "가린토 만주",
+    "desc_ko": "흑설탕 반죽으로 홋카이도산 팥소를 감싸 아침마다 갓 튀겨내는 한입 크기 만주. 겉은 바삭하고 팥소는 촉촉한 간판 상품(연간 20만 개 이상 판매)",
+    "price_jpy": 540,
+    "source_urls": [
+     "https://www.amoya.jp/",
+     "https://amoyasiten.base.shop/",
+     "https://tabiiro.jp/shopping/s/600045-osaka-amoya-shitennoji/"
+    ]
+   },
+   {
+    "name_ja": "豆大福",
+    "name_ko": "마메다이후쿠",
+    "desc_ko": "콩이 들어간 찹쌀떡에 팥소를 넣은 다이후쿠",
+    "price_jpy": null,
+    "source_urls": [
+     "https://www.amoya.jp/",
+     "https://tabiiro.jp/shopping/s/600045-osaka-amoya-shitennoji/"
+    ]
+   },
+   {
+    "name_ja": "四天王寺最中 餅もちかめよ♪",
+    "name_ko": "시텐노지 모나카 '모치모치 카메요'",
+    "desc_ko": "시텐노지 거북 연못의 거북을 본뜬 모나카. 직접 만든 말차(히키차) 앙금 속에 떡이 2개 들어 있음",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabiiro.jp/shopping/s/600045-osaka-amoya-shitennoji/"
+    ]
+   },
+   {
+    "name_ja": "一升餅",
+    "name_ko": "잇쇼모치(돌잔치 떡)",
+    "desc_ko": "아이의 성장을 기원하는 축하용 떡(한 되 분량)",
+    "price_jpy": 4320,
+    "source_urls": [
+     "https://amoyasiten.base.shop/",
+     "https://www.amoya.jp/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "other",
+     "url": "https://amoyasiten.base.shop/",
+     "note_ko": "시텐노지점 테이크아웃 사전 주문(BASE). 전날까지 주문하면 다음 날부터 1주일 안에 받을 수 있음. 당일 주문 불가, 매장 수령만 가능, 신용카드 결제만 가능"
+    },
+    {
+     "type": "phone",
+     "url": "tel:0667721563",
+     "note_ko": "매장 전화(06-6772-1563). 문의용으로만 확인됨. 전화 예약이 되는지는 확인하지 못함"
+    }
+   ],
+   "note_ko": "화과자 테이크아웃 가게라 줄서기나 대기 정보는 찾지 못함. 공식 사이트는 빨리 받아 가고 싶은 손님(특히 차로 오는 손님)에게 테이크아웃 사전 주문을 권함. 영업 10:00~18:00, 화요일·부정기 휴무",
+   "source_urls": [
+    "https://www.amoya.jp/",
+    "https://amoyasiten.base.shop/",
+    "https://tabiiro.jp/shopping/s/600045-osaka-amoya-shitennoji/"
+   ]
+  },
+  "note": "음식점이 아니라 화과자 테이크아웃 가게임. 타베로그에서 이 지점 페이지를 찾지 못했고, AutoReserve 페이지는 403으로 열리지 않았으며, 구글 리뷰와 블로그도 확인하지 못함. 그래서 인기 순서는 공식 사이트(가린토 만주가 간판 상품이라고 명시)와 旅色의 PICK UP 목록을 기준으로 정함. 가린토 만주 540엔은 BASE 사전 주문 페이지의 5개입 가격이며, 'JPY'로만 표시돼 세금 포함 여부가 적혀 있지 않음. 낱개 가격은 확인 못 함. 마메다이후쿠와 모나카 가격도 확인 못 함. 일반 방문(워크인) 구매가 된다는 명시는 없지만 테이크아웃 판매점이고 사전 주문은 선택 사항이라 status를 accepted로 둠."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "豆大福",
+    "name_ko": "마메다이후쿠",
+    "desc_ko": "붉은 완두가 들어간 찹쌀떡에 부드럽게 거른 팥소를 채운 화과자.",
+    "price_jpy": 183,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270203/27056343/dtlmenu/",
+     "https://map.yahoo.co.jp/v3/place/vxSD45tC6Q-/menu"
+    ]
+   },
+   {
+    "name_ja": "かりんと饅頭",
+    "name_ko": "가린토 만주",
+    "desc_ko": "흑설탕 반죽에 팥소를 넣고 쌀기름에 바삭하게 튀긴 한입 크기 만주.",
+    "price_jpy": 108,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270203/27056343/dtlmenu/",
+     "https://tabelog.com/osaka/A2701/A270203/27056343/dtlrvwlst/",
+     "https://map.yahoo.co.jp/v3/place/vxSD45tC6Q-/menu",
+     "https://chanoyumap.jp/special/amoyaminamikasuga/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "phone",
+     "url": "tel:06-6772-1563",
+     "note_ko": "상품 예약·보관 가능. 기본적으로 1개부터 예약할 수 있으며, 타베로그 안내는 3일 전까지 주문하고 급한 경우 상담하도록 명시."
+    }
+   ],
+   "note_ko": "포장 판매 전문점으로, 좌석 예약이 아닌 상품 예약·보관이다. 실제 대기시간이나 혼잡 시간대는 확인하지 못했다.",
+   "source_urls": [
+    "https://tabelog.com/osaka/A2701/A270203/27056343/dtlmenu/"
+   ]
+  },
+  "note": "판매량 기준 인기 순위는 확인되지 않았다. 반복 언급이 확인된 2개를 Yahoo! 지점 메뉴의 후기 건수 순으로 기재했다(豆大福 16건, かりんと饅頭 7건 및 10개입 별도 3건). 가격은 2026-10-04 갱신된 지점 타베로그 메뉴의 1개당 세금 포함 금액이다. 지점 전용 온라인 예약 사이트는 본문 열기에 실패하여 예약 수단에서 제외했다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "かりんと饅頭",
+    "name_ko": "가린토 만주",
+    "desc_ko": "흑설탕 반죽으로 홋카이도산 팥소를 감싸 아침마다 갓 튀겨내는 한입 크기 만주. 겉은 바삭하고 팥소는 촉촉한 간판 상품(연간 20만 개 이상 판매)",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 1,
+    "source_urls": [
+     "https://www.amoya.jp/",
+     "https://amoyasiten.base.shop/",
+     "https://tabiiro.jp/shopping/s/600045-osaka-amoya-shitennoji/",
+     "https://tabelog.com/osaka/A2701/A270203/27056343/dtlmenu/",
+     "https://tabelog.com/osaka/A2701/A270203/27056343/dtlrvwlst/",
+     "https://map.yahoo.co.jp/v3/place/vxSD45tC6Q-/menu",
+     "https://chanoyumap.jp/special/amoyaminamikasuga/"
+    ]
+   },
+   {
+    "name_ja": "豆大福",
+    "name_ko": "마메다이후쿠",
+    "desc_ko": "붉은 완두가 들어간 찹쌀떡에 부드럽게 거른 팥소를 채운 화과자.",
+    "price_jpy": null,
+    "a_index": 1,
+    "b_index": 0,
+    "source_urls": [
+     "https://www.amoya.jp/",
+     "https://tabiiro.jp/shopping/s/600045-osaka-amoya-shitennoji/",
+     "https://tabelog.com/osaka/A2701/A270203/27056343/dtlmenu/",
+     "https://map.yahoo.co.jp/v3/place/vxSD45tC6Q-/menu"
+    ]
+   }
+  ],
+  "reservation_status": "accepted",
+  "reservation_agree": true,
+  "methods": [
+   {
+    "type": "phone",
+    "url": "tel:06-6772-1563",
+    "note_ko": "매장 전화(06-6772-1563). 상품 예약·보관 가능(1개부터). 타베로그 안내상 3일 전까지 주문, 급한 경우 상담."
+   }
+  ],
+  "reservation_note_ko": "화과자 포장(테이크아웃) 판매점이라 좌석 예약이 아니라 상품 사전 주문·예약 개념이며, 대기·혼잡 정보는 양쪽 모두 확인하지 못함.",
+  "disagreements_ko": "인기 순서: A는 가린토 만주를 1위(공식 사이트의 간판 상품 표기 기준), B는 마메다이후쿠를 1위(Yahoo! 후기 건수 기준)로 둠. 가격: 가린토 만주가 A는 540엔(BASE 5개입, 세금 포함 여부 불명), B는 108엔(타베로그 1개 세금 포함)으로 기준 단위가 다름. 마메다이후쿠는 B만 183엔을 제시. 메뉴: A에만 시텐노지 모나카 '모치모치 카메요', 잇쇼모치(4,320엔)가 있음. 예약 수단: A에만 BASE 온라인 사전 주문(전날까지 주문, 카드 결제만 가능)이 있고, 전화는 A에서는 문의용으로만 확인됐지만 B는 전화로 상품 예약이 된다고 함(3일 전까지 주문). 주문 마감이 A(BASE)는 전날, B(타베로그)는 3일 전으로 다름."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(정면, 가린토 만주 깃발)"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": 0,
+    "what_ko": "소쿠리와 검은 판 위의 가린토 만주, 단면에 팥소, 가린토 만주 봉투"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관과 줄 선 손님들"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "매장 진열대의 포장된 떡·상품들"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(세로 사진, 손님들)"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "분홍·흰색 다이후쿠와 녹차(붉은 완두 안 보여 마메다이후쿠 불확실)"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": 0,
+    "what_ko": "상자에 담긴 가린토 만주와 쇼핑백, 접시 위 만주"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "소쿠리에 진열된 개별 포장 구움과자들"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "딸기 다이후쿠·귤 다이후쿠·초코 떡 진열장"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "푸딩·도라야키 등이 든 매장 진열 쇼케이스"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 정면 외관과 입구 진열대"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": 0,
+    "what_ko": "갈색 가린토 만주와 팥소가 보이는 단면"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 입구와 진열 상품, 방문객"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "포장된 떡과 가린토 만주 봉투 등이 놓인 진열대"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관과 입구의 방문객"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "분홍색과 흰색 찹쌀떡을 차와 함께 차린 모습"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": 0,
+    "what_ko": "상자와 작은 접시에 담긴 가린토 만주"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "개별 포장된 여러 종류의 화과자 진열대"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "딸기 다이후쿠, 통귤 다이후쿠와 초콜릿 떡 진열"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "여러 화과자와 크림 도라야키 등이 놓인 유리 진열장"
+   }
+  ]
+ }
+}

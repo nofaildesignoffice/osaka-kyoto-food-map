@@ -1,0 +1,441 @@
+{
+ "id": "sumikara",
+ "google": {
+  "id": "ChIJVbFwzOHnAGARFBRMLoGDvqk",
+  "location": {
+   "latitude": 34.6704726,
+   "longitude": 135.5033343
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=12231358228835603476&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "https://sumikarasumimade.netlify.app/",
+  "displayName": {
+   "text": "炭焼きと焼き鳥 炭から隅まで",
+   "languageCode": "ja"
+  },
+  "reservable": true,
+  "photos": [
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLfw5rsC8XVhm9eFNdy59tjGzyQpozhsekBjM489wf2qmlrIpwwdwqpGzt_FKUK0722sgKgLJiQrxP6L9oFB65-SP0sbnYXkZ251197ehytb_1OZjwDCJjjaTGJACM7YaP_F76JYZnkp-h0OOH6rKtB-59URCs_lODbpc0dpglMwXTseuGgHf6RoUItxVgEK3NgIPQy4MPNtAx_KJTzdLJ4xFzsK8OGyzp3ez6lb-A54OEwXcpSfg_LQS9_eOF3DfN8W3lTh8NW0ioBDeDCKU2_yCL3Aku95fo3LfU-XCexhdiBy1sOQ0Og4kqK2azJ-8kNUsMQKRM-fMz0Ng6A4qkFrUzKizNUJjxcppHl2Szxy4JFbkzRc1xINJ8B9zi6NGbe-2bT6y7hbAuy3qavJYa2Pw8k",
+    "widthPx": 1536,
+    "heightPx": 1536,
+    "authorAttributions": [
+     {
+      "displayName": "炭焼きと焼き鳥 炭から隅まで",
+      "uri": "https://maps.google.com/maps/contrib/111801281863513709227",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXHpzTXyxUR04S_0-OhDLADxDaO6PlHQUmbVlg5DiBsBIBBBA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLffdBzbK3GZdWfnF4EfQf0YcuP1FCYwTSZXSzvgQXHAt2YNbcvGkYb26spMfoT1ZqH1IAVmVu9feN1kqb0DyrVDWmEeQ79BFznZxVO2lMxcFxI4sasPBMYc97_HVx-7j6ERhaS7XfXj27L41oQtUUzsam-gisCaUBpbOTK8yldQRjgFN4jxOHqVh8l7n2ejO8HAmscJxzm5uooG-rNpQhXNo9vSRUCvTSscjXEpxaq23yoha4SaPlQVnliCyZ6sQctFqbRqbOdkJgP0O0owF7WefLbwHKGEXOE7aKpOUVjE76zB9GsG_0MeC9lxBaS8S-FF20AinEz1fSXp2p_i-RssMThfO1n_HZ6VXajaYncrPKBgxgRoHCTTTSKe_5fU-DCCxKZHrSZjtVrNfi7cVTBVmR4UzDWCnQmPYt3XxFlFCw",
+    "widthPx": 3264,
+    "heightPx": 2448,
+    "authorAttributions": [
+     {
+      "displayName": "炭焼きと焼き鳥 炭から隅まで",
+      "uri": "https://maps.google.com/maps/contrib/111801281863513709227",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXHpzTXyxUR04S_0-OhDLADxDaO6PlHQUmbVlg5DiBsBIBBBA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLdnCMxB3i6dsa8ThbNG5P9i6KVewLvic0jr-ZC0ACewrztB4NoPlPgyxgCFWRXKJ2owKa_JPgfsVq7mKVgSxsD2pn2MYr8KK_MmPx730MhWA_QcAhpXboyeeAiYGFs6SkaKb0CRpXk4Wbjz5Utce78ls7MBFD2iO2DxD-FFD3RQySPsawEcfBsO2KAm5rabE_b8Lue3cXatA9MooNk7Czybtz02_tZ7CehD3O6Lf5fgMJsz3UWUda6PFzLu0TcQajUPsCLzFmIymqnfK8fYa1mJAqhl-63ywOAUqLNeNTvrcqfi9c_VyUunjRxIPQqie8oGsVs1T1QzWXERl1vuQrHqV-QPdDRjUl39kSlWd6ZLCTtjrjaET5OFyKH-SJP1KtoBe1DJ3sMBX39cJ_pPRReT2g3Qasxtt4kPHaoRicAs",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "ことり",
+      "uri": "https://maps.google.com/maps/contrib/102672425723982557125",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJ2tR63ZmPsIr5ySBas4ZUwxPDxq23kQ3IOLF7qs26QgXuOzw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLeGvLqTETDb9SM-oRIkAkQJXJP5t4UwoW7cMiYrp1C6OZqDulLtIKijYtTFKteJfowA1PnKcGdxCm6K1aYQ7QG0wpM4__kR0rtvPwsk4O92VU0kKv606wjPin74PLla0kZuIcXYOaruoUS24Cgkaw2UshJKY5rHZGkxnqYWWBZ5YrJBy2qCG-3WPSIhpcqcgjl9sj7scgGxDOWYbnr_pQxjUM5FKybyQO9a-OW1umKRealbLbMii5BLZ36kedh0gFVE3YqcOpMUERG979HowcQOQtIP4V6ef75xIUv6dbBBaBCijg-YnLDms0hzwdurJX7iI5qu8yoE77j-HbdYct16Z4QaDIfC6zrA3FtbGEc6-yc4i6s29s8dKqNgsnxwqw67dZhqOzKTERbkoHsHJRIYFE4NZEGDdYum-8ayvCqh",
+    "widthPx": 2240,
+    "heightPx": 2240,
+    "authorAttributions": [
+     {
+      "displayName": "新藤",
+      "uri": "https://maps.google.com/maps/contrib/105883897304795548432",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXVMWqPTu60WghNlAQ8OuvS_y3wcTklP3SConuMEcLg7m8smDQ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLeaEdGR6d0YQ21gtIvxKiayPaZDRDoh4s_kbXe1E3IqybVx_ICClrFEMf07KntvAfO3FQ6OJYrGH5Yoe0SKqk2p3S4nQQgVmCxOS2OhHHoDB2tGED7eHiu8Hkn4v4u_W3fFxJ0qYJUZE0d_xUBVlFW5BAoOIpfoAndjbQLVhUwhPDaOQZPhMKVx8a6xoxP4McCNcbd9L9M8wk91Itcn3OCYK_VQUWWa6suKQa2BgNDm4F9B7Fsdvf0-bZiJHfZqGZT-wfQFJW84AWmijzro4MDdxQspXJuYeeyKNLBgw3Kp2bpDiHOtJxettWDR5yPd9Q02BUuQSzIBSW6-BD8t1AI55jPXEXGe7ZWGKJnFoPZ_vW2P3E9ES2B1OekfX16oYAegtjpmjROhTMsC_UobFc2926TXX7HvmNKndoKAxJIm",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "藤井雅浩",
+      "uri": "https://maps.google.com/maps/contrib/104265058961938166037",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIYHGYumuPVE34j7dRfu68lJJO0eYbM26cTMDjXCqq7YnoXAA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLdDwfi2tJeMeLaUt6RFZykrLTXMQUeTEiwYKp1QrxIv3z5_haLCHiGrAVWdN7T9-h7nl2_0oGJZtI42aI4fm5HouRuaWRYJokaMO2LYaFfgledmKiEKsAxhPJJR18A_paCSbmShTSO-yt6eSorFh5q_J91KqMmcS0jDiib_uy-6d3fsfNYN39EDNxD2wPnkUn5J7Vv6og5S8cX5cE5m40xG1GnBIkPeaDn7_4FvhzV_XfnjMm14AOXdbviojSqJ4DsJqiT1BFAH_Ni3nKdaFGo3lGWZ4DqTxveAKy9LZr7hZzei0urSSij5hnH1AGqwtmpRhzVO32k6CBHzo5wcJa2-heiWNVYhrJSwJvvJVy4Lui-fSxSay4Y4dfVO6jP3DTxp0QB1L3vbqdZQO6VfyFgP8J7shwIzP4uO8_ZA6V8PbQ",
+    "widthPx": 4800,
+    "heightPx": 3600,
+    "authorAttributions": [
+     {
+      "displayName": "あくびちゃん",
+      "uri": "https://maps.google.com/maps/contrib/106135782094367887503",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJNakGMb4bjLLrxIpWXA4sr1T_jZypHwEJ32Ay5K7fCVgKtqQ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLczUyuTMC0NS5cJbafJGWF_w7Ji7s4_XkoC6LM_ky7PTqo3eXuhZjmgLlEonTFPG0Ul7e8KhGZ2bYlMm_5fyWwH2sWqSSy7kQjHwhu4vFfFPFGomTEyLnJT6pIGUBYtI0DAa1Y-Kapkr15sfJKHGiYrH6WzIYfTd3NHwaw4YUZ8nBiNuIYfFtBRKUrc0_225uHR37WdTIKKIdbftuDO_Haw2Jo4Dj66IaHgcjOqsQH9iG2LaZp0FqJa5EVW5E4HWgVww2WfqR-JcDejNp-Fx-bRQ81tQn9UX2T8d8U1irBS_hA_Jer_UgQXeyfq6mZzRr8hRT0incMyjEkJd-u9zK-QBWc4gx460dfX_KIuDd0QVQXPGO9Ma4bqYM2wmcpmRgY862EpjZ-nCsJp3npTRqk9AopfIGYx8WojgCLkG0cc_w",
+    "widthPx": 3072,
+    "heightPx": 4080,
+    "authorAttributions": [
+     {
+      "displayName": "D Y",
+      "uri": "https://maps.google.com/maps/contrib/112379933434505184616",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUtPs_FMAW2GGEGYK8e-euPfWnzPd9ADS4NS5TydDLZ3vNPafVU=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLfU58J5pB2C5gayofR2PDwdg0lzgm2F9bB8_6jI1K4DsaE_fbp_ZD9bORWJhgRg0bvs4YZ3nSZ96KLYzwQNc72IBqBguiE-qHuNj0ISYzqDx2Y7aX4SN_FYv8UqKy30VoOirhmXU3Naidlf8pU5SL62W-X_dMnQBdYkVqZhuGnM7sAvJzchUnljrlkITwh8BCAxiJUJwrTMaXOUlE8dcov3Fy-lnZS3icvHfCgrHr2pr1OwA5g9uBqhyB9jcD6MWNPW7vriE4Lr6s8c4BCPHtisDqOO_EUMadAT971CDVvIVR_atJTh9IWw2jwHKkmXAHqYyHKWGkEHPiFcdRjqSWc9TBPPMiL6KOEdZ5LrTZMAYZlqubiK7pUHskQ3kgUcQDM0IGXVr5l7XSOBgVMZXjrzYmNtV0Ugnrjaso70aWqnKw",
+    "widthPx": 3489,
+    "heightPx": 2437,
+    "authorAttributions": [
+     {
+      "displayName": "炭焼きと焼き鳥 炭から隅まで",
+      "uri": "https://maps.google.com/maps/contrib/111801281863513709227",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXHpzTXyxUR04S_0-OhDLADxDaO6PlHQUmbVlg5DiBsBIBBBA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLdJNXDm9Yd39yrdpeiJEI3TEHF5-hAbU5-NKuKvmPQGcBZbA5t7OeD4pOS1rX2QCB-Y0R9xSL6SEWLOo5uWKzM02Bb4xmZWt8Hm0uSTAVALaJgPUn__ccG0Cgh4auPWWqR36K0_FsUKgm26IWzRuDr736C9VRAEY5BlhQrN73uuwUJzKzj_hsxMxNMncBt2DEQu5NmIBaoe8Gb66Xwh3i0tRQaH0gJeFm10EeTtCHt7nuDbhrxECarvsGSDlDuIA8H2xL0x6Y_HUVlBpiXyj9mZaSPBKEZovuX4DZ6BWN4voJhe1i9NHkHKQLIFfKEYtkoUHvMnfmhQj34ZgNDubd5ybm51a6FKwF3NfvZxbBv5RO5v1EzPR7ac4LvcnlmIgKaTSCpv_DY7cke4WlCMs1uoudNIQiXxFZkpw8-HRJJUiQ",
+    "widthPx": 640,
+    "heightPx": 427,
+    "authorAttributions": [
+     {
+      "displayName": "稲井章人（おでかけぶろぐlago）",
+      "uri": "https://maps.google.com/maps/contrib/108731665858134942444",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVTCy_vmxGhaJmerxxehzT7EHWgayF_osqiJ_XfHGFT2ik10wLUnA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJVbFwzOHnAGARFBRMLoGDvqk/photos/AV-0GLfbeAtcOBuVwm5vBUl7NU86VaqbUyqYnEwZH_9tf3OaBfTIJ12FU2lkLiOXf8X76XuIWmgMYZZl0dKlNJDkYcDx-_37-cQQwn73xY9sMIyMQb4zrqu0YopVDqdXakArRy4WpCFnQU0wyxdgTOYb5kZM1NGfaCmhdjEgcqmB6J-gIcw_B4ATlMz_1sBTpOOpr0X-zsPXqAFLqfR_r0jxSqDDxOUyi3OsdO1XbuymDVxY43UYYclRj25NacjujDi4YWq-01NZ_kdI7Qb34rZS-BE7Qof4dhYfOWXYBGTanykDbaGobTr0VgpNkSFpVqVLDXLaxRVVHOE1ONlETnxNlQmUvgw-ELzaatDAB8G3xIJGX0U6yrFYKyFlBGlZd8PaP8Ggy7P1DqKZPn23Ah2wGnkObjcLaXO0kU9wWzSOsp-yQw",
+    "widthPx": 3024,
+    "heightPx": 4032,
+    "authorAttributions": [
+     {
+      "displayName": "中崎純華",
+      "uri": "https://maps.google.com/maps/contrib/101248403690087690180",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocK8Sz-UO_Yq5FOuS96Fcj07O9sbtGiwruPBfwfZtEqK6sCutg=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "厚切りトロ牛タン串",
+    "name_ko": "두툼한 토로 우설 꼬치",
+    "desc_ko": "두껍게 썬 우설을 숯불에 구운 꼬치로, 가게 대표 메뉴. 공식 사이트에 따르면 손님의 90% 이상이 주문함",
+    "price_jpy": null,
+    "source_urls": [
+     "https://sumikarasumimade.netlify.app/",
+     "https://hamoni.jp/shop/5cnq2H6v7qMiAxZierxE",
+     "https://foodle.pro/restaurants/osaka/646a892e4d468"
+    ]
+   },
+   {
+    "name_ja": "和牛肉寿司3種盛り",
+    "name_ko": "와규 고기초밥 3종 모둠",
+    "desc_ko": "설로인 등 와규 세 부위를 올린 고기초밥 모둠. 가게 추천 메뉴",
+    "price_jpy": null,
+    "source_urls": [
+     "https://www.hotpepper.jp/strJ003451218/",
+     "https://foodle.pro/restaurants/osaka/646a892e4d468",
+     "https://hamoni.jp/shop/5cnq2H6v7qMiAxZierxE"
+    ]
+   },
+   {
+    "name_ja": "炭焼き堪能コース",
+    "name_ko": "숯불구이 만끽 코스",
+    "desc_ko": "두툼한 우설 등 숯불구이를 즐기는 코스. 2시간 음료 무제한은 +1,000엔 추가(공식 사이트), 핫페퍼에는 음료 무제한 포함으로 표기",
+    "price_jpy": 4500,
+    "source_urls": [
+     "https://sumikarasumimade.netlify.app/",
+     "https://www.hotpepper.jp/strJ003451218/"
+    ]
+   },
+   {
+    "name_ja": "河内鴨しゃぶしゃぶコース",
+    "name_ko": "가와치 오리 샤부샤부 코스",
+    "desc_ko": "국산 오리를 1번 다시 육수에 데쳐 먹는 샤부샤부 코스. 디저트 포함",
+    "price_jpy": 5500,
+    "source_urls": [
+     "https://sumikarasumimade.netlify.app/",
+     "https://www.hotpepper.jp/strJ003451218/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "hotpepper",
+     "url": "https://www.hotpepper.jp/strJ003451218/",
+     "note_ko": "핫페퍼 넷 예약. 즉시 예약은 당일 23시까지, 요청 예약은 전날 17시까지. 코스 예약은 전날 23시부터 취소 시 코스 요금 100%, 좌석만 예약하면 1인 2,000엔 취소료"
+    },
+    {
+     "type": "phone",
+     "url": "tel:06-4708-6960",
+     "note_ko": "전화 예약"
+    }
+   ],
+   "note_ko": "리뷰에 따르면 점심에도 손님이 계속 들어와서 예약은 사실상 필수라고 함. 다만 혼자 가볍게 한잔하러 들어가기는 쉽다는 평도 있음. 1층은 카운터석, 2층은 테이블석. 영업시간은 12:00~23:00(음식 L.O. 22:00, 음료 L.O. 22:30), 정기 휴무 없음(핫페퍼 기준).",
+   "source_urls": [
+    "https://www.hotpepper.jp/strJ003451218/",
+    "https://sumikarasumimade.netlify.app/",
+    "https://foodle.pro/restaurants/osaka/646a892e4d468"
+   ]
+  },
+  "note": "타베로그 지점 페이지는 검색으로 찾지 못했고, 구구나비 페이지는 503 오류로 열리지 않았음. 우설 꼬치(1개 700엔)와 고기초밥 3종 모둠(1,500엔) 가격은 2024년 11월 foodle 리뷰에 실린 '오늘의 메뉴' 가격이라 세금 포함인지, 지금도 같은지 확인되지 않아 null로 둠. 코스 가격(4,500엔/5,500엔)은 공식 사이트와 핫페퍼 모두 세금 포함으로 확인함. 음료 무제한이 코스에 포함되는지는 공식 사이트(+1,000엔 추가)와 핫페퍼(포함)가 서로 다름. hamoni에는 우설 육회 덮밥(牛タンユッケ丼)과 1일 10식 한정 우설 런치(1,950엔, 2026년 3월 말까지 기간 한정)도 있었지만, 한 곳에서만 확인돼 제외함. hamoni에 autoreserve 예약이 가능하다고 적혀 있었으나 예약 URL은 확인하지 못함. 구글 리뷰는 직접 확인하지 못함."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "厚切りトロ牛タン",
+    "name_ko": "두툼한 소혀 숯불 꼬치",
+    "desc_ko": "소혀의 가장 부드러운 부위를 사용한 숯불 꼬치로, 매장이 인기 1위·주문율 90% 이상으로 소개한다.",
+    "price_jpy": 750,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27134304/dtlmenu/",
+     "https://sumikarasumimade.netlify.app/",
+     "https://retty.me/area/PRE27/ARE94/SUB9401/100001690420/"
+    ]
+   },
+   {
+    "name_ja": "炭隅ポテサラ",
+    "name_ko": "스미스미 감자샐러드",
+    "desc_ko": "으깬 감자에 숯을 섞고 닭고기와 훈제 무절임을 넣은 검은 감자샐러드.",
+    "price_jpy": 500,
+    "source_urls": [
+     "https://www.hotpepper.jp/strJ003451218/food/",
+     "https://retty.me/area/PRE27/ARE94/SUB9401/100001690420/"
+    ]
+   },
+   {
+    "name_ja": "河内鴨の鴨しゃぶ",
+    "name_ko": "가와치 오리 샤부샤부",
+    "desc_ko": "가와치 오리고기를 육수에 익혀 먹는 샤부샤부로, 매장이 명물로 소개한다.",
+    "price_jpy": 2450,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27134304/dtlmenu/",
+     "https://www.hotpepper.jp/strJ003451218/",
+     "https://sumikarasumimade.netlify.app/"
+    ]
+   },
+   {
+    "name_ja": "肉寿司3種盛り",
+    "name_ko": "고기 초밥 3종 모둠",
+    "desc_ko": "와규를 사용한 세 종류의 고기 초밥 모둠.",
+    "price_jpy": 1750,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27134304/dtlmenu/",
+     "https://www.hotpepper.jp/strJ003451218/",
+     "https://retty.me/area/PRE27/ARE94/SUB9401/100001690420/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "hotpepper",
+     "url": "https://www.hotpepper.jp/strJ003451218/yoyaku/",
+     "note_ko": "공식 사이트가 연결하는 온라인 예약 수단. 좌석만 예약 및 코스 예약 가능."
+    },
+    {
+     "type": "tabelog",
+     "url": "https://tabelog.com/osaka/A2701/A270202/27134304/",
+     "note_ko": "타베로그 온라인 예약 가능."
+    },
+    {
+     "type": "phone",
+     "url": "tel:06-4708-6960",
+     "note_ko": "공식 사이트에 안내된 전화 예약 번호."
+    }
+   ],
+   "note_ko": "Retty에 만석으로 여러 차례 입장하지 못했다는 후기와 예약을 권하는 후기가 있다. 예약 필수라는 매장 규정은 확인되지 않았다.",
+   "source_urls": [
+    "https://retty.me/area/PRE27/ARE94/SUB9401/100001690420/",
+    "https://sumikarasumimade.netlify.app/",
+    "https://www.hotpepper.jp/strJ003451218/",
+    "https://www.hotpepper.jp/strJ003451218/yoyaku/",
+    "https://tabelog.com/osaka/A2701/A270202/27134304/"
+   ]
+  },
+  "note": "인기 순위가 명시된 메뉴는 소혀 꼬치뿐이다. 나머지 3개는 반복 언급된 대표 메뉴이며 배열 순서는 인기 순위를 뜻하지 않는다. 가격은 세금 포함 게시 가격이다. 오리 샤부샤부와 고기 초밥은 사이트별 가격이 달라 갱신일이 더 최근인 타베로그 메뉴(2026-10-02)를 채택했다. 감자샐러드는 핫페퍼 메뉴(2026-06-28)에 있으나 해당 타베로그 메뉴에는 없어 현재 제공 여부를 확정하지 못했다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "厚切りトロ牛タン串",
+    "name_ko": "두툼한 토로 우설 꼬치",
+    "desc_ko": "두껍게 썬 우설을 숯불에 구운 꼬치로, 가게 대표 메뉴. 공식 사이트에 따르면 손님의 90% 이상이 주문함",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 0,
+    "source_urls": [
+     "https://sumikarasumimade.netlify.app/",
+     "https://hamoni.jp/shop/5cnq2H6v7qMiAxZierxE",
+     "https://foodle.pro/restaurants/osaka/646a892e4d468",
+     "https://tabelog.com/osaka/A2701/A270202/27134304/dtlmenu/",
+     "https://retty.me/area/PRE27/ARE94/SUB9401/100001690420/"
+    ]
+   },
+   {
+    "name_ja": "和牛肉寿司3種盛り",
+    "name_ko": "와규 고기초밥 3종 모둠",
+    "desc_ko": "설로인 등 와규 세 부위를 올린 고기초밥 모둠. 가게 추천 메뉴",
+    "price_jpy": null,
+    "a_index": 1,
+    "b_index": 3,
+    "source_urls": [
+     "https://www.hotpepper.jp/strJ003451218/",
+     "https://foodle.pro/restaurants/osaka/646a892e4d468",
+     "https://hamoni.jp/shop/5cnq2H6v7qMiAxZierxE",
+     "https://tabelog.com/osaka/A2701/A270202/27134304/dtlmenu/",
+     "https://retty.me/area/PRE27/ARE94/SUB9401/100001690420/"
+    ]
+   }
+  ],
+  "reservation_status": "recommended",
+  "reservation_agree": true,
+  "methods": [
+   {
+    "type": "hotpepper",
+    "url": "https://www.hotpepper.jp/strJ003451218/yoyaku/",
+    "note_ko": "핫페퍼 온라인 예약. 좌석만 예약하거나 코스로 예약할 수 있음."
+   },
+   {
+    "type": "phone",
+    "url": "tel:06-4708-6960",
+    "note_ko": "전화 예약"
+   }
+  ],
+  "reservation_note_ko": "후기에 따르면 손님이 많아 예약하고 가는 게 좋음. 핫페퍼 온라인 예약이나 전화(06-4708-6960)로 예약할 수 있음.",
+  "disagreements_ko": "· 가격: A는 우설 꼬치와 고기초밥 가격을 null로 둠(foodle 2024년 11월 기준 700엔/1,500엔이라 지금도 같은지 확인 안 됨). B는 750엔/1,750엔(타베로그, 세금 포함)으로 적음.\n· 오리 샤부샤부: A는 코스(河内鴨しゃぶしゃぶコース, 5,500엔), B는 단품(河内鴨の鴨しゃぶ, 2,450엔)이라 같은 메뉴로 보지 않고 뺌.\n· 한쪽에만 있는 메뉴: A의 숯불구이 만끽 코스(4,500엔), B의 스미스미 감자샐러드(500엔).\n· 인기 순서: B는 우설 꼬치만 인기 1위가 명시되어 있고 나머지 순서는 인기순이 아니라고 함.\n· 예약 방법: B에만 타베로그 예약이 있음. A는 타베로그 지점 페이지를 찾지 못함.\n· 예약 근거: A는 리뷰상 '사실상 필수'라는 평과 혼자 들어가기 쉽다는 평을 함께 적음. B는 Retty에 만석 후기가 있지만 가게 규정상 예약 필수는 아니라고 함."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "카운터석이 있는 가게 실내"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "간 무와 파를 올린 구운 닭고기(닭날개) 요리"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "달걀노른자를 올린 소고기 다타키, 김치, 구운 닭고기"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": 0,
+    "what_ko": "레몬과 소금을 곁들인 두툼한 우설 꼬치"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": 1,
+    "what_ko": "나무 판 위의 와규 고기초밥 3종(2개씩)과 양념 꼬치"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "소파가 있는 개별 룸 실내"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "노른자 2개를 올린 깍둑썰기 소고기 덮밥"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "간 무와 파를 올린 목이버섯 무침 같은 작은 반찬"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 입구 외관"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "참치 다진살과 단무지를 넣은 김초밥 롤"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "주방 앞 카운터 좌석과 식기가 놓인 가게 내부"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "간 무와 파를 올린 닭고기 구이"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "노른자를 올린 고기 요리와 닭고기 구이, 김치"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": 0,
+    "what_ko": "두껍게 썰어 구운 우설 꼬치와 레몬, 소금"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": 1,
+    "what_ko": "세 종류의 와규 고기초밥 모둠과 곁들인 꼬치구이"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "소파와 낮은 테이블이 있는 가게 내부"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "잘게 썬 고기와 노른자 두 개를 올린 덮밥"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "간 무와 송송 썬 파를 올린 버섯 요리"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 출입문과 건물 외관"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "참치와 단무지가 들어간 김초밥 및 참치 군함초밥"
+   }
+  ]
+ }
+}

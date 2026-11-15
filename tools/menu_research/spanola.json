@@ -1,0 +1,365 @@
+{
+ "id": "spanola",
+ "google": {
+  "id": "ChIJrYRtAO3mAGARiOfMO6oYIas",
+  "location": {
+   "latitude": 34.6991301,
+   "longitude": 135.4990767
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=12331164374143920008&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "displayName": {
+   "text": "スパニョラ",
+   "languageCode": "ja"
+  },
+  "photos": [
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLdfSmdF3qXsFUKqAupg3YVNwuC3TF-hmqb0qgctdAMiIASqorY9NHQIF_ErZTtduLu8-lVdgzoYSX6EwlDPD65BFqhid7Op1IE_ZXP9dac9DLbDyokcJeRdQ-6UUOxP_nPDEHW5uhB6x6dZ2JJkEAyHD9R7iB6ZfXWRu84Z6yizgjfGrlFDA9x3kMsr2VAtCcYVSQ8O1b7lrJ3IUsYXBHGdLi0IAkSNZ94325Nrbn8TmeRsmFp92s__SORT7liZ7IwUK2I8I7e4_d-bH0xv3Vk0T8USf4kmI9TMDpagk7OOhIUtC_qQvQpqJ4zBn5HS86S5Auh1YSZByMjJYdazHEo_UNwWKGCbWoviEhCu2WfswYaHxLkkxv4fgAB2sNUYszvKxKkZJtkmcOZPe19ASUt0DHp-lRP9J7pQEp-uc5RAsQ",
+    "widthPx": 3738,
+    "heightPx": 2828,
+    "authorAttributions": [
+     {
+      "displayName": "G バルサ 50",
+      "uri": "https://maps.google.com/maps/contrib/110463105359439841469",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUSZ97DUk3XT2qEokWgbFn_SVqNZhXjUAVKi3swRH49vld_fO7N=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLfZLB3kNbqddhjmrNaX0EDpxwjPxm8doSD24hlj7QHb4tZwYNgEY5mXZpiZz4aY7Ix2l0I1wuOIkenX59ParugKe3LlfHCEX8HfStlQNZyVgQnjcJaw_towpm4Eo0TPu4-qTczmlAs8Afvho9mfpezDDJx03FPYclPfVg84zSPXQsYeZF4C_z5KaSvw4jQZFnNtPFWveH74HzDySjgF0M_dGll-mKvLY06UPJTLPCAcVsEKKnhdjDQ1oVS59yBp3047NNdxmLOTqaHGXqq9N4NDy8KA5zherXHfU5u3JpCMycSpj0c_FT_-AreyI0MBO6Gn4Viy_pZYUVDK-iBQee94lDhCx0qG-FzsedIS5_sH4G9ANYHMYY1QyTVTnKNb390rJ7sGOXx3K1gc_eiiiLYvqaw",
+    "widthPx": 962,
+    "heightPx": 571,
+    "authorAttributions": [
+     {
+      "displayName": "らん",
+      "uri": "https://maps.google.com/maps/contrib/104430845371568724847",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV7GIZ1WGsLMmPb8iWE69p3XniqNr1agHY64PRikL3fw61ZuNfZ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLfRM3ZEfTYOCaTuVElR5UW4p4jWV2I9z2aYvqKXpmEdJR4EQ6hJDrjJ9z_-7MnO6OJc8bvVogG8m4nny7AyEOaPx7h2nv8MbOVNsgFfTnwks4MRKanAN6u0BYCEnph25Y30cVHeErGv2CFwEXNGUpVaLEJHyEt6kY6wjJjq2af2cahekeciAt7tQ9bLLXrqRcfXQqlx34Dg5umDCW_WXuGK9IxH3z921ux_WcHY4REINuYWjQWzNYEGQXlNMn6TuBC3y2wQoC3-wBqW0wsAbjhCWtHMW-B4F9OVZjav-ro53qZ2wU9l9ei8E-eqttB5w5phK0bpDA8LWWspezJWAQg1NxeoBkQIt-PPzWYxzk7gaHrt9slM_VeE7zRvh-JvbGvlrLkcakAz_GPNSEa_QsiaevE-qcMbtQL7MK3Ssdrg",
+    "widthPx": 1108,
+    "heightPx": 1477,
+    "authorAttributions": [
+     {
+      "displayName": "もぐもぐるめPK",
+      "uri": "https://maps.google.com/maps/contrib/101489074686428543266",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVfsWVzKCuebujdzjqj-nUjmxchgnhptHGPrsIvlEqFX0I_1g=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLdBSUNS2cBa3I3o5YDmi1b2_W4Lw6J4CUe01yeuUOXhDtn5_epz_CjUJBlN9J0-CkrL9g-t7fNMlToOGmQp6KyFJIjkfCdlwJbE1kTV-LN7OsE4mvzSmqSMpaLiuWNmYWOwb_dOJVaWhrhf_f5j6riLYskqnBAFiajRhgcxykO0p6aamYeAdf4IzEERGsPeBZWsIPZnjdGTgq5H7jkEIEYCAqeIf0PZinKX9nq7vdsn4jE3mJNDQcK6ij1y9Ck9B7kf30lYnAFta1J_oAQHXLLdJSliSDi28CfxBj__rQR4V0IQEbmVlRKGQwb28wd_XQ7zjmI3noQIYGC5mcshwsoCxCNZDoJ_YabS9niNuzvB-0bPEp8Ei6hWiIM9_83OY5nhyWg4bJJjqxsk9P2yDhTMck-K-dDuTusmu6vMge9z",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "ふう",
+      "uri": "https://maps.google.com/maps/contrib/100520083111980782003",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU2Exg-1sfkLCfnqsk1SQqSA4A8d2Zb3FAbOQcgk7AkuXjI76XlHw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLeDkS0YjvcGAoPKERRblFXVzc36dDhnT2uuZS3SGaFSoaqgefC3fXhzo2IYcSy9s4hpaBrlJNjsF1jONvI2RMvM_JJyAUfHeez2dhYxyPFlDfYIJ6dFIJicqIRIfugUz0cBZYvxdnyfR7mSt15AlVoVjDuQIMwVDf3S35UebOZCzeYnvFlDf-eLiz4siNJh-MKI4pzJj736_RBlKxK3u2w3SwUy2pqqwjDwnjkWTNF2swBtCCTSmOVCcj1SyevUqQG-0QRYikWJou7m8O8n6T1JpA9KhtxU82edmy5l0oWxrHR3VQVNA0yu1rNuaGj-c7I2J20E8JDHlrgFFy0bPP6Wix_RsAxuGDaxrsyG1vclAt2kqz1m4TrkLa3aSYbJjA34zXPNuYJFpfa7__twK-AMGZRKabssFrMVOyfbFCLAZw",
+    "widthPx": 4160,
+    "heightPx": 3120,
+    "authorAttributions": [
+     {
+      "displayName": "ビバキナコ",
+      "uri": "https://maps.google.com/maps/contrib/104943016603341180907",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJBdWAqqZ3o2kRSdPc0rhBNQH2BZ6XyfPFTS3dWkZAImabN-Q=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLcw5sSpzlfSsqTxNJAdMjR_jxhEQo5lS0261L7yrDiLhUYyAKw_7tXrbN9Z2fGpf1_broTX7Qdz5KrpXdsdK3us8k0pBuX0oMzYwrLjfnq_42ugwZ3v2V0ix3trE20Y0DqQZOPD53D1jzFKGMWBPgnGda6J2J1E8595eLjL1zcBtw61TWtPH9RDKAAhxL01QkZHcg3xJsp87g2R6_3rn2mhkRDgZfbVHXYPcdENm1s9wJJDVUDFC4dC3X8YOotxQdaStYHf6qww4HnpsJ5Ns9K_Eqyh-VLy7AzojWsMFQkOIi-wg0U6_OxNhCNqvvLfonC-j32Gudhj92xbS0qO4PDrP0Bh18_TPi5rpQ-CzlweFWbHZ11WNGI19HX5c5JZ9g9qAG2BbAZwBEUaYBjUhB5bi2leSL46g2lh7NvrE4pTCw",
+    "widthPx": 3072,
+    "heightPx": 4080,
+    "authorAttributions": [
+     {
+      "displayName": "K太郎 A",
+      "uri": "https://maps.google.com/maps/contrib/101223572668889936539",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJdni-3BjGx-G7HgMhM83DLGFwmIYpGTpp6iKRN1O8YJ7juAw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLedBqW9yBkMKVpMfN14xkNRWHIZwviSfdoBX8p9cKnCNUQif2XCXTlBFeWpG_bJJSt2Z-rXHAcIyIjonQCt8b73sR7MWTfc2jF6OWtl8jSZFEIU_7BlxPj6W9fj-pbux4Db4NNhAjOEP3daUm-1dtlEpW1gppdn5xFr390-vP1dwnXqLQOAUfDQmUe-YcO1rUwxYKjP21QV5EwceCrBvU57CQw3mQxoEN2PN3clV6Ah4iP_EtAPI8-SMOnEgfLwb0vHEWkmAVC8OWYwBfvex5w4kBBtw56PGEgbp_KeCEDcy7eGBnrkOBRcZIq3uWTHdYP66-7pOlkAAcz1yI7D-odTT-qvAQcIXojfsmKMrUAFDK7u0As0nE5U27RVL6Q29DnZiVm1BmOx6v8p3ZY2VPSLb0w5njaZ-aMIqpc2zQT34Q",
+    "widthPx": 4800,
+    "heightPx": 3600,
+    "authorAttributions": [
+     {
+      "displayName": "FR",
+      "uri": "https://maps.google.com/maps/contrib/100467077504721120062",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVScknwgGBXvlck5FuTJeWXCU4oX2Qz9ItJIJ5laB03ZPcNnpnmXg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLca-EkVVB8WrDJ4gSXvbwLFqebINvgyRN3rDLFfFDBhaJHij1ZCu13I2AFdl3FNL_GGXEWWhEffzBXHPvfSzJkrDkVomnVS5O6R4q7j2NnxsBI0FaboLhYStDzpFVRqJpYlv1Jf9WlxwaF3rN3QqILzdgFxETetI8LGQp8BuyrI-G9O_QhmF89cO-caHo1tQ0Fe3r8B420XRAcpzCfXCz2LvBgUQx6VcRBAWr1lF-HnOl1JnCyRhu6foNBcqltCmswrOFD_LWgJF0l63bRWhlKuSKF1-SOPY6AvLkR6bw7PEtBPXz_TK6EnowYsAqztS_2F0BjCaKHz1Kl6XIgOktm93NwVE5MwrgYvN3vsFWF4r0_hexVc1oi8aUOWF3ugk_ejUZZhRYxkw7bAL3lzJzCTCZS8JHpTbQFr7CwHd-zq",
+    "widthPx": 640,
+    "heightPx": 480,
+    "authorAttributions": [
+     {
+      "displayName": "BOSS",
+      "uri": "https://maps.google.com/maps/contrib/111928668980609507887",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWuhBZVCJRv-DRPpXn6fJf1CutnjdfJZiEUmqF2IBT6jXjXY0cl=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLe-7SdK2tZg1pHevYY9Q9ozAP__vr8kF6Ux0qyJHlNuWTCXrM0Tp4gv4ftIow6Ro9kPK8ZFqR1bAF7xQWkxVPdR1zVPzU8Y4anHkz8O83806f3xqiSWx_y2t1GH6yksFhSYVydsTPxl2rtjmgm71h-R6w0PqMIqGbDTBL2Fefp-5hjVSfPBtuG6fZsvXXvy9T0LX4scnY5PC6bU6LfJoUvkJUBgHLZJcyUdmOdit1xlThc4a8pebHdZMm4Id8KC0soeDFPXpJSI6np9_nwYJpo4G5yCVLBHVAtzi7IsnXQrb-ELhBeWc-f5WE7lG1CydslTUtYKqWAyIjHyGUaMuZNT-XmACTfb9kE75M3JJSvm9br46bhrBoGZBmOQdKkKWgtyWrvHjlbZ2wiVZIlbuHkaZVQZjZCizjeSdrsYFPyOZg",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "u u",
+      "uri": "https://maps.google.com/maps/contrib/117781157064034693468",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW2rTQWcMRhoDQtJG2IDlmqf7WdbaMssgvsrB1-M-bBQ4hW4btF=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJrYRtAO3mAGARiOfMO6oYIas/photos/AV-0GLf1A9cBIofmwVCT6qD64Ln6P55-IGL55jr39GHsqvjrM7Za8CU_dGYRcbpCyeigFDWqQ8Ed3TxTOyRN93EEHbZaFtjxlxRvRCjXX5NB_8GVGgJWQACpCKJq01OYiOXLA-dzrcEpk1GQLUY7RhKprwZYEpeI8Jcy0DaW3mMMuAY_MB_3fXBY3WD3j6uXKqZCzrhtrD9nFP7wE5pHeCQ3lU84RTy_Pfd_lyA3OW4qBZsyzWLsAfodfTBAVUDEyiPNd2NCbUlm_PYWhq2P9Y2iQRGNte8RHkNlZd4xUnVhFVGUttunoHE19RtA2ZJrEDopRNolT4itKROsctbABvc9is2VBxY6nfrfoWo2vGol54fwi_0QL7K7B0XPKcRvBGEXLJ6Pkty9Ur75F2Dyjg7X_Sp7_4dhDAXFGB6ndHyUd5JTMg",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "まめこ",
+      "uri": "https://maps.google.com/maps/contrib/106244940617753569735",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVWNUI-SWa4GQZRlHJPXmjYT-rmfdhg0TArfJD6dRhZ-j9lFMTRwg=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "モンブラントースト",
+    "name_ko": "몽블랑 토스트",
+    "desc_ko": "두툼하게 구운 버터 토스트(식빵) 위에 마롱(밤) 크림을 듬뿍 올린 이 가게 명물",
+    "price_jpy": 520,
+    "source_urls": [
+     "https://www.walkerplus.com/article/205212/",
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://www.timeout.com/osaka/restaurants/spanola"
+    ]
+   },
+   {
+    "name_ja": "ウインナ・コーヒー",
+    "name_ko": "비엔나 커피",
+    "desc_ko": "블랙커피 위에 생크림을 컵에서 넘칠 듯 올린 인기 커피",
+    "price_jpy": 650,
+    "source_urls": [
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://www.timeout.com/osaka/restaurants/spanola",
+     "https://tabelog.com/matome/14155/"
+    ]
+   },
+   {
+    "name_ja": "ストレートコーヒー",
+    "name_ko": "스트레이트 커피",
+    "desc_ko": "블루마운틴·콜롬비아 등 11종의 단일 원산지 커피",
+    "price_jpy": null,
+    "source_urls": [
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://www.timeout.com/osaka/restaurants/spanola"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "unknown",
+   "methods": [],
+   "note_ko": "확인한 페이지 어디에도 예약 가능 여부나 대기·줄서기 정보가 없음. 전화번호 06-6347-1177은 확인되지만 예약을 받는지는 확인하지 못함. 좌석 26석(Walkerplus 기재).",
+   "source_urls": [
+    "https://www.walkerplus.com/article/205212/",
+    "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola"
+   ]
+  },
+  "note": "타베로그 매장 페이지(https://tabelog.com/osaka/A2701/A270101/27010558/)와 co-trip 기사는 403 오류로 열지 못함. 몽블랑 토스트 520엔은 Walkerplus 기사 기준이며 게재 시점이 오래됐을 수 있어 지금 가격과 다를 수 있음(세금 포함 여부도 표기 없음). 비엔나 커피 650엔(세금 포함)은 Time Out 일본어판 기준. 스트레이트 커피 가격은 확인 못 함(Walkerplus에는 커피 '400엔~'으로만 나옴). 영업시간은 출처마다 다름(Walkerplus: 7:30~20:15, 일·공휴일 11:00~18:00 / 다른 가이드: 평일 7:30~19:00). 예약 정보는 찾지 못함."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "モンブラントースト",
+    "name_ko": "몽블랑 토스트",
+    "desc_ko": "두툼한 버터 토스트에 밤 크림을 듬뿍 올린 가게의 명물.",
+    "price_jpy": 700,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270101/27010558/dtlmenu/",
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://we-love-osaka.jp/umeda_jyunkissa/"
+    ]
+   },
+   {
+    "name_ja": "ウインナ・コーヒー(Hot or Ice)",
+    "name_ko": "비엔나커피",
+    "desc_ko": "수제 휘핑크림을 듬뿍 올린 커피로, 따뜻하게 또는 차갑게 주문할 수 있다.",
+    "price_jpy": 750,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270101/27010558/dtlmenu/drink/",
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://we-love-osaka.jp/umeda_jyunkissa/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "not_accepted",
+   "methods": [],
+   "note_ko": "타베로그에 예약 불가로 명시되어 있다. 4명 이상 방문하면 나누어 앉도록 안내할 수 있다고 기재되어 있다.",
+   "source_urls": [
+    "https://tabelog.com/osaka/A2701/A270101/27010558/"
+   ]
+  },
+  "note": "여러 페이지에서 반복 소개된 대표 메뉴 2개만 수록했다. 정확한 판매량·인기 순위는 확인되지 않았다. 가격은 2026년 9월 15일 갱신된 타베로그 메뉴의 세금 포함 금액이다. 등록된 공식 홈페이지는 열리지 않아 내용을 확인하지 못했다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "モンブラントースト",
+    "name_ko": "몽블랑 토스트",
+    "desc_ko": "두툼하게 구운 버터 토스트(식빵) 위에 마롱(밤) 크림을 듬뿍 올린 이 가게 명물",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 0,
+    "source_urls": [
+     "https://www.walkerplus.com/article/205212/",
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://www.timeout.com/osaka/restaurants/spanola",
+     "https://tabelog.com/osaka/A2701/A270101/27010558/dtlmenu/",
+     "https://we-love-osaka.jp/umeda_jyunkissa/"
+    ]
+   },
+   {
+    "name_ja": "ウインナ・コーヒー(Hot or Ice)",
+    "name_ko": "비엔나 커피",
+    "desc_ko": "수제 휘핑크림을 듬뿍 올린 커피로, 따뜻하게 또는 차갑게 주문할 수 있다.",
+    "price_jpy": null,
+    "a_index": 1,
+    "b_index": 1,
+    "source_urls": [
+     "https://www.timeout.jp/osaka/ja/レストラン/cafe-spanola",
+     "https://www.timeout.com/osaka/restaurants/spanola",
+     "https://tabelog.com/matome/14155/",
+     "https://tabelog.com/osaka/A2701/A270101/27010558/dtlmenu/drink/",
+     "https://we-love-osaka.jp/umeda_jyunkissa/"
+    ]
+   }
+  ],
+  "reservation_status": "unknown",
+  "reservation_agree": false,
+  "methods": [],
+  "reservation_note_ko": "",
+  "disagreements_ko": "가격: 몽블랑 토스트는 A 520엔(Walkerplus, 오래된 기사일 수 있음), B 700엔(2026-09-15 갱신된 타베로그, 세금 포함). 비엔나 커피는 A 650엔(Time Out, 세금 포함), B 750엔(타베로그, 세금 포함). 예약: A는 예약 정보를 찾지 못해 unknown(타베로그 403 오류로 열지 못함), B는 타베로그에 예약 불가로 명시돼 있고 4명 이상이면 나누어 앉을 수 있다고 함(not_accepted). 메뉴 구성: A에만 스트레이트 커피(11종, 가격 확인 못 함)가 있음."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(입구와 간판)"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "패티와 양상추를 넣은 토스트 샌드위치"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "로고가 찍힌 컵에 담긴 블랙 핫커피 두 잔"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "버터 토스트와 샐러드(모닝 세트)"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": 0,
+    "what_ko": "마롱 크림을 듬뿍 올린 몽블랑 토스트와 블랙 커피"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "모닝 서비스 메뉴판"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(벽돌 벽 간판과 메뉴 보드)"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "휘핑크림 없는 아이스커피"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 입구와 모닝 서비스 안내판"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "계란·토마토 샌드위치와 아이스 카페오레"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "벽돌 벽과 출입문이 보이는 가게 외관"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "고기 패티와 채소가 들어간 토스트 샌드위치"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "휘핑크림 없는 따뜻한 블랙커피 두 잔"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "버터 토스트와 채소 샐러드"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": 0,
+    "what_ko": "밤 크림을 듬뿍 올린 몽블랑 토스트와 블랙커피"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "모닝 세트 안내 메뉴판"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 입구와 입간판 메뉴판"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "휘핑크림 없는 아이스 블랙커피"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관과 모닝 서비스 안내판"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "달걀·토마토·양상추 샌드위치와 밝은 갈색의 아이스 음료"
+   }
+  ]
+ }
+}

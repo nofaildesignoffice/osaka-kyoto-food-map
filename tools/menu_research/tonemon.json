@@ -1,0 +1,422 @@
+{
+ "id": "tonemon",
+ "google": {
+  "id": "ChIJRXiQ2JcJAWARlypCklgnL3Y",
+  "location": {
+   "latitude": 34.9984709,
+   "longitude": 135.7708535
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=8516068681745312407&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "https://tabelog.com/kyoto/A2601/A260201/26039226/",
+  "displayName": {
+   "text": "宮川豚衛門",
+   "languageCode": "ja"
+  },
+  "reservable": true,
+  "photos": [
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLfFYSE1jm0k9fD-mjjsvcw4rpkSs4IRzKqvpQaO7SpBwGagAk_fc6LUpIxrZvC5frQAUqVX7PK_AZ2MKCTbKCpuCR3MzRO8_tT2sXQ_jUKSiTAkg16GjqWyghOzEcN73bxHQ9uYF7KPLb_DLOsdFsJpSea0eHkXyuK7yNvN61rZithQoM5sZ6ubeLFssW6erCzDiB9ahtka7BD6MG7Zez-ZFhOHHWPP-JM9uuxeS5_ATpfY-f-c9nbOb9dcdviw9hnDaa-KPqNfrJij222giaiEeQ_ojyBgexhSNAmao5sQSG4Qm8BYRSZloBtXtlL5RqQcoBV5x0Hj6x2D7g47AG91WDdEinp6v8SZxQvUc3enh8_1HulQLUa0WgD8vDdcAL-uVwlnMgR8snmx8vW9w8AOp-YNQH0cpsIOCpqM_VrCxA",
+    "widthPx": 1200,
+    "heightPx": 800,
+    "authorAttributions": [
+     {
+      "displayName": "宮川豚衛門",
+      "uri": "https://maps.google.com/maps/contrib/113628773697026180356",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWdJDPUPdBGBfRg6VTRP4cChk-_Yhrb5EjqDqEtCp90BwJZGVw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLd64HF_gwaxr0r5C5mU5ZeQJNUqlh1CEyN7kUOdPPKLWOsnryj8SdydevIAX3GfnBIdOfcGGNtHFkMyWfg2I1DVenltWuOJFjlq4ObD8x7yLl6ZUGXcP0gOlO5MsLAjgPFPJP_O75wZKNs2c4kmOx992EWSitW6mIG2dJS_TbKn5w5DdeJZeUMBwQcjw5jAKWfLtuG5hrEivSNyaGVb8uXDbCU-NyMfDWoOvqMzCWRUy70CPouxxEIi9rZZ7qhUkKczkkpUKOlpS0HKKe0BPKjcYXA4vy22NLfE5y_jN92-jX-IYjnflXXDmLn7c2nsmfT93ZSb5OhduHH8HmVDMDeBX1viIZ51rA4L3LSvo6SfEhK0FQPmZ3zkC1PY-fsPZAoEYHMfadRDWw_d_tG86o9fQ11hwwPN12nPLAHo53qVzw",
+    "widthPx": 4800,
+    "heightPx": 3200,
+    "authorAttributions": [
+     {
+      "displayName": "宮川豚衛門",
+      "uri": "https://maps.google.com/maps/contrib/113628773697026180356",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWdJDPUPdBGBfRg6VTRP4cChk-_Yhrb5EjqDqEtCp90BwJZGVw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLdsn9si_xkVoLRll2bpt5dwv3CSNy_31cf6hZT0JRKzKcY1kKygpwhSweKDosbnoAWXrzztpB4aE8iQWmn5o9MeOiW3WfmIY5GKbT6zDswA4LMaFK8hzI4vSaWjm7X2TSigj9qem0fbEwdt7b1Y3z3l4WfuOd6of7NeE6cCgvdyEZPWcmPQ7f3KmH4mSFIGFIe9utyskUR2KwsxHfYT8LkYKRdRsdMO2Py77lyNIGWMi55jHQv9nC5MVRb5kwOP5c-NRb8i9Muo4YUNZCpYAOqlt1ZpxaCIm7FdN2cfKeOJtjLA5i3YgCSdEmorKABzAuIsgWSbUIskF47oiE03Zwz0rnqSNh46AlweWa929weLxLzAgewGgWbhoAW1fSCc7DWNB7hOt4AqQnzZvqwecl2AQfoQfwSw0JgQXrdDYlJT8g",
+    "widthPx": 1000,
+    "heightPx": 1000,
+    "authorAttributions": [
+     {
+      "displayName": "宮川豚衛門",
+      "uri": "https://maps.google.com/maps/contrib/113628773697026180356",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWdJDPUPdBGBfRg6VTRP4cChk-_Yhrb5EjqDqEtCp90BwJZGVw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLc3-MX5qAOke_M4Hr-QQonO8xEwpksFQj_4YLI9uhfvYsgsANeagjqyKpgwbFVDt1EpmLM5yAKgeL97KONIFDDlhsL6-LCFaehzd-BxHgSi9QvjctQV9C-wT1GfKcdKo2zaz_4GZGdq4L0e002JIR_d7jKjfCGk-SPf2imsT_2ldcIDa4nkw6JtjMO_B4Ww0qzwvcTkMwNuA6VJ_gszg-zvrP37Eu2HWFqrhgiPCIjFVaaAyyArCJi-r0VEbfMVWXMC-5h1VDkFT2eSKhasT4OMXElfPg3inhOA77WbJQZcjnyRKRsAbaCpqt_O7ZwINOzJsLVYscCY58dScT9PbXLwiQDU3wpf-j4MYW9RMm9cTa0CNLIlHspv7ojks3-RUCl4RCbqkDMxq9mx5v4UqP5LhU0LgHnmKxl8UlOxey1AAw",
+    "widthPx": 4800,
+    "heightPx": 3600,
+    "authorAttributions": [
+     {
+      "displayName": "周月茹",
+      "uri": "https://maps.google.com/maps/contrib/101875404957302419221",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLNSEgmcqX9rrBG3cLCieVi7JKDwmRMKG5c1UjDLQaJezvidg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLcbFW7iuZ-5_YtEpDMeQYkO0OfnN9VYHMMbFS1yXxDTfYurWSetH0jKyvk-TawCRicTEwyHMZgDP8iDX4LrQfPzKQgwC4s6BGAdyNAf9dog6XiY8cz4gkwlCaScS7VnhbMBUzEF8keaLW1Qswo-WrkCi1Ln_F76qbvP5oUe7HMHGkge0eogG9j7a9bF19Z5WBZgOzgW3FL8lzrnQOrV6vQhOdnt1AEsw_jwhtMN7TyX_m539ulRCAXcUI-uxfrL46-vIRDPZTmoASpI5JYLI1s2n6tJyt1QiU9kS-qHFc1xRCyutWWLRGW7pB9JdtjTZUWRfcXDZa9YsbNATuavTRiHGlIkjxEqwZfOAac0gqZg8EREGZWS1XdGvGZWhc_Uj4jbYMHWh0VLEdORD6cTpVcd_IpAxcG4AhyZscQSPE82",
+    "widthPx": 2000,
+    "heightPx": 1500,
+    "authorAttributions": [
+     {
+      "displayName": "Chen小彤",
+      "uri": "https://maps.google.com/maps/contrib/104816457135783458409",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJwBZn9TEW4lIG56dE_A-yghPnUKryMlD27FU-4ZEv5axGhuhA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLcxb0eGlS4VVrH5Wvq2YwT8ztENL0nPefJeae-Iv26t77wnl78vE2nWMv6rTRK-oCTqtCDf40YR4rRqYWjUBnXhevm2LNpzRzP3JiFXEEBq6hw-CMXjCP4WO6skM4JzgLzIUvA-FESv7Mtd84otKrLvf3LNFuFo1iqyMiD7GK1NcVtg_Cw4N36kqrqRKfqSG25cM-aiUy-f4k5st_gKNfFvk0rXO041P4ep03_CiZe8O8zgw-NVVzIgOfjkpW-4BoFrLaArlZxZ7m7hi1qQVu1g7JVEaBUqsLPmNgJPf5bRhxaJIMsY2uwzjbQZJaQauio-JSUMzqzqvLO0_9JAz5a3lvbskyvhPUCFBMAxqmRNx7GcU3Yyy68LgVHlN72FP6rLzzttFl66Fxbko6y38Rq8_8i_ziVuCmiWILwsxkaX9A",
+    "widthPx": 4800,
+    "heightPx": 3600,
+    "authorAttributions": [
+     {
+      "displayName": "정근호",
+      "uri": "https://maps.google.com/maps/contrib/104608516780278368365",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKI9CCZSI5v7tPyWaTzYNUcCWFgRmHXvLkPPhL9v3-J6L2y2w=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLfWrFOfWNdtEK8M8qdW3vnpuvSCKxTeYkLboTOec_IWkvd5pVzVNRgSCAE11Zw_8dKd0PFKUIiGkYfWG0LhrwuIVXnHy-wp0gJ9E22LA6b80YYmrl8EQ8y19akbMcHh4vcvdB2ltGowsMVNEHD8DQIluJ8_xFzV4rRaeioZYjBHcqB_E0gs_lHip5GBqN8yT30eVui3r3dQoUW_sSceKzaRTNzIJkKAdNdtKmUoOW8TaR7qnbzfs-J3MTd0o4gN1w9Ge2oYIoIR_xnwjWeLD2WJsENaH2oCM4drtwnGLz51e_W3zhlN8qvhhl-gje0iBKmA_V3QhxNpE-QOdW35luSe7FBJ-15Q6V-vA299VWB_5WUT_lvPNbz0vEmxuRXcpadTyemUiRAbmFZ3VrSghb1W10MMPxQyg0Aux98Kf3vNMQ",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "シュシュ",
+      "uri": "https://maps.google.com/maps/contrib/117671871610509393412",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXkxhCM_ImLkepYwyGRxxO5eDVnfkA-O0wdf60RTf92W4ZgWg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLf6JEowb2gTDtzWjbd88xFoa6U-vdH9bMiCQjy4VQle3lHE62PLI00QryGslEVDIV7hew0suxI5MdaO79-9c5u4nAP5ungN6h4aHthG6wSFwsk4m-iZxwbUQ4spAZxPQpu-JJ5LRlHQEZDV1fpInAt2-FUXaSDRXdr7wE1uoFiiQzObLi4ATTCW43s5MyDGTt1LhQtaW6D7sfLxkFMO7H2qc15aa1DH61JxMmIfUNe_V9LgyI-BjTFOpzmNWpzHTysY7-KZe7ztXKNlxE7db5rzt7ddHcz8SMdzD2ejNhbFO2LtW3MtUTjxJEqGUFxhTa5dpRhAsXw3zo8-l6-8ZFGqDSKoo3VKHBTkuA-b4vlcTA2c-SSBnQ_n4jZe0mimxGfYZvRKAUWczr2E9f7h46SMUvcoY3UjzmY9Z3fg5BC7Dg",
+    "widthPx": 1200,
+    "heightPx": 800,
+    "authorAttributions": [
+     {
+      "displayName": "宮川豚衛門",
+      "uri": "https://maps.google.com/maps/contrib/113628773697026180356",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWdJDPUPdBGBfRg6VTRP4cChk-_Yhrb5EjqDqEtCp90BwJZGVw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLcxhYLeYTSgAyNDdeGVXyek6jYcwTWW8GBOu7Jc7lJtwp0FiYzsOl38x4fiDYPemxfg0h1i5zrtR-NGcHenBZXxfAlwUPow4MFTL1S7kA8dZU84KQnrTSA8oZ4gz3BrENGIrtB5EuinuI0oZ0iUVuz6u71kGWqN_-sL8tKm7PkPbfiUjNTzROUdqrU7XVmNf53MuxnJIW5sUpUS8zaUXLYrJlr1zEOShny-VaLvwrWgw1xj9D8cnFMGUWMaFCfmk3tKe755sj2LVtyQb1_GIjNmT2qwWJlRDLZkE467oHY_6JYA37B2Wbft-Ek9jgHSvsPApQkMVG_9qvwBwGLelxYdbVmKs796Juh2z4dHwdPNbdGBnCtQSIQNCoh9x3P7ltfK_o9gKdcRWBBl6JJXsD8icuoATtPzkBBr279P87oBXw",
+    "widthPx": 3024,
+    "heightPx": 4032,
+    "authorAttributions": [
+     {
+      "displayName": "sandy huang",
+      "uri": "https://maps.google.com/maps/contrib/117375641848299280627",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLm5wx9qTQAWydAMicCdikzBS1EPnAeZUasxohu9kqBQ85JSA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJRXiQ2JcJAWARlypCklgnL3Y/photos/AV-0GLdONhGj-hjXqCkGxGj2xhu7NrR6WF-2NkYz8vTsC4SDxzpwoeuZwzjeERnP28pXV8iIbGlsMnzio-bWd0mygSmZog8khGS88HR7sSXwG_8fZh6mk6QhA2A69UnHh0lxymD0Y8Ghj0-01jeu-XRtYQOjKrWgosuFQY_ns4B873q6S0olBUJQnTYDB5Fh8IUcKUZnThxk1__Y8m9YjG3lswyy_be5KX51yr--0ppNhg6H0XKFg2ZaqnnaWBlu36j-vpQQh-qNbSdd0bRAqWDhHRNMzzuMbY1Q-dMetf7nnWdKmzDPs1fDptgbu_0_ZtWLa5ASV12XB0-R3tlSW-cKee0cKEecYrbK0Bfd0RJCVUbvoW0mh4SvBXtyCACtGRLAp5yNwjzHC640hLFGGGn5tq3o4iPXketFY9e-PXYQXAW-vQ",
+    "widthPx": 527,
+    "heightPx": 491,
+    "authorAttributions": [
+     {
+      "displayName": "宮川豚衛門",
+      "uri": "https://maps.google.com/maps/contrib/113628773697026180356",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWdJDPUPdBGBfRg6VTRP4cChk-_Yhrb5EjqDqEtCp90BwJZGVw=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "林SPFポーク ロース（とんかつ定食）",
+    "name_ko": "하야시 SPF 포크 로스카츠 정식",
+    "desc_ko": "브랜드 돼지 '하야시 SPF 포크' 등심(150g/180g) 돈카츠 정식. 밥·돼지고기 된장국(돈지루)·양배추가 나오고, 7가지 양념과 무화과 소스를 곁들여 먹음",
+    "price_jpy": 2500,
+    "source_urls": [
+     "https://www.life-info.co.jp/miyagawatonemon/",
+     "https://kyoto-hannarism.com/miyagawaton-emon-yoyaku/",
+     "https://tabelog.com/en/kyoto/A2601/A260201/26039226/",
+     "https://www.tablecheck.com/ja/miyagawatonemon"
+    ]
+   },
+   {
+    "name_ja": "ヘレ（ヒレかつ）",
+    "name_ko": "헤레(안심) 카츠",
+    "desc_ko": "돼지 안심 부위 돈카츠. 로스에 추가로 주문하는 옵션으로도 언급됨",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/area/PRE26/ARE112/SUB11201/100001698731/",
+     "https://kyoto-hannarism.com/miyagawaton-emon-yoyaku/"
+    ]
+   },
+   {
+    "name_ja": "とんかつ出汁茶漬け",
+    "name_ko": "돈카츠 다시 오차즈케",
+    "desc_ko": "돈카츠를 밥에 올리고 육수를 부어 먹는 오차즈케(타베로그 사진 설명에 등장)",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/en/kyoto/A2601/A260201/26039226/"
+    ]
+   },
+   {
+    "name_ja": "TOKYOメンチカツ",
+    "name_ko": "도쿄 멘치카츠",
+    "desc_ko": "저녁 단품(아라카르트) 메뉴인 다진 고기 커틀릿",
+    "price_jpy": 680,
+    "source_urls": [
+     "https://www.life-info.co.jp/miyagawatonemon/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "tablecheck",
+     "url": "https://www.tablecheck.com/ja/miyagawatonemon",
+     "note_ko": "TableCheck 온라인 예약"
+    },
+    {
+     "type": "phone",
+     "url": "tel:050-5596-6581",
+     "note_ko": "타베로그에 적힌 예약·문의 번호"
+    },
+    {
+     "type": "phone",
+     "url": "tel:080-4087-9504",
+     "note_ko": "TableCheck·타베로그·Retty에 적힌 가게 번호"
+    }
+   ],
+   "note_ko": "예약이 많아서 예약 없이 가면 기다릴 수 있음. 가게 앞에 줄 서지 말고, 도착하면 대기 명단 시스템에 등록하라고 안내함. 예약 시간 15분 넘게 늦으면 자동 취소, 당일·무단 취소 시 1인 3,000엔 취소료가 있음(타베로그). 2024년 2월 블로그에서는 연휴 낮 12시 직전에 예약 없이 바로 들어갔다고 함.",
+   "source_urls": [
+    "https://tabelog.com/en/kyoto/A2601/A260201/26039226/",
+    "https://www.tablecheck.com/ja/miyagawatonemon",
+    "https://kyoto-hannarism.com/miyagawaton-emon-yoyaku/"
+   ]
+  },
+  "note": "타베로그 일본어 페이지와 리뷰 페이지는 403으로 막혀서 영문판(tabelog.com/en)만 읽음. 영문판에도 메뉴 이름·가격 목록은 없었음. 메뉴판 가격을 직접 확인하지 못했고, 가격은 모두 2023~2024년 블로그 기준임: 하야시 SPF 로스 180g은 2023년 7월 2,400엔(세금 포함 여부 없음), 2024년 2월 2,500엔(세금 포함). 지금은 다를 수 있음. 인기 순위를 명시한 곳은 KYOTOLIFE의 '가장 인기 있는 돈카츠 정식 = 하야시 SPF 로스'뿐이고, 2~4위는 언급된 메뉴를 나열한 것이라 인기 순서로는 확인되지 않음. 현재 타베로그 영문판에 나온 돼지 브랜드는 하야시 SPF·아와유키·이와나카와 주간 특선 돼지. 2023년 리뷰에 나온 망갈리차 포크(로스 180g 3,000엔 세금 포함)와 TOKYO X는 지금도 파는지 확인하지 못해 목록에서 뺐음. 전화번호가 두 개(050-5596-6581, 080-4087-9504) 나옴. TableCheck의 2,500엔/3,500엔이 런치/디너 예산인지는 페이지에 적혀 있지 않음. 구글 리뷰 본문은 읽지 못함."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "林 SPF ポーク ロース 150ｇ",
+    "name_ko": "하야시 SPF 포크 등심 150g",
+    "desc_ko": "지바현산 하야시 SPF 돼지고기 등심 돈카츠. 가격은 점심 기준.",
+    "price_jpy": 2700,
+    "source_urls": [
+     "https://tabelog.com/kyoto/A2601/A260201/26039226/dtlmenu/lunch/",
+     "https://ameblo.jp/sorakaranotayori78/entry-12864063622.html",
+     "https://osumituki.com/foodie/188005.html"
+    ]
+   },
+   {
+    "name_ja": "林 SPF ポーク ヘレ 120ｇ",
+    "name_ko": "하야시 SPF 포크 안심 120g",
+    "desc_ko": "지방이 적고 부드러운 하야시 SPF 돼지고기 안심 돈카츠. 가격은 점심 기준.",
+    "price_jpy": 2600,
+    "source_urls": [
+     "https://tabelog.com/kyoto/A2601/A260201/26039226/dtlmenu/lunch/",
+     "https://tabelog.com/kyoto/A2601/A260201/26039226/",
+     "https://osumituki.com/foodie/188005.html"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "tabelog",
+     "url": "https://tabelog.com/kyoto/A2601/A260201/26039226/",
+     "note_ko": "타베로그 온라인 예약 가능."
+    },
+    {
+     "type": "tablecheck",
+     "url": "https://www.tablecheck.com/ja/miyagawatonemon",
+     "note_ko": "날짜·인원·시간을 선택하는 예약 기능 확인."
+    },
+    {
+     "type": "phone",
+     "url": "tel:05055966581",
+     "note_ko": "타베로그에 기재된 예약·문의 전화."
+    }
+   ],
+   "note_ko": "가게에서 원활한 입장을 위해 사전 예약을 권장합니다. 예약 없이 방문해 대기하는 경우 직원 안내에 따라 순번 대기 시스템에 등록하고, 매장 앞에 줄 서지 말고 주변에서 기다리도록 안내합니다.",
+   "source_urls": [
+    "https://tabelog.com/kyoto/A2601/A260201/26039226/",
+    "https://www.tablecheck.com/ja/miyagawatonemon"
+   ]
+  },
+  "note": "정확한 인기 순위는 확인되지 않아, 메뉴와 방문기에서 반복 확인된 대표 메뉴 2개만 수록했습니다. 배열 순서는 검증된 인기 순위가 아닙니다. 가격은 2026년 6월 1일 갱신된 타베로그 점심 메뉴의 세금 포함 금액이며, 저녁에는 같은 중량의 등심 3,100엔·안심 3,000엔으로 기재되어 있습니다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "林 SPF ポーク ロース 150ｇ",
+    "name_ko": "하야시 SPF 포크 등심 150g",
+    "desc_ko": "브랜드 돼지 '하야시 SPF 포크' 등심(150g/180g) 돈카츠 정식. 밥·돼지고기 된장국(돈지루)·양배추가 나오고, 7가지 양념과 무화과 소스를 곁들여 먹음",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 0,
+    "source_urls": [
+     "https://www.life-info.co.jp/miyagawatonemon/",
+     "https://kyoto-hannarism.com/miyagawaton-emon-yoyaku/",
+     "https://tabelog.com/en/kyoto/A2601/A260201/26039226/",
+     "https://www.tablecheck.com/ja/miyagawatonemon",
+     "https://tabelog.com/kyoto/A2601/A260201/26039226/dtlmenu/lunch/",
+     "https://ameblo.jp/sorakaranotayori78/entry-12864063622.html",
+     "https://osumituki.com/foodie/188005.html"
+    ]
+   },
+   {
+    "name_ja": "林 SPF ポーク ヘレ 120ｇ",
+    "name_ko": "하야시 SPF 포크 안심 120g",
+    "desc_ko": "지방이 적고 부드러운 하야시 SPF 돼지고기 안심 돈카츠. 가격은 점심 기준.",
+    "price_jpy": null,
+    "a_index": 1,
+    "b_index": 1,
+    "source_urls": [
+     "https://retty.me/area/PRE26/ARE112/SUB11201/100001698731/",
+     "https://kyoto-hannarism.com/miyagawaton-emon-yoyaku/",
+     "https://tabelog.com/kyoto/A2601/A260201/26039226/dtlmenu/lunch/",
+     "https://tabelog.com/kyoto/A2601/A260201/26039226/",
+     "https://osumituki.com/foodie/188005.html"
+    ]
+   }
+  ],
+  "reservation_status": "recommended",
+  "reservation_agree": true,
+  "methods": [
+   {
+    "type": "tablecheck",
+    "url": "https://www.tablecheck.com/ja/miyagawatonemon",
+    "note_ko": "TableCheck 온라인 예약 (날짜·인원·시간 선택)"
+   },
+   {
+    "type": "phone",
+    "url": "tel:050-5596-6581",
+    "note_ko": "타베로그에 기재된 예약·문의 전화"
+   }
+  ],
+  "reservation_note_ko": "예약 권장. 예약 없이 가면 대기할 수 있으며, 가게 앞에 줄 서지 말고 순번 대기 시스템에 등록하라고 안내함.",
+  "disagreements_ko": "가격: 로스는 A가 2,500엔(2024년 블로그, 180g 기준), B가 2,700엔(2026년 6월 타베로그 점심, 150g 기준). 헤레는 A에 가격이 없고 B는 2,600엔(점심). B는 저녁에 로스 3,100엔·헤레 3,000엔이라고 함. 메뉴: 돈카츠 다시 오차즈케·도쿄 멘치카츠(680엔)는 A에만 있음. 예약 방법: 타베로그 온라인 예약은 B에만, 두 번째 전화번호(080-4087-9504)는 A에만 있음. A에만 있는 내용: 15분 넘게 늦으면 자동 취소, 1인 3,000엔 취소료, 2024년 2월에 예약 없이 바로 들어갔다는 블로그 후기."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "카운터석과 테이블석이 있는 가게 실내"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "밥 위에 돈카츠 한 조각과 와사비를 얹고 차를 붓는 오차즈케"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "한입 크기 카츠(히레카츠 조각으로 추정)와 양배추·밥·돈지루 정식, 어느 메뉴인지 애매함"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": 1,
+    "what_ko": "둥글고 두툼하게 썬 안심(헤레) 돈카츠와 양념 접시·양배추·밥·된장국 정식"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "작은 아이스크림 한 스쿱과 차 한 잔"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "오픈 주방과 카운터석, 조리 중인 직원들"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "등심·립로스·안심 부위를 소개하는 메뉴판"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "'宮川豚衛門' 목제 간판"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "OPEN 팻말이 걸린 가게 입구와 입간판 메뉴"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "그릇에 담긴 크로켓 3개"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "카운터석과 테이블석이 있는 가게 내부"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "밥 위에 돈카츠와 와사비를 올리고 국물을 붓는 모습"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "작은 튀김 여러 개와 양배추, 밥, 된장국으로 구성된 정식"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": 1,
+    "what_ko": "둥글고 두툼한 안심 돈카츠 네 조각과 양배추, 밥, 된장국 정식"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "작은 접시의 흰색 디저트와 찻잔"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "오픈 주방에서 조리하는 직원들과 카운터석"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "등심·리브로스·안심 부위를 사진과 함께 소개하는 메뉴판"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "宮川豚衛門 상호가 적힌 나무 간판"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "영업 중 표지와 메뉴 안내판이 놓인 가게 출입문"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "무늬 접시의 철망 위에 올린 타원형 튀김 세 개"
+   }
+  ]
+ }
+}

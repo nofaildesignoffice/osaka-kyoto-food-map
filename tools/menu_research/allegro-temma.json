@@ -1,0 +1,386 @@
+{
+ "id": "allegro-temma",
+ "google": {
+  "id": "ChIJqb7pzsXmAGARUaDuDJi4_Ac",
+  "location": {
+   "latitude": 34.7025697,
+   "longitude": 135.51381469999998
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=575537815588085841&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "http://www.restaurant-bank.jp/",
+  "displayName": {
+   "text": "大衆イタリア食堂 アレグロ天満店",
+   "languageCode": "ja"
+  },
+  "reservable": true,
+  "photos": [
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLeGLNXZfPc-EQcU_493Y5jN8vh8VYyDjleR4P9QZNpck5hTcP7cT2NKAEHKKEnfcJhgx0dyvaxxJgef0Wa_lv0l5XMZ9ULL9AshwiUMvDZpNq2OEqqo8zbLAWYYNxGRLPE8-i94bmXc5h9nmrU6s6szQjHzqITfalOFUirJdt3vFrdOXrWWMwYkAs09mUA52GfXUGrLGw_JG442H_70jFW9FF4d1sJaEbnIzjteWF156VMQA9f6HigRR3-STBlCRcbv_uQwde91rbLqOwsqNnRmoFwQ49A7luYc91-t0aNcQffI2UM89vqohKbooMIbQJHfMnd80ZEB5OgrzGeoxE4nANslg5Wp_2LOpMBRNpyd8kL6Rqv9Z1XW23l--VKnk4updUpz7ieNdmgh_TK9rNTs1so",
+    "widthPx": 480,
+    "heightPx": 640,
+    "authorAttributions": [
+     {
+      "displayName": "kazuchi",
+      "uri": "https://maps.google.com/maps/contrib/106385425138325619110",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUv0YcG0OfP270HMBbnMMBt-8cK4jlmjskgCuUOWMTg-xPBtBW_NA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLcMu-jZizW_YRoDcpHU0PgMtFg2rTetVQJeq0E9dcHhgkf9bkFEVnDj-8yg6KsOSxeA4wnKXgufxRxOCYVKPZ218ZJPeXmnqXMQ9W-QNb4uThwY9NCiUbiAft7O6ReJFMAg9-k98D2laKmw2I3WKZAnBrv60fm0PBKXZk4CziHSiOtqla7M3SjgygKjgr1QdujKoKLAtYyeasKSY9uJjbqP8M67Ke1X-LNiDeVMtPmteB5DiwAmALF6aDG7yh-i9GPb6SFdMD72P07tHj7i4_8PFCRUj8x1z97HMARq48T2dwCL1MymEMykQvzH_5ZM_lV8ZybnlYpHRY3UgCtNI2NCOw_ZxDMlUc0uwtDaOCMheJffnJOJqZ_-4C-afpfuswbLAXTgs0fTs0k_b4hjC9AbbZU_ZJg",
+    "widthPx": 2738,
+    "heightPx": 1825,
+    "authorAttributions": [
+     {
+      "displayName": "大衆イタリア食堂 アレグロ天満店",
+      "uri": "https://maps.google.com/maps/contrib/104321348432168722040",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWYHiawX_LFfJPLaFxy3m34bZgNxCZ0WBUB6dyvFDO8pcW_OMM=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLe6ZEMiyqelMcjTyMU9vYo3C4w5UBrhk7fcKS9I-ksh65EXhTKrmfA26tJSu4HuwM9DWKWg21an0YFO_viT37ybNcOuaSe-euOHL61gEbtpCsFG7CEbxbx9JF5m-8ls3kOmSzz8yu91heHjfF7i6xYJ-a73jmEARsGqXB6iuEcB8eqGJjFAlxtYpcsl6knM8PxYPnVwbbq6vsB4D1ugrA3zNwsyYR415t8aTiA67yx4l5oheeiE9_RKf5FTO6bdb2errPNmckWhyqQfLOPiafjsBEmEVT7EQefrBCmDXUMHybwqfNEWBZKrxlhyuflMv_kQaJDJxkWZvY4iZ6cG961optj538ZUevlBnB3MuvwnxvZknbDKLPGl74yqmnwgN0o8gSek843SXTIBoXQL2vXTjfzGxAz9MGh4YZ5F1nsA",
+    "widthPx": 4000,
+    "heightPx": 2252,
+    "authorAttributions": [
+     {
+      "displayName": "D",
+      "uri": "https://maps.google.com/maps/contrib/111413487529446353166",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVwjcPy-tsz3XOJRo3_xHJ9ikQqfMex1pE0HpIhuZsXZAm9i26-=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLdGchbDQjl7bhByrZPXdLxxVRyRmfrJsUDOq_nQCyoQxyozQH28ypLxuGU8oT9HPgSPKxGCe4N4fB0Gn37fJAcP9US9qjRD8IFOPkieuF5H6NvoPDk2ulLAznB8VsVQHOZIZ1OkVPM0_vUsMW4uIV3zWhQitLlIU_j9OrlZU_NUDuOqwUP3oiAMtJFA_oIpBrGnpVbebnALBOuLDpj8AtZF5Td6q8t4HTVKq9HEPvscJo4qGrql_HMDieysJkF2pW5vjVRClYake70Nrfm_zG6OJkj2iZek9nL21J5KPg5KKI39S1lfCGqyTeSU97RX005LGJtRdDSQ35s8fnjrMmvOdR2JhhqmMx_TGjF0BZs3oPhz4wRInvnS9hwdWC5aMsGQbTcNltOHhi43ugsLak_fQq5dFDh2W4q19tNwALgwEg",
+    "widthPx": 4800,
+    "heightPx": 3599,
+    "authorAttributions": [
+     {
+      "displayName": "椚座泰行",
+      "uri": "https://maps.google.com/maps/contrib/108923321429399966525",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKfEaig-KZ3glu3Q2arr6-GBPRX_jiCy_9g3pGJ0loBlixrow=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLfshRB1_JypMI_P7MH9KY356aZLdKlCX_SnivjrasWWGvMh4BwocxFlQ4Y2sn4avYWDHJk7PjX0SjIz8MJvPPImjq1VELD54XJrHIJBO9YQo8rGmUmwymRHDN2Sx25LqZXQm4hGQj71XOI9hfsOqRpcYDwQcMX67y8bnQ2NAwnLFB2eRz-Cvxn66zQUvFKcJvUGKvKolcN_QLLzFs2xMvzu9dJfUwm6lFG1usPKSkK8KD3K59NyyO2cVOIebXwlmzg1lBHgbFhEdnTp3xoh6-HTdEsrbaf1769NpuQ4DFx841tQrNJwUzrZg9-I-6MH3gzjEkNO4fURH4wfJ48XUumo7uwOqmjR0tk3cmIvVptNz3I5MvJ5AB_jbS9VqDyZJzGNJOEzOejxeZSeWtExNwGbaxLYVpfYL9O0PZf5JShkdA",
+    "widthPx": 4000,
+    "heightPx": 2252,
+    "authorAttributions": [
+     {
+      "displayName": "D",
+      "uri": "https://maps.google.com/maps/contrib/111413487529446353166",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVwjcPy-tsz3XOJRo3_xHJ9ikQqfMex1pE0HpIhuZsXZAm9i26-=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLd9MOqlyhT3ZDT8WiLd5zpV-Je6Ga1XYxadsmB4a0ufj4E3UPuZPaeGNCIWtWOC0fiTp1tEOFkf2-vZCXxKJqe35RoECWjlKwabMIKKbmTn0iPe9Wc9_WVwA7kwWwuzNKv_MB2oweQb-F22IKUK76YI4NmxHlPDpphaPx06Wkn2QjhkKrV2GJwQ7sdaH67NE45KTglgbBBOKepNRfDFc7Cn-fXIPRuBYB0uEhdFG1VcUvHz7ljvYKhs9ava2EXCTL-xTMB14A_8junP6mV9RxoUV5pH8tuURGia71PzQXpR84Vcm3z7uXGx7zsvCtuk3lJSj3W1mMj3YFJDonMxyLtdPpJ19RrHE_WtyUbiMKgwJUo4fFRsgRxNgF805E84YBvq0xJW8XeRgw3nhwYujqjxg0I1HbLP-Cys-CuR_za7TQ",
+    "widthPx": 2880,
+    "heightPx": 2160,
+    "authorAttributions": [
+     {
+      "displayName": "ayaka",
+      "uri": "https://maps.google.com/maps/contrib/101505564960940197669",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUvD8dsID7QY_SiLhH-k60mDVBo9SNu0rZqtAJrp79_MPJxzqkn=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLcf8OEvrYnnZ1VXDJzNrVbBWiH3b8ig4Es_Tu6X2oRX8-mO8AymQC6FCLxIBFPg1AD_cBZLCduCc52Qxok6XOTjzH5f_qkOGKv2maBXgJBFR9kKbb9mBzZp-alAbGyfPcIA7TgfeVTaiH5rpK-F0YtpQaIgN6WngBKoO1z5Hr8m_n1UEPn1xop3lFmm91-fV01Jut6hFn7tZzzkv8FGgWC0BK-I09rSDN6YvCBE2YcWd1YSDuhYvvVwMATsJ10eTnim6c5JFM6QfIHoKKY9D-0GkPpXtOqkmEdbehFLF1FuYeKEZ96VwTnB_gMgTGySXInWKAds5bpNZrmfTBJeXj6l-2Ca49sJfBQeEstondl9RWUxBTVoQoQYqnolWfHuOjqvDdfHgwrQ3yMoJzYlZI_cpb4LvWzU5pGvvQLcFQmsFQ",
+    "widthPx": 2160,
+    "heightPx": 2449,
+    "authorAttributions": [
+     {
+      "displayName": "ayaka",
+      "uri": "https://maps.google.com/maps/contrib/101505564960940197669",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUvD8dsID7QY_SiLhH-k60mDVBo9SNu0rZqtAJrp79_MPJxzqkn=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLcW3lWznniqe-wGCGAt7CBbV3ol-sOhW0nC1NKvQH6CrAWbQvfzlPd1OG0EKZkgWRaRnt_djVYVUk5uac06vX3LPzWwJWoKela5H1InzlWEmbuYUixS08EeqLw_midmXa_hJvYza2NBVAzbvjyBCC7f0qnXMWyFyI9B4X5784NVRPspGMyeUKEuMbCT3fNGTwOul2I7XOhNIt9s0oFpDHmMfmD3wc8NLk4eTi3z9kNk_miNwZnOtKMO7uPUGo6koWLOLJtRwM2IEWYN9urs2D2vh9uoQzcF8GSzw5H1d-Ps801s8KsUc4LeUjIGsTAMB02KiHXG_pQwQ0mdMwgmxanpjfdsXeGbwsRV5AEIZ-lhQKegzPbJ2LKplZ0DJSedGLsyNzctnZ06-CGntQM5btNxygMlEzYQDMUOAMV_YwppcQ",
+    "widthPx": 4000,
+    "heightPx": 3000,
+    "authorAttributions": [
+     {
+      "displayName": "Takaharu Oka (PROSTREET)",
+      "uri": "https://maps.google.com/maps/contrib/107097702080089506729",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVMMVB-YtLgaQWz99lg1PaZFaUdLLgLD5ajDjD0TONSID-Wykqxiw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLd0xmqbCSqOaNouwZemgE_HdTq7l38gUFMhMshiFWafS_9-sWoQpt1pgTkten8By2CkGc_40OuMFV8CjGXopyOmEzauHO8aNlcz3BWShCn8hXcwKfGQLMmxy8SBi7MjUBK4LYRkNpLhF_Hx82hvt4Qn6jTQBhPZHkNr7ELpvK47lnVSRXi3bUjQFcxcGQY2WB_Zqha7xVoX89gsavJ2F2r9VgbL8OHqmGtKhUObjpcDaGMglMEYBZLlUluBZsz9Ivl0aIX3bhGwRF4ln2yjC5ZINYfLaIpCG-kAQM29QEtnNZU49Zj-LSOvUHTPfsR02TDz7Y9dOLRGDKPry2DO3VssRuneYMNsyzDFdfAqKwJB_c0NetXRkF02j1tjOxg2XSiLnCZj8BjfrAHYrCigjSRMqmBYWaM",
+    "widthPx": 3264,
+    "heightPx": 2448,
+    "authorAttributions": [
+     {
+      "displayName": "Oka Nori",
+      "uri": "https://maps.google.com/maps/contrib/110782276238537381810",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWt49wX6IWkwBJQVw9xvJZjO3BOgtjqZ2fPqCg_-TkWX9sTHWWr=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJqb7pzsXmAGARUaDuDJi4_Ac/photos/AV-0GLfkHvgrTtyzFW4EVco0FWDQgKaxdWCPg97_eF2NUrUl0xxpvqMPyEDopfce48DVNeXwUNFVo98PyvOCM4Lvf3xMXKLiU74O7Bpc95EIyvXjNrYMQyDKJCYeFGaq8wPKovL_Bm2jF2N2GQ29eJJYXiFjBfokMeR6ZpG4Mrmu1uipZiwJ1WUflGip3GTH6sWV_uarykOlqV-i_gk1eSZivjLKacI4jadZH6aoeUHRFQa25VpHiDLmqZkxC9EcxtzL8N0ynBvltoRD5CXHqrOHG1bv9OVa7NJsvNMi401fsAAiBPxgPM60C-Tx1tqCyHacuToG1p1HcTjOZ1wqRjaFDQGAYmNSuW0SWMwBvBXb8ff4CcGv7CQ2ANHs_JTEvBkWHCZ6YD259lXYtdl77jMJ0iTErZNHLMr8OzYgYxbmI7Ghuw",
+    "widthPx": 1440,
+    "heightPx": 1080,
+    "authorAttributions": [
+     {
+      "displayName": "e k",
+      "uri": "https://maps.google.com/maps/contrib/113487980009325962088",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX1DXC60Hh7EDd5lOhy8GcchPcrgFB-ZYCersn8K8xDkvMSXVxK=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "マルゲリータ",
+    "name_ko": "마르게리타",
+    "desc_ko": "석가마에 구운 나폴리 피자로, 토마토·모차렐라·바질을 올린 기본 피자. 물소 모차렐라를 쓴 '水牛マルゲリータ'가 오늘의 추천으로 나온 적도 있음",
+    "price_jpy": null,
+    "source_urls": [
+     "https://ameblo.jp/docoicoca0321/entry-12959689674.html",
+     "https://www.hotpepper.jp/strJ000717673/report/",
+     "https://gourmet-cannondale.blogspot.com/2014/07/blog-post_9600.html"
+    ]
+   },
+   {
+    "name_ja": "クワトロフォルマッジ",
+    "name_ko": "콰트로 포르마지",
+    "desc_ko": "치즈 네 가지를 올려 석가마에 구운 나폴리 피자",
+    "price_jpy": null,
+    "source_urls": [
+     "https://ameblo.jp/docoicoca0321/entry-12959689674.html",
+     "https://gourmet-cannondale.blogspot.com/2014/07/blog-post_9600.html"
+    ]
+   },
+   {
+    "name_ja": "石窯ナポリピッツァランチ",
+    "name_ko": "석가마 나폴리 피자 런치",
+    "desc_ko": "전채가 함께 나오는 나폴리 피자 런치 세트. 2015년 글에는 평일 1650엔·주말과 공휴일 1850엔(물소 모차렐라 아라비아타 기준)으로 나오지만, 지금 가격은 확인하지 못함",
+    "price_jpy": null,
+    "source_urls": [
+     "https://ameblo.jp/docoicoca0321/entry-12959689674.html",
+     "https://lastscene.com/kansai-gourmet/archives/6870"
+    ]
+   },
+   {
+    "name_ja": "パスタランチ",
+    "name_ko": "파스타 런치",
+    "desc_ko": "전채가 함께 나오는 파스타 런치 세트. 블로그에 사진이 실린 메뉴로는 '새우와 봄양배추 알리오 올리오'가 있음",
+    "price_jpy": null,
+    "source_urls": [
+     "https://ameblo.jp/docoicoca0321/entry-12959689674.html",
+     "https://www.hotpepper.jp/strJ000717673/report/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "phone",
+     "url": "tel:06-6354-8710",
+     "note_ko": "운영사(Restaurant Bank) 매장 목록에 나온 번호. 2014년 블로그 글쓴이가 며칠 전 전화로 금요일 저녁을 예약함(카운터석만 남아 있었음)"
+    }
+   ],
+   "note_ko": "2026년 3월 블로그는 '점심은 예약 필수, 이날도 만석'이라고 적었고, 2015년 블로그는 '늘 만석', 11:50에 도착해 마지막 카운터석을 겨우 잡았다고 씀. 토요일 점심은 만석이라 여러 번 포기했다는 글도 있음. 핫페퍼에는 '현재 넷 예약을 받지 않는다'고 나와 있음.",
+   "source_urls": [
+    "https://restaurant-bank.jp/restaurant/",
+    "https://ameblo.jp/docoicoca0321/entry-12959689674.html",
+    "https://lastscene.com/kansai-gourmet/archives/6870",
+    "https://gourmet-cannondale.blogspot.com/2014/07/blog-post_9600.html",
+    "https://www.hotpepper.jp/strJ000717673/"
+   ]
+  },
+  "note": "타베로그(tabelog.com/osaka/A2701/A270103/27018209/), 구루나비, AutoReserve 페이지는 접속이 차단(403/503)되어 직접 읽지 못함. 검색 결과 요약에는 타베로그 넷 예약이 '평일 디너만'이라고 나왔지만, 페이지를 직접 확인하지 못해 예약 수단에는 넣지 않음. 메뉴별 정확한 현재 가격(세금 포함)은 확인하지 못함. 핫페퍼에는 '나폴리 피자 각종 1080엔~'이라고만 있고 세금 포함 여부가 적혀 있지 않음. 인기 순위는 블로그와 리뷰에 언급된 횟수를 기준으로 정함. 매장 공식 Instagram(@allegrotenma)과 Facebook은 확인하지 않음."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "ナポリピッツァの王様 マルゲリータ DOC",
+    "name_ko": "마르게리타 DOC",
+    "desc_ko": "토마토소스, 물소 모차렐라, 생토마토, 바질을 올린 피자.",
+    "price_jpy": 2618,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270103/27018209/dtlmenu/",
+     "https://map.yahoo.co.jp/v3/place/jGahc4bf2_U/menu"
+    ]
+   },
+   {
+    "name_ja": "ナポリピッツァの定番 マルゲリータ",
+    "name_ko": "마르게리타",
+    "desc_ko": "토마토소스, 모차렐라, 바질을 올린 기본 피자이며 물소 모차렐라 변경은 2,068엔.",
+    "price_jpy": 1738,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270103/27018209/dtlmenu/",
+     "https://map.yahoo.co.jp/v3/place/jGahc4bf2_U/menu",
+     "https://www.hotpepper.jp/strJ000717673/report/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "tabelog",
+     "url": "https://tabelog.com/osaka/A2701/A270103/27018209/",
+     "note_ko": "타베로그 넷 예약은 평일만 가능."
+    },
+    {
+     "type": "phone",
+     "url": "tel:05058697270",
+     "note_ko": "예약·문의 전화. 토요일·일요일·공휴일 예약은 전화로 접수."
+    }
+   ],
+   "note_ko": "혼잡 시 런치는 1시간 30분, 디너는 2시간 이용 제한. 예약 가능은 확인했으나 예약 없이 원활히 입장할 수 있는지는 확인하지 못함.",
+   "source_urls": [
+    "https://tabelog.com/osaka/A2701/A270103/27018209/"
+   ]
+  },
+  "note": "주소가 일치하는 텐마점 자료만 사용했다. 정확한 인기 순위는 확인되지 않아 메뉴판의 대표 표현과 이용자 반복 언급이 확인된 2개만 수록했으며, 배열 순서는 판매량 순위가 아니다. 가격은 2026년 3월 16일 갱신된 타베로그 메뉴의 세금 포함 표시 기준이다. 등록된 공식 홈페이지는 열리지 않아 내용을 확인하지 못했다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "ナポリピッツァの定番 マルゲリータ",
+    "name_ko": "마르게리타",
+    "desc_ko": "토마토소스, 모차렐라, 바질을 올린 기본 피자이며 물소 모차렐라 변경은 2,068엔.",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 1,
+    "source_urls": [
+     "https://ameblo.jp/docoicoca0321/entry-12959689674.html",
+     "https://www.hotpepper.jp/strJ000717673/report/",
+     "https://gourmet-cannondale.blogspot.com/2014/07/blog-post_9600.html",
+     "https://tabelog.com/osaka/A2701/A270103/27018209/dtlmenu/",
+     "https://map.yahoo.co.jp/v3/place/jGahc4bf2_U/menu"
+    ]
+   }
+  ],
+  "reservation_status": "unknown",
+  "reservation_agree": false,
+  "methods": [
+   {
+    "type": "phone",
+    "url": "tel:05058697270",
+    "note_ko": "전화 예약 가능. 토·일·공휴일 예약은 전화로 받음(B). A가 찾은 번호(06-6354-8710)와 다름."
+   }
+  ],
+  "reservation_note_ko": "전화로 예약할 수 있음.",
+  "disagreements_ko": "예약: A는 '권장'(블로그에 점심 예약 필수·늘 만석이라는 글이 있음), B는 '예약 가능'으로만 보고 예약 없이 들어갈 수 있는지는 확인하지 못함. 넷 예약: B는 타베로그 넷 예약(평일만)을 예약 수단으로 넣었으나, A는 타베로그 페이지가 막혀 확인하지 못해 넣지 않았음. A의 검색 요약에는 '평일 디너만'으로 나와 범위도 다름. A는 핫페퍼에 '현재 넷 예약 안 받음'이라고 나와 있다고 적음. 전화번호: A는 06-6354-8710(운영사 매장 목록), B는 050-5869-7270(타베로그). 메뉴: 겹치는 메뉴는 기본 마르게리타 하나뿐임. A의 콰트로 포르마지, 피자 런치, 파스타 런치는 B에 없고, B의 마르게리타 DOC(2,618엔)는 A 목록에 따로 없음. 가격: B는 마르게리타 1,738엔(세금 포함, 2026년 3월 타베로그 기준)이라고 했으나 A는 가격을 확인하지 못함."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "분홍색 가게 외관과 '石窯ピッツァと生パスタ' 간판, 원형 창"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "방울토마토·모차렐라·바질 피자 클로즈업(토마토소스 마르게리타와 달라 애매함)"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "로스트 포크와 루콜라, 방울토마토 샐러드"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": 0,
+    "what_ko": "토마토소스·모차렐라·바질을 올린 마르게리타 피자"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "오징어 먹물 스파게티와 방울토마토"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "토마토소스 탈리아텔레 파스타(브로콜리 포함)"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "치즈케이크와 아이스크림 디저트 두 접시"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "화이트 치즈 피자(콰트로 포르마지 계열)와 바질"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "길모퉁이에서 찍은 가게 건물 외관"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "생햄·루콜라·치즈가루를 올린 피자"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "분홍색 벽과 간판이 있는 가게 외관"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "방울토마토와 치즈, 바질을 올린 피자"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": -1,
+    "what_ko": "얇게 썬 고기와 채소, 방울토마토를 담은 샐러드"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": 0,
+    "what_ko": "토마토소스, 모차렐라, 바질을 올린 마르게리타 피자"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": -1,
+    "what_ko": "검은 소스와 방울토마토가 들어간 먹물 파스타"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": -1,
+    "what_ko": "토마토소스와 채소를 곁들인 넓적한 면 파스타"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "치즈케이크와 아이스크림, 베리를 담은 디저트 접시"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "토마토소스 없이 치즈와 바질을 올린 흰 피자"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": -1,
+    "what_ko": "길모퉁이에 자리한 가게 건물 외관"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "생햄과 루콜라, 가루 치즈를 올린 피자"
+   }
+  ]
+ }
+}

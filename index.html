@@ -154,6 +154,26 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 /* google place info */
 .gp{margin:10px 0 2px}
 .gp-slider{position:relative}
+.gp-photos figure{position:relative}
+.mph-tag{position:absolute;left:6px;top:6px;max-width:calc(100% - 12px);background:rgba(20,18,15,.72);color:#fff;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msum{display:flex;align-items:center;gap:6px;margin-top:6px;min-width:0;font-size:12px}
+.msum-m{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.rsv{flex:none;display:inline-block;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.rsv.r-req{background:#ffe3e1;color:#c4231b} .rsv.r-rec{background:#fff0d6;color:#b25e00} .rsv.r-ok{background:#e3f6e8;color:#1b7a3a} .rsv.r-no{background:#eeeae4;color:#5d5850} .rsv.r-unk{background:#f1ecff;color:var(--brand-d)}
+.mlist{margin:6px 0 4px;padding:0;list-style:none;counter-reset:m}
+.mlist li{counter-increment:m;position:relative;padding:7px 0 7px 26px;border-top:1px solid var(--line)}
+.mlist li:first-child{border-top:0}
+.mlist li::before{content:counter(m);position:absolute;left:0;top:8px;width:18px;height:18px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center}
+.ml-n{display:flex;justify-content:space-between;gap:8px;font-size:14px}
+.ml-p{color:var(--ink2);font-weight:700;font-size:12.5px;white-space:nowrap}
+.ml-ja{font-size:11.5px;color:var(--ink3)}
+.ml-d{font-size:12.5px;color:var(--ink2);margin-top:2px;line-height:1.5}
+.rbox2{border:1px solid var(--line);border-radius:12px;padding:10px 11px;margin:6px 0}
+.rb2-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.rb2-note{font-size:12.5px;color:var(--ink2);line-height:1.55;margin-top:6px}
+.rb2-mn{font-size:11.5px;color:var(--ink3);line-height:1.5;margin-top:3px}
+.rbox2 .links{margin-top:8px}
+.msrc{margin:6px 0 2px;font-size:12px;color:var(--ink3)} .msrc summary{cursor:pointer} .msrc ul{margin:4px 0;padding-left:18px} .msrc a{color:var(--ink2);word-break:break-all}
 .gp-photos{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;padding-bottom:2px}
 .gp-photos::-webkit-scrollbar{display:none}
 .gp-nav{position:absolute;top:75px;transform:translateY(-50%);z-index:2;width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.95);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.22);display:grid;place-items:center;cursor:pointer;padding:0;transition:opacity .15s}
@@ -387,6 +407,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 
 <script src="data/hotels.js?v=20261115-hotels9"></script>
 <script src="data/places.js?v=20261115b"></script>
+<script src="data/menus.js?v=20261115m1"></script>
 <script src="data/spots.js?v=20261115b"></script>
 <script src="data/added.js"></script>
 <script src="data/events.js"></script>
@@ -532,7 +553,7 @@ async function loadPlace(p){
   GP[p.id] = {status:'loading'}; fillPlace(p);
   try{
     const j = await gpost('https://places.googleapis.com/v1/places:searchText',
-      'places.id,places.displayName,places.location,places.rating,places.userRatingCount,places.websiteUri,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.weekdayDescriptions,places.currentOpeningHours.openNow,places.photos.name,places.photos.authorAttributions,places.reservable,places.googleMapsUri,places.businessStatus',
+      'places.id,places.displayName,places.location,places.rating,places.userRatingCount,places.websiteUri,places.nationalPhoneNumber,places.internationalPhoneNumber,places.regularOpeningHours.weekdayDescriptions,places.currentOpeningHours.openNow,places.photos.name,places.photos.authorAttributions,places.photos.widthPx,places.photos.heightPx,places.reservable,places.googleMapsUri,places.businessStatus',
       {textQuery:`${p.nameJa} ${p.address}`, languageCode:'ko', regionCode:'JP', pageSize:3, locationBias:{circle:{center:{latitude:p.lat,longitude:p.lng}, radius:300}}});
     // 우리 좌표에서 250m 안에 있는 결과만 같은 가게로 인정 (엉뚱한 가게 정보가 붙는 것을 막음)
     const cands = (j.places||[]).map(x=>({x, d: x.location ? haversine(p,{lat:x.location.latitude,lng:x.location.longitude}) : 1e9})).sort((a,b)=>a.d-b.d);
@@ -541,15 +562,53 @@ async function loadPlace(p){
   }catch(err){ GP[p.id] = {status:'error', msg:String(err.message||err)}; }
   fillPlace(p);
 }
+/* 인기 메뉴 사진 우선: Claude·Codex 둘 다 같은 메뉴라고 판별한 Google 사진 → 메뉴 순서대로 맨 앞에 */
+function menuPhotoList(p, x){
+  const M=(window.MENUS||{})[p.id], live=(x.photos||[]);
+  const att=ph=>(ph.authorAttributions||[])[0]||{};
+  const out=[], used=new Set();
+  if(M&&M.photos) M.photos.forEach(mp=>{
+    const hit=live.find(ph=>!used.has(ph.name)&&ph.widthPx===mp.w&&ph.heightPx===mp.h&&(att(ph).uri||'')===(mp.authorUri||''));
+    const m=M.menus[mp.menu]; if(!m) return;
+    if(hit){ used.add(hit.name); out.push({name:hit.name, label:m.name_ko, author:att(hit).displayName, uri:att(hit).uri}); }
+    else out.push({name:mp.name, label:m.name_ko, author:mp.author, uri:mp.authorUri});
+  });
+  live.filter(ph=>!used.has(ph.name)).slice(0, Math.max(4, 8-out.length)).forEach(ph=>out.push({name:ph.name, author:att(ph).displayName, uri:att(ph).uri}));
+  return out;
+}
+const RSV={required:['예약 필수','r-req'], recommended:['예약 권장','r-rec'], accepted:['예약 가능','r-ok'], not_accepted:['예약 불가 · 선착순','r-no'], unknown:['예약 정보 확인 필요','r-unk']};
+const RSV_M={google:'Google 예약',tabelog:'타베로그',hotpepper:'핫페퍼',gurunavi:'구루나비',tablecheck:'TableCheck',official_site:'공식 사이트',phone:'전화',instagram:'Instagram',line:'LINE',other:'기타'};
+function rsvBadge(p){ const M=(window.MENUS||{})[p.id]; if(!M) return ''; const r=RSV[M.reserve.status]||RSV.unknown; return `<span class="rsv ${r[1]}">${r[0]}</span>`; }
+function menuSummary(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
+  const names=M.menus.slice(0,3).map(m=>esc(m.name_ko)).join(' · ');
+  return `<div class="msum">${rsvBadge(p)}${names?`<span class="msum-m">🍽 ${names}</span>`:''}</div>`; }
+function menuHTML(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
+  let h='';
+  if(M.menus.length){
+    h+=`<p class="quote-h">🍽 인기 메뉴 <span class="meta">· Claude·Codex 둘 다 꼽은 메뉴만</span></p><ol class="mlist">`+M.menus.map(m=>
+      `<li><div class="ml-n"><b>${esc(m.name_ko)}</b>${m.price_jpy?`<span class="ml-p">¥${m.price_jpy.toLocaleString()}</span>`:''}</div><div class="ml-ja">${esc(m.name_ja)}</div>${m.desc_ko?`<div class="ml-d">${esc(m.desc_ko)}</div>`:''}</li>`).join('')+'</ol>';
+  }
+  const R=M.reserve, r=RSV[R.status]||RSV.unknown;
+  h+=`<p class="quote-h">📅 예약</p><div class="rbox2"><div class="rb2-top"><span class="rsv ${r[1]}">${r[0]}</span>${R.agree?'':(R.single?`<span class="meta">${esc(R.single.who)}만 확인: ${esc((RSV[R.single.status]||RSV.unknown)[0])}</span>`:'<span class="meta">두 AI 의견이 반대라 확정 못함</span>')}${R.googleReservable===true?'<span class="tag hotel">Google 예약 가능</span>':''}</div>`;
+  if(R.note) h+=`<div class="rb2-note">${esc(R.note)}</div>`;
+  if(R.hint) h+=`<div class="rb2-mn">· ${esc(R.hint)}</div>`;
+  if(R.methods&&R.methods.length) h+='<div class="links">'+R.methods.map(m=>{ const u=m.url||''; const ok=/^(https?:|tel:)/.test(u);
+      return ok?`<a class="btn small" href="${esc(u)}" target="_blank" rel="noopener" title="${esc(m.note_ko||'')}">${esc(RSV_M[m.type]||m.type)}${m.type==='phone'?' '+esc(u.replace(/^tel:/,'')):''}</a>`:`<span class="btn small" title="${esc(m.note_ko||'')}">${esc(RSV_M[m.type]||m.type)}</span>`; }).join('')+'</div>'+
+      R.methods.filter(m=>m.note_ko).map(m=>`<div class="rb2-mn">· ${esc(RSV_M[m.type]||m.type)}: ${esc(m.note_ko)}</div>`).join('');
+  h+='</div>';
+  const src=[...new Set(M.menus.flatMap(m=>m.source_urls||[]))].filter(u=>/^https?:/.test(u));
+  h+=`<details class="msrc"><summary>조사 근거 · ${esc(M.checkedAt)} 확인</summary>${src.length?'<ul>'+src.map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/,'').slice(0,60))}</a></li>`).join('')+'</ul>':''}${M.disagree?`<div class="meta">두 AI가 다르게 본 점: ${esc(M.disagree)}</div>`:''}</details>`;
+  return h;
+}
 function placeHTML(p){
   const g = GP[p.id];
   if(!g || g.status==='loading') return '<div class="meta">Google 지도 장소 정보 불러오는 중…</div>';
   if(g.status==='error') return `<div class="meta">Google 장소 정보를 불러오지 못했어요 (${esc(g.msg)})</div>`;
   if(g.status==='nomatch') return '<div class="meta">Google 지도에서 이 위치와 일치하는 장소를 찾지 못해 사진·평점은 표시하지 않아요.</div>';
   const x = g.place; let h='';
-  const photos = (x.photos||[]).slice(0,4);
-  if(photos.length) h += '<div class="gp-slider"><button type="button" class="gp-nav prev" data-gpnav="-1" aria-label="이전 사진" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><div class="gp-photos">'+photos.map(ph=>{ const a=(ph.authorAttributions||[])[0];
-    return `<figure><img loading="lazy" alt="${esc((x.displayName&&x.displayName.text)||p.name)} 사진" src="https://places.googleapis.com/v1/${esc(ph.name)}/media?maxWidthPx=480&maxHeightPx=330&key=${GKEY}"><figcaption>사진: ${a?(a.uri?`<a href="${esc(a.uri)}" target="_blank" rel="noopener">${esc(a.displayName)}</a>`:esc(a.displayName)):'Google 지도'}</figcaption></figure>`; }).join('')+'</div><button type="button" class="gp-nav next" data-gpnav="1" aria-label="다음 사진"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div>';
+  const photos = menuPhotoList(p, x);
+  if(photos.length) h += '<div class="gp-slider"><button type="button" class="gp-nav prev" data-gpnav="-1" aria-label="이전 사진" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><div class="gp-photos">'+photos.map(ph=>
+    `<figure${ph.label?' class="mph"':''}><img loading="lazy" alt="${esc(ph.label||((x.displayName&&x.displayName.text)||p.name)+' 사진')}" src="https://places.googleapis.com/v1/${esc(ph.name)}/media?maxWidthPx=480&maxHeightPx=330&key=${GKEY}" onerror="this.closest('figure').remove()">${ph.label?`<span class="mph-tag">🍽 ${esc(ph.label)}</span>`:''}<figcaption>사진: ${ph.uri?`<a href="${esc(ph.uri)}" target="_blank" rel="noopener">${esc(ph.author||'Google 지도')}</a>`:esc(ph.author||'Google 지도')}</figcaption></figure>`).join('')+'</div><button type="button" class="gp-nav next" data-gpnav="1" aria-label="다음 사진"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div>';
   let row = '';
   if(x.rating) row += `<span>⭐ <b>${x.rating.toFixed(1)}</b> <span class="meta">(${(x.userRatingCount||0).toLocaleString()})</span></span>`;
   if(x.businessStatus && x.businessStatus!=='OPERATIONAL') row += `<span class="gp-open off">${x.businessStatus==='CLOSED_PERMANENTLY'?'폐업':'임시 휴업'}</span>`;
@@ -798,6 +857,7 @@ function cardHTML(p){
   let body = p.type==='hotel'?hotelRateHTML(p):'';
   if(p.type==='hotel') body += `<p class="quote-h">순위 맛집까지 평균 (지도에 순위 색 선으로 표시)</p><div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
+  if(p.type==='food') body += menuHTML(p);
   if(p.comment) body += `<p class="quote-h">💬 유튜브 댓글 (캡처 이미지에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
   if(p.origin==='list') body += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름: “${esc(p.typed)}”</p>`;
   if(p.origin==='ai') body += `<p class="quote-h">🤖 AI로 추가 — ${p.verified&&p.verified.length===2?'Claude·Codex 둘 다 같은 곳으로 확인':'AI 한쪽만 찾음 → 알림에서 직접 확인 후 추가'}${p.pending?' (반영 중)':''} · 입력: “${esc(p.typed)}”</p>${(p.aiEvidence||[]).map(a=>`<div class="quote"><b>${esc(a.ai)}</b>: ${esc(a.evidence)}</div>`).join('')}`;
@@ -812,7 +872,7 @@ function cardHTML(p){
     (p.sources||[]).map(s=>`<a class="btn small" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')+
     `<button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small" data-setto="${p.id}">여기로 도착</button></div>`;
   body += `<div data-near="${p.id}">${nearTable(p)}</div>`;
-  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div>${p.type==='hotel'?hotelRateHTML(p,true):''}</div>${rankset}</div><div class="detail">${body}</div></article>`;
+  return `<article class="${cls}" data-id="${p.id}"><div class="card-top"><div class="ico">${ico}</div><div class="card-main"><div class="nm">${esc(p.name)}</div><div class="ja">${esc(p.nameJa)}</div><div class="area">${tags}<span class="area-t">${esc(p.area)}</span>${flags?`<span class="flag">${flags}</span>`:''}</div>${p.type==='hotel'?hotelRateHTML(p,true):''}${p.type==='food'?menuSummary(p):''}</div>${rankset}</div><div class="detail">${body}</div></article>`;
 }
 function renderList(){
   const all = P.filter(p=>p.city===state.city);

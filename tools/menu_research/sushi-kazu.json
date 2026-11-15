@@ -1,0 +1,209 @@
+{
+ "id": "sushi-kazu",
+ "google": {
+  "id": "ChIJ5dByRxLnAGARL7eqF4hBX-M",
+  "location": {
+   "latitude": 34.703649299999995,
+   "longitude": 135.5028341
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=16383886022165575471&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "displayName": {
+   "text": "寿司処かず",
+   "languageCode": "ja"
+  },
+  "reservable": true,
+  "photos": [
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLev8Y0wC1p5TeSL_rbf6VbgB5c-piBiErchQ_Gz4TwbnrtJftpasllqKOfPQRVhLyov-QDbroM-_MhRFOGaaHyUECeAP_3nkbJDJrlNPmXVOEgwv2b-De9VwUJh0rFLk21eoQ12g1wVbEGLIYk5umaUcrHpLc7jNgS0Aakzkfw_G5w_05ve1SnJTOmKC7XTz4WD1L4BzdHRyvkDptuc8FnooyHBeLpPrXW-3Z4q6pzSgmyGtZkZOtg_pHCPLM7K5YgAXvYd0i0SXpv90CvU2Re9XGE7p-yV9ms1DQ4CI4w6H86XqXmEmES0PXeWfoxJ_DbaJH-xYYMIxcDmljS1hywGLGRNGMXoSlJYR25V2i3zgjgnmdZLV2oBByhm7rkAzPLZTHxahODkUDQyUzgpZmezVg",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "平井証大",
+      "uri": "https://maps.google.com/maps/contrib/107065733397718522705",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUaxHxEXI5RG2eDUpFEiQflSxttG1aMVNO01-VE40ZnBvmfgAg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLeYppjU36ttSdcFAN3AmE0LigTXdntq1h7RHIVMJdPd88ThnpKBsMD6M9sCfUIKOoxHR8a5AOhKLmtI6MHIBNNMnztqFb-P8xeETf8J9cv1HYZAHEI5LiojVh4yoxo3OooEf77cXqMLL1bf244ifJ1DYIONWW_2a66BWaXv5TtBxQ_l706agqjwYH9R3yWPGwcVrVRd8RJ7wxeW8GFtFoN9_9svnSCkg_bsh1cQtjdqIR5ruCRZaq07mvoq0ST0GM4vdfqYwXqGQoX7Ec4BQkwDljrpntFDV2H-AnU1BDMoBPAygzo_bAFl-KXQVCHCHl-eduQ-IMa8KZfnFnz8VE_fHDlKx8E4nZMlH58SnL9t1LjORu9gD2VKjpt0yWcNiyMWG8IzWo_9dz4bf7E6GK4dUjB4l6elA4HwUT2HY4aN",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "Reee",
+      "uri": "https://maps.google.com/maps/contrib/110013810250938041779",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLAxLjZYVnaFrzCazqyPMmmIsi3vAhxNMeoMRW3Looufc_mWg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLevk_vsUQeTlE9YU1XnTrG0vmwBM8tkFgDBiLoLbeq4-1B6FuyRWCmEzCBWGv-5jNCyNsVxpXGno_zdD0Xco-98gI17j_b1bH6o4XP8H2RDeubBsWrv9P9xxgHwhf90szgNqQfvJ0QbN6iaxs8sjE6v7W48TwsRl4ws8RDPa45RrTvpBYoNF3Wus1IQ-Ev3sLnbFIG9ltfkR-7zKnK0JDtDcojco_telftkzjEG7HNOittwOKWMmaQkIkVZSMipUSu5IeWO0wCETSOVI4tMyeKTUmmxbYiVUMRDdqMw8MZ7d07Td4fCcpWQp4QGv-6JdPorvw-FWNo8jNwATtII-7ZKU0x3apf99VJrBkNdFmdqCST4iQswNBGn3-IDTsAoHVZ4kurPClKb3FZiMOq9ECNVU3pY9MEUMSpcKQvkhofkzw",
+    "widthPx": 2877,
+    "heightPx": 4030,
+    "authorAttributions": [
+     {
+      "displayName": "土本花ず子",
+      "uri": "https://maps.google.com/maps/contrib/103318525023659129264",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVEzhPRlccIAoeEIUkaMIT68oftMj58jJtkvsiLP4wkLnAXohg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLeSfLFrLNkReguSqHDSMmfW24gDIMneWabBzt-AJuQoMUSeQBIKezkWF8L_eLf7qmsTpzps6HfqW5MoKUFHpnld3GEj2fGVNbYE8dXP9bkLzzAk1Ey971r8XmyzI_polA_yRs-5gjP6pTkHhjlMuUtpw73Mbvabn_wXv2HIpN04tEVevvdRnGbYfZcxNOqcw-3zAInGVN7aKSYmo3lbgizNjEr29klEWtqFYfO4txZzEDbkAb1lfdUhTUxuMPeRZjPS7JmQUgrfbUvh8DznWhErnXRW78TAdpqeFsZBy2izllGXnLmMkKdymLIA7QbVMR-p5wgl_g-yUPqGYapaixDr4fK8ZN1lAB-pX0280wKumOTUgfUWsbRhnwWRjR9Oya6KnUKKEwwlwnAfb6kvAoQMzhViw6q1Nat91CsDelIn5w",
+    "widthPx": 3000,
+    "heightPx": 4000,
+    "authorAttributions": [
+     {
+      "displayName": "skewed O",
+      "uri": "https://maps.google.com/maps/contrib/106973713905224018971",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKwijsGoKphanKsXk6MC4aOQLSyGOD3lPR-UdFTA3PbRXqkUGc=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLeQ8TcVPOust07TOUTHnlfglDx9WEupGrt6Dz2rHhetBFUBUUgKv4vplGVURC_dCLt6lFmWSfLoU_qUAx4kCLlgq1oZfu9b27oxdHJ5Yry_sDiBc6YQsppAnSLcdgdqnJJzvj05YD2RmyPf5xxOpQhKz1OkMtMiZn9vcFtdWSr2ikJr7fl40_udyf3uOWvKQREkoDVJkKo7vv-kwI-luNT6tTivaBWvfyN3acmcaX9OgMKACyWCyebWcekjXUiZu3VjbrUt2L70SEiWNQjzaWfIghkxmikyrEp2rbYHPGBF-7zRqkO2HdrPWu_meic9G1qaV85sRuWIqFGtqqFOEdG2vdBlmEW88Z5f3J2IywZF6ZwfuLBcegb3HYGRXmtXP8pnNmlFsqwbyHpV5Oj61LxW7wipv_e8q_cQOY3Iy-mLww",
+    "widthPx": 3024,
+    "heightPx": 4032,
+    "authorAttributions": [
+     {
+      "displayName": "이한빈",
+      "uri": "https://maps.google.com/maps/contrib/112990056381446893137",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKwVfBlaDWYvsikCx_9Ychn0BtwgdYmnXaO-6t9JMFF2mH_Ag=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLeUabJa3xvPRGOgHndGhCLNhDfWPivvsxaQyhMecY15F5E5cC1xnir3LEIfrwopR9cVVNMrDOPfM_8TdWBq5wyNdj8ATEiUKd-Zdpp-5XLF6OBF3dQpxwooXPLSTEUk39SscksO5fVXvH3GkPKsXW8v4J8ke_OJaizr9vUrH7eghnzTm_JadTzc14mwZxKtC1wUZYnJ1yVFv_OixRXIji9IEke2RbZHeK_fORl-5OC8I1wfr8kUe2_6eEI83pRBR0CrJtArMGk_ffGWPXVeerPAx74QC2lE370HbuHCYEcqSk4e096isEahQ2MUc8Zq0QoMuxnQjmnUdjmdbL6tllbDmlRE6erWwHs5USREYj9ELRYL6xOOWlN0FxOizryx9ly5nJVEv0T3mhHoLPMnlAfyIc3U0QHM8TjnRbUQ7FK9EQ",
+    "widthPx": 4000,
+    "heightPx": 3000,
+    "authorAttributions": [
+     {
+      "displayName": "中野知弥",
+      "uri": "https://maps.google.com/maps/contrib/107776426814726219246",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW6IJCt2IE4xXIBd6kVUbZA8GhKlDCRoumEd6nb6G4h50963YTK=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLe-CODmU73PWxZUgQuMBIgHZCRccvb_wVdQQl7-fZwSK6fopluoSohMlnM2l88iTGbw8sKqV4GThdjCUDCGHFMk46yyPuE5DIuXF1NCSgdzZGOvC2I2q2_8mT-ggfyW8CFaa9cugH36y_ZfCjIIdi52Fv98aOCnjZuzFhheiPSJ1G5_YN7MZmBq0GqFCg0WRlV56X1QL8SrDDC9w9R281P1_zBFmfiqR5bItr9RTvM8m4OoCY4oWOvi7oLfDncdWIZ03q0F74SlXTf0yksMfxhoIPTKAwuMa_hsDMGmLSUaIfviI8F30b6YR9hnbe8eGVrNDLB9-ymhJlHEfV3nPmSl1A7A7K7e-HXamiPh736kNfnVmgvt2OWQ0ck1Ur9mVwSwNjUWB_7CbqfzDLYn1s7Ti0MWZXEgqG23bNnVOLKl",
+    "widthPx": 4800,
+    "heightPx": 3600,
+    "authorAttributions": [
+     {
+      "displayName": "YH Choi",
+      "uri": "https://maps.google.com/maps/contrib/117466079632604634386",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIjOHpq74A3xhUPEgf3aVWfFVSDSojptIlKIcLOb8NqIc51Nw=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLct6qLw-Wxpi-HEzJL0bn5-R24XbaTgub6eXU-aNhsRpR9XAcn6miJE9O7lf01NhA6FbNRJfF9cpr14fm4KNQEvTNJ8sxpJOzP3RL4ZuNr9Kzq5zABn-nsju2RClGZoIlNEJ3v64qLAzAH4hkxitXlPem07Tz4NqBI2gTAjUIYcguEm0yLYYt5maqh8e28wRobyEXDknRGO1ZhPD_GFgVTQHUTmA_Ku-PDkvLGeDa0i81FLPSfH9DQ3x3oFPyujzuwe1x5Hy5AN2yhzcRQBR7Aqjyoj9f2fLVVQ8Ldr8WEOuiVIvV4U44Wm3CDqzkRprDTqODmKLTJsFT99GHVMXwdbntV-JCD5H6ZHH91luL6ezIYU0AAfHOr1HNTNXlLqKq5uor6GuCGfD5fAn0350Ub7ou909cN9CyMCVkwi_hkFQw",
+    "widthPx": 3000,
+    "heightPx": 4000,
+    "authorAttributions": [
+     {
+      "displayName": "山川浩司",
+      "uri": "https://maps.google.com/maps/contrib/101495964291579440684",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJqMUPLWa5ZEyjcmF9UQfd_4ZO91S1hCuOy18Byy722GyiV7A=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLeYQvBsGQrG31vt7JirQOhbTGdw5LG4clUq678hSd-RslH6PywAe9tAOi9a6vrqkYovGR2CI1ZclonVCvtH3aq79bhAEHdkKlcqcB1XlOTPBHVfY7qoFe_U8CECfraHX0Ta7U7F1ksSy6qP5rB6JEtZ1i7eyh7Dk5cJiwuE8GFifP0reHDPiq_vxJX0tnN4gDoXwlw1c3wDC-_T75mpVUd34-tAogDHNvyWdo2IE7MnRedvbgyRb2onjO_IK35YKN_I77373A3c8fJnswY60dfNoRdBj5nfqhVvhxpkYrbeMdG01wKi_4j0SbfpYvkIT7btnweuWh0NRyD1FjOD8Yyt-NoAusL5HiCuGJFj7yduvLUMf73olx_gnAaBjJxNKBrkEkIRSbeE878tAUPD3Dh05rDqiQxwZ_-taIm0gaKYLg",
+    "widthPx": 3024,
+    "heightPx": 4032,
+    "authorAttributions": [
+     {
+      "displayName": "Andersen Yu",
+      "uri": "https://maps.google.com/maps/contrib/108860090970643329448",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWPJtD4i6ig63Cz8jjnIV_-VAn90wcsNva22rLMuMeaYxwFAlQ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJ5dByRxLnAGARL7eqF4hBX-M/photos/AV-0GLcX2oKmjbj4ue1jR0O4WdI7tHcHxpHAjyET_h90wsJIBD38L9XadgJ7ya_Axx2lhPsEGE0d6BVVnVzd--2EzazNqRZRYn0bedeBBGvYHYbny661k0M9N2r5TaBlsery-4HI1LX3zLWW3z8joJukUdGLQJwzBAp_XS40qbXmBi1y59Son8F4aRMp9BgERWx2qwGPnxfcJ0owt4mnBbpxK-R8E00tlGVB8Wxky2XiTTGTEqx6hrbo5JtBCOtsp1L6fG_sym6F-Y3thSEYGjQFySUb6QhtiDDU4ygqtUgTocNmq8WbnGOJ_X6EnvUeC3tNFRO71z1QfFXfFpFfV0myD8y-lxP3S-SPEMZji5G-AjrNaYa-8U7TWhTfwIv2Bi0DZi1-dwY3DxstueFusZejXVdmWQhob7Xs2XqI-9lFjSQlxQ",
+    "widthPx": 3600,
+    "heightPx": 4800,
+    "authorAttributions": [
+     {
+      "displayName": "Reee",
+      "uri": "https://maps.google.com/maps/contrib/110013810250938041779",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLAxLjZYVnaFrzCazqyPMmmIsi3vAhxNMeoMRW3Looufc_mWg=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "おばんざい",
+    "name_ko": "오반자이",
+    "desc_ko": "그날그날 바뀌는 일본식 가정 반찬. 리뷰에 따르면 매일 10가지 정도 나온다",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/en/osaka/A2701/A270101/27047802/dtlrvwlst/"
+    ]
+   },
+   {
+    "name_ja": "寿司(いくら・ウニ・エンガワ等)",
+    "name_ko": "스시(연어알·성게·광어 지느러미 등)",
+    "desc_ko": "나가사키 출신 주인이 나가사키 어부에게서 직접 들여온 생선으로 쥐는 스시",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/en/osaka/A2701/A270101/27047802/dtlrvwlst/"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "phone",
+     "url": "tel:090-7555-5827",
+     "note_ko": "전화 예약(타베로그에 예약·문의 번호로 올라 있음)"
+    }
+   ],
+   "note_ko": "타베로그에는 '예약 가능'으로 나와 있습니다. 카운터 16석, 영업시간 17:00~22:30, 연중무휴로 올라 있고 카드·전자결제는 받지 않습니다. 줄서기나 대기에 대한 언급은 찾지 못했습니다.",
+   "source_urls": [
+    "https://tabelog.com/en/osaka/A2701/A270101/27047802/",
+    "https://tabelog.com/en/osaka/A2701/A270101/27047802/dtlrvwlst/"
+   ]
+  },
+  "note": "타베로그 일본어 페이지는 403 오류로 열리지 않아 영어판(같은 가게 ID 27047802, 주소 堂山町8-16 일치)으로 확인했습니다. 타베로그에 메뉴와 가격이 올라 있지 않고, 리뷰는 '칠판 메뉴'·'오마카세식'이라고만 할 뿐 가격 언급이 없어 가격은 모두 null로 두었습니다. 리뷰 본문이 중간에 잘려 있어 메뉴별 언급 횟수는 정확하지 않습니다. 반복해서 언급된 메뉴는 오반자이(4회)와 스시뿐이라 2개만 적었습니다(이쿠라는 2회, 우니·엔가와는 1회). 공식 사이트, 블로그, 구글 리뷰는 찾거나 열지 못했습니다. 예약은 전화로만 확인됐고 넷 예약은 없었습니다. 예약 필수인지는 확인하지 못해 accepted로 두었습니다."
+ },
+ "codex": {
+  "popular_menus": [],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "phone",
+     "url": "tel:09075555827",
+     "note_ko": "타베로그의 예약·문의 번호. 해당 지점은 예약 가능으로 등록되어 있습니다."
+    }
+   ],
+   "note_ko": "2026년 2월 방문 후기에는 평일에도 손님이 가득해 예약을 권한다는 내용이 있습니다. 2026년 5월 후기에는 마침 비어 있는 카운터 2석에 입장한 사례도 있습니다.",
+   "source_urls": [
+    "https://tabelog.com/osaka/A2701/A270101/27047802/",
+    "https://tabelog.com/osaka/A2701/A270101/27047802/dtlrvwlst/"
+   ]
+  },
+  "note": "주소가 일치하는 타베로그·Retty 페이지를 확인했습니다. 초밥과 오반자이는 여러 후기에서 언급되지만, 개별 메뉴의 인기 순위와 메뉴판의 정확한 일본어 표기를 확인하지 못해 popular_menus는 비웠습니다. 세금 포함 가격도 확인하지 못했습니다. Retty에는 다른 전화번호가 기재되어 있어 예약 번호는 타베로그의 예약·문의 항목을 기준으로 적었습니다."
+ },
+ "merged": {
+  "menus": [],
+  "reservation_status": "unknown",
+  "reservation_agree": false,
+  "methods": [
+   {
+    "type": "phone",
+    "url": "tel:090-7555-5827",
+    "note_ko": "타베로그에 예약·문의 번호로 올라 있는 번호로 전화 예약"
+   }
+  ],
+  "reservation_note_ko": "타베로그에는 '예약 가능'으로 나와 있고, 예약·문의 번호(090-7555-5827)로 전화 예약할 수 있습니다.",
+  "disagreements_ko": "예약 상태: A는 '예약 가능(accepted)'으로 봤고, 예약이 필수인지는 확인하지 못했다고 했습니다. B는 2026년 2월 후기(평일에도 만석이라 예약 권장)를 근거로 '예약 권장(recommended)'으로 봤습니다. 다만 B도 2026년 5월에 예약 없이 빈 카운터 2석에 들어간 후기를 함께 적었습니다. A는 대기나 만석에 대한 언급을 찾지 못했다고 했습니다. 메뉴: A는 오반자이와 스시(이쿠라·우니·엔가와 등) 2개를 적었습니다. B는 초밥과 오반자이가 후기에 나온다는 점은 인정했지만, 인기 순위와 정확한 표기를 확인하지 못해 목록을 비워 두었습니다. 그래서 양쪽에 공통으로 남은 메뉴는 없습니다. 기타: A는 타베로그 영어판만 확인했고, B는 타베로그 일본어판과 Retty를 확인했습니다. B는 Retty에 다른 전화번호가 적혀 있다고 했습니다."
+ }
+}

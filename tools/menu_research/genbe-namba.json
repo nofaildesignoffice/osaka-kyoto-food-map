@@ -1,0 +1,432 @@
+{
+ "id": "genbe-namba",
+ "google": {
+  "id": "ChIJb7peR8LnAGAR5XyI7m81_nk",
+  "location": {
+   "latitude": 34.6634987,
+   "longitude": 135.5041752
+  },
+  "googleMapsUri": "https://maps.google.com/?cid=8790522277533351141&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgBIAA",
+  "websiteUri": "https://booking.ebica.jp/webrsv/plan_search/e014153701/31271",
+  "displayName": {
+   "text": "源兵衛 なんば店",
+   "languageCode": "ja"
+  },
+  "reservable": true,
+  "photos": [
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLcPrYBug1le_yEhc9_FrMFK6QuYwm7mkS5QPEhOTZvIQDph4QAELrfMeiEKFk1uW_xwjzHRSFrmP2aVjSGn64OrOHh37M4tpv3e6M7R0pzI6U9LNX7C3acKVC3prsDj8kfSnCyI4e5I2xtc9NYNC5eyBvsG_9zWQXDbAHFUJkQzjahFQpV5X5aPa8BVhvwtDaM8erbANb61rpTnH60-WUU95HiE3Bi_vMqmy7rYlW4HVVCR9CFkOyL1KKjA59kjFHNr9NPLPvDaGcIgfjRZWY5_9DinlLn1EDTmnXFaaRjFE_FUPr_KkVTOB1N7O-76ws77SFYpQmca6kWuAwnJK-E3NpYhqPc5bLOgFHTQ6Q3NB78IKWkPeyGqBWIIbYS36AjKD2yjHYxer-yMrchLKpeqjhyPAqs",
+    "widthPx": 4032,
+    "heightPx": 2269,
+    "authorAttributions": [
+     {
+      "displayName": "源兵衛 なんば店",
+      "uri": "https://maps.google.com/maps/contrib/117784775130933389220",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUFw8yIrb-l_ZltXqA5Dh2rFgjRfIXeDPLktIuONlQtCfE_uWf3=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLeoLkfJvEeMskhKnbX6LLPZhsaT7rwLehLoSrmvYcEzbkTtZUcm2gmWdDBg23xIXjTHciVak9WYB-QbETdt8G-LVyWSiDEh2u5hOicAEZWrmUyWI_3QLvT0LM8dvP3oPed_IBQ4sSjPsC03Kt42hrpxHD99aGRcK8tlgFrWJWUZCRqPQZrE21GESQWO_pWYtZNjyu3IvTHjvZsf_XpivSl2NUAy4dD83qKwIpsSA2RyImd_xk4akweEt7DBV4uPzzRZjJQM8bmdsI52XxEHMROU6QIJsKWnHb34chHJ2tN9lfX_jKRdGUTtCsgp8qFVE5rkETcVcNtPm2lLZ4jPB4XeKKmsBOsaBGZ8q6nIGfCbDwpOSr169gdbXbyLdTUFTGme1i891mVsCXN8w5sJwaBXDQDpWnxVTuRkirWdHnYfew",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "김성현",
+      "uri": "https://maps.google.com/maps/contrib/114006791368017943543",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJcWsCcKlVA8yIyc_7aR5SB3mYPpUTxug1gTxEk6V4HkhFWoA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLewbvU2sZnqzKBna9znzMAItvpXEUsdW_eRUjRYH878Nf_7bFjKsv1xmcF1cV6Yd77HJZpTOWwBT8kw5gOFDZV7pmlYOUT98iNoBL2Si2nCtMgpSksIHeM83RhES5TGruSF0RLTNW_jbcBOBQcmvh9YstaRXarGcqEVFNKPxCR9_VgrJlXd_sS6-OUyV5H8wxH4ruQZOw191Zcn6gS4Br3fa2EJbYuwzPR11XGybFX8ExDV2jJBy-TUDf0Jl6C7KNHB5WuJdQ99PvsNocj2ilZomZr1TG8pfBb6SQrD0PRg_uVhyMK4kv1JdJoMLTlJSY6hax6T_Dmzh_uBB7ZRF56QDdj_n87fJs8dbxy9GzJhAi-CMWADVA2h3Qc2qxR-G4I7UHajZBCmlRa_g9yP7iF6vQk",
+    "widthPx": 1568,
+    "heightPx": 883,
+    "authorAttributions": [
+     {
+      "displayName": "源兵衛 なんば店",
+      "uri": "https://maps.google.com/maps/contrib/117784775130933389220",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUFw8yIrb-l_ZltXqA5Dh2rFgjRfIXeDPLktIuONlQtCfE_uWf3=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLdl4mJ0JmxvA6tZNzVdTjXKaLPbUObdAFiQnAPgAEnvOLcNy0_W_6e3KOJP5yN-6CJcJMAGefXBLE2AS7wnQ9O4TGo_xCU5RUj4NIqwUAuDM3cMd4_3neBSrd7UGfAw5pQH8fIBeujXVRCt87KjMI5EKkoqYMucA45k06hmuYWP2tMHQf6uQUXZ7D-dAlXnpIVnbeptMQdkPabIqxySDVDKnZ_XUWHLkzcuRdsyAkjmID2j_wRb99Tg03Q1vOtl8CQAwQflbdP-z6YeQ6pWHC3B0ajM8yNHI7LI7kVux_ulSHmIgZLHiWtoz2KZclZxVWmFjxFjN3B9IUjBXodrhyEzSbQ0OaHr9MJcjCDc0_dKPcX5UK9IHs8A9hcvnRXJ-JWPFT2C7tk0tbxzFMebBahisaGIo0ENzDzbHwItItf4",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "김성현",
+      "uri": "https://maps.google.com/maps/contrib/114006791368017943543",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJcWsCcKlVA8yIyc_7aR5SB3mYPpUTxug1gTxEk6V4HkhFWoA=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLc7R4A_JSKKeA8QMD5w3M07_fMgDQsi5BSmTKLBzik5-FhHYknmfJaF1TJBQlkjPH___JDS8sYkgXbeynR5cbdlgyCH1F7ugqPgkq9Xkp7uXhR-AMt2wG7k4WIQxpLtJ_G_k9Iu1OPnBRrCP0UqQiVqiTwEJ3WwQ_Pi-wKtulHhGC3Cc8FC0eYJmAEpF5iT4pQbdTSfrZKnjVO34ERcpf0R8eDvXKlwdLb6piiMLuRI3-H1go0gipcCitfpMHpId8UXfwKskw_RmysvVikbsRggFMANlQFJE5sJ1wNJaKBsd98776vETCaD1onJEYVOLwBKklrYT50i29zVuHpzE-BmJO9IxDUS3aZunkc2xkcjVKSPRRHwfaR-Muvx76aX0AKahzYWskfqVS0PT6oEc8x35j7BqIguhO48uPS-Cla7CQ",
+    "widthPx": 4096,
+    "heightPx": 3072,
+    "authorAttributions": [
+     {
+      "displayName": "Mikey C",
+      "uri": "https://maps.google.com/maps/contrib/103092004183416718382",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXhSqWRrdoUpDEeftaDmsRF9SVLL6U4EcOf6GhuBXIclpQ7iC2Mbg=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLeJTimfwOJi5IgADJ0ne7YbjZj_PmEaUf2kMkCJgcw8-JtkMbGvMHMN4ZliOHFWtlsTCXS1SDVopLZSvFnr4iOpn8l7BKGgdTJdq3WFRrp114LNTIJk3nmL1197icrC6nspizlJ02LdDQ3EkvUb_bSZjQAGwg17jhm6XWqe6rxFTjH8zPSjTuT1Zdgf_4k5D9RqTR9_WYELz32PfKCIhGtbujDD_OMLJPMfFvaSzNLtffZFCZfXouw672n6ytFVDHzfJrCyJOseLNvmoGBeBTd94KFqPA-pNxlB53ujvZY7hjIjfwvSbvP6t9DQhGscNMyxazShlyVOUFJgNITc3Q4gqcYGLAjOx8L9IZnxj5Nqe4SO37twE-f9NBQ8SvvicbdoaRMwvDWED8Z3ljQcLMXm8V_mUsyGqUsD-fvpQ5VLrg",
+    "widthPx": 4000,
+    "heightPx": 3000,
+    "authorAttributions": [
+     {
+      "displayName": "Sava Spasenovic",
+      "uri": "https://maps.google.com/maps/contrib/101834706009055084164",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJ83G-o1qOoKxP4TMYcAFGaUe9elE5uc5IG_j-3oQJ3QFSUvQ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLdWTAWh8xmnpQJnAsaQRLkFwxWmEVAMIcypWUVZnZub8dDaBj7xRnRUvWGhh8MgXwmuvEXSupRhNxs5fVedLP0X_nsccWt1uGgNVX9Yc7YlvjBSRo4w-tJ6xKZZdinZKj1apL9mxHG41cyF8DTIl3WvXaHZ-D97vhx8xUbz6JPB7iGUIQDh-M6zT-QUpAxsI9KFj3ktxX47N6bvTpWwkcvML_BfpZgR0MwD0zgaVeNbNHgy9gzuuknOBPKO0AnL5humvNlCuqKCPTVunopm7AOqzKcRKk1Cp67_oCLxnGHP5-CP-xTfXAZeQ7LMgJ6aoqjlXRTET22sJhJ4Jpy2FHH1t1-A7fCagGCncdLi2SdJCq9rKW1nzRtI93ro4eNXu4npG2-Had9X2AwJEiN-3x29wTq200nyV1Bp9kzEbuWaMw",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "me ZinShell",
+      "uri": "https://maps.google.com/maps/contrib/100444833144361308832",
+      "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKWwa9g9dAm1OxSPqdLp7QnjSdVmOQ3UKn2RIUxaLgCs5C7UQ=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLcm-g8Ig9fGT-2IwzG1y6hVBXTDq2gUojUheaDVuWTI6hdl8Cttkwq9qxMayOSwyxnUDJgONEpc3EhABzeJ5v14KCJ3slELxRaJBlPQweqi7H8PgUsQ4X7H07Xn0TyIfJH4g3G9x-LFjCQp_LNrKv8V9-s6Rt8c7lK63G1Gwp_LHUZbZRn8sQxN_5jgBc3MuR843mUzivhLW8JGFPgo0TjPi0KfsdUIyPvx-pLdFahuxZ94pIWa8RY1hjHi6FDMT3kTnt-Yhc1q1GJ23GkQC-H0AXqst8JxMy0PHwdtvJpZP3SkZezgwNHsZOf5tOfw22RZ3jXXw3PPYtGYFi4IwBuMA-BbRFHN6zRC23S5XPW0WKyRXnrMc-orOo4C-s6lhAd4n_DcSvG_ufRS_TKRUUMsycpkveZatQLRK-RmtbJO1A",
+    "widthPx": 1104,
+    "heightPx": 828,
+    "authorAttributions": [
+     {
+      "displayName": "Mernarot",
+      "uri": "https://maps.google.com/maps/contrib/118400492985371732035",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWSwVoA3JaNleQW9Xrq55_9MQ5YlmmP9Qv6GA9hcTJXc7DDxtRW=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLdpsVnn3_ZLHZlUPuiXoaNFwibJpif67nlZqsMvW32bQ4mzNgZ9cxkCwZbjcA_0ZnoJCbJ6wkWeEj2gO0FPlficvupMUVywkdilRHPhsAZFCg6I312Ul-LVS-LtEO7eztU_YUaNa1xuqPQUbjkks6KTFo-YfnEvk2W7CkU5mEdi3u_mG46MRwN3d4pOD6d_W1uByWMUvl4GLykQZiAUavnpKFXsHaQ8opWoWcZXYFe5Z_9NAN0BHMoITD-Coez1mtHqu0skQQXQrkTOA_JCYzfan_YeyvI-uj8ImLhVkPgdIw45GieQhwgBwYzChmYEKACZkaCMwzFVZDdHQWMLaVHMEf0rFDSCyOf1FCoukeRqLT3OXBDHZPui6MFJJexH7hkuO0bYYoIRR39uCv9q3ip5Po7ma1DKsBfCVgtnxLn4-w",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "ウDanny",
+      "uri": "https://maps.google.com/maps/contrib/112743312764030569383",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWZQuB028Qjk1ALY0OPNCfkyNIBvHyeI0A2018djB9ArcizyPAD=s100-p-k-no-mo"
+     }
+    ]
+   },
+   {
+    "name": "places/ChIJb7peR8LnAGAR5XyI7m81_nk/photos/AV-0GLctP-SQI548alLtWu-Zumf4vsoDCbJK65TXrqSjEafnlsUDdtR4oLUX5mgPc3s-XiyI1IrbRwl3viCxmJ8AmtuUxaTI_KHBulWSiQvAwc2qreyjujrDYYS2nFrGvAP01lroqn2TiNtRQF8EWu3YZ3iKwY_eIMXkf14zdHhDK0nlLiS68b1TklfnPdnGBTbni3lkT_DKY1TAlDm6ArtlIN_lUuTNGnlQMtuBqIuLOjy18cLZFkkP8eQVAICWm4YLosdU5MVZEU7FvoPNVhAhB4WeT7xhpLbd9i7piI3KRDkaicrGYX_XrnWOJoX-_hqxHJIwqrpspB8gZOnUs_e3u8p-cZO5Mt96Ccgl3M4-yFW3y63WxHxGhHuaJ1vKvfl0FUvOte8yupOiUoONYUUbQBw7bHB72jkNJF1Cib7drIDqDA",
+    "widthPx": 4032,
+    "heightPx": 3024,
+    "authorAttributions": [
+     {
+      "displayName": "ウDanny",
+      "uri": "https://maps.google.com/maps/contrib/112743312764030569383",
+      "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWZQuB028Qjk1ALY0OPNCfkyNIBvHyeI0A2018djB9ArcizyPAD=s100-p-k-no-mo"
+     }
+    ]
+   }
+  ]
+ },
+ "claude": {
+  "popular_menus": [
+   {
+    "name_ja": "塊肉ステーキ",
+    "name_ko": "덩어리 고기 스테이크",
+    "desc_ko": "쇼케이스의 덩어리 고기 중 부위·크기를 골라 두껍게 구워 주는 간판 스테이크. 리뷰에서 '꼭 시켜야 할 메뉴'로 언급됨",
+    "price_jpy": null,
+    "source_urls": [
+     "https://aumo.jp/articles/5352408",
+     "https://retty.me/theme/100294613/",
+     "https://retty.me/theme/200245200/"
+    ]
+   },
+   {
+    "name_ja": "名物にこみ",
+    "name_ko": "명물 니코미(소 내장 조림)",
+    "desc_ko": "가게가 '명물'로 내세우는 조림 요리. 코스에도 포함됨",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/theme/200245200/",
+     "https://retty.me/theme/100294613/"
+    ]
+   },
+   {
+    "name_ja": "炭火で炙った赤身ユッケ",
+    "name_ko": "숯불에 살짝 구운 붉은살 육회",
+    "desc_ko": "숯불로 겉을 그을린 붉은살 소고기 육회",
+    "price_jpy": null,
+    "source_urls": [
+     "https://retty.me/theme/100294613/",
+     "https://retty.me/theme/200245200/"
+    ]
+   },
+   {
+    "name_ja": "スタンダード源兵衛コース",
+    "name_ko": "스탠더드 겐베에 코스",
+    "desc_ko": "홋카이도 가무이규 덩어리 스테이크(1인 약 150g) 포함 8품, 2층석 한정 2시간 음료 무제한 연회 코스",
+    "price_jpy": 6500,
+    "source_urls": [
+     "https://aumo.jp/articles/5352408",
+     "https://aumo.jp/articles/5449794"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "recommended",
+   "methods": [
+    {
+     "type": "official_site",
+     "url": "https://booking.ebica.jp/webrsv/plan_search/e014153701/31271",
+     "note_ko": "공식 등록 넷 예약(ebica → japanticket으로 리다이렉트). 페이지가 403으로 막혀 있어 플랜 내용은 확인하지 못함"
+    },
+    {
+     "type": "gurunavi",
+     "url": "https://gurunavi.com/ja/kbwx902/rev/rst",
+     "note_ko": "구루나비 넷 예약 페이지(검색 결과에서 예약 기능이 있다고 나옴. 페이지가 503이라 직접 열어 보지는 못함)"
+    },
+    {
+     "type": "phone",
+     "url": "tel:06-6599-8988",
+     "note_ko": "구루나비에 실린 번호(검색 결과 요약에서 확인)"
+    }
+   ],
+   "note_ko": "aumo에 따르면 2층 연회 코스는 좌석이 적어 일찍 예약하는 게 좋고, 1층에 하나뿐인 소파석도 예약을 추천함. Retty 리뷰에는 원하던 19시 대신 18시 30분 자리를 받았다는 글이 있음. 평일 18시까지 하이볼 50엔이라는 리뷰도 있음.",
+   "source_urls": [
+    "https://aumo.jp/articles/5352408",
+    "https://retty.me/theme/200245200/",
+    "https://retty.me/theme/100294613/"
+   ]
+  },
+  "note": "타베로그(tabelog.com 403, ssl.tabelog.com 접속 불가), 구루나비(503), 공식 예약 페이지(japanticket 403)를 모두 열지 못해서 메뉴판 일본어 이름과 단품 가격(덩어리 스테이크, 니코미, 육회)은 확인하지 못함. 덩어리 스테이크는 부위·g 수에 따라 가격이 달라지는 방식임. 코스 가격(6,500엔, 세금 포함)은 aumo 기사 두 곳에서 확인함. 다만 aumo 기사 안에서 와규 프티리치 코스 가격이 7,500엔/9,000엔으로 서로 달라서 이 코스는 넣지 않음. 인기 순위는 Retty·aumo에서 언급된 횟수를 기준으로 정함. 7월부터 시작한 런치(규탄 정식)가 있다는 Retty 언급이 있지만 가격은 확인 못함. 전화번호와 구루나비 예약 페이지는 검색 결과 요약에서만 확인함. 검색 결과에 섞여 나온 源兵衛 천마점(天満店) 정보는 빼고 정리함."
+ },
+ "codex": {
+  "popular_menus": [
+   {
+    "name_ja": "塊肉ステーキ",
+    "name_ko": "덩어리 고기 스테이크",
+    "desc_ko": "원하는 크기의 소고기 덩어리를 골라 굽는 대표 메뉴로, 조리에 30분 이상 걸립니다.",
+    "price_jpy": null,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27108460/dtlmenu/",
+     "https://ameblo.jp/yamachang-1963/entry-12833842365.html",
+     "https://www.hotpepper.jp/strJ001210238/"
+    ]
+   },
+   {
+    "name_ja": "名物 にこみ",
+    "name_ko": "명물 소내장·힘줄 조림",
+    "desc_ko": "소내장과 소힘줄을 레드와인과 육수로 푹 끓인 요리입니다.",
+    "price_jpy": 550,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27108460/dtlmenu/",
+     "https://ameblo.jp/yamachang-1963/entry-12833842365.html",
+     "https://map.yahoo.co.jp/v3/place/HTmZxQj-ZfE/menu"
+    ]
+   },
+   {
+    "name_ja": "ローストビーフのとろろユッケ丼",
+    "name_ko": "로스트비프 참마 육회풍 덮밥",
+    "desc_ko": "로스트비프에 간 참마와 달걀을 곁들인 덮밥입니다.",
+    "price_jpy": 1138,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27108460/dtlmenu/",
+     "https://map.yahoo.co.jp/v3/place/HTmZxQj-ZfE/menu"
+    ]
+   },
+   {
+    "name_ja": "一年中おいしおろしそば",
+    "name_ko": "무즙 소바",
+    "desc_ko": "간 무를 곁들여 식사 마무리로 먹는 소바입니다.",
+    "price_jpy": 968,
+    "source_urls": [
+     "https://tabelog.com/osaka/A2701/A270202/27108460/dtlmenu/",
+     "https://ameblo.jp/yamachang-1963/entry-12833842365.html",
+     "https://map.yahoo.co.jp/v3/place/HTmZxQj-ZfE/menu"
+    ]
+   }
+  ],
+  "reservation": {
+   "status": "accepted",
+   "methods": [
+    {
+     "type": "tabelog",
+     "url": "https://tabelog.com/osaka/A2701/A270202/27108460/",
+     "note_ko": "타베로그 인터넷 예약 가능."
+    },
+    {
+     "type": "phone",
+     "url": "tel:06643948717",
+     "note_ko": "매장 전화. 10명 초과 예약과 대관은 전화 문의로 안내합니다."
+    }
+   ],
+   "note_ko": "매장 안내에 따르면 18~20시에 예약이 몰리고 20시 이후에는 예약이 비교적 쉽습니다. 웹 예약이 불가능하게 표시되어도 안내 가능한 경우가 있어 전화 문의를 받습니다.",
+   "source_urls": [
+    "https://tabelog.com/osaka/A2701/A270202/27108460/"
+   ]
+  },
+  "note": "정확한 인기 순위는 확인되지 않아 명물로 명시된 메뉴를 먼저 두고 여러 페이지에 등장한 메뉴를 정리했습니다. 가격은 2026년 7월 12일 갱신된 타베로그 메뉴의 세금 포함 표기 기준이며, 스테이크는 부위·중량별 가격이므로 단일 가격을 비웠습니다. 예약 가능은 확인했지만 워크인 대기 수준은 확인하지 못했습니다. 제공된 ebica 주소는 403 오류로 내용을 읽지 못해 예약 수단에서 제외했습니다. 핫페퍼는 현재 인터넷 예약을 받지 않는다고 표시합니다."
+ },
+ "merged": {
+  "menus": [
+   {
+    "name_ja": "塊肉ステーキ",
+    "name_ko": "덩어리 고기 스테이크",
+    "desc_ko": "원하는 크기의 소고기 덩어리를 골라 굽는 대표 메뉴로, 조리에 30분 이상 걸립니다.",
+    "price_jpy": null,
+    "a_index": 0,
+    "b_index": 0,
+    "source_urls": [
+     "https://aumo.jp/articles/5352408",
+     "https://retty.me/theme/100294613/",
+     "https://retty.me/theme/200245200/",
+     "https://tabelog.com/osaka/A2701/A270202/27108460/dtlmenu/",
+     "https://ameblo.jp/yamachang-1963/entry-12833842365.html",
+     "https://www.hotpepper.jp/strJ001210238/"
+    ]
+   },
+   {
+    "name_ja": "名物 にこみ",
+    "name_ko": "명물 소내장·힘줄 조림",
+    "desc_ko": "소내장과 소힘줄을 레드와인과 육수로 푹 끓인 요리입니다.",
+    "price_jpy": null,
+    "a_index": 1,
+    "b_index": 1,
+    "source_urls": [
+     "https://retty.me/theme/200245200/",
+     "https://retty.me/theme/100294613/",
+     "https://tabelog.com/osaka/A2701/A270202/27108460/dtlmenu/",
+     "https://ameblo.jp/yamachang-1963/entry-12833842365.html",
+     "https://map.yahoo.co.jp/v3/place/HTmZxQj-ZfE/menu"
+    ]
+   }
+  ],
+  "reservation_status": "unknown",
+  "reservation_agree": false,
+  "methods": [
+   {
+    "type": "phone",
+    "url": "tel:06-6599-8988",
+    "note_ko": "매장 전화. A는 06-6599-8988(구루나비 검색 요약), B는 06643948717(11자리로 형식 오류 가능성)로 번호가 서로 다르므로 확인 필요. 10명 초과 예약·대관은 전화 문의(B)."
+   }
+  ],
+  "reservation_note_ko": "",
+  "disagreements_ko": "예약 상태: A는 '권장(recommended)', B는 '가능(accepted)'. 예약 수단: A는 공식 ebica·구루나비·전화, B는 타베로그·전화이며 전화번호가 서로 다름(A 06-6599-8988, B 06643948717 — B는 자릿수가 맞지 않음). 메뉴: 육회가 A는 '숯불에 구운 붉은살 육회', B는 '로스트비프 참마 육회 덮밥(1,138엔)'으로 다른 메뉴임. A에만 스탠더드 겐베에 코스(6,500엔), B에만 무즙 소바(968엔)가 있음. 니코미 가격은 B만 550엔으로 제시함. 예약 메모: A는 2층 연회석·소파석 조기 예약을 권장하고, B는 18~20시 혼잡·20시 이후 여유를 안내함."
+ },
+ "photo_claude": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(야간, 입구와 입간판)"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(주간, 입구와 와규 덩어리 고기 스테이크 입간판)"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": 0,
+    "what_ko": "나무 도마에 담은 썰어 놓은 덩어리 고기 스테이크와 감자튀김, 샐러드"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "파와 스다치를 올린 차가운 소바"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": 0,
+    "what_ko": "주방 석쇠 위에서 굽고 있는 소고기 덩어리(덩어리 고기 스테이크 조리 중)"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": 0,
+    "what_ko": "'Enjoy Osaka' 문구를 쓴 도마 위 썰어 놓은 덩어리 고기 스테이크와 감자, 샐러드"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "철냄비에 담긴 내장·양배추·파 조림(냄비) 요리, 레드와인 니코미인지 불확실"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "달걀노른자와 깻잎을 곁들인 소고기 유케/타타키풍 요리"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": 0,
+    "what_ko": "불길이 치솟는 석쇠 위에서 굽는 소고기 덩어리 두 개(덩어리 고기 스테이크)"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 외관(야간 정면, 입간판)"
+   }
+  ]
+ },
+ "photo_codex": {
+  "photos": [
+   {
+    "file": "photo01.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 출입구와 입간판이 보이는 외관"
+   },
+   {
+    "file": "photo02.jpg",
+    "menu_index": -1,
+    "what_ko": "가게 간판과 입구, 스테이크 홍보 입간판"
+   },
+   {
+    "file": "photo03.jpg",
+    "menu_index": 0,
+    "what_ko": "구운 소고기 덩어리를 썰어 감자와 샐러드를 곁들인 스테이크"
+   },
+   {
+    "file": "photo04.jpg",
+    "menu_index": -1,
+    "what_ko": "파와 감귤류, 채 썬 고명을 올린 메밀국수"
+   },
+   {
+    "file": "photo05.jpg",
+    "menu_index": 0,
+    "what_ko": "석쇠 위에서 두툼한 소고기 덩어리 스테이크를 굽는 모습"
+   },
+   {
+    "file": "photo06.jpg",
+    "menu_index": 0,
+    "what_ko": "나무 도마에 썬 소고기 스테이크와 감자, 샐러드를 담은 요리"
+   },
+   {
+    "file": "photo07.jpg",
+    "menu_index": -1,
+    "what_ko": "뜨거운 철판에 소스와 고기, 양배추, 파를 담은 요리로 명물 조림인지는 불확실"
+   },
+   {
+    "file": "photo08.jpg",
+    "menu_index": -1,
+    "what_ko": "얇게 썬 소고기에 달걀노른자와 차조기 잎을 곁들인 육회풍 요리"
+   },
+   {
+    "file": "photo09.jpg",
+    "menu_index": 0,
+    "what_ko": "큰 불꽃이 올라오는 석쇠에서 소고기 덩어리 스테이크를 굽는 모습"
+   },
+   {
+    "file": "photo10.jpg",
+    "menu_index": -1,
+    "what_ko": "밤에 촬영한 가게 정면 외관과 입간판"
+   }
+  ]
+ }
+}
