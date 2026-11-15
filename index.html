@@ -37,6 +37,7 @@ button,select{font:inherit;color:inherit}
 .chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .scroll{--sx:14px;overflow-y:auto;flex:1;min-height:0;padding:12px var(--sx) 40px}
 .sheet-handle{display:none}
+.scroll.sheet-drag{user-select:none;cursor:grabbing}
 
 /* route box */
 .routebox{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0 calc(-1 * var(--sx)) 14px;padding:4px var(--sx) 18px}
@@ -624,12 +625,9 @@ const listEl = document.getElementById('list');
   const isMob=()=>matchMedia('(max-width:860px) and (min-height:521px)').matches;
   const isMin=()=>app.classList.contains('sheet-min');
   const set=min=>{ app.classList.toggle('sheet-min',min); h.setAttribute('aria-expanded',!min); h.querySelector('span').textContent=min?'목록 펼치기':'목록 접기'; if(!min) sc.scrollTop=0; };
-  // 손잡이: 탭(또는 마우스 드래그)
-  let py=null;
-  h.addEventListener('pointerdown',e=>{ py=e.clientY; });
-  h.addEventListener('pointerup',e=>{ if(py===null) return; const dy=e.clientY-py; py=null;
-    if(e.pointerType==='touch' && Math.abs(dy)>=10) return; // 터치 스와이프는 아래 터치 처리에서
-    if(dy>30) set(true); else if(dy<-30) set(false); else set(!isMin()); });
+  // 손잡이: 탭/클릭 (드래그 직후의 클릭은 무시)
+  let justDragged=false;
+  h.addEventListener('click',()=>{ if(justDragged) return; set(!isMin()); });
   h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!isMin()); } });
   // 시트 어디서든 스와이프: 펼친 상태에선 목록 맨 위에서 아래로 쓸면 접힘, 접힌 상태에선 위로 쓸면 펼침
   let t=null;
@@ -643,6 +641,19 @@ const listEl = document.getElementById('list');
   const end=()=>{ if(!t) return; const {dy,active}=t; t=null; sc.style.transition='transform .18s'; sc.style.transform='';
     if(!active) return; if(isMin() && dy<-30) set(false); else if(!isMin() && dy>50) set(true); };
   sc.addEventListener('touchend',end); sc.addEventListener('touchcancel',end);
+  // 데스크탑(마우스): 시트를 잡고 위/아래로 끌기 — 규칙은 터치와 같음
+  let m=null;
+  sc.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0||!isMob()) return;
+    if(e.target.closest('select,input,textarea,a,.cats,.rankset,.routebox button')) return;
+    m={y:e.clientY, top:sc.scrollTop<=0, dy:0, active:false}; });
+  window.addEventListener('pointermove',e=>{ if(!m) return; const dy=e.clientY-m.y; m.dy=dy;
+    if(!m.active){ if(Math.abs(dy)<6) return; if(isMin() ? dy<0 : (dy>0 && m.top)) { m.active=true; sc.classList.add('sheet-drag'); } else { m=null; return; } }
+    e.preventDefault(); sc.style.transition='none'; sc.style.transform=`translateY(${isMin()?Math.max(dy,-80)*.5:Math.max(dy,0)*.6}px)`; });
+  window.addEventListener('pointerup',()=>{ if(!m) return; const {dy,active}=m; m=null; if(!active) return;
+    sc.classList.remove('sheet-drag'); sc.style.transition='transform .18s'; sc.style.transform='';
+    justDragged=true; setTimeout(()=>justDragged=false,0);
+    if(isMin() && dy<-30) set(false); else if(!isMin() && dy>50) set(true); });
+  sc.addEventListener('click',e=>{ if(justDragged){ e.stopPropagation(); e.preventDefault(); } },true);
   window.openSheet=()=>{ if(isMin()) set(false); };
 })();
 function trCellHTML(k){
