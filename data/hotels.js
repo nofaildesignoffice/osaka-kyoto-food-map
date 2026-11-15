@@ -9,9 +9,21 @@ window.HOTELS = [
   "address": "奈良県奈良市川上町728-10",
   "lat": 34.6969372,
   "lng": 135.846124,
-  "agoda": "https://www.agoda.com/sh-app/J8p5z81eR7Z",
+  "agoda": "https://www.agoda.com/ko-kr/mikasa-ryokan/hotel/nara-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
   "type": "hotel",
-  "notes": []
+  "notes": [],
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 1376878,
+   "room": "일본식 객실 - 전망 · 29m² · 요이불 세트 4개",
+   "conditions": "즉시 결제 · 식사 포함 여부·취소 정책은 예약 시 확인 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-15T17:55+09:00"
+  }
  },
  {
   "id": "hotel-sumiya",
@@ -22,11 +34,23 @@ window.HOTELS = [
   "address": "京都府亀岡市ひえ田野町柿花宮ノ奥25",
   "lat": 35.0212564,
   "lng": 135.5057184,
-  "agoda": "https://www.agoda.com/sh-app/JTB2VSBvWFn",
+  "agoda": "https://www.agoda.com/ko-kr/sumiya-kiho-an-ryokan/hotel/kyoto-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
   "notes": [
    "교토 시내가 아니라 가메오카(교토역에서 서쪽으로 약 20km) 산속 온천 마을"
   ],
-  "type": "hotel"
+  "type": "hotel",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": null,
+   "room": "",
+   "conditions": "아고다에서 11/25~11/28 3박 일정 판매 완료로 표시. 확인 가능한 예약 요금 없음.",
+   "availability": "sold_out",
+   "checkedAt": "2026-11-15T17:55+09:00"
+  }
  },
  {
   "id": "hotel-granbell",
@@ -37,9 +61,21 @@ window.HOTELS = [
   "address": "大阪府大阪市中央区北久宝寺町2-6-7",
   "lat": 34.6797932,
   "lng": 135.5037083,
-  "agoda": "https://www.agoda.com/sh-app/mIx270RHVq7",
+  "agoda": "https://www.agoda.com/ko-kr/granbell-hotel-osaka/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
   "type": "hotel",
-  "notes": []
+  "notes": [],
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 406145,
+   "room": "트윈룸 · 14m² · 싱글베드 2개",
+   "conditions": "조식 불포함 · 환불 불가 · 즉시 결제 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-15T17:55+09:00"
+  }
  },
  {
   "id": "hotel-forza",
@@ -50,9 +86,23 @@ window.HOTELS = [
   "address": "大阪府大阪市中央区今橋2-2-21",
   "lat": 34.690275,
   "lng": 135.5061942,
-  "agoda": "https://www.agoda.com/sh-app/0NibWR93raP",
+  "agoda": "https://www.agoda.com/ko-kr/hotel-forza-osaka-kitahama/hotel/kobe-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
   "type": "hotel",
-  "notes": []
+  "notes": [
+   "조회 시 객실 이동 상품도 있었음: 11/25~27 더블룸 2박 + 11/27~28 리프레쉬 트윈룸 1박, 총 464,834원(1박 평균 약 154,945원). 예약 2건과 11/27 객실 이동이 필요하며 카드 가격과 다른 상품."
+  ],
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 724740,
+   "room": "리프레쉬 더블룸 · 18m² · 더블베드 1개 · 성인 2명",
+   "conditions": "3박 같은 객실 기준 · 조식 별도 · 환불 불가 · 즉시 결제 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-15T17:56+09:00"
+  }
  },
  {
   "id": "hotel-daiwa",
@@ -63,9 +113,21 @@ window.HOTELS = [
   "address": "大阪府大阪市中央区本町1-5-10",
   "lat": 34.6837519,
   "lng": 135.5076811,
-  "agoda": "https://www.agoda.com/sh-app/FbumT4Y6sFZ",
+  "agoda": "https://www.agoda.com/ko-kr/daiwa-roynet-hotel-osaka-sakaisuji-honmachi/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
   "type": "hotel",
-  "notes": []
+  "notes": [],
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 605066,
+   "room": "모더레이트 할리우드 트윈 · 금연 · 최대 성인 2명",
+   "conditions": "조식 불포함 · 11/24 전 무료 취소 · 11/22까지 결제 불필요 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-15T17:56+09:00"
+  }
  },
  {
   "id": "hotel-mrt-namba-east43",

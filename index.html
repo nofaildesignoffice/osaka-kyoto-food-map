@@ -354,7 +354,7 @@ table.near tr[data-route]:hover td{background:var(--bg)}
   </main>
 </div>
 
-<script src="data/hotels.js?v=20261115-hotels4"></script>
+<script src="data/hotels.js?v=20261115-hotels9"></script>
 <script src="data/places.js?v=20261115b"></script>
 <script src="data/spots.js?v=20261115b"></script>
 <script src="data/added.js"></script>
@@ -744,6 +744,11 @@ function nearTable(p){
 }
 function hotelRateHTML(p,compact=false){
   const r=p.stayRate; if(!r) return '';
+  if(r.availability==='sold_out'){
+    const title='해당 날짜 예약 불가';
+    if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--warn)">${title} <span class="meta">· ${esc(r.checkIn.slice(5).replace('-','/'))}부터 ${r.nights}박</span></div>`;
+    return `<div class="warn"><b>${title}</b><div>${esc(r.checkIn)} → ${esc(r.checkOut)} · 성인 ${r.adults}명 · 객실 ${r.rooms}개</div><div>${esc(r.conditions)}</div><div class="meta">${esc(r.checkedAt)} 아고다 조회 · 취소 객실이 나오면 달라질 수 있어요.</div></div>`;
+  }
   const price=Number.isFinite(r.totalKRW)?Math.round(r.totalKRW/r.nights).toLocaleString('ko-KR')+'원':'확인 필요';
   if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--hotel)">1박 평균 ${price} <span class="meta">· ${esc(r.checkIn.slice(5).replace('-','/'))}부터 ${r.nights}박</span></div>`;
   return `<div class="tip"><b>1박 평균 ${price}</b><div>${esc(r.checkIn)} 체크인 → ${esc(r.checkOut)} 체크아웃 · ${r.nights}박</div>
