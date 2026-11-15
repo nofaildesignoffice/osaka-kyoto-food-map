@@ -327,10 +327,10 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .field span{display:block;font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:5px}
 .field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:#fff}
 .field textarea{min-height:90px;resize:vertical}
-.cand:not(.card){display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}
-.cand:not(.card) .mi{flex:1;min-width:0}
-.cand:not(.card) .mn{font-weight:800;font-size:14px}
-.cand:not(.card) .meta{line-height:1.45}
+.cand:not(.card):not(.pin){display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}
+.cand:not(.card):not(.pin) .mi{flex:1;min-width:0}
+.cand:not(.card):not(.pin) .mn{font-weight:800;font-size:14px}
+.cand:not(.card):not(.pin) .meta{line-height:1.45}
 .sub-h{font-size:12px;font-weight:800;color:var(--ink3);margin:14px 0 4px}
 .bell{position:relative;flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink);padding:0}
 .bell .badge{position:absolute;top:-4px;right:-5px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#e5484d;color:#fff;font-size:11px;font-weight:800;line-height:18px;text-align:center;border:2px solid #fff;box-sizing:content-box}
