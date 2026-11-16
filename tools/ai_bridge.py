@@ -272,7 +272,7 @@ def make_record(job_or_text, c, cat, forced=False, grp=""):
     return {"id": "a-" + re.sub(r"[^A-Za-z0-9]", "", c["pid"])[-14:], "gpid": c["pid"], "type": cat, "city": city_of(c["lat"], c["lng"]),
             "lat": round(c["lat"], 7), "lng": round(c["lng"], 7), "name": c["name"], "nameJa": c.get("nameJa", ""), "address": c.get("address", ""),
             "area": c.get("typeKo", ""), "group": (grp if cat == "food" and grp else {"food": "AI로 추가한 맛집", "spot": "관광지", "hotel": ""}[cat]), "emoji": (GROUP_EMOJI.get(grp) if cat == "food" and GROUP_EMOJI.get(grp) else emoji_of(c.get("types"), cat)),
-            "origin": "ai", "typed": text[:300], "verified": c.get("votes", []), "forced": forced,
+            "gtypes": list(c.get("types") or [])[:12], "origin": "ai", "typed": text[:300], "verified": c.get("votes", []), "forced": forced,
             "aiEvidence": [{"ai": a["ai"], "evidence": (a.get("evidence") or "")[:400]} for a in c.get("ai", [])],
             "addedAt": time.strftime("%Y-%m-%d"), "notes": []}
 
