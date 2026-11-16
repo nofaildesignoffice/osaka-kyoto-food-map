@@ -1585,9 +1585,9 @@ async function syncPull(){
     if(applySynced(k,s[k])){ if(k==='ranks') ranks=true; else if(k==='localEvents') bell=true; else places=true; } }
   SRV_NV = s.nvcache||{};
   for(const k in SRV_NV){ const e=SRV_NV[k], cur=TR[k]; if(!e||!Array.isArray(e.routes)||(cur&&cur.status==='loading')) continue;
-    if(!cur || cur.status!=='ok' || Date.parse(e.at)>Date.parse(cur.at)){ TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, src:e.src, shared:true}; tr=true; } }
+    if(!cur || cur.status!=='ok' || Date.parse(e.at)>Date.parse(cur.at) || (e.at===cur.at && e.src!==cur.src)){ TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, src:e.src, shared:true}; tr=true; } }
   const first=!syncReady; syncReady=true;
-  if(tr){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; try{ localStorage.setItem('nvcache', JSON.stringify(o)); }catch(e){} }
+  if(tr){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c, src:TR[k].src}; try{ localStorage.setItem('nvcache', JSON.stringify(o)); }catch(e){} }
   if(bell) renderBell();
   if(places) afterPlacesChanged(); else if(ranks||tr){ renderList(); refreshMarkers(); }
   const h = state.sel&&byId[state.sel]&&byId[state.sel].type==='hotel' ? byId[state.sel] : null;
