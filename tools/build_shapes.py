@@ -2,7 +2,7 @@
 """저장된 지하철+도보 경로(공용 저장소 nvcache)마다 지도에 그릴 실제 모양을 만들어 /shape/<구간> 에 올린다.
 - 역·정류장 위치: Google Places 검색 → 걷는 거리·탄 시간과 맞는 후보만 채택 (안 맞으면 그 구간은 만들지 않음)
 - 걷는 구간: Google Routes 도보 경로 / 버스: Google Routes 차도 경로
-- 철도·지하철: OpenStreetMap 노선(relation) 선로를 따라 최단 경로 (tools/osm/rail_rel.json)
+- 철도·지하철: 국토교통성 国土数値情報 鉄道データ(N02-25, 2025-12-31 시점) 선로를 따라 최단 경로 (tools/osm/rail_rel.json)
 결과 형식은 사이트가 이미 그리는 NAVITIME GeoJSON 과 같음: [FeatureCollection]
 사용: python build_shapes.py [--push] [--only key1,key2]"""
 import json, math, os, re, sys, heapq, urllib.request, urllib.parse
@@ -85,12 +85,14 @@ def groute(a, b, mode):
     return decode(enc) if enc else [a, b]
 
 # ---------- 철도 선로 (OSM) ----------
-LINE_JA = [('堺筋', '堺筋線'), ('사카이스지', '堺筋線'), ('御堂筋', '御堂筋線'), ('미도스지', '御堂筋線'), ('環状', '環状線'), ('순환', '環状線'),
+# 노선 이름(구글 한국어 / NAVITIME 일본어) → 국토교통성 N02 노선명 일부 ('|' = 여러 노선 선로를 합침: 직통 운행 구간)
+LINE_JA = [('堺筋', '堺筋線'), ('사카이스지', '堺筋線'), ('御堂筋', '御堂筋線'), ('미도스지', '御堂筋線'), ('環状', '大阪環状線'), ('순환', '大阪環状線'),
            ('谷町', '谷町線'), ('다니마치', '谷町線'), ('千日前', '千日前線'), ('센니치마에', '千日前線'), ('四つ橋', '四つ橋線'), ('요쓰바시', '四つ橋線'),
-           ('長堀', '長堀鶴見緑地線'), ('나가호리', '長堀鶴見緑地線'), ('中央線', '中央線'), ('주오선', '中央線'), ('고야선', '高野線'), ('난카이 본선', '南海本線'),
-           ('야마토지', '関西本線'), ('関西本線', '関西本線'), ('嵯峨野', '山陰本線'), ('산인', '山陰本線'), ('東西線', '東西線'), ('도자이', '東西線'),
-           ('한큐 고베', '神戸本線'), ('긴테쓰 나라', '奈良線'), ('나라선', '奈良線'), ('유메사키', '桜島線'), ('京阪本線', '京阪本線'), ('게이한 본선', '京阪本線'),
-           ('한신 난바', '阪神なんば線'), ('이마자토', '今里筋線'), ('뉴트램', 'ニュートラム')]
+           ('長堀', '長堀鶴見緑地線'), ('나가호리', '長堀鶴見緑地線'), ('中央線', '(中央線)'), ('주오선', '(中央線)'), ('고야선', '南海電気鉄道 南海本線|南海電気鉄道 高野線'),
+           ('난카이 본선', '南海電気鉄道 南海本線'), ('야마토지', '西日本旅客鉄道 関西線'), ('関西本線', '西日本旅客鉄道 関西線'), ('嵯峨野', '西日本旅客鉄道 山陰線'), ('산인', '西日本旅客鉄道 山陰線'),
+           ('京都市営東西線', '京都市 東西線'), ('도자이', '京都市 東西線'), ('한큐 고베', '阪急電鉄 神戸線'), ('긴테쓰 나라', '近畿日本鉄道 難波線|近畿日本鉄道 奈良線'),
+           ('나라선', '西日本旅客鉄道 奈良線'), ('유메사키', '桜島線'), ('京阪本線', '京阪電気鉄道 京阪本線'), ('게이한 본선', '京阪電気鉄道 京阪本線'),
+           ('한신 난바', '阪神電気鉄道 阪神なんば線'), ('이마자토', '今里筋線'), ('뉴트램', '南港ポートタウン線')]
 RAIL = None
 def rail_graph(ja):
     """노선 이름(일본어 일부)이 들어간 OSM 노선의 선로 그래프"""
@@ -109,11 +111,22 @@ def rail_graph(ja):
                 d = dist(a, b); adj.setdefault(a, {})[b] = d; adj.setdefault(b, {})[a] = d
     return adj
 GRAPHS = {}
+def line_graph(line):
+    g = {}
+    for part in line.split(' → '):
+        ja = next((v for k, v in LINE_JA if k in part), None)
+        for x in (ja.split('|') if ja else []):
+            for u, nb_ in (GRAPHS.get(x) or GRAPHS.setdefault(x, rail_graph(x))).items(): g.setdefault(u, {}).update(nb_)
+    return g
+def line_dist(line, c):
+    g = line_graph(line)
+    return min((dist(u, c) for u in g), default=1e9)
 def rail_path(line, a, b):
     jas = []   # 직통(A → B)이면 두 노선 선로를 합침
     for part in line.split(' → '):
         ja = next((v for k, v in LINE_JA if k in part), None)
-        if ja and ja not in jas: jas.append(ja)
+        for x in (ja.split('|') if ja else []):
+            if x not in jas: jas.append(x)
     if not jas: return None, 'no line map'
     g = {}
     for ja in jas:
@@ -175,6 +188,10 @@ def build(key, ent, pl):
             ok = [B]   # 내리자마자 도착(걷기 120m 이하): 정류장 = 도착지 바로 앞
         if not ok: return None, f"역 위치 확인 실패: {s['to']} (후보 {len(cs)})"
         ok.sort(key=lambda c: dist(cur, c) if s['kind'] == 'walk' else abs(dist(cur, c) - (s.get('min') or 5) * 600))
+        # 같은 이름 역이 여러 노선에 있을 때(本町 등): 이 역에서 타거나 내리는 철도 노선 선로에 가장 가까운 역
+        rl = [x.get('line', '') for x in (s, nxt) if x and x['kind'] == 'ride' and not is_bus(x.get('line', ''), x.get('to', ''))]
+        if rl and len(ok) > 1:
+            ok.sort(key=lambda c: round(max(line_dist(l, c) for l in rl) / 150))   # 갈아타는 역이면 두 노선 모두에 가까워야 함
         pts.append(ok[0])
     feats = []
     for s, a, b in zip(steps, pts, pts[1:]):
