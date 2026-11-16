@@ -247,7 +247,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .pin .pico svg{width:calc(17px*var(--k));height:calc(17px*var(--k))}
 .pin:hover{--k:calc(var(--pz,1) * 1.12)}
 .pin.sel{--k:max(1.2, var(--pz,1) * 1.32);filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
-.pin.dim{opacity:.4}
+.pin.dim{opacity:.3;filter:saturate(.5) drop-shadow(0 1px 2px rgba(0,0,0,.2))} .pin.dim:hover{opacity:.85;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .tlabel{transform:translateY(50%);background:#fff;border-radius:999px;padding:2px 7px;font-size:11.5px;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.25);white-space:nowrap;border:2px solid currentColor}
 .zlabel{transform:translateY(50%);font-size:11px;font-weight:800;color:#5a2fd6;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;white-space:nowrap;pointer-events:none}
 
@@ -711,13 +711,16 @@ function catOK(p){ return state.cat==='all' || catOf(p)===state.cat; }
 function refreshMarkers(){
   if(!map) return;
   const hotelSel = state.sel && byId[state.sel].type==='hotel' ? byId[state.sel] : null;
+  // 활성 장소: 선택한 곳, 경로 출발·도착, 선택한 숙소와 선으로 이어진 순위 맛집. 활성 장소가 있으면 나머지는 흐리게
+  const active = new Set([state.sel, state.from, state.to].filter(Boolean));
+  if(hotelSel) P.forEach(q=>{ if(q.type==='food'&&q.city===hotelSel.city&&rankOf(q)>0) active.add(q.id); });
   P.forEach(p=>{ const k=markers[p.id]; if(!k) return; const r=rankOf(p);
     const show = typeOK(p);
     const shown = show && catOK(p);
-        k.el.className = ['pin', p.type, p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', hotelSel&&p.type==='food'&&p.city===hotelSel.city&&!r?'dim':''].join(' ');
+        k.el.className = ['pin', p.type, p.candidate?'cand':'', r?'r'+r:'', state.sel===p.id||state.from===p.id||state.to===p.id?'sel':'', active.size&&!active.has(p.id)?'dim':''].join(' ');
     const icon = p.type==='hotel' ? BED : p.type==='spot' ? (p.emoji||'📍') : (r ? RANK_ICON[r] : (p.emoji||'🍴'));
     k.el.innerHTML = pinSVG(p.type, p.candidate) + `<span class="pico">${icon}</span>`;
-    k.m.zIndex = p.type==='hotel'?30 : r ? 20-r : 5;
+    k.m.zIndex = (active.has(p.id)?100:0) + (p.type==='hotel'?30 : r ? 20-r : 5);
     k.m.map = shown ? map : null; });
 }
 function clearOverlays(){ overlays.forEach(o=>{ if(o.setMap) o.setMap(null); else o.map=null; }); overlays=[]; }
@@ -738,12 +741,21 @@ function showEmbed(url){
   else { view={kind:'pins'}; mapwrap.classList.remove('embed'); }
   renderBar();
 }
-function addLine(a,b,color,weight,label){
-  const line = new google.maps.Polyline({map, path:[{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}], geodesic:true, strokeColor:color, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1', strokeOpacity:.9, strokeWeight:weight, strokeColor:color, scale:3}, offset:'0', repeat:'12px'}], clickable:false, zIndex:2});
-  overlays.push(line);
+// path(실제 도보 경로)가 있으면 길을 따라 실선, 아직 없으면 직선 점선(조회 중 표시)
+function addLine(a,b,color,weight,label,path){
+  let mid={lat:(a.lat+b.lat)/2,lng:(a.lng+b.lng)/2};
+  if(path && path.length>1){
+    overlays.push(new google.maps.Polyline({map, path, strokeColor:'#fff', strokeOpacity:.95, strokeWeight:weight+3, clickable:false, zIndex:2}));
+    overlays.push(new google.maps.Polyline({map, path, strokeColor:color, strokeOpacity:.95, strokeWeight:weight, clickable:false, zIndex:3}));
+    try{ const L=google.maps.geometry.spherical.computeLength(path); let acc=0;
+      for(let i=1;i<path.length;i++){ const d=google.maps.geometry.spherical.computeDistanceBetween(path[i-1],path[i]); if(acc+d>=L/2){ mid=google.maps.geometry.spherical.interpolate(path[i-1],path[i],(L/2-acc)/(d||1)); break; } acc+=d; } }catch(e){}
+  } else {
+    overlays.push(new google.maps.Polyline({map, path:[{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}], geodesic:true, strokeColor:color, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1', strokeOpacity:.45, strokeWeight:weight, strokeColor:color, scale:3}, offset:'0', repeat:'12px'}], clickable:false, zIndex:2}));
+  }
   if(label){ const el=document.createElement('div'); el.className='tlabel'; el.style.color=color; el.innerHTML=label;
-    overlays.push(new google.maps.marker.AdvancedMarkerElement({map, position:{lat:(a.lat+b.lat)/2,lng:(a.lng+b.lng)/2}, content:el, zIndex:40})); }
+    overlays.push(new google.maps.marker.AdvancedMarkerElement({map, position:mid, content:el, zIndex:40})); }
 }
+const HPATH = {};   // "hotel|food" -> 디코딩된 도보 경로 (메모리)
 
 /* ---------- 숙소 → 순위 맛집 ---------- */
 function rankedFoods(h){ return P.filter(q=>q.type==='food' && q.city===h.city && rankOf(q)>0).sort((a,b)=>rankOf(a)-rankOf(b)); }
@@ -784,13 +796,16 @@ async function showHotelRanks(h){
     clearOverlays();
     foods.forEach(q=>{ const r=rankOf(q), k=`${h.id}|${q.id}`, w=WALK[k], t=trBest(k);
       const lab = [w&&Number.isFinite(w.min)?`🚶${fmtMin(w.min)}`:'', t&&!t.walkOnly?`🚇${fmtMin(t.min)}`:''].filter(Boolean).join(' ');
-      addLine(h,q,RANK_COLOR[r], r===1?4:r===2?3:2.5, lab); });
+      addLine(h,q,RANK_COLOR[r], r===1?5:r===2?4:3.5, lab, HPATH[k]); });
     renderBar();
   };
   const redraw = ()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; draw(); }); };
   if(map && !routeOpen){ draw(); fit([h, ...(foods.length?foods:[])]); if(!foods.length) panTo(h.lat,h.lng,15); } else draw();
   if(!allFoods.length) return;
   walkMatrix([h], allFoods).then(redraw);
+  // 순위 맛집까지 실제 도보 경로(Google Routes) — 길 따라 선을 그림
+  if(map) foods.forEach(q=>{ const k=`${h.id}|${q.id}`; if(HPATH[k]) return;
+    walkRoute(h,q).then(v=>{ if(v.enc){ HPATH[k]=google.maps.geometry.encoding.decodePath(v.enc); redraw(); } }).catch(e=>console.warn('walk path',q.id,e)); });
   // 순위 맛집 먼저, 그다음 나머지 맛집 — 지하철+도보 조회 (한 번 조회한 구간은 이 기기에 30일 기억)
   [...foods, ...allFoods.filter(q=>!rankOf(q))].forEach(q=>transitQuery(h,q).then(redraw));
 }
