@@ -303,7 +303,9 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .fab:hover{border-color:var(--brand)}
 .fab:focus-visible{outline:3px solid var(--brand-soft);outline-offset:2px}
 .mapwrap.embed .hot-fab{display:none}
-.help-fab{position:absolute;right:14px;bottom:28px;z-index:5}
+.help-fab{position:absolute;right:14px;bottom:28px;z-index:5;width:31px!important;height:31px!important}
+.help-fab>svg{width:14px;height:14px}
+@media (max-width:860px){ .help-fab{width:29px!important;height:29px!important} }
 @media (max-width:860px){ .help-fab{right:12px;bottom:calc(var(--sv,55dvh) + 12px)} }
 @media (max-width:860px) and (max-height:520px){ .help-fab{bottom:24px} }
 .lg-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}
