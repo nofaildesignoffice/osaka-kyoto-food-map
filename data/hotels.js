@@ -272,8 +272,22 @@ window.HOTELS = [
   "lat": 34.669757,
   "lng": 135.5036447,
   "gpid": "ChIJV0LnVRTnAGARLTeh1yIz86A",
-  "agoda": "https://www.agoda.com/ko-kr/holiday-inn-osaka-namba/hotel/osaka-jp.html?checkIn=2026-11-25&los=2&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=1",
-  "notes": [],
+  "agoda": "https://www.agoda.com/ko-kr/holiday-inn-osaka-namba/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 570519,
+   "room": "객실 이동 조합: 11/25~27 스탠다드룸(더블베드 1개 · 20m²) 2박 → 11/27~28 프리미엄룸(싱글베드 2개 + 간이침대 · 25m²) 1박",
+   "conditions": "한 객실로 3박 가능한 방 없음(객실 4종 판매 완료) · 아고다 '객실 이동 & 할인' 요금 · 세금·수수료 포함 1박당 190,173원 (3박 총액은 1박당 금액 × 3)",
+   "availability": "available",
+   "checkedAt": "2026-11-16T19:40+09:00"
+  },
+  "notes": [
+   "아고다 11/25~11/27 2박 일정은 전 객실 판매 완료 (2026-11-16 조회)."
+  ],
   "sources": [
    {
     "label": "Google 지도",
