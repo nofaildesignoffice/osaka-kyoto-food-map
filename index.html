@@ -1101,7 +1101,7 @@ function renderList(){
   if(state.cat!=='all' && !cnt[state.cat]) state.cat='all';
   const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
   const slotId = mobSheet() && state.sel && byId[state.sel] && byId[state.sel].city===state.city ? state.sel : null;
-  selSlot.innerHTML = slotId ? `<div class="sel-bar"><button class="sel-back" type="button" data-close><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>목록으로</button><button class="d2-close" type="button" data-close aria-label="접기" title="접기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button></div>`+cardHTML(byId[slotId]) : '';
+  selSlot.innerHTML = slotId ? `<div class="sel-bar"><button class="sel-back" type="button" data-close><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>목록으로</button></div>`+cardHTML(byId[slotId]) : '';
   const paneId = deskPane() && state.sel && byId[state.sel] ? state.sel : null;
   if(paneId!==detailPane.dataset.id) detailBody.scrollTop=0;
   detailPane.dataset.id = paneId||''; detailBody.innerHTML = paneId ? cardHTML(byId[paneId]) : '';
