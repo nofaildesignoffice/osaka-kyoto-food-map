@@ -138,9 +138,16 @@ def parse_detail(detail):
             msid = next((re.search(r'정거장 ID:\s*(\S+)', s) for s in seg if re.search(r'정거장 ID:\s*(\S+)', s)), None)
             # Only treat as a ride when Google showed a ride duration AND a stop count for it
             nonstop = any(s.strip() == '(무정차)' for s in seg)
+            # 직통 열차: '열차에 계속 탑승' 뒤 노선으로 그대로 이어짐 → 시간 합산, 이어지는 노선 기록
+            thru = []
+            if '열차에 계속 탑승' in seg:
+                durs = [minutes(x) for x in seg[1:] if DUR.match(x) and minutes(x) is not None]
+                mins = sum(durs) if durs else mins
+                thru = [seg[i + 1] for i, x in enumerate(seg[:-1]) if x == '열차에 계속 탑승']
+                mst = next((re.search(r'정류장/역 (\d+)개', x) for x in reversed(seg) if re.search(r'정류장/역 (\d+)개', x)), mst)
             if mins is not None and (mst or nonstop):
                 res["legs"].append({"mode": "ride", "line": line, "from": a, "to": b, "min": mins,
-                                    "stops": int(mst.group(1)) if mst else None, "nonstop": nonstop, "stationId": msid.group(1) if msid else None})
+                                    "stops": int(mst.group(1)) if mst else None, "nonstop": nonstop, "stationId": msid.group(1) if msid else None, "thru": thru})
             else:
                 res["legs"].append({"mode": "unknown", "from": a, "to": b, "raw": " / ".join(seg)[:200]})
     return res

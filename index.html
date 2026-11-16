@@ -17,11 +17,21 @@
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
 button,select{font:inherit;color:inherit}
-.app{display:grid;grid-template-columns:420px minmax(0,1fr);height:100dvh}
+.app{display:grid;grid-template-columns:var(--w1,420px) minmax(0,1fr);height:100dvh}
 .side,.mapwrap{min-width:0}
 .side{display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);min-height:0;z-index:2}
 /* PC: 장소를 고르면 목록 오른쪽에 상세 사이드 섹션 */
-.app.has-detail{grid-template-columns:420px 400px minmax(0,1fr)}
+.app.has-detail{grid-template-columns:var(--w1,420px) var(--w2,400px) minmax(0,1fr)}
+/* PC: 목록·상세 섹션 오른쪽 끝을 마우스로 끌어 가로폭 조절 */
+.pane-rs{display:none}
+@media (min-width:861px){
+  .side{position:relative}
+  .pane-rs{display:block;position:absolute;top:0;right:-5px;width:10px;height:100%;cursor:col-resize;z-index:6;touch-action:none}
+  .pane-rs::after{content:'';position:absolute;top:0;bottom:0;left:4px;width:2px;background:transparent;transition:background .15s}
+  .pane-rs:hover::after,.pane-rs.on::after{background:var(--brand)}
+  body.rs-drag{cursor:col-resize;user-select:none}
+  body.rs-drag iframe,body.rs-drag #gmap{pointer-events:none}
+}
 .side2{display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);min-height:0;min-width:0;z-index:2;position:relative}
 .side2[hidden]{display:none}
 .d2-head{position:absolute;top:10px;right:10px;z-index:3}
@@ -429,7 +439,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 </head>
 <body>
 <div class="app">
-  <aside class="side">
+  <aside class="side"><div class="pane-rs" data-rs="w1" title="끌어서 목록 너비 조절 (두 번 누르면 기본값)" aria-hidden="true"></div>
     <div class="side-head">
       <div class="title-row"><h1 class="title">오사카·교토 맛집 지도</h1>
         <button class="hbtn edit" id="btnEdit" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>수정</button>
@@ -463,7 +473,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
       <div id="list"></div>
     </div>
   </aside>
-  <aside class="side2" id="detailPane" hidden aria-label="장소 상세"><div class="d2-head"><button class="d2-close" type="button" data-close aria-label="상세 닫기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div><div class="d2-body" id="detailBody"></div></aside>
+  <aside class="side2" id="detailPane" hidden aria-label="장소 상세"><div class="pane-rs" data-rs="w2" title="끌어서 상세 너비 조절 (두 번 누르면 기본값)" aria-hidden="true"></div><div class="d2-head"><button class="d2-close" type="button" data-close aria-label="상세 닫기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div><div class="d2-body" id="detailBody"></div></aside>
   <main class="mapwrap" id="mapwrap">
     <div id="gmap"><div class="mapmsg">지도를 불러오는 중…</div></div>
     <iframe id="embed" title="Google 지도 길찾기" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -1681,6 +1691,22 @@ function openEditModal(){
 document.getElementById('btnEdit').onclick=openEditModal;
 document.getElementById('btnHot').onclick=()=>{ shade=!shade; lsSet('shade',shade); applyShade(); renderBar(); };
 document.getElementById('btnHot').setAttribute('aria-checked',shade);
+
+/* ---------- PC: 목록·상세 가로폭 조절 (이 기기에만 기억) ---------- */
+(function(){ const app=document.querySelector('.app'), DEF={w1:420,w2:400}, MIN=300;
+  const W=lsGet('paneW',{});
+  const maxOf=k=>{ const other=k==='w1' ? (app.classList.contains('has-detail')?(W.w2||DEF.w2):0) : (W.w1||DEF.w1); return Math.max(MIN, Math.min(900, innerWidth-other-360)); };   // 지도는 최소 360px 남김
+  const apply=()=>{ ['w1','w2'].forEach(k=>{ if(W[k]) app.style.setProperty('--'+k, Math.min(W[k],maxOf(k))+'px'); else app.style.removeProperty('--'+k); }); };
+  apply(); addEventListener('resize',apply);
+  document.querySelectorAll('.pane-rs').forEach(h=>{ const k=h.dataset.rs;
+    h.addEventListener('pointerdown',e=>{ if(e.button!==0) return; e.preventDefault(); h.setPointerCapture(e.pointerId);
+      const x0=e.clientX, w0=h.parentElement.getBoundingClientRect().width; h.classList.add('on'); document.body.classList.add('rs-drag');
+      const mv=ev=>{ W[k]=Math.round(Math.max(MIN, Math.min(maxOf(k), w0+ev.clientX-x0))); app.style.setProperty('--'+k, W[k]+'px'); };
+      const up=()=>{ h.removeEventListener('pointermove',mv); h.removeEventListener('pointerup',up); h.removeEventListener('pointercancel',up);
+        h.classList.remove('on'); document.body.classList.remove('rs-drag'); try{ localStorage.setItem('paneW', JSON.stringify(W)); }catch(e){} };
+      h.addEventListener('pointermove',mv); h.addEventListener('pointerup',up); h.addEventListener('pointercancel',up); });
+    h.addEventListener('dblclick',()=>{ delete W[k]; try{ localStorage.setItem('paneW', JSON.stringify(W)); }catch(e){} apply(); }); });
+})();
 
 /* ---------- 리스트 썸네일 (Google 지도 사진) ---------- */
 const THUMB = lsGet('thumbs',{});   // id -> {pid, photo, at}  (Place ID는 장기 보관 가능, 사진 이름은 3일만)

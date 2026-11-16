@@ -62,7 +62,7 @@ export default {
           const stmts = [];
           for (const [k, e] of Object.entries(v)) {
             if (k.length > 300) continue;
-            stmts.push(db.prepare('INSERT INTO nv(k,v,at,t) VALUES(?,?,?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v, at=excluded.at, t=excluded.t WHERE excluded.at > nv.at').bind(k, JSON.stringify(e), e.at, Date.now()));
+            stmts.push(db.prepare('INSERT INTO nv(k,v,at,t) VALUES(?,?,?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v, at=excluded.at, t=excluded.t WHERE excluded.at >= nv.at').bind(k, JSON.stringify(e), e.at, Date.now()));
           }
           for (let i = 0; i < stmts.length; i += 50) await db.batch(stmts.slice(i, i + 50));
           return json({ ok: true, n: stmts.length }, cors);

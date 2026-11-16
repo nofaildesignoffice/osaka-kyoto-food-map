@@ -27,7 +27,9 @@ for line in open(sys.argv[1] if len(sys.argv) > 1 else 'raw_routes_gm2.jsonl', e
         else:
             raw = l['line']; ln = next((c for c in clean if raw.startswith(c)), raw)
             lines.append(ln)
-            steps.append({'kind': 'ride', 'line': ln, 'color': COLOR.get(ln, '#555'), 'type': '', 'min': l['min'], 'from': l.get('from') or '',
+            for t in l.get('thru') or []:   # 직통으로 이어지는 노선
+                tl = next((c for c in clean if t.startswith(c)), None) or (re.match(r'^(.*?선)', t) or re.match(r'(.*)', t)).group(1); lines.append(tl); ln = ln + ' → ' + tl
+            steps.append({'kind': 'ride', 'line': ln, 'color': COLOR.get(ln.split(' → ')[0], '#555'), 'type': '', 'min': l['min'], 'from': l.get('from') or '',
                           'fromNo': '', 'to': '도착지' if last else (l.get('to') or ''), 'toNo': '', 'dir': ''})
     walkM = sum((l.get('m') or 0) for l in legs if l['mode'] == 'walk')
     route = {'min': d['total'], 'fare': d['fare'], 'ic': None, 'transfers': max(0, len(rides) - 1), 'walkM': walkM, 'walkOnly': d['walkOnly'] or not rides,
