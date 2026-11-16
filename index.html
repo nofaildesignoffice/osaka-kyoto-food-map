@@ -477,7 +477,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
   </main>
 </div>
 
-<script src="data/hotels.js?v=20261116-hotels11"></script>
+<script src="data/hotels.js?v=20261116-hotels12"></script>
 <script src="data/places.js?v=20261115r1"></script>
 <script src="data/menus.js?v=20261115m2"></script>
 <script src="data/spots.js?v=20261115b"></script>
@@ -1022,10 +1022,15 @@ function hotelRateHTML(p,compact=false){
     if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--warn)">${title} <span class="meta">· ${esc(r.checkIn.slice(5).replace('-','/'))}부터 ${r.nights}박</span></div>`;
     return `<div class="warn"><b>${title}</b><div>${esc(r.checkIn)} → ${esc(r.checkOut)} · 성인 ${r.adults}명 · 객실 ${r.rooms}개</div><div>${esc(r.conditions)}</div><div class="meta">${esc(r.checkedAt)} 아고다 조회 · 취소 객실이 나오면 달라질 수 있어요.</div></div>`;
   }
-  const price=Number.isFinite(r.totalKRW)?Math.round(r.totalKRW/r.nights).toLocaleString('ko-KR')+'원':'확인 필요';
-  if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--hotel)">1박 평균 ${price} <span class="meta">· ${esc(r.checkIn.slice(5).replace('-','/'))}부터 ${r.nights}박</span></div>`;
-  return `<div class="tip"><b>1박 평균 ${price}</b><div>${esc(r.checkIn)} 체크인 → ${esc(r.checkOut)} 체크아웃 · ${r.nights}박</div>
-    <div>성인 ${r.adults}명 · 객실 ${r.rooms}개 · 3박 총액 ${r.totalKRW.toLocaleString('ko-KR')}원</div>
+  const price=Number.isFinite(r.perNightKRW)?r.perNightKRW.toLocaleString('ko-KR')+'원':Number.isFinite(r.totalKRW)?Math.round(r.totalKRW/r.nights).toLocaleString('ko-KR')+'원':'확인 필요';
+  if(r.availability==='no_double'){   // 더블 객실이 없을 때: 다른 객실 요금을 더블처럼 보이지 않게
+    if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--warn)">더블 객실 없음 <span class="meta">· 다른 객실 1박 ${price} · ${esc(r.checkIn.slice(5).replace('-','/'))}부터 ${r.nights}박</span></div>`;
+    return `<div class="warn"><b>더블 객실 없음</b><div>${esc(r.checkIn)} 체크인 → ${esc(r.checkOut)} 체크아웃 · ${r.nights}박 · 성인 ${r.adults}명 · 객실 ${r.rooms}개</div><div>${esc(r.room)}</div><div>다른 객실 1박 ${price} (세금·수수료 포함) · ${esc(r.conditions)}</div><div class="meta">${esc(r.checkedAt)} 아고다 조회 · 취소 객실이 나오면 달라질 수 있어요.</div></div>`;
+  }
+  const dbl = r.bed==='double' ? '더블 ' : '';
+  if(compact) return `<div class="hotel-rate" style="margin-top:7px;font-size:13px;font-weight:700;color:var(--hotel)">${dbl}1박 ${price} <span class="meta">· ${esc(r.checkIn.slice(5).replace('-','/'))}~${esc(r.checkOut.slice(5).replace('-','/'))} ${r.nights}박</span></div>`;
+  return `<div class="tip"><b>${dbl}1박 ${price}</b><div>${esc(r.checkIn)} 체크인 → ${esc(r.checkOut)} 체크아웃 · ${r.nights}박</div>
+    <div>성인 ${r.adults}명 · 객실 ${r.rooms}개 · ${r.nights}박 총액 ${r.totalKRW.toLocaleString('ko-KR')}원${r.perNightKRW?' (1박 요금 × '+r.nights+')':''}</div>
     <div>${esc(r.room)} · ${esc(r.conditions)}</div>
     <div class="meta">${esc(r.checkedAt)} 아고다 조회 · 표시된 세금·봉사료 포함 · 현지 숙박세 별도 여부는 예약 시 확인 · 할인·환율·재고에 따라 변동</div></div>`;
 }

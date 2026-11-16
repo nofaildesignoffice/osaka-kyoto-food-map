@@ -70,11 +70,13 @@ window.HOTELS = [
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 406145,
-   "room": "트윈룸 · 14m² · 싱글베드 2개",
-   "conditions": "조식 불포함 · 환불 불가 · 즉시 결제 · 쿠폰 할인 적용",
+   "totalKRW": 352383,
+   "perNightKRW": 117461,
+   "bed": "double",
+   "room": "더블 금연 · 13m² · 더블베드 1개",
+   "conditions": "조식 별도(1인 20,901원) · 무료 취소 없음 · 즉시 결제 · 쿠폰 할인 적용",
    "availability": "available",
-   "checkedAt": "2026-11-15T17:55+09:00"
+   "checkedAt": "2026-11-16T20:30+09:00"
   }
  },
  {
@@ -97,11 +99,13 @@ window.HOTELS = [
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 724740,
-   "room": "리프레쉬 더블룸 · 18m² · 더블베드 1개 · 성인 2명",
-   "conditions": "3박 같은 객실 기준 · 조식 별도 · 환불 불가 · 즉시 결제 · 쿠폰 할인 적용",
+   "totalKRW": 463335,
+   "perNightKRW": 154445,
+   "bed": "double",
+   "room": "슈페리어 더블룸 (금연) · 18m² · 더블베드 1개",
+   "conditions": "조식 별도(1인 19,229원) · 11/23 전 무료 취소 · 쿠폰 할인 적용",
    "availability": "available",
-   "checkedAt": "2026-11-15T17:56+09:00"
+   "checkedAt": "2026-11-16T20:30+09:00"
   }
  },
  {
@@ -122,11 +126,13 @@ window.HOTELS = [
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 605066,
-   "room": "모더레이트 할리우드 트윈 · 금연 · 최대 성인 2명",
-   "conditions": "조식 불포함 · 11/24 전 무료 취소 · 11/22까지 결제 불필요 · 쿠폰 할인 적용",
-   "availability": "available",
-   "checkedAt": "2026-11-15T17:56+09:00"
+   "totalKRW": 650538,
+   "perNightKRW": 216846,
+   "bed": "double",
+   "room": "더블 객실 없음 — 예약 가능한 객실은 할리우드 트윈룸(금연) · 22m² · 싱글베드 2개뿐",
+   "conditions": "아고다에서 객실 종류 4개 판매 완료 · 표시 금액은 트윈룸(조식 별도, 11/24 전 무료 취소, 쿠폰 할인) 기준",
+   "availability": "no_double",
+   "checkedAt": "2026-11-16T20:30+09:00"
   }
  },
  {
@@ -140,17 +146,20 @@ window.HOTELS = [
   "lat": 34.6584244,
   "lng": 135.5053087,
   "gpid": "ChIJgwzmFQrnAGARtOjc50eXhtQ",
-  "agoda": "https://www.agoda.com/ko-kr/tanimachi-namba-east43/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "agoda": "https://www.agoda.com/ko-kr/tanimachi-namba-east43/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
   "stayRate": {
    "checkIn": "2026-11-25",
    "checkOut": "2026-11-28",
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 379717,
-   "room": "1베드룸 디럭스 · 32m²",
-   "conditions": "무료 Wi-Fi · 11/22 전 무료 취소 · 회원·쿠폰 할인 적용",
-   "checkedAt": "2026-11-15T16:28+09:00"
+   "totalKRW": 455145,
+   "perNightKRW": 151715,
+   "bed": "double",
+   "room": "트윈 · 32m² · 더블베드 2개",
+   "conditions": "11/22 전 무료 취소 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-16T20:30+09:00"
   },
   "notes": [
    "Google 지도에서는 Tanimachikun Hotel Nambahigashi 43으로 표시. 아고다와 주소 일치 확인."
@@ -173,17 +182,20 @@ window.HOTELS = [
   "lat": 34.6514055,
   "lng": 135.5069768,
   "gpid": "ChIJV8SnHOrnAGARFVztLFIEt34",
-  "agoda": "https://www.agoda.com/ko-kr/the-b-osaka-shinsekai-h47780705/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "agoda": "https://www.agoda.com/ko-kr/the-b-osaka-shinsekai-h47780705/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
   "stayRate": {
    "checkIn": "2026-11-25",
    "checkOut": "2026-11-28",
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 200741,
-   "room": "슈페리어 트윈 · 18m² · 싱글베드 2개",
-   "conditions": "Room-Only Plan · 11/24 전 무료 취소 · 쿠폰 할인 적용",
-   "checkedAt": "2026-11-15T16:28+09:00"
+   "totalKRW": 202656,
+   "perNightKRW": 67552,
+   "bed": "double",
+   "room": "스탠다드 킹 · 16m² · 킹베드 1개 (더블보다 큰 침대 1개)",
+   "conditions": "11/24 전 무료 취소 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-16T20:30+09:00"
   },
   "notes": [
    "사용자가 보낸 the-b-osaka-shinsekai URL은 현재 The OneFive Osaka Shinsekai로 표시됨."
@@ -206,17 +218,20 @@ window.HOTELS = [
   "lat": 34.6536381,
   "lng": 135.4911872,
   "gpid": "ChIJ9aS0bj_nAGARgD8Gqedtsh4",
-  "agoda": "https://www.agoda.com/ko-kr/b-namba4/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "agoda": "https://www.agoda.com/ko-kr/b-namba4/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
   "stayRate": {
    "checkIn": "2026-11-25",
    "checkOut": "2026-11-28",
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 306812,
+   "totalKRW": 299919,
+   "perNightKRW": 99973,
+   "bed": "double",
    "room": "패밀리룸 4 · 27m² · 더블베드 1개 + 요이불",
-   "conditions": "환불 불가 · 회원·장기 투숙·쿠폰 할인 적용",
-   "checkedAt": "2026-11-15T16:28+09:00"
+   "conditions": "즉시 결제 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-16T20:30+09:00"
   },
   "notes": [
    "Google 지도 A관(北開1-2-25)을 아고다 주소와 대조. B관(1-2-6)과 구분. 숙박세 별도 안내."
@@ -239,17 +254,20 @@ window.HOTELS = [
   "lat": 34.6540451,
   "lng": 135.5062561,
   "gpid": "ChIJTc1BnmDnAGARwbLQ0nk_IZw",
-  "agoda": "https://www.agoda.com/ko-kr/hotel-shinsekai/hotel/all/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
+  "agoda": "https://www.agoda.com/ko-kr/hotel-shinsekai/hotel/all/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3&cid=1719676",
   "stayRate": {
    "checkIn": "2026-11-25",
    "checkOut": "2026-11-28",
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 374524,
-   "room": "쿼드러플룸 · 34m² · 싱글베드 2개 + 더블베드 1개",
-   "conditions": "성인 2명 요금 · 환불 불가 · 쿠폰 할인 적용",
-   "checkedAt": "2026-11-15T16:28+09:00"
+   "totalKRW": 363837,
+   "perNightKRW": 121279,
+   "bed": "double",
+   "room": "쿼드러플룸 · 34m² · 더블베드 1개 + 싱글베드 2개",
+   "conditions": "즉시 결제 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-16T20:30+09:00"
   },
   "notes": [
    "Google 지도 동일 이름·恵美須東1丁目13 확인. 인근 다른 Apartment Hotel 11 지점과 구분. 숙박세 별도 안내."
@@ -272,18 +290,20 @@ window.HOTELS = [
   "lat": 34.669757,
   "lng": 135.5036447,
   "gpid": "ChIJV0LnVRTnAGARLTeh1yIz86A",
-  "agoda": "https://www.agoda.com/ko-kr/holiday-inn-osaka-namba/hotel/osaka-jp.html?checkIn=2026-11-25&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
+  "agoda": "https://www.agoda.com/ko-kr/holiday-inn-osaka-namba/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
   "stayRate": {
    "checkIn": "2026-11-25",
    "checkOut": "2026-11-28",
    "nights": 3,
    "adults": 2,
    "rooms": 1,
-   "totalKRW": 570519,
-   "room": "객실 이동 조합: 11/25~27 스탠다드룸(더블베드 1개 · 20m²) 2박 → 11/27~28 프리미엄룸(싱글베드 2개 + 간이침대 · 25m²) 1박",
-   "conditions": "한 객실로 3박 가능한 방 없음(객실 4종 판매 완료) · 아고다 '객실 이동 & 할인' 요금 · 세금·수수료 포함 1박당 190,173원 (3박 총액은 1박당 금액 × 3)",
-   "availability": "available",
-   "checkedAt": "2026-11-16T19:40+09:00"
+   "totalKRW": 688047,
+   "perNightKRW": 229349,
+   "bed": "double",
+   "room": "더블 객실 없음 — 3박 한 객실로는 프리미엄룸(싱글베드 2개 + 간이침대) · 25m²만 가능",
+   "conditions": "아고다에서 객실 종류 4개 판매 완료 · 표시 금액은 프리미엄룸(조식 별도, 즉시 결제) 기준 · 더블 스탠다드룸 2박 + 프리미엄룸 1박으로 방을 옮기는 조합은 1박당 190,173원",
+   "availability": "no_double",
+   "checkedAt": "2026-11-16T20:30+09:00"
   },
   "notes": [
    "아고다 11/25~11/27 2박 일정은 전 객실 판매 완료 (2026-11-16 조회)."
