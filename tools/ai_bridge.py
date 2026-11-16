@@ -203,7 +203,7 @@ def analyze(job):
             if is_existing(c, existing): dup.append(c["name"])
             else: added.append(make_record(job, c, cat)); existing.append((c["lat"], c["lng"], c["pid"]))
         else: others.append(c)
-    base = {"at": now_iso(), "text": job["text"], "cat": cat, "job": job["id"]}
+    base = {"at": now_iso(), "text": job["text"], "cat": cat, "group": job.get("group", ""), "job": job["id"]}
     evs = []
     if added:
         evs.append({**base, "id": uuid.uuid4().hex, "type": "added", "places": [brief(r) for r in added],
@@ -265,11 +265,13 @@ def emoji_of(types, cat):
         if k in s: return e
     return "📍" if cat == "spot" else "🍴"
 
-def make_record(job_or_text, c, cat, forced=False):
+GROUP_EMOJI = {'스시': '🍣', '라멘': '🍜', '고기': '🥩', '피자': '🍕', '카페': '☕', '디저트': '🍰', '오코노미야키': '🥞', '야키토리': '🍢', '교자': '🥟', '카레': '🍛', '일식': '🍱'}
+def make_record(job_or_text, c, cat, forced=False, grp=""):
     text = job_or_text["text"] if isinstance(job_or_text, dict) else job_or_text
+    if isinstance(job_or_text, dict): grp = job_or_text.get("group") or grp
     return {"id": "a-" + re.sub(r"[^A-Za-z0-9]", "", c["pid"])[-14:], "gpid": c["pid"], "type": cat, "city": city_of(c["lat"], c["lng"]),
             "lat": round(c["lat"], 7), "lng": round(c["lng"], 7), "name": c["name"], "nameJa": c.get("nameJa", ""), "address": c.get("address", ""),
-            "area": c.get("typeKo", ""), "group": {"food": "AI로 추가한 맛집", "spot": "관광지", "hotel": ""}[cat], "emoji": emoji_of(c.get("types"), cat),
+            "area": c.get("typeKo", ""), "group": (grp if cat == "food" and grp else {"food": "AI로 추가한 맛집", "spot": "관광지", "hotel": ""}[cat]), "emoji": (GROUP_EMOJI.get(grp) if cat == "food" and GROUP_EMOJI.get(grp) else emoji_of(c.get("types"), cat)),
             "origin": "ai", "typed": text[:300], "verified": c.get("votes", []), "forced": forced,
             "aiEvidence": [{"ai": a["ai"], "evidence": (a.get("evidence") or "")[:400]} for a in c.get("ai", [])],
             "addedAt": time.strftime("%Y-%m-%d"), "notes": []}
@@ -307,7 +309,7 @@ def force_add(event_id, idx):
     c = (e.get("cands") or [])[idx]
     if c["level"] == "mismatch": raise ValueError("이름이 맞지 않는 후보는 추가할 수 없어요")
     if is_existing(c, existing_coords()): raise ValueError("이미 지도에 있는 장소예요")
-    r = make_record(e.get("text", ""), c, e.get("cat", "food"), forced=True)
+    r = make_record(e.get("text", ""), c, e.get("cat", "food"), forced=True, grp=e.get("group") or "")
     with GIT_LOCK:
         ev = read_js(EVENTS_JS, "EVENTS")
         for x in ev:
@@ -360,7 +362,8 @@ class H(BaseHTTPRequestHandler):
             text = str(body.get("text", "")).strip()[:1500]
             if not text: return self._json(400, {"error": "empty"})
             jid = uuid.uuid4().hex
-            JOBS[jid] = {"id": jid, "status": "running", "text": text, "cat": cat, "steps": {}, "result": None, "at": now_iso()}
+            grp = str(body.get("group") or "").strip()[:30] if cat == "food" else ""
+            JOBS[jid] = {"id": jid, "status": "running", "text": text, "cat": cat, "group": grp, "steps": {}, "result": None, "at": now_iso()}
             log("job", jid, cat, text[:80].replace("\n", " "))
             def run():
                 try: analyze(JOBS[jid])

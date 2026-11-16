@@ -7,7 +7,8 @@ SYNC = 'https://osaka-map-sync.osaka-kyoto-map.workers.dev'
 # 오사카 메트로·JR 공식 노선 색
 COLOR = {'미도스지선':'#e5171f','다니마치선':'#522886','요쓰바시선':'#0078ba','주오선':'#019a66','센니치마에선':'#e44d93','사카이스지선':'#814721',
          '나가호리쓰루미료쿠치선':'#a9cc51','이마자토스지선':'#ee7b1a','뉴트램':'#00b2e5','오사카 순환선':'#f15a22','JR 오사카 순환선':'#f15a22'}
-jobs = {f"{j['o']}|{j['d']}": j for j in json.load(open('jobs_gm2.json', encoding='utf-8'))}
+JOBS = next((a.split('=',1)[1] for a in sys.argv if a.startswith('--jobs=')), 'jobs_gm2.json')
+jobs = {f"{j['o']}|{j['d']}": j for j in json.load(open(JOBS, encoding='utf-8'))}
 out, skipped = {}, []
 for line in open(sys.argv[1] if len(sys.argv) > 1 else 'raw_routes_gm2.jsonl', encoding='utf-8'):
     r = json.loads(line); k = f"{r['o']}|{r['d']}"; j = jobs.get(k)

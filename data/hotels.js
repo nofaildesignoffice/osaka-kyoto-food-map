@@ -260,5 +260,25 @@ window.HOTELS = [
     "url": "https://www.google.com/maps/search/?api=1&query=ChIJTc1BnmDnAGARwbLQ0nk_IZw&query_place_id=ChIJTc1BnmDnAGARwbLQ0nk_IZw"
    }
   ]
+ },
+ {
+  "id": "hotel-holiday-inn-namba",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "홀리데이 인 오사카 난바",
+  "nameJa": "Holiday Inn Osaka Namba by IHG",
+  "area": "난바·도톤보리 (宗右衛門町)",
+  "address": "大阪府大阪市中央区宗右衛門町5-15",
+  "lat": 34.669757,
+  "lng": 135.5036447,
+  "gpid": "ChIJV0LnVRTnAGARLTeh1yIz86A",
+  "agoda": "https://www.agoda.com/ko-kr/holiday-inn-osaka-namba/hotel/osaka-jp.html?checkIn=2026-11-25&los=2&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=1",
+  "notes": [],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJV0LnVRTnAGARLTeh1yIz86A&query_place_id=ChIJV0LnVRTnAGARLTeh1yIz86A"
+   }
+  ]
  }
 ];

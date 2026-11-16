@@ -97,7 +97,15 @@ def parse_detail(detail):
     # tokens: time, stopName, [address], legDesc..., time, stopName ...
     stops, segs, cur = [], [], None
     i = 0
+    # drop icon glyphs (private-use chars) and the lone country line under an address
+    L = [l for l in L if l != '일본' and not all('' <= ch <= '' for ch in l)]
     while i < len(L):
+        if TIME.match(L[i]) and i + 1 < len(L) and TIME.match(L[i + 1]):
+            i += 1   # bus: scheduled time followed by real-time departure — keep the later line
+            continue
+        if TIME.match(L[i]) and cur is not None and all(re.match(r'^(승강장|플랫폼)\s*\S{0,6}$', x) for x in cur) and stops:
+            i += 1   # waiting at a station: departure time printed again before the line name
+            continue
         if TIME.match(L[i]):
             name = L[i + 1] if i + 1 < len(L) else None
             stops.append({"time": L[i], "name": name})

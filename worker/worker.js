@@ -1,8 +1,8 @@
 // 오사카·교토 지도 공용 저장소 (Cloudflare Worker + D1)
-// GET  /state          → {ranks, removed, added, localEvents, nvcache, _t}
+// GET  /state          → {ranks, edits, removed, added, localEvents, nvcache, _t}
 // PUT  /kv/<key>       → 키별 병합 규칙으로 저장 후 최신 값 반환
 const ORIGINS = ['https://nofaildesignoffice.github.io', 'http://127.0.0.1:8766', 'http://localhost:8766'];
-const KEYS = { ranks: 'mergeObj', removed: 'replace', added: 'replace', localEvents: 'union', nvcache: 'perEntry' };
+const KEYS = { ranks: 'mergeObj', edits: 'mergeObj', removed: 'replace', added: 'replace', localEvents: 'union', nvcache: 'perEntry' };
 const MAX = 3_000_000;
 
 const json = (o, h, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { ...h, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -10,6 +10,8 @@ const isStrArr = a => Array.isArray(a) && a.every(x => typeof x === 'string' && 
 
 function validate(key, v) {
   if (key === 'ranks') return v && typeof v === 'object' && !Array.isArray(v) && Object.entries(v).every(([k, r]) => k.length < 200 && [0, 1, 2, 3].includes(r));
+  if (key === 'edits') return v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length < 2000 && Object.entries(v).every(([k, e]) => k.length < 200 && e && typeof e === 'object' && !Array.isArray(e)
+    && Object.entries(e).every(([f, x]) => ['type', 'group', 'emoji'].includes(f) && typeof x === 'string' && x.length < 40) && (!e.type || ['food', 'hotel', 'spot'].includes(e.type)));
   if (key === 'removed') return isStrArr(v);
   if (key === 'added') return Array.isArray(v) && v.every(x => x && typeof x === 'object' && typeof x.id === 'string' && Number.isFinite(x.lat) && Number.isFinite(x.lng));
   if (key === 'localEvents') return Array.isArray(v) && v.every(x => x && typeof x === 'object' && typeof x.id === 'string');
