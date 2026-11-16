@@ -54,8 +54,6 @@ button,select{font:inherit;color:inherit}
 .title{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0}
 .sub{font-size:12.5px;color:var(--ink3);margin:4px 0 0}
 .legend{display:flex;gap:10px;font-size:12px;color:var(--ink2);flex-wrap:wrap}
-.map-legend{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;flex-wrap:nowrap;justify-content:flex-end;align-items:center;gap:12px;padding:46px 14px 24px;background:linear-gradient(to top,rgba(20,18,15,.78) 0%,rgba(20,18,15,.5) 45%,rgba(20,18,15,0) 100%);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.45)}
-.map-legend>span{flex:none}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
 .dot.food{background:#fff;border:2px solid var(--food)} .dot.hotel{background:var(--hotel);border-radius:3px}
@@ -279,9 +277,9 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
   .sheet-handle:focus{outline:none} .sheet-handle:focus-visible i{background:var(--ink3)}
   .app.sheet-min .scroll{overflow:hidden}
   .mapbar{bottom:calc(var(--sv,55dvh) + 50px)}
-  .map-legend{bottom:calc(var(--sv,55dvh) - 12px);padding:44px 12px 38px;gap:10px;font-size:11.5px;justify-content:center;transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
-  .app.sheet-dragging .map-legend{transition:none}
-  .app.sheet-full .map-legend,.app.sheet-full .mapbar,.app.sheet-full .osm-attr{opacity:0}
+  .help-fab{bottom:calc(var(--sv,55dvh) + 12px);right:12px;transition:bottom .34s cubic-bezier(.22,.9,.24,1),background .15s,border-color .15s}
+  .app.sheet-dragging .help-fab{transition:none}
+  .app.sheet-full .help-fab,.app.sheet-full .mapbar,.app.sheet-full .osm-attr{opacity:0}
   /* 끝까지 올리면 위 헤더와 한 장처럼: 모서리 라운딩·그림자 제거 */
   .scroll,.sheet-handle{transition:transform .34s cubic-bezier(.22,.9,.24,1),border-radius .2s}
   .app.sheet-full .scroll,.app.sheet-full .sheet-handle{border-radius:0}
@@ -292,7 +290,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 @media (max-width:860px) and (max-height:520px){
   .app{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
   .app{overflow:visible} .side{display:flex} .side-head{order:0} .scroll{order:0;position:static;height:auto;transform:none;transition:none;border-radius:0;box-shadow:none;padding-top:10px} .sheet-handle{display:none}
-  .app.sheet-min .scroll{overflow-y:auto} .mapbar{bottom:64px} .mapwrap .osm-attr{bottom:4px} .map-legend{bottom:0;padding:46px 14px 24px}
+  .app.sheet-min .scroll{overflow-y:auto} .mapbar{bottom:64px} .mapwrap .osm-attr{bottom:4px} .help-fab{bottom:24px}
   .mapwrap{order:2} .side{order:1;border-top:0;border-right:1px solid var(--line)}
 }
 /* head actions */
@@ -305,6 +303,14 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .fab:hover{border-color:var(--brand)}
 .fab:focus-visible{outline:3px solid var(--brand-soft);outline-offset:2px}
 .mapwrap.embed .hot-fab{display:none}
+.help-fab{position:absolute;right:14px;bottom:28px;z-index:5}
+.lg-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.lg-list li{display:flex;align-items:center;gap:14px;padding:10px 2px;border-bottom:1px dashed var(--line)}
+.lg-list li:last-child{border-bottom:0}
+.lg-list .lg-ic{flex:none;width:34px;display:grid;place-items:center}
+.lg-list .lg-ic .rk{transform:scale(1.35)}
+.lg-list b{font-size:14.5px;font-weight:800}
+.lg-list p{margin:2px 0 0;font-size:12.5px;color:var(--ink3);line-height:1.5}
 .hot-fab[aria-pressed=true]{background:var(--brand);border-color:var(--brand);color:#fff}
 .hot-fab[aria-pressed=true]:hover{background:var(--brand-d)}
 @media (max-width:860px){ .map-fabs{left:auto;right:12px;top:12px;gap:8px} .fab{width:48px;height:48px} }
@@ -490,12 +496,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
       <button class="fab hot-fab" id="btnHot" type="button" aria-pressed="true" title="핫플 지역 음영 켜기/끄기">핫플</button>
       <button class="fab" id="btnEdit" type="button" aria-label="수정" title="수정 (추가·변경·삭제)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.4 2.6a1 1 0 0 1 3 3l-9 9a2 2 0 0 1-.85.5l-2.87.84a.5.5 0 0 1-.62-.62l.84-2.87a2 2 0 0 1 .5-.85z"/></svg></button>
     </div>
-    <div class="legend map-legend">
-        <span><span class="rk r1">1</span>1순위</span><span><span class="rk r2">2</span>2순위</span><span><span class="rk r3">3</span>3순위</span>
-        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>맛집</span>
-        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-hotel)" stroke="var(--pin-hotel-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>숙소</span>
-        <span><svg class="lpin" width="12" height="16" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-spot)" stroke="var(--pin-spot-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>관광지</span>
-      </div>
+    <button class="fab help-fab" id="btnHelp" type="button" aria-label="지도 표시 안내" title="지도 표시 안내"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
   </main>
 </div>
 
@@ -1703,6 +1704,13 @@ function openEditModal(){
 document.getElementById('btnEdit').onclick=openEditModal;
 document.getElementById('btnHot').onclick=()=>{ shade=!shade; lsSet('shade',shade); applyShade(); renderBar(); };
 document.getElementById('btnHot').setAttribute('aria-pressed',shade);
+
+/* ---------- 지도 표시 안내 (? 버튼) ---------- */
+const LEGEND_HTML=`<li><span class="lg-ic"><span class="rk r1">1</span></span><div><b>1순위</b><p>순위를 1로 정한 맛집. 핀에 숫자가 붙어요.</p></div></li><li><span class="lg-ic"><span class="rk r2">2</span></span><div><b>2순위</b><p>순위를 2로 정한 맛집.</p></div></li><li><span class="lg-ic"><span class="rk r3">3</span></span><div><b>3순위</b><p>순위를 3으로 정한 맛집.</p></div></li><li><span class="lg-ic"><svg class="lpin" width="21" height="28" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg></span><div><b>맛집</b><p>유튜브 댓글 추천 맛집과 직접 추가한 가게.</p></div></li><li><span class="lg-ic"><svg class="lpin" width="21" height="28" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>맛집</span>
+        <span><svg class="lpin" width="21" height="28" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-hotel)" stroke="var(--pin-hotel-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg></span><div><b>숙소</b><p>후보 숙소. 누르면 1박 요금과 순위 맛집까지 평균 이동 시간이 보이고, 지도에 순위 색 선으로 길이 표시돼요.</p></div></li><li><span class="lg-ic"><svg class="lpin" width="21" height="28" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-food)" stroke="var(--pin-food-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>맛집</span>
+        <span><svg class="lpin" width="21" height="28" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-hotel)" stroke="var(--pin-hotel-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg>숙소</span>
+        <span><svg class="lpin" width="21" height="28" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9c0 4.6 2.2 8.9 5 12.9 3 4.3 6.6 8.2 9 11.2 2.4-3 6-6.9 9-11.2 2.8-4 5-8.3 5-12.9C29 7.2 22.7 1 15 1z" fill="var(--pin-spot)" stroke="var(--pin-spot-d)" stroke-width="2"/><circle cx="15" cy="15" r="7.5" fill="#fff"/></svg></span><div><b>관광지</b><p>가 볼 만한 관광지.</p></div></li>`;
+document.getElementById('btnHelp').onclick=()=>{ openModal(`<div class="modal-h"><h2>지도 표시 안내</h2><p>지도 위 핀과 숫자가 뜻하는 것</p></div><div class="modal-b"><ul class="lg-list">${LEGEND_HTML}</ul></div><div class="modal-f"><button class="btn primary" data-close>닫기</button></div>`); modalEl.dataset.kind='legend'; document.addEventListener('keydown', escClose); modalEl.querySelector('[data-close]').onclick=closeModal; };
 
 /* ---------- PC: 목록·상세 가로폭 조절 (이 기기에만 기억) ---------- */
 (function(){ const app=document.querySelector('.app'), DEF={w1:420,w2:400}, MIN=300;
