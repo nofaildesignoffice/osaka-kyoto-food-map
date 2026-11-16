@@ -527,9 +527,9 @@ function cleanRoute(r){ // 캐시·응답 값 검증: 숫자 필드는 숫자만
     steps:(Array.isArray(r.steps)?r.steps:[]).map(x=>({kind:x.kind==='ride'?'ride':'walk', min:numOr(x.min), m:numOr(x.m), to:str(x.to), gate:str(x.gate), fromGate:str(x.fromGate), line:str(x.line), color:/^#[0-9a-fA-F]{3,8}$/.test(x.color||'')?x.color:'#555', type:str(x.type), from:str(x.from), fromNo:str(x.fromNo), toNo:str(x.toNo), dir:str(x.dir)}))};
 }
 // 공유본(data/transit.js): 기간 상관없이 사용 → 재조회 안 함. 이 기기 캐시가 더 최신이면 그걸 우선
-(function(){ const S=window.TRANSIT||{}; for(const k in S){ const e=S[k]; if(e&&e.at&&Array.isArray(e.routes)&&e.routes.length) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, shared:true}; } })();
-(function(){ const c=lsGet('nvcache',{}); const now=Date.now(); for(const k in c){ if(TR[k]&&TR[k].shared&&Date.parse(TR[k].at)>=Date.parse((c[k]||{}).at||0)) continue; const e=c[k]; if(e&&e.at&&now-Date.parse(e.at)<TR_TTL&&Array.isArray(e.routes)) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c}; } })();
-function saveTR(){ syncTransitSoon(); const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; lsSet('nvcache', o); }
+(function(){ const S=window.TRANSIT||{}; for(const k in S){ const e=S[k]; if(e&&e.at&&Array.isArray(e.routes)&&e.routes.length) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, src:e.src, shared:true}; } })();
+(function(){ const c=lsGet('nvcache',{}); const now=Date.now(); for(const k in c){ if(TR[k]&&TR[k].shared&&Date.parse(TR[k].at)>=Date.parse((c[k]||{}).at||0)) continue; const e=c[k]; if(e&&e.at&&now-Date.parse(e.at)<TR_TTL&&Array.isArray(e.routes)) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, src:e.src}; } })();
+function saveTR(){ syncTransitSoon(); const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c, src:TR[k].src}; lsSet('nvcache', o); }
 const trFresh = (t,a,b) => t && t.status==='ok' && (t.shared || Date.now()-Date.parse(t.at)<TR_TTL) && (!t.c || t.c===coordKey(a,b));
 const KO_LINE = [['御堂筋線','미도스지선'],['谷町線','다니마치선'],['四つ橋線','요쓰바시선'],['中央線','주오선'],['千日前線','센니치마에선'],['堺筋線','사카이스지선'],['長堀鶴見緑地線','나가호리쓰루미료쿠치선'],['今里筋線','이마자토스지선'],['ニュートラム','뉴트램'],['大阪環状線','JR 오사카 순환선'],['ゆめ咲線','JR 유메사키선'],['ＪＲ京都線','JR 교토선'],['ＪＲ神戸線','JR 고베선'],['大和路線','JR 야마토지선'],['ＪＲ奈良線','JR 나라선'],['嵯峨野線','JR 사가노선'],['ＪＲ東西線','JR 도자이선'],['おおさか東線','JR 오사카히가시선'],['阪急京都本線','한큐 교토선'],['阪急神戸本線','한큐 고베선'],['阪急宝塚本線','한큐 다카라즈카선'],['阪急千里線','한큐 센리선'],['京阪本線','게이한 본선'],['京阪鴨東線','게이한 오토선'],['京阪中之島線','게이한 나카노시마선'],['近鉄奈良線','긴테쓰 나라선'],['近鉄京都線','긴테쓰 교토선'],['近鉄難波線','긴테쓰 난바선'],['近鉄大阪線','긴테쓰 오사카선'],['近鉄南大阪線','긴테쓰 미나미오사카선'],['阪神本線','한신 본선'],['阪神なんば線','한신 난바선'],['南海本線','난카이 본선'],['南海高野線','난카이 고야선'],['京都市営烏丸線','교토 지하철 가라스마선'],['京都市営東西線','교토 지하철 도자이선'],['嵐電','란덴(게이후쿠)'],['叡山電鉄','에이잔 전철'],['新幹線','신칸센']];
 const koLine = n => { if(!n) return ''; for(const [ja,ko] of KO_LINE) if(n.includes(ja)) return ko; return ''; };
@@ -596,8 +596,9 @@ async function fetchShape(k){ try{ const r=await fetch(`${SYNC_URL}/shape/${enco
 const APPROX = {};
 async function stationLL(name, near){
   const c=lsGet('stll',{}); if(c[name]) return c[name];
-  const q=name.replace(/（.*?）|\(.*?\)/g,'').trim()+'駅';
-  const j=await gpost('https://places.googleapis.com/v1/places:searchText','places.location,places.types',{textQuery:q, languageCode:'ja', regionCode:'JP', pageSize:5, locationBias:{circle:{center:{latitude:near.lat,longitude:near.lng},radius:20000}}});
+  const ko=/[가-힣]/.test(name), base=name.replace(/（.*?）|\(.*?\)/g,'').replace(/\s*역$/,'').trim();
+  const q= ko ? base+'역' : base+'駅';
+  const j=await gpost('https://places.googleapis.com/v1/places:searchText','places.location,places.types',{textQuery:q, languageCode:ko?'ko':'ja', regionCode:'JP', pageSize:5, locationBias:{circle:{center:{latitude:near.lat,longitude:near.lng},radius:20000}}});
   const x=(j.places||[]).find(p=>(p.types||[]).some(t=>/station/.test(t))); if(!x) return null;
   const v={lat:x.location.latitude, lng:x.location.longitude};
   if(google.maps.geometry.spherical.computeDistanceBetween(v,near)>25000) return null;   // 엉뚱한 동명 역 방지
@@ -796,7 +797,24 @@ function addLine(a,b,color,weight,label,path){
   if(label){ const el=document.createElement('div'); el.className='tlabel'; el.style.color=color; el.innerHTML=label;
     overlays.push(new google.maps.marker.AdvancedMarkerElement({map, position:mid, content:el, zIndex:40})); }
 }
-const HPATH = {};   // "hotel|food" -> 디코딩된 도보 경로 (메모리)
+const HPATH = {};
+// 지하철 경로 선: NAVITIME 노선 모양이 있으면 그것, 없으면 저장된 단계로 만든 근사 경로
+function segsFromShape(fc){ const out=[]; (fc&&fc.features||[]).forEach(f=>{ const g=f.geometry; if(!g) return; const ride=(f.properties||{}).ways!=='walk';
+  (g.type==='LineString'?[g.coordinates]: g.type==='MultiLineString'?g.coordinates:[]).forEach(cs=>out.push({ride, path:cs.map(c=>({lat:c[1],lng:c[0]}))})); }); return out.length?out:null; }
+function transitSegs(k){ const sh=TRSHAPE[k]&&TRSHAPE[k][0]; if(sh) return segsFromShape(sh); const ap=APPROX[`${k}#0`]; return ap&&ap.segs||null; }
+const tPrep={};
+function prepTransit(a,b,k){ if(tPrep[k]) return tPrep[k];
+  return tPrep[k]=(async()=>{ if(!TRSHAPE[k] && await fetchShape(k)) return; const r=trBest(k); if(r&&!r.walkOnly) await buildApprox(`${k}#0`,a,b,r); })(); }
+function drawSegs(segs,color,weight,label){
+  let best=null, bl=-1;
+  segs.forEach(sg=>{ const path=sg.path; if(path.length<2) return;
+    if(sg.ride){ overlays.push(new google.maps.Polyline({map, path, strokeColor:'#fff', strokeOpacity:.95, strokeWeight:weight+3, clickable:false, zIndex:2}));
+      overlays.push(new google.maps.Polyline({map, path, strokeColor:color, strokeOpacity:.95, strokeWeight:weight, clickable:false, zIndex:3}));
+      const L=google.maps.geometry.spherical.computeLength(path); if(L>bl){ bl=L; best=path; } }
+    else overlays.push(new google.maps.Polyline({map, path, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1', strokeOpacity:.9, strokeWeight:Math.max(2.5,weight-1.5), strokeColor:color, scale:2}, offset:'0', repeat:'8px'}], clickable:false, zIndex:3})); });
+  if(label && best){ const el=document.createElement('div'); el.className='tlabel'; el.style.color=color; el.innerHTML=label;
+    overlays.push(new google.maps.marker.AdvancedMarkerElement({map, position:google.maps.geometry.spherical.interpolate(best[0],best[best.length-1],.5), content:el, zIndex:40})); }
+}   // "hotel|food" -> 디코딩된 도보 경로 (메모리)
 
 /* ---------- 숙소 → 순위 맛집 ---------- */
 function rankedFoods(h){ return P.filter(q=>q.type==='food' && q.city===h.city && rankOf(q)>0).sort((a,b)=>rankOf(a)-rankOf(b)); }
@@ -837,7 +855,11 @@ async function showHotelRanks(h){
     clearOverlays();
     foods.forEach(q=>{ const r=rankOf(q), k=`${h.id}|${q.id}`, w=WALK[k], t=trBest(k);
       const lab = [w&&Number.isFinite(w.min)?`🚶${fmtMin(w.min)}`:'', t&&!t.walkOnly?`🚇${fmtMin(t.min)}`:''].filter(Boolean).join(' ');
-      addLine(h,q,RANK_COLOR[r], r===1?5:r===2?4:3.5, lab, HPATH[k]); });
+      const wt=r===1?5:r===2?4:3.5;
+      // 지하철이 더 빠르면 지하철 경로(타는 구간 실선 + 걷는 구간 점선)로, 아니면 도보 경로로
+      const useT = t && !t.walkOnly && Number.isFinite(t.min) && !(w && Number.isFinite(w.min) && w.min<=t.min);
+      if(useT){ const segs=transitSegs(k); if(segs){ drawSegs(segs,RANK_COLOR[r],wt,lab); return; } prepTransit(h,q,k).then(redraw); }
+      addLine(h,q,RANK_COLOR[r], wt, lab, HPATH[k]); });
     renderBar();
   };
   const redraw = ()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; draw(); }); };
@@ -1183,7 +1205,7 @@ async function renderRoute(){
           if(s.kind==='walk') return `<li class="step"><span class="ic">🚶</span><div>${s.fromGate?`<b>${esc(s.fromGate)}</b>로 나와서 `:''}${esc(s.to==='도착지'?b.name:s.to)}${s.gate?` <b>${esc(s.gate)}</b>`:''}까지 걷기<div class="meta">${fmtMin(s.min)} · ${fmtDist(s.m)}</div></div></li>`;
           return `<li class="step"><span class="ic" style="background:${esc(s.color)}22">🚇</span><div><span class="badge" style="background:${esc(s.color)}">${lineLabel(s.line).replace(/<span class="meta">/,'<span style="opacity:.85;font-weight:500">')}</span><div style="margin-top:4px"><b>${esc(s.from)}</b>${s.fromNo?` <span class="meta">${esc(s.fromNo)}</span>`:''} 승차 → <b>${esc(s.to)}</b>${s.toNo?` <span class="meta">${esc(s.toNo)}</span>`:''} 하차</div><div class="meta">${fmtMin(s.min)}${s.dir?` · ${esc(s.dir)} 방면`:''}${s.type&&s.type!=='普通'?` · ${esc(s.type)}`:''}</div></div></li>`;
         }).join('')+'</ol>';
-        h+=`<p class="note">총 ${fmtMin(r.min)} · 운임 ${r.fare!=null?'¥'+r.fare.toLocaleString():'미확인'}${r.ic!=null&&r.ic!==r.fare?` (IC카드 ¥${r.ic.toLocaleString()})`:''} · 걷는 거리 ${fmtDist(r.walkM)}<br>출처: NAVITIME 경로 탐색 (${esc(fmtAt(t.at))} 조회). 철도 시간은 시간표가 아닌 <b>평균 소요시간</b> 기준이고 버스는 포함되지 않아요. 다음 열차 시각·지연은 아래 구글 지도 앱 버튼으로 확인하세요.</p>`;
+        h+=`<p class="note">총 ${fmtMin(r.min)} · 운임 ${r.fare!=null?'¥'+r.fare.toLocaleString():'미확인'}${r.ic!=null&&r.ic!==r.fare?` (IC카드 ¥${r.ic.toLocaleString()})`:''} · 걷는 거리 ${fmtDist(r.walkM)}<br>${t.src==='google' ? `출처: Google 지도 대중교통 길찾기 화면 (${esc(fmtAt(t.at))} 확인, 그 시각 시간표 기준).` : `출처: NAVITIME 경로 탐색 (${esc(fmtAt(t.at))} 조회). 철도 시간은 시간표가 아닌 <b>평균 소요시간</b> 기준이고 버스는 포함되지 않아요.`} 다음 열차 시각·지연은 아래 구글 지도 앱 버튼으로 확인하세요.</p>`;
       }
     } else if(w && Number.isFinite(w.min)){
       h+=`<ol class="steps"><li class="step"><span class="ic">🚶</span><div>${esc(b.name)}까지 걷기<div class="meta">${fmtMin(w.min)} · ${fmtDist(w.m)}</div></div></li></ol><p class="note">도보: Google Routes API 실시간 계산 (${esc(fmtAt(w.at))}). 지도에 초록 선으로 표시했어요.</p>`;
@@ -1550,7 +1572,7 @@ function applySynced(k,v){   // 서버 값 → 이 기기 사본. 바뀐 게 있
 function syncTransitSoon(){ if(!syncReady) return; clearTimeout(nvTimer); nvTimer=setTimeout(syncTransit,1500); }
 async function syncTransit(){
   if(nvPushing||!syncReady) return; const out={};
-  for(const k in TR){ const t=TR[k]; if(!t||t.status!=='ok') continue; const s=SRV_NV[k]; if(!s||Date.parse(t.at)>Date.parse(s.at)) out[k]={routes:t.routes, at:t.at, basis:t.basis, c:t.c}; }
+  for(const k in TR){ const t=TR[k]; if(!t||t.status!=='ok') continue; const s=SRV_NV[k]; if(!s||Date.parse(t.at)>Date.parse(s.at)) out[k]={routes:t.routes, at:t.at, basis:t.basis, c:t.c, src:t.src}; }
   if(!Object.keys(out).length) return;
   nvPushing=true;
   try{ const r=await fetch(`${SYNC_URL}/kv/nvcache`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(out)}); if(r.ok) Object.assign(SRV_NV,out); }catch(e){}
@@ -1563,7 +1585,7 @@ async function syncPull(){
     if(applySynced(k,s[k])){ if(k==='ranks') ranks=true; else if(k==='localEvents') bell=true; else places=true; } }
   SRV_NV = s.nvcache||{};
   for(const k in SRV_NV){ const e=SRV_NV[k], cur=TR[k]; if(!e||!Array.isArray(e.routes)||(cur&&cur.status==='loading')) continue;
-    if(!cur || cur.status!=='ok' || Date.parse(e.at)>Date.parse(cur.at)){ TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, shared:true}; tr=true; } }
+    if(!cur || cur.status!=='ok' || Date.parse(e.at)>Date.parse(cur.at)){ TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, src:e.src, shared:true}; tr=true; } }
   const first=!syncReady; syncReady=true;
   if(tr){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; try{ localStorage.setItem('nvcache', JSON.stringify(o)); }catch(e){} }
   if(bell) renderBell();

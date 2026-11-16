@@ -117,6 +117,7 @@ def parse_detail(detail):
         a, b = stops[k]["name"], stops[k + 1]["name"]
         # drop the address line Google prints under the origin/destination name
         seg = [s for s in seg if not (s.startswith('일본 〒') or s.endswith(' 일본') or re.search(r'\w+ Ward, Osaka', s))]
+        seg = [s for s in seg if not re.match(r'^(승강장|플랫폼)\s*\S{0,6}$', s)]   # 2026-11: Google added platform lines
         if not seg:
             continue
         if seg[0] == '도보':
