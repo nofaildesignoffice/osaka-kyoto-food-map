@@ -412,6 +412,12 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 .bell .badge[hidden]{display:none}
 .osm-attr{position:absolute;left:78px;bottom:4px;z-index:5;font-size:10px;color:#555;background:rgba(255,255,255,.75);padding:1px 5px;border-radius:4px;pointer-events:none}
 .ctlpanel.right{left:auto;right:0}
+/* 헤더 지역·종류 버튼 = '수정' 버튼과 같은 크기·모양(알약형 30px) */
+.ctlgrp .ctl{flex:none}
+.ctlgrp .ctlbtn{width:auto;height:30px;padding:0 12px;gap:6px;border-radius:999px;font-size:12.5px;font-weight:800}
+.ctlgrp .ctlbtn .ctlk{font-size:12.5px;font-weight:800}
+.ctlgrp .ctlbtn>svg{width:13px;height:13px}
+.ctlgrp .ctlpanel.right{left:0;right:auto}
 .rankset button{display:grid;place-items:center;line-height:0}
 .rb-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px}
 .rbox{position:relative;display:flex;align-items:center;gap:9px;height:44px;padding:0 13px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;min-width:0}
