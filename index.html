@@ -272,6 +272,10 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
   .map-legend{bottom:calc(var(--sv,55dvh) - 12px);padding:44px 12px 38px;gap:10px;font-size:11.5px;justify-content:center;transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
   .app.sheet-dragging .map-legend{transition:none}
   .app.sheet-full .map-legend,.app.sheet-full .mapbar,.app.sheet-full .osm-attr{opacity:0}
+  /* 끝까지 올리면 위 헤더와 한 장처럼: 모서리 라운딩·그림자 제거 */
+  .scroll,.sheet-handle{transition:transform .34s cubic-bezier(.22,.9,.24,1),border-radius .2s}
+  .app.sheet-full .scroll,.app.sheet-full .sheet-handle{border-radius:0}
+  .app.sheet-full .scroll{box-shadow:none}
   .mapwrap .osm-attr{bottom:calc(var(--sv,55dvh) - 6px);transition:bottom .34s cubic-bezier(.22,.9,.24,1)}
   .app.sheet-dragging .mapwrap .osm-attr{transition:none}
 }
