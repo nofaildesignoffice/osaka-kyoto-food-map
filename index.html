@@ -147,7 +147,7 @@ table.near td{overflow-wrap:anywhere;word-break:keep-all}
 table.near th{font-size:11px;color:var(--ink3);text-align:left;font-weight:700;padding:4px}
 table.near td{border-top:1px solid var(--line);padding:6px 4px;vertical-align:top}
 table.near td.n{font-weight:700}
-table.near tr[data-route]{cursor:pointer}
+table.near tr[data-route]{cursor:pointer} table.near a.gtr{font-size:12px;font-weight:700;color:#1a56c4;text-decoration:none;white-space:nowrap}
 table.near tr[data-route]:hover td{background:var(--bg)}
 .empty{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink2);font-size:13.5px;line-height:1.6;background:#fff}
 
@@ -446,6 +446,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 <script src="data/spots.js?v=20261115b"></script>
 <script src="data/added.js"></script>
 <script src="data/events.js"></script>
+<script src="data/transit.js?v=20261116t1"></script>
 <script>window.PLACES.push(...(window.SPOTS||[]));</script>
 <script src="data/districts.js?v=20261115b"></script>
 <script>
@@ -524,9 +525,11 @@ function cleanRoute(r){ // 캐시·응답 값 검증: 숫자 필드는 숫자만
     lines:(Array.isArray(r.lines)?r.lines:[]).map(str),
     steps:(Array.isArray(r.steps)?r.steps:[]).map(x=>({kind:x.kind==='ride'?'ride':'walk', min:numOr(x.min), m:numOr(x.m), to:str(x.to), gate:str(x.gate), fromGate:str(x.fromGate), line:str(x.line), color:/^#[0-9a-fA-F]{3,8}$/.test(x.color||'')?x.color:'#555', type:str(x.type), from:str(x.from), fromNo:str(x.fromNo), toNo:str(x.toNo), dir:str(x.dir)}))};
 }
-(function(){ const c=lsGet('nvcache',{}); const now=Date.now(); for(const k in c){ const e=c[k]; if(e&&e.at&&now-Date.parse(e.at)<TR_TTL&&Array.isArray(e.routes)) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c}; } })();
+// 공유본(data/transit.js): 기간 상관없이 사용 → 재조회 안 함. 이 기기 캐시가 더 최신이면 그걸 우선
+(function(){ const S=window.TRANSIT||{}; for(const k in S){ const e=S[k]; if(e&&e.at&&Array.isArray(e.routes)&&e.routes.length) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, shared:true}; } })();
+(function(){ const c=lsGet('nvcache',{}); const now=Date.now(); for(const k in c){ if(TR[k]&&TR[k].shared&&Date.parse(TR[k].at)>=Date.parse((c[k]||{}).at||0)) continue; const e=c[k]; if(e&&e.at&&now-Date.parse(e.at)<TR_TTL&&Array.isArray(e.routes)) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c}; } })();
 function saveTR(){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; lsSet('nvcache', o); }
-const trFresh = (t,a,b) => t && t.status==='ok' && Date.now()-Date.parse(t.at)<TR_TTL && (!t.c || t.c===coordKey(a,b));
+const trFresh = (t,a,b) => t && t.status==='ok' && (t.shared || Date.now()-Date.parse(t.at)<TR_TTL) && (!t.c || t.c===coordKey(a,b));
 const KO_LINE = [['御堂筋線','미도스지선'],['谷町線','다니마치선'],['四つ橋線','요쓰바시선'],['中央線','주오선'],['千日前線','센니치마에선'],['堺筋線','사카이스지선'],['長堀鶴見緑地線','나가호리쓰루미료쿠치선'],['今里筋線','이마자토스지선'],['ニュートラム','뉴트램'],['大阪環状線','JR 오사카 순환선'],['ゆめ咲線','JR 유메사키선'],['ＪＲ京都線','JR 교토선'],['ＪＲ神戸線','JR 고베선'],['大和路線','JR 야마토지선'],['ＪＲ奈良線','JR 나라선'],['嵯峨野線','JR 사가노선'],['ＪＲ東西線','JR 도자이선'],['おおさか東線','JR 오사카히가시선'],['阪急京都本線','한큐 교토선'],['阪急神戸本線','한큐 고베선'],['阪急宝塚本線','한큐 다카라즈카선'],['阪急千里線','한큐 센리선'],['京阪本線','게이한 본선'],['京阪鴨東線','게이한 오토선'],['京阪中之島線','게이한 나카노시마선'],['近鉄奈良線','긴테쓰 나라선'],['近鉄京都線','긴테쓰 교토선'],['近鉄難波線','긴테쓰 난바선'],['近鉄大阪線','긴테쓰 오사카선'],['近鉄南大阪線','긴테쓰 미나미오사카선'],['阪神本線','한신 본선'],['阪神なんば線','한신 난바선'],['南海本線','난카이 본선'],['南海高野線','난카이 고야선'],['京都市営烏丸線','교토 지하철 가라스마선'],['京都市営東西線','교토 지하철 도자이선'],['嵐電','란덴(게이후쿠)'],['叡山電鉄','에이잔 전철'],['新幹線','신칸센']];
 const koLine = n => { if(!n) return ''; for(const [ja,ko] of KO_LINE) if(n.includes(ja)) return ko; return ''; };
 const lineLabel = n => { const k=koLine(n); return k ? `${k} <span class="meta">(${esc(n)})</span>` : esc(n); };
@@ -863,10 +866,11 @@ const mobSheet = ()=>matchMedia('(max-width:860px) and (min-height:521px)').matc
   layout(); window.addEventListener("load",layout); window.sheetLayout=layout;
   window.openSheet=()=>{ if(isMin()) set('half'); };
 })();
-function trCellHTML(k){
+const trErrText = m => /quota|exceeded|429|too many/i.test(m||'') ? '이번 달 지하철 조회 한도 초과' : '조회 실패';
+function trCellHTML(k,a,b){
   const t=TR[k];
   if(!t || t.status==='loading') return '<span class="meta">조회 중…</span>';
-  if(t.status==='error') return `<span class="meta">조회 실패 (${esc(t.msg)})</span>`;
+  if(t.status==='error') return `<span class="meta">${trErrText(t.msg)}</span>${a&&b?`<div><a class="gtr" href="${gdir(a,b,'transit')}" target="_blank" rel="noopener">Google 지도에서 보기 ›</a></div>`:''}`;
   const r=t.routes[0];
   if(r.walkOnly) return '<span class="meta">걸어가는 게 빨라요</span>';
   return `${fmtMin(r.min)} · ${r.fare!=null?'¥'+r.fare.toLocaleString():'요금 미확인'}<div class="meta">${esc(r.lines.map(lineShort).join(' → '))}${r.transfers?` · 환승 ${r.transfers}`:''}</div>`;
@@ -885,7 +889,7 @@ function nearTable(p){
   return `<table class="near"><thead><tr><th>${head}</th><th>🚶 도보</th><th>🚇 지하철+도보</th></tr></thead><tbody>${rows.map(({q,a,b,k,w,wm,tm,r})=>{
     const wBest = wm!=null && (tm==null || wm<=tm), tBest = tm!=null && wm!=null && tm<wm;
     const wc = !w ? '<span class="meta">계산 중…</span>' : w.err ? `<span class="meta">${esc(w.err)}</span>` : `${wBest?'<b>':''}${fmtMin(w.min)}${wBest?' ⚡</b>':''}<div class="meta">${fmtDist(w.m)}</div>`;
-    let tc = trCellHTML(k); if(tBest) tc = '<b>⚡</b> '+tc;
+    let tc = trCellHTML(k,a,b); if(tBest) tc = '<b>⚡</b> '+tc;
     return `<tr data-route="${a.id}|${b.id}"><td class="n">${r?`<span class="rk r${r}">${r}</span> `:''}${esc(q.name.replace(' (후보)',''))}</td><td>${wc}</td><td>${tc}</td></tr>`;
   }).join('')}</tbody></table><p class="note">⚡ = 더 빠른 방법. 행을 누르면 갈아타는 역·출구·요금까지 단계별로 보여주고 지도에 경로를 그려요.</p>`;
 }
@@ -990,7 +994,7 @@ const onListClick=e=>{
   const sf=e.target.closest('[data-setfrom]'), st=e.target.closest('[data-setto]'), tr=e.target.closest('tr[data-route]');
   if(sf){ e.stopPropagation(); setRoute(sf.dataset.setfrom, state.to); return; }
   if(st){ e.stopPropagation(); setRoute(state.from, st.dataset.setto); return; }
-  if(tr){ e.stopPropagation(); const [a,b]=tr.dataset.route.split('|'); setRoute(a,b); return; }
+  if(tr && !e.target.closest('a.gtr')){ e.stopPropagation(); const [a,b]=tr.dataset.route.split('|'); setRoute(a,b); return; }
   if(e.target.closest('a,details')) return;
   if(e.currentTarget===detailPane){ if(e.target.closest('[data-close]')) select(null,false); return; }
   const c=e.target.closest('.card'); if(c) select(c.dataset.id===state.sel?null:c.dataset.id,false);
@@ -1128,7 +1132,7 @@ async function renderRoute(){
     const w=WALK[k], t=TR[k], tb=t&&t.status==='ok'&&t.routes.length ? t.routes[Math.min(state.alt||0,t.routes.length-1)] : null;
     let h='<div class="modes">';
     h+=`<button class="mode" data-mode="walk" aria-pressed="${state.mode==='walk'}"><small>🚶 도보</small><b>${w&&Number.isFinite(w.min)?fmtMin(w.min):(w&&w.err?'—':'계산 중…')}</b><small>${w&&w.m?fmtDist(w.m):(w&&w.err?esc(w.err):'')}</small></button>`;
-    h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 지하철+도보</small><b>${tb?(tb.walkOnly?'도보 추천':fmtMin(tb.min)):(t&&t.status==='error'?'—':'조회 중…')}</b><small>${tb&&!tb.walkOnly?(tb.fare!=null?'¥'+tb.fare.toLocaleString():'요금 미확인')+(tb.transfers?` · 환승 ${tb.transfers}`:''):(t&&t.status==='error'?'조회 실패':'')}</small></button>`;
+    h+=`<button class="mode" data-mode="transit" aria-pressed="${state.mode==='transit'}"><small>🚇 지하철+도보</small><b>${tb?(tb.walkOnly?'도보 추천':fmtMin(tb.min)):(t&&t.status==='error'?'—':'조회 중…')}</b><small>${tb&&!tb.walkOnly?(tb.fare!=null?'¥'+tb.fare.toLocaleString():'요금 미확인')+(tb.transfers?` · 환승 ${tb.transfers}`:''):(t&&t.status==='error'?trErrText(t.msg):'')}</small></button>`;
     h+='</div>';
     if(state.mode==='transit'){
       if(!t || t.status==='loading') h+='<p class="note">NAVITIME에서 경로를 찾는 중…</p>';
