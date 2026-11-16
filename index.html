@@ -469,7 +469,7 @@ const gdir = (a,b,mode) => `https://www.google.com/maps/dir/?api=1&origin=${a.la
 const gplace = p => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.nameJa+' '+p.address)}`;
 const BED = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>';
 const lsGet = (k,d) => { try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } };
-const lsSet = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+const lsSet = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} syncMark(k); };   // 공용 키는 서버에도 저장
 
 const state = {city:'osaka', types:new Set(), cat:'all', sel:null, from:'', to:'', mode:null};
 
@@ -529,7 +529,7 @@ function cleanRoute(r){ // 캐시·응답 값 검증: 숫자 필드는 숫자만
 // 공유본(data/transit.js): 기간 상관없이 사용 → 재조회 안 함. 이 기기 캐시가 더 최신이면 그걸 우선
 (function(){ const S=window.TRANSIT||{}; for(const k in S){ const e=S[k]; if(e&&e.at&&Array.isArray(e.routes)&&e.routes.length) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, shared:true}; } })();
 (function(){ const c=lsGet('nvcache',{}); const now=Date.now(); for(const k in c){ if(TR[k]&&TR[k].shared&&Date.parse(TR[k].at)>=Date.parse((c[k]||{}).at||0)) continue; const e=c[k]; if(e&&e.at&&now-Date.parse(e.at)<TR_TTL&&Array.isArray(e.routes)) TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c}; } })();
-function saveTR(){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; lsSet('nvcache', o); }
+function saveTR(){ syncTransitSoon(); const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; lsSet('nvcache', o); }
 const trFresh = (t,a,b) => t && t.status==='ok' && (t.shared || Date.now()-Date.parse(t.at)<TR_TTL) && (!t.c || t.c===coordKey(a,b));
 const KO_LINE = [['御堂筋線','미도스지선'],['谷町線','다니마치선'],['四つ橋線','요쓰바시선'],['中央線','주오선'],['千日前線','센니치마에선'],['堺筋線','사카이스지선'],['長堀鶴見緑地線','나가호리쓰루미료쿠치선'],['今里筋線','이마자토스지선'],['ニュートラム','뉴트램'],['大阪環状線','JR 오사카 순환선'],['ゆめ咲線','JR 유메사키선'],['ＪＲ京都線','JR 교토선'],['ＪＲ神戸線','JR 고베선'],['大和路線','JR 야마토지선'],['ＪＲ奈良線','JR 나라선'],['嵯峨野線','JR 사가노선'],['ＪＲ東西線','JR 도자이선'],['おおさか東線','JR 오사카히가시선'],['阪急京都本線','한큐 교토선'],['阪急神戸本線','한큐 고베선'],['阪急宝塚本線','한큐 다카라즈카선'],['阪急千里線','한큐 센리선'],['京阪本線','게이한 본선'],['京阪鴨東線','게이한 오토선'],['京阪中之島線','게이한 나카노시마선'],['近鉄奈良線','긴테쓰 나라선'],['近鉄京都線','긴테쓰 교토선'],['近鉄難波線','긴테쓰 난바선'],['近鉄大阪線','긴테쓰 오사카선'],['近鉄南大阪線','긴테쓰 미나미오사카선'],['阪神本線','한신 본선'],['阪神なんば線','한신 난바선'],['南海本線','난카이 본선'],['南海高野線','난카이 고야선'],['京都市営烏丸線','교토 지하철 가라스마선'],['京都市営東西線','교토 지하철 도자이선'],['嵐電','란덴(게이후쿠)'],['叡山電鉄','에이잔 전철'],['新幹線','신칸센']];
 const koLine = n => { if(!n) return ''; for(const [ja,ko] of KO_LINE) if(n.includes(ja)) return ko; return ''; };
@@ -923,7 +923,7 @@ function cardHTML(p){
   if(p.comment) why += `<p class="quote-h">💬 유튜브 댓글 (캡처에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
   if(p.origin==='list') why += `<p class="quote-h">📝 우리가 고른 가게 — 보낸 이름 “${esc(p.typed)}”</p>`;
   if(p.origin==='ai') why += `<p class="quote-h">🤖 AI 추천 — ${p.verified&&p.verified.length===2?'Claude·Codex 둘 다 같은 곳 추천':'AI 한쪽만 찾음'}${p.pending?' (반영 중)':''} · “${esc(p.typed)}”</p>${(p.aiEvidence||[]).map(a=>`<div class="quote"><b>${esc(a.ai)}</b> ${esc(a.evidence)}</div>`).join('')}`;
-  if(p.origin==='added') why += `<p class="quote-h">➕ 직접 추가 (이 기기에 저장) — “${esc(p.typed)}”</p>`;
+  if(p.origin==='added') why += `<p class="quote-h">➕ 직접 추가 (모두에게 공유) — “${esc(p.typed)}”</p>`;
   if(p.origin==='blog') why += `<p class="quote-h">📰 네이버 블로그 (캡처에서 옮겨 적음)</p><div class="quote">${esc(p.blog)}</div>`;
   if(p.tip) why += `<div class="tip">💡 ${esc(p.tip)}</div>`;
   if(p.menu) why += `<p class="whymenu">댓글 추천 메뉴 <b>${esc(p.menu)}</b></p>`;
@@ -1190,7 +1190,7 @@ async function renderRoute(){
   drawMap();
 }
 
-/* ---------- 장소 추가·삭제 (이 기기에 저장) ---------- */
+/* ---------- 장소 추가·삭제 (공용 저장소에 동기화) ---------- */
 function rebuildPlaces(){
   const removed=new Set(lsGet('removed',[]));
   const shipped=new Set(BASE.map(p=>p.gpid).filter(Boolean));
@@ -1337,7 +1337,7 @@ function evHTML(e){
   const head=(ic,label,color)=>`<div style="display:flex;gap:8px;align-items:center"><b style="color:${color}">${ic} ${label}</b><span class="meta">${t}${e.cat?' · '+TYPE_LABEL[e.cat]:''}</span>${isNew?'<span class="newdot">새</span>':''}</div>`;
   const memo = e.text?`<div class="meta" style="margin-top:2px">입력: “${esc(e.text)}”</div>`:'';
   if(e.type==='added') return `<div class="nrow">${head('✅','추가됨','#1b7f3b')}${(e.places||[]).map(p=>`<button class="nlink" data-goto="${esc(p.id)}">${esc(p.name)}${p.nameJa&&p.nameJa!==p.name?` <span class="meta">${esc(p.nameJa)}</span>`:''} · ${esc(CITY[p.city]?CITY[p.city].name:'')}</button>`).join('')}${memo}${e.note?`<div class="meta">${esc(e.note)}</div>`:''}</div>`;
-  if(e.type==='deleted'||e.type==='restored') return `<div class="nrow">${head(e.type==='deleted'?'🗑':'↩',e.type==='deleted'?'삭제함 (이 기기)':'복원함 (이 기기)','#555')}<div class="meta">${(e.names||[]).map(esc).join(', ')}</div></div>`;
+  if(e.type==='deleted'||e.type==='restored') return `<div class="nrow">${head(e.type==='deleted'?'🗑':'↩',e.type==='deleted'?'삭제함':'복원함','#555')}<div class="meta">${(e.names||[]).map(esc).join(', ')}</div></div>`;
   // failed / duplicate
   const res=new Set(e.resolved||[]);
   const cands=(e.cands||[]).map((c,i)=>{ const L=LEVEL[c.level]||['','#555'];
@@ -1420,7 +1420,7 @@ function openAddModal(){
       try{ const res=await placesSearch(pi.q||`${pi.coord.lat},${pi.coord.lng}`, pi.coord); const all=[...BASE,...lsGet('added',[])];
         cands=res.filter(c=>c.location).map(c=>({pid:c.id, name:c.displayName&&c.displayName.text, address:c.formattedAddress, lat:c.location.latitude, lng:c.location.longitude, types:c.types, typeKo:c.primaryTypeDisplayName&&c.primaryTypeDisplayName.text, rating:c.rating, photo:c.photos&&c.photos[0]&&c.photos[0].name, mapsUri:c.googleMapsUri}));
         cands.forEach(c=>c._exists=all.some(p=>(p.gpid&&p.gpid===c.pid)||haversine(p,{lat:c.lat,lng:c.lng})<25));
-        status=cands.length?'AI 없이 Google 검색 결과예요. 맞는 곳의 + 를 누르면 이 기기에만 추가돼요.':'Google 지도에서 찾지 못했어요.'; }catch(err){ status='검색 실패: '+esc(err.message||err); }
+        status=cands.length?'AI 없이 Google 검색 결과예요. 맞는 곳의 + 를 누르면 추가돼요 (모든 기기에 공유).':'Google 지도에서 찾지 못했어요.'; }catch(err){ status='검색 실패: '+esc(err.message||err); }
       draw(); return;
     }
     if(t.dataset.pick){
@@ -1428,7 +1428,7 @@ function openAddModal(){
       let ja=null; try{ ja=await gpost(`https://places.googleapis.com/v1/places/${encodeURIComponent(c.pid)}?languageCode=ja`,'displayName,formattedAddress',undefined,'GET'); }catch(err){}
       const p={id:'u-'+c.pid.slice(-12)+'-'+Date.now().toString(36), gpid:c.pid, type:cat, city:cityOf(c.lat,c.lng), lat:c.lat, lng:c.lng, name:c.name||'이름 없음', nameJa:(ja&&ja.displayName&&ja.displayName.text)||'', address:(ja&&ja.formattedAddress)||c.address||'', area:c.typeKo||'', group:cat==='food'?'직접 추가한 맛집':(cat==='spot'?'관광지':''), emoji:cat==='hotel'?'':(emojiOf(c.types)||(cat==='spot'?'📍':'🍴')), origin:'added', typed:input.slice(0,300), notes:[]};
       const added=lsGet('added',[]); added.push(p); lsSet('added',added);
-      pushLocalEvent({type:'added', cat, text:input.slice(0,300), places:[{id:p.id,name:p.name,nameJa:p.nameJa,city:p.city}], note:'AI 없이 구글 검색으로 추가 (이 기기에만)'});
+      pushLocalEvent({type:'added', cat, text:input.slice(0,300), places:[{id:p.id,name:p.name,nameJa:p.nameJa,city:p.city}], note:'AI 없이 구글 검색으로 추가'});
       closeModal(); afterPlacesChanged(); setCity(p.city,true); select(p.id,false); return;
     }
   });
@@ -1482,6 +1482,55 @@ const thumbIO = 'IntersectionObserver' in window ? new IntersectionObserver(es=>
 function observeThumbs(){ if(!thumbIO) return; sheetEl.querySelectorAll('.card .ico').forEach(el=>{ const id=el.closest('.card').dataset.id; const t=THUMB[id];
   if(t&&t.photo&&t.at&&Date.now()-Date.parse(t.at)<PHOTO_TTL){ paintThumb(id); } else thumbIO.observe(el); }); }
 
+/* ---------- 공용 저장소 (Cloudflare Worker + D1) ----------
+   순위·삭제·추가·알림·지하철 조회 결과를 서버에 저장 → 어느 기기·브라우저에서 열어도 같게 보임.
+   기기 저장(localStorage)은 서버 값의 사본 + 오프라인 대비. */
+const SYNC_URL = 'https://osaka-map-sync.osaka-kyoto-map.workers.dev';
+var SYNC_KEYS = ['ranks','removed','added','localEvents'];
+var syncPending = {}, syncTimer=0, syncReady=false, SRV_NV={}, nvTimer=0, nvPushing=false;
+function syncMark(k){ if(!SYNC_KEYS || !SYNC_KEYS.includes(k)) return; syncPending[k]=true; clearTimeout(syncTimer); syncTimer=setTimeout(syncPush,300); }
+async function syncPush(){
+  for(const k of Object.keys(syncPending)){
+    try{ const r=await fetch(`${SYNC_URL}/kv/${k}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:localStorage.getItem(k)||(k==='ranks'?'{}':'[]')});
+      if(r.ok){ delete syncPending[k]; const j=await r.json().catch(()=>null); if(j&&j.value!==undefined&&!syncPending[k]) applySynced(k,j.value); } }catch(e){}
+  }
+  if(Object.keys(syncPending).length){ clearTimeout(syncTimer); syncTimer=setTimeout(syncPush,5000); }   // 오프라인이면 잠시 뒤 재시도
+}
+function applySynced(k,v){   // 서버 값 → 이 기기 사본. 바뀐 게 있으면 true
+  const nv=JSON.stringify(v); if(localStorage.getItem(k)===nv) return false;
+  try{ localStorage.setItem(k,nv); }catch(e){}
+  if(k==='ranks') RANKS=Object.assign({}, v);
+  return true;
+}
+function syncTransitSoon(){ if(!syncReady) return; clearTimeout(nvTimer); nvTimer=setTimeout(syncTransit,1500); }
+async function syncTransit(){
+  if(nvPushing||!syncReady) return; const out={};
+  for(const k in TR){ const t=TR[k]; if(!t||t.status!=='ok') continue; const s=SRV_NV[k]; if(!s||Date.parse(t.at)>Date.parse(s.at)) out[k]={routes:t.routes, at:t.at, basis:t.basis, c:t.c}; }
+  if(!Object.keys(out).length) return;
+  nvPushing=true;
+  try{ const r=await fetch(`${SYNC_URL}/kv/nvcache`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(out)}); if(r.ok) Object.assign(SRV_NV,out); }catch(e){}
+  nvPushing=false;
+}
+async function syncPull(){
+  let s; try{ const r=await fetch(`${SYNC_URL}/state`,{cache:'no-store'}); if(!r.ok) return; s=await r.json(); }catch(e){ return; }
+  let places=false, ranks=false, bell=false, tr=false;
+  for(const k of SYNC_KEYS){ if(syncPending[k] || !(k in s)) continue;
+    if(applySynced(k,s[k])){ if(k==='ranks') ranks=true; else if(k==='localEvents') bell=true; else places=true; } }
+  SRV_NV = s.nvcache||{};
+  for(const k in SRV_NV){ const e=SRV_NV[k], cur=TR[k]; if(!e||!Array.isArray(e.routes)||(cur&&cur.status==='loading')) continue;
+    if(!cur || cur.status!=='ok' || Date.parse(e.at)>Date.parse(cur.at)){ TR[k]={status:'ok', routes:e.routes.map(cleanRoute), at:e.at, basis:e.basis, c:e.c, shared:true}; tr=true; } }
+  const first=!syncReady; syncReady=true;
+  if(tr){ const o={}; for(const k in TR) if(TR[k].status==='ok') o[k]={routes:TR[k].routes, at:TR[k].at, basis:TR[k].basis, c:TR[k].c}; try{ localStorage.setItem('nvcache', JSON.stringify(o)); }catch(e){} }
+  if(bell) renderBell();
+  if(places) afterPlacesChanged(); else if(ranks||tr){ renderList(); refreshMarkers(); }
+  const h = state.sel&&byId[state.sel]&&byId[state.sel].type==='hotel' ? byId[state.sel] : null;
+  if(h && (ranks||places)) showHotelRanks(h);
+  else if(state.sel && tr) document.querySelectorAll(`[data-near="${state.sel}"]`).forEach(tb=>tb.innerHTML=nearTable(byId[state.sel]));
+  if(first) syncTransit();   // 이 기기에만 있던 조회 결과 올리기
+}
+setInterval(()=>{ if(document.visibilityState==='visible') syncPull(); }, 20000);
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') syncPull(); });
+
 /* ---------- init ---------- */
 rebuildPlaces(); renderBell(); if(lsGet('bridgeUsed',false)) pollBridge();   // AI 브리지를 쓴 적 있는 기기(PC)만 연결 시도
 fillSelects(); setCity('osaka');
@@ -1496,6 +1545,7 @@ const s=document.createElement('script');
 s.src=`https://maps.googleapis.com/maps/api/js?key=${GKEY}&v=weekly&language=ko&region=JP&loading=async&callback=__initMap`;
 s.async=true; s.onerror=()=>{ document.getElementById('gmap').innerHTML='<div class="mapmsg">Google 지도 스크립트를 불러오지 못했어요.</div>'; };
 document.head.appendChild(s);
+syncPull();
 })();
 </script>
 </body>
