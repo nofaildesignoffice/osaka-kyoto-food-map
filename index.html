@@ -72,6 +72,10 @@ button,select{font:inherit;color:inherit}
 .sel-label{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin:2px 4px 8px}
 #selSlot{margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 #selSlot .card{border:0;border-radius:0;box-shadow:none;background:none;padding:2px 2px 0;margin:0;cursor:default}
+#selSlot .card-top{cursor:pointer}
+.sel-bar{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+.sel-back{display:inline-flex;align-items:center;gap:4px;height:34px;padding:0 12px 0 8px;border-radius:999px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;font-weight:800;color:var(--ink);cursor:pointer}
+.sel-back:hover,.sel-bar .d2-close:hover{border-color:var(--ink)}
 
 /* route box */
 .routebox{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0 calc(-1 * var(--sx)) 14px;padding:4px var(--sx) 18px}
@@ -1096,7 +1100,7 @@ function renderList(){
   if(state.cat!=='all' && !cnt[state.cat]) state.cat='all';
   const catBar = `<div class="cats" role="group" aria-label="카테고리">${[['all','전체',Object.values(cnt).reduce((a,b)=>a+b,0)],...order.map(c=>[c,c,cnt[c]])].map(([v,l,n])=>`<button class="cat" data-cat="${esc(v)}" aria-pressed="${state.cat===v}">${esc(l)}<b>${n}</b></button>`).join('')}</div>`;
   const slotId = mobSheet() && state.sel && byId[state.sel] && byId[state.sel].city===state.city ? state.sel : null;
-  selSlot.innerHTML = slotId ? cardHTML(byId[slotId]) : '';
+  selSlot.innerHTML = slotId ? `<div class="sel-bar"><button class="sel-back" type="button" data-close><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>목록으로</button><button class="d2-close" type="button" data-close aria-label="접기" title="접기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button></div>`+cardHTML(byId[slotId]) : '';
   const paneId = deskPane() && state.sel && byId[state.sel] ? state.sel : null;
   if(paneId!==detailPane.dataset.id) detailBody.scrollTop=0;
   detailPane.dataset.id = paneId||''; detailBody.innerHTML = paneId ? cardHTML(byId[paneId]) : '';
@@ -1151,6 +1155,8 @@ const onListClick=e=>{
   if(tr && !e.target.closest('a.gtr')){ e.stopPropagation(); const [a,b]=tr.dataset.route.split('|'); setRoute(a,b); return; }
   if(e.target.closest('a,details')) return;
   if(e.currentTarget===detailPane){ if(e.target.closest('[data-close]')) select(null,false); return; }
+  // 모바일 선택 카드: '목록으로'·접기 버튼이나 카드 윗부분(이름·사진)을 누르면 접고 목록으로. 상세 내용 클릭으로는 안 접힘
+  if(e.target.closest('#selSlot')){ if(e.target.closest('[data-close]')||e.target.closest('#selSlot .card-top')){ select(null,false); sheetEl.scrollTo({top:0}); } return; }
   const c=e.target.closest('.card'); if(c) select(c.dataset.id===state.sel?null:c.dataset.id,false);
 };
 sheetEl.addEventListener('click',onListClick); detailPane.addEventListener('click',onListClick);
