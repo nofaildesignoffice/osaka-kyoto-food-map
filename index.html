@@ -851,7 +851,7 @@ function panTo(lat,lng,z){ if(!map) return; map.panTo({lat,lng}); if(z) map.setZ
 function fit(points){ if(!map||!points.length) return; const b=new google.maps.LatLngBounds(); points.forEach(p=>b.extend({lat:p.lat,lng:p.lng})); map.fitBounds(b, 60); }
 function renderBar(){
   if(view.kind==='embed'){ mapbar.innerHTML=`<span class="pill on">🚇 대중교통 경로 · Google 지도</span><button class="pill" data-back>← 우리 지도로</button>`; return; }
-  mapbar.innerHTML=(overlays.length?'<button class="pill" data-clearlines>선 지우기</button>':'');
+  mapbar.innerHTML='';   // '선 지우기' 버튼 제거 (사용자 요청)
   const hb=document.getElementById('btnHot'); if(hb) hb.setAttribute('aria-pressed',shade);
 }
 mapbar.addEventListener('click',e=>{
