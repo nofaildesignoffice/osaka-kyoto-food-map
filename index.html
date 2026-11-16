@@ -447,6 +447,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 <script src="data/added.js"></script>
 <script src="data/events.js"></script>
 <script src="data/transit.js?v=20261116t2"></script>
+<script src="data/ranks.js?v=20261116k1"></script>
 <script>window.PLACES.push(...(window.SPOTS||[]));</script>
 <script src="data/districts.js?v=20261115b"></script>
 <script>
@@ -473,7 +474,7 @@ const lsSet = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch
 const state = {city:'osaka', types:new Set(), cat:'all', sel:null, from:'', to:'', mode:null};
 
 /* ---------- 순위 (①②③) : 데이터 기본값 p.rank + 이 기기에서 바꾼 값 ---------- */
-let RANKS = lsGet('ranks', {});
+let RANKS = Object.assign({}, window.SHARED_RANKS||{}, lsGet('ranks', {}));   // 공유 순위 + 이 기기에서 바꾼 순위
 const rankOf = p => { if(p.type!=='food') return 0; const v = RANKS[p.id]; return v===undefined ? (p.rank||0) : v; };
 function setRank(id, r){ const p=byId[id]; RANKS[id] = rankOf(p)===r ? 0 : r; lsSet('ranks', RANKS); renderList(); refreshMarkers(); if(state.sel && byId[state.sel].type==='hotel') showHotelRanks(byId[state.sel]); }
 
