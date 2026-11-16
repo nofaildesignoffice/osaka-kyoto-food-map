@@ -854,7 +854,9 @@ async function showHotelRanks(h){
     if(!map || state.from&&state.to) return;
     clearOverlays();
     foods.forEach(q=>{ const r=rankOf(q), k=`${h.id}|${q.id}`, w=WALK[k], t=trBest(k);
-      const lab = [w&&Number.isFinite(w.min)?`🚶${fmtMin(w.min)}`:'', t&&!t.walkOnly?`🚇${fmtMin(t.min)}`:''].filter(Boolean).join(' ');
+      const wOK=w&&Number.isFinite(w.min), tOK=t&&!t.walkOnly&&Number.isFinite(t.min);
+      // 라벨은 더 빠른 쪽 시간만 (지하철이 빠르면 🚇만, 걷는 게 빠르거나 같으면 🚶만)
+      const lab = tOK && (!wOK || t.min<w.min) ? `🚇${fmtMin(t.min)}` : wOK ? `🚶${fmtMin(w.min)}` : '';
       const wt=r===1?5:r===2?4:3.5;
       // 지하철이 더 빠르면 지하철 경로(타는 구간 실선 + 걷는 구간 점선)로, 아니면 도보 경로로
       const useT = t && !t.walkOnly && Number.isFinite(t.min) && !(w && Number.isFinite(w.min) && w.min<=t.min);
