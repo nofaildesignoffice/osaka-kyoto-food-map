@@ -561,6 +561,9 @@ function transitQuery(a,b,opts={}){
     return cur.promise.then(()=>transitQuery(a,b,opts));
   }
   if(trFresh(cur,a,b) && (!opts.shape || TRSHAPE[k])) return Promise.resolve(cur);
+  if(trFresh(cur,a,b) && opts.shape && !cur.shapeTried){ cur.shapeTried=true;   // 저장된 노선 모양 먼저
+    return fetchShape(k).then(ok=> ok ? TR[k] : transitQuery(a,b,opts)); }
+  if(nvQuotaOut) return Promise.resolve(cur || (TR[k]={status:'error', msg:'quota exceeded'}));   // 이번 달 한도 끝 → 요청 생략
   const basis=jstNow();
   const url=`https://${NVHOST}/route_transit?start=${a.lat},${a.lng}&goal=${b.lat},${b.lng}&start_time=${basis}&datum=wgs84&coord_unit=degree&limit=3&shape=${opts.shape?'true':'false'}`;
   const keep = trFresh(cur,a,b) ? cur : null;
@@ -573,13 +576,47 @@ function transitQuery(a,b,opts={}){
       if(!res.ok || !j || !Array.isArray(j.items)) throw new Error((j&&(j.message||(j.error&&j.error.message)))||('HTTP '+res.status));
       if(!j.items.length) throw new Error('경로 없음');
       TR[k]={status:'ok', routes:j.items.map(parseItem), at:new Date().toISOString(), basis, c:coordKey(a,b)};
-      if(opts.shape) TRSHAPE[k]=j.items.map(it=>it.shapes&&Array.isArray(it.shapes.features)?it.shapes:null); else delete TRSHAPE[k];
+      if(opts.shape){ TRSHAPE[k]=j.items.map(it=>it.shapes&&Array.isArray(it.shapes.features)?it.shapes:null); pushShape(k); } else delete TRSHAPE[k];
       saveTR();
-    }catch(err){ TR[k] = keep ? {...keep, promise:undefined, shapeReq:undefined} : {status:'error', msg:String(err.message||err)}; console.warn('navitime', err); }
+    }catch(err){ if(/quota|exceeded/i.test(String(err.message||err))) nvQuotaOut=true; TR[k] = keep ? {...keep, promise:undefined, shapeReq:undefined} : {status:'error', msg:String(err.message||err)}; console.warn('navitime', err); }
     resolve(TR[k]);
   });
   pumpTR();
   return promise;
+}
+let nvQuotaOut=false;
+// 노선 모양: 공용 저장소에 구간별 저장 (좌표 소수 5자리로 줄여서)
+const rnd5 = c => Array.isArray(c) ? c.map(rnd5) : (typeof c==='number' ? Math.round(c*1e5)/1e5 : c);
+function pushShape(k){ const v=TRSHAPE[k]; if(!v) return;
+  const slim=v.map(fc=>fc&&{type:'FeatureCollection', features:(fc.features||[]).map(f=>({type:'Feature', properties:{ways:(f.properties||{}).ways, inline:{color:((f.properties||{}).inline||{}).color}}, geometry:f.geometry&&{type:f.geometry.type, coordinates:rnd5(f.geometry.coordinates)}}))});
+  fetch(`${SYNC_URL}/shape/${encodeURIComponent(k)}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(slim)}).catch(()=>{}); }
+async function fetchShape(k){ try{ const r=await fetch(`${SYNC_URL}/shape/${encodeURIComponent(k)}`,{cache:'no-store'}); if(!r.ok) return false;
+  const v=await r.json(); if(Array.isArray(v)&&v.some(Boolean)){ TRSHAPE[k]=v; return true; } }catch(e){} return false; }
+// 노선 모양이 없을 때: 저장된 단계(승하차역)로 그림 — 역 위치는 Google Places, 걷는 구간은 Google 도보 경로
+const APPROX = {};
+async function stationLL(name, near){
+  const c=lsGet('stll',{}); if(c[name]) return c[name];
+  const q=name.replace(/（.*?）|\(.*?\)/g,'').trim()+'駅';
+  const j=await gpost('https://places.googleapis.com/v1/places:searchText','places.location,places.types',{textQuery:q, languageCode:'ja', regionCode:'JP', pageSize:5, locationBias:{circle:{center:{latitude:near.lat,longitude:near.lng},radius:20000}}});
+  const x=(j.places||[]).find(p=>(p.types||[]).some(t=>/station/.test(t))); if(!x) return null;
+  const v={lat:x.location.latitude, lng:x.location.longitude};
+  if(google.maps.geometry.spherical.computeDistanceBetween(v,near)>25000) return null;   // 엉뚱한 동명 역 방지
+  c[name]=v; lsSet('stll',c); return v;
+}
+async function walkPath(p,q){ try{ const j=await gpost('https://routes.googleapis.com/directions/v2:computeRoutes','routes.polyline.encodedPolyline',{origin:{location:{latLng:{latitude:p.lat,longitude:p.lng}}}, destination:{location:{latLng:{latitude:q.lat,longitude:q.lng}}}, travelMode:'WALK'});
+  const e=j.routes&&j.routes[0]&&j.routes[0].polyline&&j.routes[0].polyline.encodedPolyline; if(e) return google.maps.geometry.encoding.decodePath(e).map(x=>({lat:x.lat(),lng:x.lng()})); }catch(e){} return [p,q]; }
+function buildApprox(key,a,b,r){
+  if(APPROX[key]) return APPROX[key].promise||Promise.resolve();
+  const mid={lat:(a.lat+b.lat)/2, lng:(a.lng+b.lng)/2};
+  const promise=(async()=>{ const segs=[]; let cur={lat:a.lat,lng:a.lng};
+    for(const st of r.steps){
+      const target = st.to==='도착지' ? {lat:b.lat,lng:b.lng} : await stationLL(st.to, mid).catch(()=>null);
+      if(!target){ APPROX[key]={failed:true}; return; }
+      if(st.kind==='ride') segs.push({ride:true, color:st.color||'#555', path:[cur,target]});
+      else if(google.maps.geometry.spherical.computeDistanceBetween(cur,target)>30) segs.push({ride:false, path:await walkPath(cur,target)});
+      cur=target; }
+    APPROX[key]={segs}; })();
+  APPROX[key]={promise}; return promise;
 }
 const trBest = k => { const t=TR[k]; return t&&t.status==='ok'&&t.routes.length ? t.routes[0] : null; };
 /* 숙소→가게 실제 비교용 시간: 지하철 경로가 '도보만'이면 도보 시간으로 */
@@ -1179,7 +1216,15 @@ async function renderRoute(){
           overlays.push(walk ? new google.maps.Polyline({map, path, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1',strokeOpacity:1,strokeColor:'#11875d',strokeWeight:3,scale:2},offset:'0',repeat:'9px'}], zIndex:3})
                              : new google.maps.Polyline({map, path, strokeColor:col==='#D3D3D3'?'#555':col, strokeOpacity:.95, strokeWeight:6, zIndex:4})); }); });
     } else {
-      overlays.push(new google.maps.Polyline({map, path:[{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}], strokeColor:'#555', strokeOpacity:.5, strokeWeight:3}));
+      const r=trBest(k) && TR[k].routes[i], ak=`${k}#${i}`, ap=APPROX[ak];
+      if(ap && ap.segs){
+        ap.segs.forEach(sg=>{ sg.path.forEach(x=>bb.extend(x));
+          overlays.push(sg.ride ? new google.maps.Polyline({map, path:sg.path, strokeColor:sg.color==='#D3D3D3'?'#555':sg.color, strokeOpacity:.95, strokeWeight:6, zIndex:4})
+                                : new google.maps.Polyline({map, path:sg.path, strokeOpacity:0, icons:[{icon:{path:'M 0,-1 0,1',strokeOpacity:1,strokeColor:'#11875d',strokeWeight:3,scale:2},offset:'0',repeat:'9px'}], zIndex:3})); });
+      } else {
+        overlays.push(new google.maps.Polyline({map, path:[{lat:a.lat,lng:a.lng},{lat:b.lat,lng:b.lng}], strokeColor:'#555', strokeOpacity:.25, strokeWeight:2}));
+        if(r && !r.walkOnly && !(ap&&ap.failed)) buildApprox(ak,a,b,r).then(()=>{ if(seq===gen && APPROX[ak] && APPROX[ak].segs) drawMap(); });
+      }
     }
     map.fitBounds(bb,60); renderBar();
   };

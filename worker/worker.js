@@ -36,6 +36,19 @@ export default {
         out._t = t;
         return json(out, cors);
       }
+      // 노선 모양(NAVITIME GeoJSON) — 구간별로 따로 저장 (state 응답을 가볍게)
+      const sm = url.pathname.match(/^\/shape\/([\w|.%-]{3,300})$/);
+      if (sm && req.method === 'GET') {
+        const r = await db.prepare('SELECT v FROM shp WHERE k=?').bind(decodeURIComponent(sm[1])).first();
+        return r ? new Response(r.v, { headers: { ...cors, 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } }) : json({ none: true }, cors, 404);
+      }
+      if (sm && req.method === 'PUT') {
+        if (!ORIGINS.includes(origin)) return json({ error: 'forbidden' }, cors, 403);
+        const body = await req.text(); if (body.length > 1_500_000) return json({ error: 'too large' }, cors, 413);
+        const v = JSON.parse(body); if (!Array.isArray(v)) return json({ error: 'invalid' }, cors, 400);
+        await db.prepare('INSERT INTO shp(k,v,t) VALUES(?,?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v, t=excluded.t').bind(decodeURIComponent(sm[1]), body, Date.now()).run();
+        return json({ ok: true }, cors);
+      }
       const m = url.pathname.match(/^\/kv\/(\w+)$/);
       if (req.method === 'PUT' && m && KEYS[m[1]]) {
         if (!ORIGINS.includes(origin)) return json({ error: 'forbidden' }, cors, 403);
