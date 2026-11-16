@@ -1485,6 +1485,11 @@ function observeThumbs(){ if(!thumbIO) return; sheetEl.querySelectorAll('.card .
 rebuildPlaces(); renderBell(); if(lsGet('bridgeUsed',false)) pollBridge();   // AI 브리지를 쓴 적 있는 기기(PC)만 연결 시도
 fillSelects(); setCity('osaka');
 const hp=new URLSearchParams(location.hash.slice(1));
+// #export: 이 브라우저에 저장된 지하철 조회 기록을 파일로 내려받기 → 공유 파일(data/transit.js)에 합치는 용도
+if(location.hash==='#export'){ try{ const raw=localStorage.getItem('nvcache')||'{}', n=Object.keys(JSON.parse(raw)).length;
+  const u=URL.createObjectURL(new Blob([raw],{type:'application/json'})), el=document.createElement('a'); el.href=u; el.download='transit-export.json'; document.body.append(el); el.click(); el.remove();
+  setTimeout(()=>{ const m=document.createElement('div'); m.className='mapmsg'; m.style.cssText='position:fixed;left:50%;top:20px;transform:translateX(-50%);z-index:9999;background:#fff;padding:12px 16px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.2);font-weight:700'; m.textContent=`지하철 조회 기록 ${n}건을 transit-export.json 으로 저장했어요`; document.body.append(m); setTimeout(()=>m.remove(),6000); },300);
+}catch(e){ console.warn('export',e); } }
 if(hp.get('from')||hp.get('to')) setRoute(byId[hp.get('from')]?hp.get('from'):'', byId[hp.get('to')]?hp.get('to'):'');
 const s=document.createElement('script');
 s.src=`https://maps.googleapis.com/maps/api/js?key=${GKEY}&v=weekly&language=ko&region=JP&loading=async&callback=__initMap`;
