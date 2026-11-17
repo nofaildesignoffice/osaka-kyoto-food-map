@@ -918,21 +918,13 @@ function rankSummaryHTML(h){
   if(!foods.length) return `<div class="empty" style="margin-top:8px">아래 맛집 카드의 <b>👑🥈🥉</b> 버튼으로 순위를 매기면, 이 숙소에서 순위별 맛집까지 선을 그리고 평균 시간을 보여줘요.</div>`;
   let h2='<div class="ranksum">';
   for(const r of [1,2,3]){ const fs=foods.filter(q=>rankOf(q)===r);
-    if(!fs.length){ h2+=`<div><span class="rk r${r}">${r}</span> 순위<br><span class="meta">지정 없음</span></div>`; continue; }
+    if(!fs.length){ h2+=`<div>${r}순위<b>—</b></div>`; continue; }
     const keys=fs.map(q=>`${h.id}|${q.id}`);
-    const ws=keys.map(k=>WALK[k]).filter(w=>w&&Number.isFinite(w.min)).map(w=>w.min);
-    const ts=keys.map(trMin).filter(Number.isFinite);
     const done = k => WALK[k] && TR[k] && TR[k].status!=='loading';   // 도보·지하철 둘 다 결과가 나온 가게만 '빠른 방법' 평균에
     const bs=keys.filter(done).map(k=>{ const w=WALK[k], t=trMin(k); const c=[w&&Number.isFinite(w.min)?w.min:null, t].filter(Number.isFinite); return c.length?Math.min(...c):null; }).filter(Number.isFinite);
-    const fares=keys.map(k=>{ const b=trBest(k); return b&&!b.walkOnly&&b.fare!=null?b.fare:null; }).filter(Number.isFinite);
-    const wPend=keys.some(k=>!WALK[k]), tPend=keys.some(k=>!TR[k]||TR[k].status==='loading');
-    const part=(n)=> n<fs.length ? ` <span class="meta">(${n}/${fs.length}곳)</span>` : '';
-    h2+=`<div><span class="rk r${r}">${r}</span> 순위 · ${fs.length}곳
-      <b>⚡ ${bs.length?fmtMin(avg(bs)):'…'}</b><span class="meta">빠른 방법 평균${part(bs.length)}</span><br>
-      🚶 ${ws.length?fmtMin(avg(ws))+part(ws.length):(wPend?'계산 중':'—')}<br>
-      🚇 ${ts.length?fmtMin(avg(ts))+part(ts.length):(tPend?'조회 중':'—')}${fares.length?` <span class="meta">· 평균 ¥${Math.round(avg(fares)).toLocaleString()}</span>`:''}</div>`;
+    h2+=`<div>${r}순위<b>⚡ ${bs.length?fmtMin(avg(bs)):'…'}</b></div>`;
   }
-  return h2+'</div><p class="note">⚡ 빠른 방법 = 가게마다 도보와 지하철+도보 중 빠른 쪽. 🚶 도보 = Google 실시간 계산. 🚇 지하철+도보 = NAVITIME 경로 탐색(철도 평균 소요시간 기준, 버스 미포함).</p>';
+  return h2+'</div>';
 }
 let hGen=0, mapTok=0;
 async function showHotelRanks(h){
