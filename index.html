@@ -278,6 +278,8 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
   #gmap{transition:none}
   .sheet-handle{display:flex;flex-direction:column;align-items:center;gap:5px;position:sticky;top:0;z-index:6;width:calc(100% + 2 * var(--sx));margin:0 calc(-1 * var(--sx)) 4px;padding:14px 0 12px;border:0;background:var(--panel);border-radius:18px 18px 0 0;cursor:pointer;touch-action:none;color:var(--ink3);font:inherit;font-size:11px;font-weight:600}
   .sheet-handle i{display:block;width:40px;height:5px;border-radius:99px;background:#d6d3cc}
+  /* 끝까지 내렸을 때: iPhone 하단 홈 바와 겹치지 않게 손잡이 아래로 여유(안전 영역, 최소 22px) */
+  .app.sheet-min .sheet-handle{padding-bottom:calc(12px + max(env(safe-area-inset-bottom, 0px), 22px))}
   .sheet-handle:focus{outline:none} .sheet-handle:focus-visible i{background:var(--ink3)}
   .app.sheet-min .scroll{overflow:hidden}
   .mapbar{bottom:calc(var(--sv,55dvh) + 50px)}
@@ -987,7 +989,7 @@ const mobSheet = ()=>matchMedia('(max-width:860px) and (min-height:521px)').matc
     const headB=document.querySelector('.ctlgrp').getBoundingClientRect().bottom + 12 - app.getBoundingClientRect().top;   // 끝까지 올려도 지도 위 지역·종류·알림 줄은 보이게
     FULL=Math.round(app.clientHeight-headB); HALF=Math.round(FULL-innerHeight*.40+16); MIN=h.offsetHeight||34;
     app.style.setProperty('--sh',FULL+'px'); paint(offOf(st),false); requestAnimationFrame(()=>sc.classList.remove('sheet-drag')); settle(); }
-  function set(x){ st=x; app.classList.toggle('sheet-min',x==='min'); app.classList.toggle('sheet-full',x==='full'); h.setAttribute('aria-expanded',x!=='min');
+  function set(x){ st=x; app.classList.toggle('sheet-min',x==='min'); app.classList.toggle('sheet-full',x==='full'); h.setAttribute('aria-expanded',x!=='min'); MIN=h.offsetHeight||34;   // 접힘 상태 손잡이는 iPhone 홈 바 높이만큼 더 큼
     if(!isMob()) return; mapInset(0); paint(offOf(x),true); clearTimeout(set.t); set.t=setTimeout(settle,360); }
   let justDragged=false;
   h.addEventListener('click',()=>{ if(justDragged) return; set(st==='min'?'half':'min'); });
