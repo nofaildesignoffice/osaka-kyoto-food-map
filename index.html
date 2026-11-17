@@ -166,6 +166,8 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 /* google place info */
 .gp{margin:10px 0 2px}
 .gp-slider{position:relative}
+.gp-ph:empty{display:none}
+.gp-ph{margin:2px 0 10px}
 .gp-photos figure{position:relative}
 .mph-tag{position:absolute;left:6px;top:6px;max-width:calc(100% - 12px);background:rgba(20,18,15,.72);color:#fff;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .msum{display:flex;align-items:center;gap:6px;margin-top:6px;min-width:0;font-size:12px}
@@ -748,15 +750,17 @@ function menuHTML(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
   h+=`<details class="msrc"><summary>조사 근거 · ${esc(M.checkedAt)}</summary>${src.length?'<ul>'+src.map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/,'').slice(0,60))}</a></li>`).join('')+'</ul>':''}${M.disagree?`<div class="meta">두 AI가 다르게 본 점: ${esc(M.disagree)}</div>`:''}</details></section>`;
   return h;
 }
-function placeHTML(p){
+function photosHTML(p){ const g=GP[p.id]; return g&&g.place ? placeHTML(p,'photos') : ''; }
+function placeHTML(p, part){
   const g = GP[p.id];
   if(!g || g.status==='loading') return '<div class="meta">Google 지도 장소 정보 불러오는 중…</div>';
   if(g.status==='error') return `<div class="meta">Google 장소 정보를 불러오지 못했어요 (${esc(g.msg)})</div>`;
   if(g.status==='nomatch') return '<div class="meta">Google 지도에서 이 위치와 일치하는 장소를 찾지 못해 사진·평점은 표시하지 않아요.</div>';
   const x = g.place; let h='';
-  const photos = menuPhotoList(p, x);
+  const photos = part==='photos' ? menuPhotoList(p, x) : [];
   if(photos.length) h += '<div class="gp-slider"><button type="button" class="gp-nav prev" data-gpnav="-1" aria-label="이전 사진" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><div class="gp-photos">'+photos.map(ph=>
     `<figure${ph.label?' class="mph"':''}><img loading="lazy" alt="${esc(ph.label||((x.displayName&&x.displayName.text)||p.name)+' 사진')}" src="https://places.googleapis.com/v1/${esc(ph.name)}/media?maxWidthPx=480&maxHeightPx=330&key=${GKEY}" onerror="this.closest('figure').remove()">${ph.label?`<span class="mph-tag">🍽 ${esc(ph.label)}</span>`:''}<figcaption>사진: ${ph.uri?`<a href="${esc(ph.uri)}" target="_blank" rel="noopener">${esc(ph.author||'Google 지도')}</a>`:esc(ph.author||'Google 지도')}</figcaption></figure>`).join('')+'</div><button type="button" class="gp-nav next" data-gpnav="1" aria-label="다음 사진"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div>';
+  if(part==='photos') return h;
   const open = x.businessStatus && x.businessStatus!=='OPERATIONAL' ? ['off', x.businessStatus==='CLOSED_PERMANENTLY'?'폐업':'임시 휴업']
     : (x.currentOpeningHours && typeof x.currentOpeningHours.openNow==='boolean') ? [x.currentOpeningHours.openNow?'on':'off', x.currentOpeningHours.openNow?'영업 중':'영업 종료'] : null;
   const wd = x.regularOpeningHours && x.regularOpeningHours.weekdayDescriptions;
@@ -775,7 +779,7 @@ function placeHTML(p){
   h += `<div class="gp-src">Google 지도 정보 · “${esc(x.displayName&&x.displayName.text)}”${tel?' · '+esc(x.nationalPhoneNumber||tel):''}</div>`;
   return h;
 }
-function fillPlace(p){ document.querySelectorAll(`[data-gp="${p.id}"]`).forEach(el=>el.innerHTML=placeHTML(p)); }
+function fillPlace(p){ document.querySelectorAll(`[data-gp="${p.id}"]`).forEach(el=>el.innerHTML=placeHTML(p)); document.querySelectorAll(`[data-gpph="${p.id}"]`).forEach(el=>el.innerHTML=photosHTML(p)); }
 
 /* ---------- 지도 (Maps JavaScript API) ---------- */
 let map=null, markers={}, overlays=[], zoneObjs=[], zoneLabels=[];
@@ -1067,7 +1071,8 @@ function cardHTML(p){
   const flags = [p.candidate?'후보':'', p.branchUnsure?'지점 미확정':''].filter(Boolean).join(' · ');
   const ico = p.type==='hotel' ? `<span style="color:var(--hotel)">${BED}</span>` : (p.emoji||'🍴');
   const rankset = p.type==='food' ? `<div class="rankset" role="group" aria-label="순위">${[1,2,3].map(n=>`<button class="r${n}" data-rank="${n}" data-id="${p.id}" aria-pressed="${r===n}" title="${n}순위">${RANK_ICON[n]}</button>`).join('')}</div>` : '';
-  let body = p.type==='hotel'?hotelRateHTML(p):'';
+  let body = `<div class="gp-ph" data-gpph="${p.id}">${photosHTML(p)}</div>`;
+  if(p.type==='hotel') body += hotelRateHTML(p);
   if(p.type==='hotel') body += `<p class="quote-h">순위 맛집까지 평균 (지도에 순위 색 선으로 표시)</p><div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
   if(p.type==='food') body += menuHTML(p);
