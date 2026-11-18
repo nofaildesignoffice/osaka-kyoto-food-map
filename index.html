@@ -1076,11 +1076,12 @@ function cardHTML(p){
     `<div class="d-route"><button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small primary" data-setto="${p.id}">여기로 도착</button></div>`;
   const ext=(p.agoda?`<a class="btn small" href="${esc(p.agoda)}" target="_blank" rel="noopener">아고다에서 보기</a>`:'')+(p.sources||[]).map(s=>`<a class="btn small ghost" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('');
   if(ext) loc += `<div class="links">${ext}</div>`;
-  loc += `</section><section class="dsec d-way"><h4 class="dsec-h">가는 법</h4><div data-near="${p.id}">${nearTable(p)}</div></section>`;
+  loc += `</section>`;
   let body = `<div class="gp-ph" data-gpph="${p.id}">${photosHTML(p)}</div>`+loc;
-  if(p.type==='hotel') body += hotelRateHTML(p);
-  if(p.type==='hotel') body += `<div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
+  if(p.type==='hotel') body += `<div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
+  body += `<section class="dsec d-way"><h4 class="dsec-h">가는 법</h4><div data-near="${p.id}">${nearTable(p)}</div></section>`;
+  if(p.type==='hotel') body += hotelRateHTML(p);
   if(p.type==='food') body += menuHTML(p);
   let why='';
   if(p.comment) why += `<p class="quote-h">💬 유튜브 댓글 (캡처에서 옮겨 적음)</p><div class="quote">${esc(p.comment)}</div>`;
