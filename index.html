@@ -773,6 +773,7 @@ function placeHTML(p, part){
   if(wd&&wd.length) h += `<details class="d-hours"><summary><span class="d-k">영업시간</span><span class="d-v">${today?'오늘 '+esc(today):'요일별 보기'}</span></summary><ul>${wd.map((t,k)=>`<li${k===(new Date().getDay()+6)%7?' class="today"':''}>${esc(t)}</li>`).join('')}</ul></details>`;
   const tel = x.internationalPhoneNumber || x.nationalPhoneNumber;
   const tiles = [];
+  if(p.agoda) tiles.push(`<a class="d-act" href="${esc(p.agoda)}" target="_blank" rel="noopener"><span>🏨</span>아고다</a>`);
   if(x.googleMapsUri) tiles.push(`<a class="d-act" href="${esc(x.googleMapsUri)}" target="_blank" rel="noopener"><span>🗺</span>Google 지도</a>`);
   if(tel) tiles.push(`<a class="d-act" href="tel:${esc(tel.replace(/\s/g,''))}"><span>📞</span>전화</a>`);
   if(x.websiteUri) tiles.push(`<a class="d-act" href="${esc(x.websiteUri)}" target="_blank" rel="noopener"><span>🌐</span>홈페이지</a>`);
@@ -1074,7 +1075,7 @@ function cardHTML(p){
   const rankset = p.type==='food' ? `<div class="rankset" role="group" aria-label="순위">${[1,2,3].map(n=>`<button class="r${n}" data-rank="${n}" data-id="${p.id}" aria-pressed="${r===n}" title="${n}순위">${RANK_ICON[n]}</button>`).join('')}</div>` : '';
   let loc = `<section class="dsec d-loc"><h4 class="dsec-h">위치</h4><p class="d-addr">${esc(p.address)}</p>`+
     `<div class="d-route"><button class="btn small" data-setfrom="${p.id}">여기서 출발</button><button class="btn small primary" data-setto="${p.id}">여기로 도착</button></div>`;
-  const ext=(p.agoda?`<a class="btn small" href="${esc(p.agoda)}" target="_blank" rel="noopener">아고다에서 보기</a>`:'')+(p.sources||[]).map(s=>`<a class="btn small ghost" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('');
+  const ext=(p.sources||[]).map(s=>`<a class="btn small ghost" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('');
   if(ext) loc += `<div class="links">${ext}</div>`;
   loc += `</section>`;
   let body = `<div class="gp-ph" data-gpph="${p.id}">${photosHTML(p)}</div>`+loc;
