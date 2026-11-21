@@ -387,5 +387,43 @@ window.HOTELS = [
     "url": "https://www.google.com/maps/search/?api=1&query=ChIJubmS3-vmAGARuk8CxYQ8t10&query_place_id=ChIJubmS3-vmAGARuk8CxYQ8t10"
    }
   ]
+ },
+ {
+  "id": "hotel-hokke-club-osaka",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "호텔 홋케 클럽 오사카",
+  "nameJa": "ホテル法華クラブ大阪 (Hotel Hokke Club Osaka)",
+  "area": "우메다·도가노초 (兎我野町)",
+  "address": "大阪府大阪市北区兎我野町12-19",
+  "lat": 34.7008054,
+  "lng": 135.5028405,
+  "gpid": "ChIJszKlkV3nAGARf1F0v7cZiNA",
+  "agoda": "https://www.agoda.com/ko-kr/hotel-hokke-club-osaka/hotel/osaka-jp.html?checkIn=2026-11-28&checkOut=2026-12-01&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
+  "stayRate": {
+   "checkIn": "2026-11-28",
+   "checkOut": "2026-12-01",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 292269,
+   "perNightKRW": 97423,
+   "bed": "double",
+   "room": "스몰 더블베드 (금연) · 14m² · 세미더블베드 1개",
+   "conditions": "조식 별도(1인 12,038원) · 2026-11-28 전 무료 취소 · 11/26 자동 결제 · 쿠폰 할인 적용",
+   "availability": "available",
+   "checkedAt": "2026-11-21T13:55+09:00"
+  },
+  "notes": [
+   "보내준 아고다 링크의 날짜(11/28 체크인 3박) 기준으로 조회.",
+   "아고다 주소(兎我野町12-19)와 Google 지도 장소를 대조해 같은 곳으로 확인.",
+   "가장 싼 1베드 객실이 세미더블(약 120cm 폭)이라 2인이 쓰기엔 좁을 수 있음."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJszKlkV3nAGARf1F0v7cZiNA&query_place_id=ChIJszKlkV3nAGARf1F0v7cZiNA"
+   }
+  ]
  }
 ];
