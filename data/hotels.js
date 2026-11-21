@@ -314,5 +314,41 @@ window.HOTELS = [
     "url": "https://www.google.com/maps/search/?api=1&query=ChIJV0LnVRTnAGARLTeh1yIz86A&query_place_id=ChIJV0LnVRTnAGARLTeh1yIz86A"
    }
   ]
+ },
+ {
+  "id": "hotel-onefive-kuromon",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "더 원파이브 오사카 난바 쿠로몬",
+  "nameJa": "ザ・ワンファイブ大阪なんば黒門 (The OneFive Osaka Namba Kuromon)",
+  "area": "닛폰바시·구로몬시장",
+  "address": "大阪府大阪市中央区日本橋1-20-6",
+  "lat": 34.6655438,
+  "lng": 135.5058373,
+  "gpid": "ChIJcQ7l9WnnAGARehan6XlEKSQ",
+  "agoda": "https://www.agoda.com/ko-kr/hotel-wbf-namba-kuromon_7/hotel/osaka-jp.html?checkIn=2026-11-25&checkOut=2026-11-28&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
+  "stayRate": {
+   "checkIn": "2026-11-25",
+   "checkOut": "2026-11-28",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 397362,
+   "perNightKRW": 132454,
+   "bed": "twin",
+   "room": "더블 객실 없음 — 가장 싼 객실은 스탠다드 트윈 · 15m² · 세미더블베드 2개",
+   "conditions": "조식 별도(1인 16,668원) · 2026-11-24 전 무료 취소 · 나중에 결제 · 쿠폰 할인 적용 · 객실 종류 3개 판매 완료 · 판매 중인 객실은 모두 트윈/트리플",
+   "availability": "no_double",
+   "checkedAt": "2026-11-21T12:45+09:00"
+  },
+  "notes": [
+   "아고다 주소(日本橋1-20-6)와 Google 지도 장소를 대조해 같은 곳으로 확인."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJcQ7l9WnnAGARehan6XlEKSQ&query_place_id=ChIJcQ7l9WnnAGARehan6XlEKSQ"
+   }
+  ]
  }
 ];
