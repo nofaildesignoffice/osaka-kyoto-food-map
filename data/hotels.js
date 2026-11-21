@@ -350,5 +350,42 @@ window.HOTELS = [
     "url": "https://www.google.com/maps/search/?api=1&query=ChIJcQ7l9WnnAGARehan6XlEKSQ&query_place_id=ChIJcQ7l9WnnAGARehan6XlEKSQ"
    }
   ]
+ },
+ {
+  "id": "hotel-elcient-umeda",
+  "type": "hotel",
+  "city": "osaka",
+  "name": "호텔 엘시언트 오사카 우메다",
+  "nameJa": "ホテル エルシエント大阪梅田 (Hotel Elcient Osaka Umeda)",
+  "area": "우메다·소네자키 (曾根崎)",
+  "address": "大阪府大阪市北区曾根崎1-2-7",
+  "lat": 34.6984593,
+  "lng": 135.502951,
+  "gpid": "ChIJubmS3-vmAGARuk8CxYQ8t10",
+  "agoda": "https://www.agoda.com/ko-kr/hotel-elcient-osaka/hotel/osaka-jp.html?checkIn=2026-11-28&checkOut=2026-12-01&los=3&adults=2&children=0&rooms=1&currencyCode=KRW&finalPriceView=3",
+  "stayRate": {
+   "checkIn": "2026-11-28",
+   "checkOut": "2026-12-01",
+   "nights": 3,
+   "adults": 2,
+   "rooms": 1,
+   "totalKRW": 486096,
+   "perNightKRW": 162032,
+   "bed": "double",
+   "room": "라운지 이용 스탠다드 더블룸 (금연) · 15m² · 퀸베드 1개",
+   "conditions": "조식 별도(1인 18,520원) · 2026-11-27 전 무료 취소 · 나중에 결제 · 쿠폰 할인 적용 · 결제 단계 할인 코드는 미반영",
+   "availability": "available",
+   "checkedAt": "2026-11-21T13:30+09:00"
+  },
+  "notes": [
+   "보내준 아고다 링크의 날짜(11/28 체크인 3박) 기준으로 조회.",
+   "아고다 주소(曾根崎1-2-7)와 Google 지도 장소를 대조해 같은 곳으로 확인."
+  ],
+  "sources": [
+   {
+    "label": "Google 지도",
+    "url": "https://www.google.com/maps/search/?api=1&query=ChIJubmS3-vmAGARuk8CxYQ8t10&query_place_id=ChIJubmS3-vmAGARuk8CxYQ8t10"
+   }
+  ]
  }
 ];
