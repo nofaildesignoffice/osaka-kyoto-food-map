@@ -180,7 +180,13 @@ table.near tr[data-route]:hover td{background:var(--bg)}
 .mlist li:first-child{border-top:0}
 .mlist li::before{content:counter(m);position:absolute;left:0;top:8px;width:18px;height:18px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center}
 .ml-n{display:flex;justify-content:space-between;gap:8px;font-size:14px}
-.ml-p{color:var(--ink2);font-weight:700;font-size:12.5px;white-space:nowrap}
+.ml-p{color:var(--ink2);font-weight:700;font-size:12.5px;white-space:nowrap;text-align:right}
+.ml-pn{font-size:11px;color:var(--ink3);margin-top:1px}
+.ml-p0{font-weight:500;color:var(--ink3);font-size:11.5px}
+.ml-why{margin-top:4px;font-size:11.5px;color:var(--ink2);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.why{font-size:10.5px;font-weight:800;padding:1px 7px;border-radius:9px;background:var(--line);color:var(--ink)}
+.w-sig{background:#fde9c8;color:#8a4b00}.w-ord{background:#fde0dc;color:#a3271a}.w-men{background:#dfeafc;color:#1d4f9a}
+.detail>.d-menu{margin-top:6px}
 .ml-ja{font-size:11.5px;color:var(--ink3)}
 .ml-d{font-size:12.5px;color:var(--ink2);margin-top:2px;line-height:1.5}
 .rbox2{border:1px solid var(--line);border-radius:12px;padding:10px 11px;margin:6px 0}
@@ -517,6 +523,7 @@ a.rm:hover{border-color:var(--brand);background:var(--brand-soft)}
 <script src="data/hotels.js?v=20261121-hotels16"></script>
 <script src="data/places.js?v=20261115r1"></script>
 <script src="data/menus.js?v=20261115m2"></script>
+<script src="data/menu_extra.js?v=20261122a"></script>
 <script src="data/spots.js?v=20261115b"></script>
 <script src="data/added.js"></script>
 <script src="data/events.js"></script>
@@ -733,12 +740,16 @@ function rsvBadge(p){ const M=(window.MENUS||{})[p.id]; if(!M) return ''; const 
 function menuSummary(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
   const names=M.menus.slice(0,3).map(m=>esc(m.name_ko)).join(' · ');
   return `<div class="msum">${rsvBadge(p)}${names?`<span class="msum-m">🍽 ${names}</span>`:''}</div>`; }
+const WHY={signature:['⭐ 시그니처','w-sig'],most_ordered:['🔥 주문 많음','w-ord'],most_mentioned:['💬 리뷰 언급 많음','w-men']};
+function menuX(p){ return (window.MENU_EXTRA||{})[p.id]||[]; }
+function menuListHTML(p){ const M=(window.MENUS||{})[p.id]; if(!M||!M.menus.length) return '';
+  const X=menuX(p);
+  return `<section class="dsec d-menu"><h4 class="dsec-h">인기 메뉴<span class="dsec-s">Claude·Codex 둘 다 꼽은 메뉴</span></h4><ol class="mlist">`+M.menus.map((m,i)=>{
+    const x=X.find(e=>e.i===i)||{}; const pr=x.price_jpy??m.price_jpy; const w=WHY[x.reason];
+    return `<li><div class="ml-n"><b>${esc(m.name_ko)}</b>${pr?`<span class="ml-p">¥${pr.toLocaleString()}</span>`:'<span class="ml-p ml-p0">가격 미확인</span>'}</div><div class="ml-ja">${esc(m.name_ja)}</div>${pr&&x.price_note?`<div class="ml-pn">💴 ${esc(x.price_note)}</div>`:''}${m.desc_ko?`<div class="ml-d">${esc(m.desc_ko)}</div>`:''}${w?`<div class="ml-why"><span class="why ${w[1]}">${w[0]}</span>${x.reason_ko?esc(x.reason_ko):''}</div>`:''}</li>`; }).join('')+'</ol></section>';
+}
 function menuHTML(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
   let h='';
-  if(M.menus.length){
-    h+=`<section class="dsec"><h4 class="dsec-h">인기 메뉴<span class="dsec-s">Claude·Codex 둘 다 꼽은 메뉴</span></h4><ol class="mlist">`+M.menus.map(m=>
-      `<li><div class="ml-n"><b>${esc(m.name_ko)}</b>${m.price_jpy?`<span class="ml-p">¥${m.price_jpy.toLocaleString()}</span>`:''}</div><div class="ml-ja">${esc(m.name_ja)}</div>${m.desc_ko?`<div class="ml-d">${esc(m.desc_ko)}</div>`:''}</li>`).join('')+'</ol></section>';
-  }
   const R=M.reserve, r=RSV[R.status]||RSV.unknown;
   h+=`<section class="dsec"><h4 class="dsec-h">예약</h4><div class="rb2-top"><span class="rsv big ${r[1]}">${r[0]}</span>${R.googleReservable===true?'<span class="rsv r-g">Google 예약 가능</span>':''}</div>`;
   if(!R.agree) h+=`<div class="rb2-mn">${R.single?`${esc(R.single.who)}만 확인: ${esc((RSV[R.single.status]||RSV.unknown)[0])}`:'두 AI 조사가 서로 달라 확정하지 않았어요'}</div>`;
@@ -747,7 +758,7 @@ function menuHTML(p){ const M=(window.MENUS||{})[p.id]; if(!M) return '';
   if(R.methods&&R.methods.length) h+='<div class="rmeth">'+R.methods.map(m=>{ const u=m.url||''; const ok=/^(https?:|tel:)/.test(u);
       const lab=`<b>${esc(RSV_M[m.type]||m.type)}${m.type==='phone'?' '+esc(u.replace(/^tel:/,'')):''}</b>${m.note_ko?`<span>${esc(m.note_ko)}</span>`:''}`;
       return ok?`<a class="rm" href="${esc(u)}" ${m.type==='phone'?'':'target="_blank" rel="noopener"'}>${lab}<i>›</i></a>`:`<div class="rm">${lab}</div>`; }).join('')+'</div>';
-  const src=[...new Set(M.menus.flatMap(m=>m.source_urls||[]))].filter(u=>/^https?:/.test(u));
+  const src=[...new Set([...M.menus.flatMap(m=>m.source_urls||[]),...menuX(p).flatMap(x=>[x.price_src,x.reason_src]).filter(Boolean)])].filter(u=>/^https?:/.test(u));
   h+=`<details class="msrc"><summary>조사 근거 · ${esc(M.checkedAt)}</summary>${src.length?'<ul>'+src.map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/,'').slice(0,60))}</a></li>`).join('')+'</ul>':''}${M.disagree?`<div class="meta">두 AI가 다르게 본 점: ${esc(M.disagree)}</div>`:''}</details></section>`;
   return h;
 }
@@ -1078,7 +1089,7 @@ function cardHTML(p){
   const ext=(p.sources||[]).map(s=>`<a class="btn small ghost" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('');
   if(ext) loc += `<div class="links">${ext}</div>`;
   loc += `</section>`;
-  let body = `<div class="gp-ph" data-gpph="${p.id}">${photosHTML(p)}</div>`+loc;
+  let body = `<div class="gp-ph" data-gpph="${p.id}">${photosHTML(p)}</div>`+(p.type==='food'?menuListHTML(p):'')+loc;
   body += `<div class="gp" data-gp="${p.id}">${placeHTML(p)}</div>`;
   if(p.type==='hotel') body += `<div data-ranksum="${p.id}">${rankSummaryHTML(p)}</div>`;
   body += `<section class="dsec d-way"><h4 class="dsec-h">가는 법</h4><div data-near="${p.id}">${nearTable(p)}</div></section>`;
